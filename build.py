@@ -71,8 +71,7 @@ def form_card(cta):
       <option value="superior_completo">Superior Completo</option>
       <option value="pos">Pós-graduação</option>
     </select><div class="msg">Selecione a sua escolaridade.</div></div>
-  <label class="consent"><input type="checkbox" name="consent" checked><span>Concordo em receber comunicações sobre a Black A Revolução do Estudo por WhatsApp e e-mail (LGPD).</span></label>
-  <button class="btn block" type="submit">{cta}</button>
+  <button class="btn block" type="submit" style="margin-top:6px">{cta}</button>
   <div class="form-error" role="alert"></div>
   <ul class="form-foot">
     <li>{BARS}Você entra no grupo oficial do WhatsApp e recebe o link da live <b>antes de todo mundo</b>.</li>
@@ -243,7 +242,7 @@ COPY = {
     },
 }
 
-V = "2"
+V = "3"
 OG = "https://fabiomsam-cloud.github.io/black-revolucao/assets/og.jpg"
 
 def page(versao):

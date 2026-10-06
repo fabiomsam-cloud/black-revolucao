@@ -107,8 +107,6 @@
       var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); setErr("email", !emailOk); ok = ok && emailOk;
       var telOk = digits.length === 11 && digits[2] === "9"; setErr("telefone", !telOk); ok = ok && telOk;
       setErr("escolaridade", !esc); ok = ok && !!esc;
-      var consent = form.querySelector("[name=consent]"), consentBox = form.querySelector(".consent");
-      if (consent && !consent.checked) { consentBox.classList.add("err"); ok = false; } else if (consentBox) consentBox.classList.remove("err");
       if (!ok) return;
       var utm = {};
       ["utm_source", "utm_medium", "utm_campaign", "utm_term"].forEach(function (k) { if (attr[k]) utm[k] = attr[k]; });
