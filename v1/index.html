@@ -13,7 +13,7 @@
 <link rel="icon" href="../assets/logo-e.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="../assets/black.css?v=1">
+<link rel="stylesheet" href="../assets/black.css?v=2">
 <script>window.BLACK_CFG={anon:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRxcHh1Z2RobGdhZnZkZGF2enpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxODQ1NTMsImV4cCI6MjA5Nzc2MDU1M30.nUhYPO3oLUZEXgQCDlRtL-Jawi0nr0l1Z7_z5ecEXvc",slug:"black-revolucao-nao-alunos",pixel:"429553154418122",versao:"v1",grupo:"https://sndflw.com/i/D3dZyygkzj3LQgQ73IHP",obrigado:"../obrigado/"};</script>
 </head>
 <body>
@@ -21,12 +21,12 @@
 <header class="topbar">
   <div class="wrap">
     <div class="cd" aria-label="Contagem regressiva para a live de 10 de novembro às 20h">
-      <span class="cd-label">A condição será liberada em</span>
+      <span class="cd-label">A condição será liberada em:</span>
       <div class="cd-units">
-        <div class="cd-unit"><b data-cd="d">--</b><span>dias</span></div>
-        <div class="cd-unit"><b data-cd="h">--</b><span>horas</span></div>
-        <div class="cd-unit"><b data-cd="m">--</b><span>min</span></div>
-        <div class="cd-unit"><b data-cd="s">--</b><span>seg</span></div>
+        <span class="cd-unit"><b data-cd="d">--</b><span>dias</span></span>
+        <span class="cd-unit"><b data-cd="h">--</b><span>horas</span></span>
+        <span class="cd-unit"><b data-cd="m">--</b><span>minutos</span></span>
+        <span class="cd-unit"><b data-cd="s">--</b><span>segundos</span></span>
       </div>
     </div>
     <a class="btn" href="#form" data-goto-form>Quero participar</a>
@@ -37,26 +37,29 @@
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-copy">
-      <div class="brand rv" style="--d:0s"><img src="../assets/logo-black-revolucao.png" alt="Black · A Revolução do Estudo"></div>
-      <div class="chip rv" style="--d:.08s"><span>10 de novembro</span><span>·</span><span>20h (Brasília)</span><span>·</span><span class="live">Ao vivo</span></div>
-      <h1 id="h1" class="rv" style="--d:.14s">A <span class="metal">tríade</span> que vai te ajudar na sua aprovação no concurso público de uma vez por todas!</h1>
-      <p class="sub rv" style="--d:.22s">No dia 10 de novembro vou liberar um novo jeito de se preparar para concursos, feito para quem trabalha, cuida da família e estuda com o tempo que tem. E abrir a maior Black Friday da história do Sou Concurseiro.</p>
+      <div class="brand-row rv" style="--d:0s">
+        <div class="brand"><img src="../assets/logo-black-revolucao.png" alt="Black · A Revolução do Estudo"></div>
+        <div class="date-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg><span>10 de novembro, às 20h</span><span class="live">Ao vivo</span></div>
+      </div>
+      <h1 id="h1" class="rv" style="--d:.1s">A <span class="metal">tríade</span> que vai te ajudar na sua aprovação no concurso público de uma vez por todas!</h1>
+      <p class="sub rv" style="--d:.18s">No dia 10 de novembro vou liberar um novo jeito de se preparar para concursos, feito para quem trabalha, cuida da família e estuda com o tempo que tem. E abrir a maior Black Friday da história do Sou Concurseiro.</p>
       <div class="hero-form-slot">
 <form class="form-card rv" id="form" novalidate style="--d:.35s">
   <p class="form-title"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span> Garanta o seu lugar na live</p>
-  <div class="field"><label for="f-nome">Seu nome</label><input id="f-nome" name="nome" type="text" autocomplete="name" placeholder="Como você quer ser chamado(a)" required><div class="msg">Digite o seu nome.</div></div>
-  <div class="field"><label for="f-tel">WhatsApp com DDD</label><input id="f-tel" name="telefone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="(92) 99999-9999" required><div class="msg">Confira o WhatsApp: DDD + número com 9 dígitos.</div></div>
-  <div class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="seu@email.com" required><div class="msg">Digite um e-mail válido.</div></div>
+  <div class="field"><label for="f-nome">Seu nome</label><input id="f-nome" name="nome" type="text" autocomplete="name" placeholder="Seu nome" required><div class="msg">Digite o seu nome.</div></div>
+  <div class="field"><label for="f-tel">WhatsApp com DDD</label><input id="f-tel" name="telefone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="Seu WhatsApp com DDD" required><div class="msg">Confira o WhatsApp: DDD + número com 9 dígitos.</div></div>
+  <div class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="Seu e-mail" required><div class="msg">Digite um e-mail válido.</div></div>
   <div class="field"><label for="f-esc">Qual a sua escolaridade?</label>
-    <select id="f-esc" name="escolaridade" required>
-      <option value="" disabled selected>Selecione</option>
+    <select id="f-esc" name="escolaridade" class="placeholder" required>
+      <option value="" disabled selected>Qual a sua escolaridade?</option>
       <option value="fundamental">Ensino Fundamental</option>
       <option value="medio">Ensino Médio</option>
       <option value="superior_cursando">Superior Cursando</option>
       <option value="superior_completo">Superior Completo</option>
       <option value="pos">Pós-graduação</option>
     </select><div class="msg">Selecione a sua escolaridade.</div></div>
-  <button class="btn block" type="submit">Quero participar da Black</button>
+  <label class="consent"><input type="checkbox" name="consent" checked><span>Concordo em receber comunicações sobre a Black A Revolução do Estudo por WhatsApp e e-mail (LGPD).</span></label>
+  <button class="btn block" type="submit">Quero participar</button>
   <div class="form-error" role="alert"></div>
   <ul class="form-foot">
     <li><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>Você entra no grupo oficial do WhatsApp e recebe o link da live <b>antes de todo mundo</b>.</li>
@@ -65,15 +68,14 @@
 </form>
 </div>
     </div>
-    <div class="hero-photo" aria-hidden="true">
-      <div class="ticker">10/11</div>
+    <div class="hero-photo rv" aria-hidden="true" style="--d:.05s">
       <img src="../assets/fabio-camisa-1011.png" alt="" loading="eager" fetchpriority="high">
     </div>
   </div>
 </section>
 
-<section class="cut" style="background:var(--bg-2)">
-  <div class="wrap">
+<section class="glow-top">
+  <div class="wrap center">
     <p class="eyebrow rv">A ideia por trás da Black</p>
     <h2 class="rv">Ninguém deveria ter que <span class="blue">parar a vida</span> para mudar de vida.</h2>
     <p class="lead rv">A preparação para o concurso que te ensinaram foi feita para quem tem horas livres todo dia. Você não tem, e não vai passar a ter. <b>No dia 10 de novembro você vai ver:</b></p>
@@ -90,20 +92,22 @@
   <div><p class="eyebrow">Para quem é</p><h3>Se uma frase aqui é a sua, a live de 10/11 foi feita para você.</h3><p>Não precisa ter estudado antes. Precisa só da vida que você já tem.</p></div>
   <ul><li><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span>Você trabalha e tem pouco tempo para estudar.</span></li><li><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span>Você nunca estudou para concurso e não sabe por onde começar.</span></li><li><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span>Você já começou, parou, e quer voltar sem recomeçar do zero.</span></li><li><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span>Você acha que já passou da idade.</span></li></ul>
 </div>
-<p class="center" style="margin-top:34px"><a class="btn" href="#form" data-goto-form>Quero garantir meu lugar</a></p>
+<p class="cta-row"><a class="btn" href="#form" data-goto-form>Quero garantir meu lugar</a></p>
 
   </div>
 </section>
 
 <section class="band" aria-label="A condição de Black Friday">
-  <div class="band-in">
-    <div class="wrap">
+  <div class="wrap">
+    <div class="band-in">
+    <div class="band-grid">
       <div>
         <p class="eyebrow rv">A condição</p>
         <h2 class="rv">A maior condição de Black Friday da história do Sou Concurseiro será liberada <span class="blue">ao vivo</span>, só para quem estiver na live.</h2>
         <p class="rv">Eu nunca fiz nada parecido. Não vai ter aviso por e-mail nem repescagem: quem está no grupo recebe o link antes e entra primeiro.</p>
       </div>
       <div class="lock rv"><span>Abre em</span><span class="date">10/11<small>20h · Brasília</small></span></div>
+    </div>
     </div>
   </div>
 </section>
@@ -114,7 +118,7 @@
     <div>
       <p class="eyebrow rv">Quem vai te mostrar o caminho</p>
       <h2 class="rv">Delegado, professor e mentor do Sou Concurseiro.</h2>
-      <ul class="roles rv"><li><span>Polícias</span></li><li><span>Tribunais</span></li><li><span>Saúde</span></li><li><span>Educação</span></li></ul>
+      <ul class="roles rv"><li>Polícias</li><li>Tribunais</li><li>Saúde</li><li>Educação</li></ul>
       <p class="rv">Fábio Silva prepara alunos para concursos de polícia, tribunais, saúde e educação. Viu de perto gente boa desistir no meio do caminho, não por falta de capacidade, mas por falta de tempo, de direção e de alguém do lado.</p>
       <p class="rv">A Revolução do Estudo é a resposta que ele passou meses construindo para essas três coisas: uma preparação que anda junto com a vida de quem trabalha, cuida da família e estuda com o tempo que tem.</p>
       <p class="rv" style="margin-top:26px"><a class="btn" href="#form" data-goto-form>Quero garantir meu lugar</a></p>
@@ -137,6 +141,6 @@
     <p>© 2026 Sou Concurseiro e Vou Passar · Todos os direitos reservados.</p>
   </div>
 </footer>
-<script src="../assets/black.js?v=1"></script>
+<script src="../assets/black.js?v=2"></script>
 </body>
 </html>

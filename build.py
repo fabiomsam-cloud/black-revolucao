@@ -42,12 +42,12 @@ def topbar():
 <header class="topbar">
   <div class="wrap">
     <div class="cd" aria-label="Contagem regressiva para a live de 10 de novembro às 20h">
-      <span class="cd-label">A condição será liberada em</span>
+      <span class="cd-label">A condição será liberada em:</span>
       <div class="cd-units">
-        <div class="cd-unit"><b data-cd="d">--</b><span>dias</span></div>
-        <div class="cd-unit"><b data-cd="h">--</b><span>horas</span></div>
-        <div class="cd-unit"><b data-cd="m">--</b><span>min</span></div>
-        <div class="cd-unit"><b data-cd="s">--</b><span>seg</span></div>
+        <span class="cd-unit"><b data-cd="d">--</b><span>dias</span></span>
+        <span class="cd-unit"><b data-cd="h">--</b><span>horas</span></span>
+        <span class="cd-unit"><b data-cd="m">--</b><span>minutos</span></span>
+        <span class="cd-unit"><b data-cd="s">--</b><span>segundos</span></span>
       </div>
     </div>
     <a class="btn" href="#form" data-goto-form>Quero participar</a>
@@ -59,18 +59,19 @@ def form_card(cta):
     return f"""
 <form class="form-card rv" id="form" novalidate style="--d:.35s">
   <p class="form-title">{BARS} Garanta o seu lugar na live</p>
-  <div class="field"><label for="f-nome">Seu nome</label><input id="f-nome" name="nome" type="text" autocomplete="name" placeholder="Como você quer ser chamado(a)" required><div class="msg">Digite o seu nome.</div></div>
-  <div class="field"><label for="f-tel">WhatsApp com DDD</label><input id="f-tel" name="telefone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="(92) 99999-9999" required><div class="msg">Confira o WhatsApp: DDD + número com 9 dígitos.</div></div>
-  <div class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="seu@email.com" required><div class="msg">Digite um e-mail válido.</div></div>
+  <div class="field"><label for="f-nome">Seu nome</label><input id="f-nome" name="nome" type="text" autocomplete="name" placeholder="Seu nome" required><div class="msg">Digite o seu nome.</div></div>
+  <div class="field"><label for="f-tel">WhatsApp com DDD</label><input id="f-tel" name="telefone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="Seu WhatsApp com DDD" required><div class="msg">Confira o WhatsApp: DDD + número com 9 dígitos.</div></div>
+  <div class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="Seu e-mail" required><div class="msg">Digite um e-mail válido.</div></div>
   <div class="field"><label for="f-esc">Qual a sua escolaridade?</label>
-    <select id="f-esc" name="escolaridade" required>
-      <option value="" disabled selected>Selecione</option>
+    <select id="f-esc" name="escolaridade" class="placeholder" required>
+      <option value="" disabled selected>Qual a sua escolaridade?</option>
       <option value="fundamental">Ensino Fundamental</option>
       <option value="medio">Ensino Médio</option>
       <option value="superior_cursando">Superior Cursando</option>
       <option value="superior_completo">Superior Completo</option>
       <option value="pos">Pós-graduação</option>
     </select><div class="msg">Selecione a sua escolaridade.</div></div>
+  <label class="consent"><input type="checkbox" name="consent" checked><span>Concordo em receber comunicações sobre a Black A Revolução do Estudo por WhatsApp e e-mail (LGPD).</span></label>
   <button class="btn block" type="submit">{cta}</button>
   <div class="form-error" role="alert"></div>
   <ul class="form-foot">
@@ -81,19 +82,21 @@ def form_card(cta):
 """
 
 def hero(c):
+    cal = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>'
     return f"""
 <section class="hero" aria-labelledby="h1">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-copy">
-      <div class="brand rv" style="--d:0s"><img src="../assets/logo-black-revolucao.png" alt="Black · A Revolução do Estudo"></div>
-      <div class="chip rv" style="--d:.08s"><span>10 de novembro</span><span>·</span><span>20h (Brasília)</span><span>·</span><span class="live">Ao vivo</span></div>
-      <h1 id="h1" class="rv" style="--d:.14s">{c['h1']}</h1>
-      <p class="sub rv" style="--d:.22s">{c['sub']}</p>
-      <div class="hero-form-slot">{form_card("Quero participar da Black")}</div>
+      <div class="brand-row rv" style="--d:0s">
+        <div class="brand"><img src="../assets/logo-black-revolucao.png" alt="Black · A Revolução do Estudo"></div>
+        <div class="date-pill">{cal}<span>10 de novembro, às 20h</span><span class="live">Ao vivo</span></div>
+      </div>
+      <h1 id="h1" class="rv" style="--d:.1s">{c['h1']}</h1>
+      <p class="sub rv" style="--d:.18s">{c['sub']}</p>
+      <div class="hero-form-slot">{form_card("Quero participar")}</div>
     </div>
-    <div class="hero-photo" aria-hidden="true">
-      <div class="ticker">10/11</div>
+    <div class="hero-photo rv" aria-hidden="true" style="--d:.05s">
       <img src="../assets/fabio-camisa-1011.png" alt="" loading="eager" fetchpriority="high">
     </div>
   </div>
@@ -113,7 +116,7 @@ def who():
   <div><p class="eyebrow">Para quem é</p><h3>Se uma frase aqui é a sua, a live de 10/11 foi feita para você.</h3><p>Não precisa ter estudado antes. Precisa só da vida que você já tem.</p></div>
   <ul>{lis}</ul>
 </div>
-<p class="center" style="margin-top:34px"><a class="btn" href="#form" data-goto-form>Quero garantir meu lugar</a></p>
+<p class="cta-row"><a class="btn" href="#form" data-goto-form>Quero garantir meu lugar</a></p>
 """
 
 def dobra2_v2():
@@ -125,11 +128,11 @@ def dobra2_v2():
   <article class="card txt rv"><span class="num">04</span>{BARS}<h3>Clareza do que você já domina</h3><p>Você enxerga onde está forte e onde precisa reforçar antes da prova, e para de estudar no escuro.</p></article>
   <article class="card txt rv" style="transition-delay:.08s"><span class="num">05</span>{BARS}<h3>Um começo guiado</h3><p>Nos primeiros 30 dias você recebe o passo a passo para montar a sua rotina, mesmo que nunca tenha estudado para concurso.</p></article>
 </div>
-<p class="lead rv" style="margin:40px auto 0;text-align:center"><b>Tempo, direção e constância</b> são o que separa quem quer passar de quem passa. Na live você vê como ter os três, e a condição de Black Friday para começar.</p>
+<p class="lead rv" style="margin:40px auto 0"><b>Tempo, direção e constância</b> são o que separa quem quer passar de quem passa. Na live você vê como ter os três, e a condição de Black Friday para começar.</p>
 """
     return f"""
-<section class="cut" style="background:var(--bg-2)">
-  <div class="wrap">
+<section class="glow-top">
+  <div class="wrap center">
     <div class="center">
       <p class="eyebrow rv">O que você vai conhecer no dia 10</p>
       <h2 class="rv">Quem passa em concurso é quem estuda todo dia, por meses. O que você vai conhecer no dia 10 foi feito para isso acontecer <span class="blue">na vida que você tem</span>.</h2>
@@ -150,8 +153,8 @@ def dobra2_v1():
     ]
     lis = "".join(f'<li class="rv" style="transition-delay:{i*.07:.2f}s"><b>{a}</b>{b}</li>' for i, (a, b) in enumerate(steps))
     return f"""
-<section class="cut" style="background:var(--bg-2)">
-  <div class="wrap">
+<section class="glow-top">
+  <div class="wrap center">
     <p class="eyebrow rv">A ideia por trás da Black</p>
     <h2 class="rv">Ninguém deveria ter que <span class="blue">parar a vida</span> para mudar de vida.</h2>
     <p class="lead rv">A preparação para o concurso que te ensinaram foi feita para quem tem horas livres todo dia. Você não tem, e não vai passar a ter. <b>No dia 10 de novembro você vai ver:</b></p>
@@ -171,14 +174,16 @@ def dobra2_v1():
 def band():
     return f"""
 <section class="band" aria-label="A condição de Black Friday">
-  <div class="band-in">
-    <div class="wrap">
+  <div class="wrap">
+    <div class="band-in">
+    <div class="band-grid">
       <div>
         <p class="eyebrow rv">A condição</p>
         <h2 class="rv">A maior condição de Black Friday da história do Sou Concurseiro será liberada <span class="blue">ao vivo</span>, só para quem estiver na live.</h2>
         <p class="rv">Eu nunca fiz nada parecido. Não vai ter aviso por e-mail nem repescagem: quem está no grupo recebe o link antes e entra primeiro.</p>
       </div>
       <div class="lock rv"><span>Abre em</span><span class="date">10/11<small>20h · Brasília</small></span></div>
+    </div>
     </div>
   </div>
 </section>
@@ -192,7 +197,7 @@ def bio():
     <div>
       <p class="eyebrow rv">Quem vai te mostrar o caminho</p>
       <h2 class="rv">Delegado, professor e mentor do Sou Concurseiro.</h2>
-      <ul class="roles rv"><li><span>Polícias</span></li><li><span>Tribunais</span></li><li><span>Saúde</span></li><li><span>Educação</span></li></ul>
+      <ul class="roles rv"><li>Polícias</li><li>Tribunais</li><li>Saúde</li><li>Educação</li></ul>
       <p class="rv">Fábio Silva prepara alunos para concursos de polícia, tribunais, saúde e educação. Viu de perto gente boa desistir no meio do caminho, não por falta de capacidade, mas por falta de tempo, de direção e de alguém do lado.</p>
       <p class="rv">A Revolução do Estudo é a resposta que ele passou meses construindo para essas três coisas: uma preparação que anda junto com a vida de quem trabalha, cuida da família e estuda com o tempo que tem.</p>
       <p class="rv" style="margin-top:26px"><a class="btn" href="#form" data-goto-form>Quero garantir meu lugar</a></p>
@@ -238,7 +243,7 @@ COPY = {
     },
 }
 
-V = "1"
+V = "2"
 OG = "https://fabiomsam-cloud.github.io/black-revolucao/assets/og.jpg"
 
 def page(versao):
