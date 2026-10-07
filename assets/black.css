@@ -77,8 +77,13 @@ h1{font-family:var(--font-d);font-weight:800;font-size:clamp(30px,4.2vw,54px);li
 @media (max-width:959px){
   /* CELULAR = réplica do mockup de 07/10 medido a 390px de largura: sem contador · [logo 52px | data] · [promessa 23px | foto 240px]
      · "GARANTA…" 15px · rótulo 14px + campo 44px · botão 48px sólido · 2 notas. Tudo na primeira tela. */
-  .topbar{display:none}
-  .hero{padding-top:22px}
+  .topbar{padding:6px 0}
+  .cd{padding:6px 14px;gap:2px 10px;width:100%;border-radius:16px}
+  .cd-label{width:100%;text-align:center;font-size:9.5px;letter-spacing:.12em}
+  .cd-units{gap:10px;width:100%;justify-content:center}
+  .cd-unit b{font-size:19px}
+  .cd-unit span{font-size:9px;letter-spacing:.06em}
+  .hero{padding-top:14px}
   .hero-bg{opacity:.35}
   .hero .wrap{grid-template-columns:minmax(0,52fr) minmax(0,48fr);gap:0 10px;align-items:start;text-align:left}
   .hero-copy{display:contents}
