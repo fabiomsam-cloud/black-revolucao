@@ -56,12 +56,13 @@ def topbar():
 """
 
 def form_card(cta):
+    arrow = '<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
     return f"""
 <form class="form-card rv" id="form" novalidate style="--d:.35s">
-  <p class="form-title desk">{BARS} Garanta o seu lugar na live</p>
-  <div class="field"><label for="f-tel">WhatsApp com DDD</label><input id="f-tel" name="telefone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="Seu WhatsApp com DDD" required><div class="msg">Confira o WhatsApp: DDD + número com 9 dígitos.</div></div>
-  <div class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="Seu e-mail" required><div class="msg">Digite um e-mail válido.</div></div>
-  <div class="field"><label for="f-esc">Qual a sua escolaridade?</label>
+  <p class="form-title">Garanta o seu lugar na live</p>
+  <div class="field"><label for="f-tel">WhatsApp com DDD</label><input id="f-tel" name="telefone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="(00) 00000-0000" required><div class="msg">Confira o WhatsApp: DDD + número com 9 dígitos.</div></div>
+  <div class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="Seu melhor e-mail" required><div class="msg">Digite um e-mail válido.</div></div>
+  <div class="field"><label for="f-esc">Escolaridade</label>
     <select id="f-esc" name="escolaridade" class="placeholder" required>
       <option value="" disabled selected>Qual a sua escolaridade?</option>
       <option value="fundamental">Ensino Fundamental</option>
@@ -70,12 +71,10 @@ def form_card(cta):
       <option value="superior_completo">Superior Completo</option>
       <option value="pos">Pós-graduação</option>
     </select><div class="msg">Selecione a sua escolaridade.</div></div>
-  <button class="btn block" type="submit" style="margin-top:6px">{cta}</button>
+  <button class="btn block" type="submit"><span>{cta}</span>{arrow}</button>
   <div class="form-error" role="alert"></div>
-  <ul class="form-foot">
-    <li>{BARS}Você entra no grupo oficial do WhatsApp e recebe o link da live <b>antes de todo mundo</b>.</li>
-    <li>{BARS}Ao final da live, vamos liberar <b>a maior condição de Black Friday já feita</b>.</li>
-  </ul>
+  <p class="form-note">Cadastro gratuito · Link no grupo do WhatsApp</p>
+  <p class="form-note">Com Fábio Silva · Sou Concurseiro</p>
 </form>
 """
 
@@ -88,7 +87,7 @@ def hero(c):
     <div class="hero-copy">
       <div class="brand-row rv" style="--d:0s">
         <div class="brand"><img src="../assets/logo-black-revolucao.png" alt="Black · A Revolução do Estudo"></div>
-        <div class="date-pill">{cal}<span>10 de novembro, às 20h</span><span class="live">Ao vivo</span></div>
+        <div class="date-pill">{cal}<span class="d1">10 de novembro · 20h</span><span class="d2 live">Ao vivo · Brasília</span></div>
       </div>
       <h1 id="h1" class="rv" style="--d:.1s">{c['h1']}</h1>
       <p class="sub rv" style="--d:.18s">{c['sub']}</p>
@@ -241,7 +240,7 @@ COPY = {
     },
 }
 
-V = "4"
+V = "5"
 OG = "https://revolucaodoestudo.com.br/assets/og.jpg"
 
 def page(versao):
