@@ -81,8 +81,8 @@ def form_card(cta):
 def hero(c):
     cal = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>'
     return f"""
-<section class="hero{' hero--synapse' if c.get('synapse') else ''}" aria-labelledby="h1">
-  <div class="hero-bg" aria-hidden="true"></div>{'<canvas class="synapse" aria-hidden="true"></canvas>' if c.get('synapse') else ''}
+<section class="hero{(' hero--' + c['fx']) if c.get('fx') else ''}" aria-labelledby="h1">
+  <div class="hero-bg" aria-hidden="true"></div>{('<canvas class="' + c['fx'] + '" aria-hidden="true"></canvas>') if c.get('fx') else ''}
   <div class="wrap">
     <div class="hero-copy">
       <div class="brand-row rv" style="--d:0s">
@@ -240,9 +240,10 @@ COPY = {
         "so_dobra1": True,
     },
 }
-COPY["v3"] = dict(COPY["v2"], synapse=True)  # v3 = v2 + rede de sinapses (21st.dev, portada) atrás do hero
+COPY["v3"] = dict(COPY["v2"], fx="synapse")  # v3 = v2 + rede de sinapses (21st.dev · Interactive Synapse Network, portada)
+COPY["v4"] = dict(COPY["v2"], fx="aether")   # v4 = v2 + éter de partículas (21st.dev · Aether Flow Hero, portado)
 
-V = "14"
+V = "16"
 OG = "https://revolucaodoestudo.com.br/assets/og.jpg"
 
 def page(versao):
@@ -250,7 +251,7 @@ def page(versao):
     out = HEAD.format(title=TITLE, desc=DESC, og=OG, fonts=FONTS, v=V, anon=ANON, slug=SLUG, pixel=PIXEL, versao=versao, grupo=GRUPO)
     # so_dobra1: página só com a primeira dobra (pedido do Fábio 07/10 para a v2)
     corpo = hero(c) if c.get("so_dobra1") else hero(c) + c["dobra2"]() + band() + bio() + final()
-    extra = f'<script src="../assets/synapse.js?v={V}" defer></script>\n' if c.get("synapse") else ""
+    extra = f'<script src="../assets/{c["fx"]}.js?v={V}" defer></script>\n' if c.get("fx") else ""
     out += topbar() + "<main>" + corpo + "</main>" + FOOT.format(v=V).replace("</body>", extra + "</body>")
     return out
 
@@ -282,7 +283,7 @@ ROOT_INDEX = """<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><t
 <body style="background:#050607;color:#ccc;font-family:sans-serif;padding:40px;text-align:center"><a href="v2/" style="color:#00b7df">Entrar na página</a></body></html>
 """
 
-for v in ("v1", "v2", "v3"):
+for v in ("v1", "v2", "v3", "v4"):
     d = ROOT / v; d.mkdir(exist_ok=True); (d / "index.html").write_text(page(v), encoding="utf-8")
 (ROOT / "obrigado").mkdir(exist_ok=True); (ROOT / "obrigado" / "index.html").write_text(obrigado(), encoding="utf-8")
 (ROOT / "index.html").write_text(ROOT_INDEX, encoding="utf-8")
