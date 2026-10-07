@@ -243,7 +243,7 @@ COPY = {
 }
 
 V = "3"
-OG = "https://fabiomsam-cloud.github.io/black-revolucao/assets/og.jpg"
+OG = "https://revolucaodoestudo.com.br/assets/og.jpg"
 
 def page(versao):
     c = COPY[versao]
