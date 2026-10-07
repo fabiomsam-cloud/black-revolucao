@@ -97,9 +97,9 @@ h1{font-family:var(--font-d);font-weight:800;font-size:clamp(30px,4.2vw,54px);li
   h1{grid-column:1;order:2;align-self:start;font-size:23px;line-height:1.14;letter-spacing:0;margin:6px 0 0;text-wrap:pretty}
   h1 .metal{background:none;color:#fff;-webkit-text-fill-color:#fff}
   .hero-photo{grid-column:2;order:2;min-height:0;height:210px;margin:0 -16px 0 0;overflow:hidden;align-self:start}
-  .hero-photo img{position:absolute;top:0;bottom:auto;left:auto;right:-10px;transform:none;height:104%;width:auto;filter:drop-shadow(0 0 24px rgba(0,170,210,.22))}
-  .hero-photo::before{width:140%;bottom:-30%;opacity:.7}
-  .hero-photo::after{height:46px}
+  .hero-photo img{position:absolute;top:0;bottom:auto;left:auto;right:-10px;transform:none;height:104%;width:auto;filter:none}
+  .hero-photo::before,.hero-photo::after{display:none}
+  .hero-photo{background:none}
   .sub{display:none}
   .hero-form-slot{grid-column:1/-1;order:3;position:relative;z-index:3;margin:10px 0 36px}
   .hero-form-slot .form-card{max-width:none;background:none;border:0;box-shadow:none;border-radius:0;padding:0}

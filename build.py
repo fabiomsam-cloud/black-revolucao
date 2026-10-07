@@ -240,7 +240,7 @@ COPY = {
     },
 }
 
-V = "8"
+V = "9"
 OG = "https://revolucaodoestudo.com.br/assets/og.jpg"
 
 def page(versao):
