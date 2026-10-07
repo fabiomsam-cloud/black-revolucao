@@ -83,11 +83,11 @@ h1{font-family:var(--font-d);font-weight:800;font-size:clamp(30px,4.2vw,54px);li
   .cd-units{gap:10px;width:100%;justify-content:center}
   .cd-unit b{font-size:19px}
   .cd-unit span{font-size:9px;letter-spacing:.06em}
-  .hero{padding-top:14px}
+  .hero{padding-top:12px}
   .hero-bg{opacity:.35}
   .hero .wrap{grid-template-columns:minmax(0,52fr) minmax(0,48fr);gap:0 10px;align-items:start;text-align:left}
   .hero-copy{display:contents}
-  .brand-row{grid-column:1/-1;order:1;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:12px;margin:0 0 20px}
+  .brand-row{grid-column:1/-1;order:1;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px}
   .brand img{height:52px}
   .date-pill{display:flex;flex-direction:column;align-items:flex-end;gap:3px;padding:0;border:0;background:none;box-shadow:none;text-align:right;letter-spacing:.01em;line-height:1.2}
   .date-pill svg{display:none}
@@ -96,17 +96,17 @@ h1{font-family:var(--font-d);font-weight:800;font-size:clamp(30px,4.2vw,54px);li
   .date-pill .live::before{display:none}
   h1{grid-column:1;order:2;align-self:start;font-size:23px;line-height:1.14;letter-spacing:0;margin:6px 0 0;text-wrap:pretty}
   h1 .metal{background:none;color:#fff;-webkit-text-fill-color:#fff}
-  .hero-photo{grid-column:2;order:2;min-height:0;height:240px;margin:0 -16px 0 0;overflow:hidden;align-self:start}
+  .hero-photo{grid-column:2;order:2;min-height:0;height:210px;margin:0 -16px 0 0;overflow:hidden;align-self:start}
   .hero-photo img{position:absolute;top:0;bottom:auto;left:auto;right:-10px;transform:none;height:104%;width:auto;filter:drop-shadow(0 0 24px rgba(0,170,210,.22))}
   .hero-photo::before{width:140%;bottom:-30%;opacity:.7}
   .hero-photo::after{height:46px}
   .sub{display:none}
-  .hero-form-slot{grid-column:1/-1;order:3;position:relative;z-index:3;margin:16px 0 36px}
+  .hero-form-slot{grid-column:1/-1;order:3;position:relative;z-index:3;margin:10px 0 36px}
   .hero-form-slot .form-card{max-width:none;background:none;border:0;box-shadow:none;border-radius:0;padding:0}
   .hero-form-slot .form-card::before{display:none}
-  .hero-form-slot .form-title{font-size:15px;letter-spacing:.02em;color:#fff;margin:0 0 12px}
-  .hero-form-slot .field{margin-bottom:10px}
-  .hero-form-slot .field label{position:static;width:auto;height:auto;overflow:visible;clip:auto;display:block;font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;color:#d2d6db;margin:0 0 6px}
+  .hero-form-slot .form-title{font-size:15px;letter-spacing:.02em;color:#fff;margin:0 0 10px}
+  .hero-form-slot .field{margin-bottom:8px}
+  .hero-form-slot .field label{position:static;width:auto;height:auto;overflow:visible;clip:auto;display:block;font-size:14px;font-weight:500;letter-spacing:0;text-transform:none;color:#d2d6db;margin:0 0 5px}
   .hero-form-slot .field input,.hero-form-slot .field select{height:44px;font-size:16px;padding:0 14px;border-radius:10px;background:#11161c;border-color:rgba(255,255,255,.14)}
   .hero-form-slot .field select{padding-right:42px;background-position:right 14px center}
   .hero-form-slot .btn.block{margin-top:4px;padding:0 18px;height:48px;border-radius:10px;font-size:17px;letter-spacing:.03em;color:#06151b;background:#1cc6e6;box-shadow:0 8px 24px rgba(0,0,0,.35);justify-content:center;gap:10px}
