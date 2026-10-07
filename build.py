@@ -237,16 +237,19 @@ COPY = {
         "h1": 'O caminho para ver o seu nome na <span class="metal">lista de aprovados</span>, sem parar a sua vida para estudar.',
         "sub": "No dia 10 de novembro, irei revelar ao vivo a preparação que faz o estudo caber na rotina de quem trabalha, cuida da família e tem pouco tempo. Você passa a estudar nos momentos que hoje perde, sabe todo dia o que precisa estudar para a sua prova e não se prepara mais sozinho. Nessa live vamos abrir a maior Black Friday da história do Sou Concurseiro.",
         "dobra2": dobra2_v2,
+        "so_dobra1": True,
     },
 }
 
-V = "11"
+V = "12"
 OG = "https://revolucaodoestudo.com.br/assets/og.jpg"
 
 def page(versao):
     c = COPY[versao]
     out = HEAD.format(title=TITLE, desc=DESC, og=OG, fonts=FONTS, v=V, anon=ANON, slug=SLUG, pixel=PIXEL, versao=versao, grupo=GRUPO)
-    out += topbar() + "<main>" + hero(c) + c["dobra2"]() + band() + bio() + final() + "</main>" + FOOT.format(v=V)
+    # so_dobra1: página só com a primeira dobra (pedido do Fábio 07/10 para a v2)
+    corpo = hero(c) if c.get("so_dobra1") else hero(c) + c["dobra2"]() + band() + bio() + final()
+    out += topbar() + "<main>" + corpo + "</main>" + FOOT.format(v=V)
     return out
 
 def obrigado():
