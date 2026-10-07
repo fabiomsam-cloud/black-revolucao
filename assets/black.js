@@ -100,10 +100,13 @@
     }
     form.addEventListener("submit", function (ev) {
       ev.preventDefault();
-      var nome = form.nome.value.trim(), email = form.email.value.trim().toLowerCase();
+      var email = form.email.value.trim().toLowerCase();
+      // o motor exige nome: deriva da parte local do e-mail ("maria.silva" → "Maria Silva"); a Anne pega o nome real depois
+      var nome = (email.split("@")[0] || "").replace(/[0-9]+/g, " ").replace(/[._\-+]+/g, " ").trim()
+        .split(/\s+/).filter(Boolean).map(function (w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(" ").slice(0, 60);
+      if (nome.length < 2) nome = "Concurseiro(a)";
       var digits = form.telefone.value.replace(/\D/g, ""), esc = form.escolaridade.value;
       var ok = true;
-      setErr("nome", nome.length < 2); ok = ok && nome.length >= 2;
       var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); setErr("email", !emailOk); ok = ok && emailOk;
       var telOk = digits.length === 11 && digits[2] === "9"; setErr("telefone", !telOk); ok = ok && telOk;
       setErr("escolaridade", !esc); ok = ok && !!esc;

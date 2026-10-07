@@ -58,8 +58,7 @@ def topbar():
 def form_card(cta):
     return f"""
 <form class="form-card rv" id="form" novalidate style="--d:.35s">
-  <p class="form-title">{BARS} Garanta o seu lugar na live</p>
-  <div class="field"><label for="f-nome">Seu nome</label><input id="f-nome" name="nome" type="text" autocomplete="name" placeholder="Seu nome" required><div class="msg">Digite o seu nome.</div></div>
+  <p class="form-title desk">{BARS} Garanta o seu lugar na live</p>
   <div class="field"><label for="f-tel">WhatsApp com DDD</label><input id="f-tel" name="telefone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="Seu WhatsApp com DDD" required><div class="msg">Confira o WhatsApp: DDD + número com 9 dígitos.</div></div>
   <div class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="Seu e-mail" required><div class="msg">Digite um e-mail válido.</div></div>
   <div class="field"><label for="f-esc">Qual a sua escolaridade?</label>
@@ -242,7 +241,7 @@ COPY = {
     },
 }
 
-V = "3"
+V = "4"
 OG = "https://revolucaodoestudo.com.br/assets/og.jpg"
 
 def page(versao):
