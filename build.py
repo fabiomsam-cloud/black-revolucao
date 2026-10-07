@@ -243,7 +243,7 @@ COPY = {
 COPY["v3"] = dict(COPY["v2"], fx="synapse")  # v3 = v2 + rede de sinapses (21st.dev · Interactive Synapse Network, portada)
 COPY["v4"] = dict(COPY["v2"], fx="aether")   # v4 = v2 + éter de partículas (21st.dev · Aether Flow Hero, portado)
 
-V = "19"
+V = "20"
 OG = "https://revolucaodoestudo.com.br/assets/og.jpg"
 
 def page(versao):
