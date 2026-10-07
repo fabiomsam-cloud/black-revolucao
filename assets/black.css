@@ -238,32 +238,6 @@ footer p{margin:0}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 
 
-/* ---------- cromo líquido (v5): gradiente de metal em movimento recortado no texto + ondulação por filtro SVG ---------- */
-.liquid{
-  background-image:
-    linear-gradient(100deg,transparent 42%,rgba(255,255,255,.85) 50%,transparent 58%),
-    linear-gradient(112deg,#5e656d 0%,#f4f6f8 14%,#8d949c 26%,#ffffff 38%,#6f767e 50%,#e6e9ec 62%,#7a8189 74%,#fafbfc 86%,#848b93 100%);
-  background-size:220% 100%,320% 100%;
-  background-position:120% 0,0% 0;
-  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
-  animation:liquid 8s ease-in-out infinite alternate;
-  text-shadow:none;
-}
-/* uma só animação move as duas camadas: o brilho (1ª) varre duas vezes enquanto o metal (2ª) flui */
-@keyframes liquid{
-  0%{background-position:130% 0,0% 0}
-  45%{background-position:-130% 0,45% 0}
-  45.01%{background-position:130% 0,45% 0}
-  100%{background-position:-130% 0,100% 0}
-}
-/* a ondulação (displacement) só onde há mouse e GPU folgada; no celular fica o fluxo do gradiente */
-@media (hover:hover) and (pointer:fine){.liquid{filter:url(#liquid-ripple)}}
-.hero--liquid h1 .liquid{background-image:
-    linear-gradient(100deg,transparent 42%,rgba(255,255,255,.85) 50%,transparent 58%),
-    linear-gradient(112deg,#5e656d 0%,#f4f6f8 14%,#8d949c 26%,#ffffff 38%,#6f767e 50%,#e6e9ec 62%,#7a8189 74%,#fafbfc 86%,#848b93 100%);
-  background-size:220% 100%,320% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
-@media (prefers-reduced-motion:reduce){.liquid{animation:none;filter:none}}
-
 /* ---------- OBRIGADO ---------- */
 .thanks{min-height:100svh;display:grid;place-items:center;padding:40px 0 60px;position:relative;overflow:hidden}
 .thanks-bg{position:absolute;inset:0;background:url(../assets/hero-bg.jpg) center/cover no-repeat;opacity:.45}

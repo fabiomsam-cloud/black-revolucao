@@ -35,8 +35,6 @@ HEAD = """<!doctype html>
 <body>
 """
 
-LIQ = '''<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="liquid-ripple" x="-10%" y="-20%" width="120%" height="140%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.010 0.028" numOctaves="2" seed="7" result="n"><animate attributeName="baseFrequency" dur="16s" values="0.010 0.028;0.016 0.020;0.009 0.031;0.010 0.028" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>'''
-
 BARS = '<span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>'
 
 def topbar():
@@ -83,8 +81,8 @@ def form_card(cta):
 def hero(c):
     cal = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>'
     return f"""
-<section class="hero{(' hero--' + c['fx']) if c.get('fx') else ''}{' hero--liquid' if c.get('liquid') else ''}" aria-labelledby="h1">
-  <div class="hero-bg" aria-hidden="true"></div>{LIQ if c.get('liquid') else ''}{('<canvas class="' + c['fx'] + '" aria-hidden="true"></canvas>') if c.get('fx') else ''}
+<section class="hero{(' hero--' + c['fx']) if c.get('fx') else ''}" aria-labelledby="h1">
+  <div class="hero-bg" aria-hidden="true"></div>{('<canvas class="' + c['fx'] + '" aria-hidden="true"></canvas>') if c.get('fx') else ''}
   <div class="wrap">
     <div class="hero-copy">
       <div class="brand-row rv" style="--d:0s">
@@ -244,9 +242,8 @@ COPY = {
 }
 COPY["v3"] = dict(COPY["v2"], fx="synapse")  # v3 = v2 + rede de sinapses (21st.dev · Interactive Synapse Network, portada)
 COPY["v4"] = dict(COPY["v2"], fx="aether")   # v4 = v2 + éter de partículas (21st.dev · Aether Flow Hero, portado)
-COPY["v5"] = dict(COPY["v2"], liquid=True, h1='O caminho para ver o seu nome na <span class="metal liquid">lista de aprovados</span>, sem parar a sua vida para estudar.')  # v5 = v2 + "lista de aprovados" em cromo líquido (CSS + filtro SVG)
 
-V = "18"
+V = "19"
 OG = "https://revolucaodoestudo.com.br/assets/og.jpg"
 
 def page(versao):
@@ -286,7 +283,7 @@ ROOT_INDEX = """<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><t
 <body style="background:#050607;color:#ccc;font-family:sans-serif;padding:40px;text-align:center"><a href="v2/" style="color:#00b7df">Entrar na página</a></body></html>
 """
 
-for v in ("v1", "v2", "v3", "v4", "v5"):
+for v in ("v1", "v2", "v3", "v4"):
     d = ROOT / v; d.mkdir(exist_ok=True); (d / "index.html").write_text(page(v), encoding="utf-8")
 (ROOT / "obrigado").mkdir(exist_ok=True); (ROOT / "obrigado" / "index.html").write_text(obrigado(), encoding="utf-8")
 (ROOT / "index.html").write_text(ROOT_INDEX, encoding="utf-8")
