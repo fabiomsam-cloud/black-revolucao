@@ -96,8 +96,9 @@ h1{font-family:var(--font-d);font-weight:800;font-size:clamp(30px,4.2vw,54px);li
   .date-pill .live::before{display:none}
   h1{grid-column:1;order:2;align-self:start;font-size:23px;line-height:1.14;letter-spacing:0;margin:6px 0 0;text-wrap:pretty}
   h1 .metal{background:none;color:#fff;-webkit-text-fill-color:#fff}
-  .hero-photo{grid-column:2;order:2;min-height:0;height:210px;margin:0 -16px 0 0;overflow:hidden;align-self:start}
-  .hero-photo img{position:absolute;top:0;bottom:auto;left:auto;right:-10px;transform:none;height:104%;width:auto;filter:none}
+  /* a caixa ocupa só a altura do título na grade; a foto é maior e transborda para baixo, por cima do vazio à direita de "GARANTA…" */
+  .hero-photo{grid-column:2;order:2;min-height:0;height:196px;margin:0 -16px 0 0;overflow:visible;align-self:start;z-index:1}
+  .hero-photo img{position:absolute;top:-10px;bottom:auto;left:auto;right:-8px;transform:none;height:264px;width:auto;filter:none;-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent 100%);mask-image:linear-gradient(180deg,#000 82%,transparent 100%)}
   .hero-photo::before,.hero-photo::after{display:none}
   .hero-photo{background:none}
   .sub{display:none}
