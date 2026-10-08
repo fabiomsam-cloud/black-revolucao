@@ -238,6 +238,50 @@ footer p{margin:0}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 
 
+
+/* ---------- seções do "encontro" (v5; vindas da revisão não-alunos de 07/10) ---------- */
+.encontro section{padding:92px 0;border-top:1px solid var(--line)}
+.encontro .section-heading{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-bottom:36px}
+.encontro .section-heading p,.encontro .section-copy{color:var(--ink-2);font-size:19px;margin:0}
+.encontro .three-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.encontro .three-cards article{border:1px solid var(--line);border-radius:20px;padding:30px;background:linear-gradient(140deg,#101e26,#0c1015)}
+.encontro .three-cards span{color:var(--blue-2);font-size:12px;letter-spacing:.14em;font-family:var(--font-d);font-weight:700}
+.encontro .three-cards h3{font:700 25px/1.2 var(--font-d);margin:30px 0 16px}
+.encontro .three-cards p{color:var(--ink-2);margin:0}
+.encontro .value,.encontro .participate{background:#0b0e13}
+.encontro .text-cta{display:inline-flex;gap:28px;color:#43d5ee;font-weight:700;text-underline-offset:6px;margin-top:20px}
+.encontro .bio-photo{max-width:390px}
+.encontro .bio .roles li{color:var(--ink-2)}
+.encontro .journey{list-style:none;counter-reset:journey;display:grid;grid-template-columns:repeat(4,1fr);gap:26px;padding:0;margin:42px 0}
+.encontro .journey li{counter-increment:journey;border-top:1px solid #287080;padding-top:24px}
+.encontro .journey li::before{content:'0' counter(journey);display:block;font:700 30px var(--font-d);color:var(--blue-2);margin-bottom:18px}
+.encontro .journey b{font-size:19px}
+.encontro .journey p{color:var(--ink-2);font-size:16px;margin:8px 0 0}
+.encontro .offer-note{border-left:3px solid var(--blue-2);padding:20px 26px;background:#11202a;border-radius:0 12px 12px 0}
+.encontro .offer-note p{margin:8px 0 0;color:var(--ink-2)}
+.encontro .faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px}
+.encontro .faq details{border-bottom:1px solid var(--line-2);padding:22px 0}
+.encontro .faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:20px}
+.encontro .faq summary::-webkit-details-marker{display:none}
+.encontro .faq summary::after{content:'+';color:var(--blue-2);font-size:24px;line-height:1}
+.encontro .faq details[open] summary::after{content:'−'}
+.encontro .faq details p{color:var(--ink-2);margin:16px 0 0}
+.encontro .final p{color:var(--ink-2)}
+.encontro .final h2{max-width:26ch}
+.encontro .final .btn{margin-top:18px}
+@media (max-width:959px){
+  .encontro section{padding:60px 0}
+  .encontro .section-heading,.encontro .faq-grid{grid-template-columns:1fr;gap:8px}
+  .encontro .three-cards{grid-template-columns:1fr}
+  .encontro .three-cards h3{margin-top:20px}
+  .encontro .journey{grid-template-columns:1fr 1fr}
+  .encontro .bio{text-align:left}
+  .encontro .bio-photo{width:100%;margin:0}
+  .encontro .bio .roles{justify-content:flex-start}
+  .encontro .final .btn{font-size:14px;padding:20px}
+}
+@media (max-width:400px){.encontro .journey{grid-template-columns:1fr}}
+
 /* ---------- OBRIGADO ---------- */
 .thanks{min-height:100svh;display:grid;place-items:center;padding:40px 0 60px;position:relative;overflow:hidden}
 .thanks-bg{position:absolute;inset:0;background:url(../assets/hero-bg.jpg) center/cover no-repeat;opacity:.45}
