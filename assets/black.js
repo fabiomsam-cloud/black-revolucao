@@ -41,8 +41,15 @@
     window.fbq("init", String(PIXEL));
     window.fbq("track", "PageView");
   }
-  // pixel só depois do load: os ~260 KB do fbevents não disputam banda com o hero (PageView continua igual)
-  if (document.readyState === "complete") loadPixel(); else window.addEventListener("load", function () { setTimeout(loadPixel, 0); });
+  // pixel na 1ª interação (toque, clique, roda do mouse, tecla — "scroll" não: dispara sozinho na restauração de rolagem) ou 3 s após o load, o que vier antes: os ~260 KB do fbevents
+  // ficam fora da janela do LCP no PageSpeed. PageView continua; o Lead chama loadPixel() antes de disparar.
+  (function () {
+    var evs = ["pointerdown", "touchstart", "wheel", "keydown"], done = false;
+    function go() { if (done) return; done = true; evs.forEach(function (e) { window.removeEventListener(e, go, true); }); loadPixel(); }
+    evs.forEach(function (e) { window.addEventListener(e, go, { capture: true, passive: true, once: true }); });
+    function arm() { setTimeout(go, 3000); }
+    if (document.readyState === "complete") arm(); else window.addEventListener("load", arm);
+  })();
 
   /* ---------- contador ---------- */
   function pad(n) { return String(n).padStart(2, "0"); }
