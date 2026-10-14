@@ -96,7 +96,8 @@
     raf = requestAnimationFrame(frame);
   }
 
-  function start() { if (running || reduce) return; running = true; frame.last = 0; raf = requestAnimationFrame(frame); }
+  var booted = false;
+  function start() { if (!booted || running || reduce) return; running = true; frame.last = 0; raf = requestAnimationFrame(frame); }
   function stop() { running = false; cancelAnimationFrame(raf); }
   function toLocal(cx, cy) { var r = host.getBoundingClientRect(); pointer.x = cx - r.left; pointer.y = cy - r.top; pointer.t = performance.now(); }
   window.addEventListener("mousemove", function (e) { toLocal(e.clientX, e.clientY); }, { passive: true });
@@ -109,6 +110,12 @@
     new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? start() : stop(); }); }, { threshold: 0.02 }).observe(host);
   }
 
-  size(); seed();
-  if (reduce) { running = true; frame(performance.now()); running = false; cancelAnimationFrame(raf); } else start();
+  // mesmo adiamento da synapse.js: começa depois do load + ociosidade, com fade (.aether.on)
+  function boot() {
+    booted = true; size(); seed();
+    if (reduce) { running = true; frame(performance.now()); running = false; cancelAnimationFrame(raf); } else start();
+    canvas.classList.add("on");
+  }
+  function later() { (window.requestIdleCallback || function (f) { setTimeout(f, 200); })(boot, { timeout: 1500 }); }
+  if (document.readyState === "complete") later(); else window.addEventListener("load", later);
 })();

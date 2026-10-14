@@ -1,4 +1,6 @@
 /* BLACK · A Revolução do Estudo — folha única (v1, v2, obrigado) · padrão: centralizado, cantos arredondados, brilho azul */
+@font-face{font-family:"Saira";font-style:normal;font-weight:500 800;font-stretch:100%;font-display:swap;src:url(fonts/saira-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Figtree";font-style:normal;font-weight:400 700;font-display:swap;src:url(fonts/figtree-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 :root{
   --bg:#07080b; --bg-2:#0b0d11; --card:#0f1217; --card-2:#141820; --field:#171b22;
   --ink:#f4f5f7; --ink-2:#c8ccd3; --ink-3:#8b919b;
@@ -13,7 +15,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:17px;line-height:1.55;overflow-x:hidden}
-img{max-width:100%;display:block}
+img{max-width:100%;height:auto;display:block}
 a{color:inherit}
 b,strong{font-weight:700;color:#fff}
 .wrap{width:min(var(--max),calc(100% - 32px));margin:0 auto}
@@ -53,8 +55,10 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opa
 
 /* ---------- HERO ---------- */
 .hero{position:relative;overflow:hidden;padding:18px 0 0}
-.hero-bg{position:absolute;inset:0;z-index:0;background:url(../assets/hero-bg.jpg) center/cover no-repeat;opacity:.5}
+.hero-bg{position:absolute;inset:0;z-index:0;background:url(../assets/hero-bg.webp) center/cover no-repeat;opacity:.5}
+@media (max-width:959px){.hero-bg,.thanks-bg{background-image:url(../assets/hero-bg-m.webp)}}
 .hero canvas.synapse,.hero canvas.aether{position:absolute;inset:0;z-index:1;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen}
+.hero canvas.synapse,.hero canvas.aether{opacity:0;transition:opacity .8s ease}.hero canvas.synapse.on,.hero canvas.aether.on{opacity:1}
 .hero--synapse .hero-bg{opacity:.28}
 .hero--aether .hero-bg{opacity:.2}
 .hero--synapse .hero-bg::after,.hero--aether .hero-bg::after{background:linear-gradient(180deg,rgba(7,8,11,.1),rgba(7,8,11,.35) 60%,var(--bg) 97%)!important}
@@ -201,7 +205,7 @@ h2{font-family:var(--font-d);font-weight:800;font-size:clamp(26px,3.4vw,42px);li
 .cta-row{margin:34px 0 0;text-align:center}
 
 .band{padding:0 0 84px}
-.band-in{position:relative;overflow:hidden;border-radius:calc(var(--r) + 6px);border:1px solid var(--line-2);padding:56px 40px;background:url(../assets/tex-metal.jpg) center/cover no-repeat;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.band-in{position:relative;overflow:hidden;border-radius:calc(var(--r) + 6px);border:1px solid var(--line-2);padding:56px 40px;background:url(../assets/tex-metal.webp) center/cover no-repeat;box-shadow:0 30px 80px rgba(0,0,0,.5)}
 .band-in::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,8,11,.92),rgba(7,8,11,.6) 60%,rgba(7,8,11,.8)),radial-gradient(50% 80% at 90% 50%,rgba(0,155,190,.25),transparent 70%)}
 .band-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:30px;align-items:center;text-align:left}
 .band h2{font-size:clamp(24px,3vw,38px);margin-bottom:10px}
@@ -284,7 +288,7 @@ footer p{margin:0}
 
 /* ---------- OBRIGADO ---------- */
 .thanks{min-height:100svh;display:grid;place-items:center;padding:40px 0 60px;position:relative;overflow:hidden}
-.thanks-bg{position:absolute;inset:0;background:url(../assets/hero-bg.jpg) center/cover no-repeat;opacity:.45}
+.thanks-bg{position:absolute;inset:0;background:url(../assets/hero-bg.webp) center/cover no-repeat;opacity:.45}
 .thanks-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 30%,rgba(0,155,190,.18),transparent 70%),radial-gradient(70% 70% at 50% 40%,rgba(7,8,11,.3),var(--bg) 85%)}
 .thanks-card{position:relative;z-index:1;width:min(620px,calc(100% - 32px));background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line-2);border-radius:calc(var(--r) + 6px);padding:38px 30px 30px;text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 80px rgba(0,155,190,.12)}
 .thanks-card .brand{display:flex;justify-content:center;margin-bottom:22px}

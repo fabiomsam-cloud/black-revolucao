@@ -41,7 +41,8 @@
     window.fbq("init", String(PIXEL));
     window.fbq("track", "PageView");
   }
-  loadPixel();
+  // pixel só depois do load: os ~260 KB do fbevents não disputam banda com o hero (PageView continua igual)
+  if (document.readyState === "complete") loadPixel(); else window.addEventListener("load", function () { setTimeout(loadPixel, 0); });
 
   /* ---------- contador ---------- */
   function pad(n) { return String(n).padStart(2, "0"); }
@@ -126,7 +127,7 @@
       fetch(API, { method: "POST", headers: HEADERS, body: JSON.stringify(payload) })
         .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { if (!r.ok) throw new Error(d.error || "erro de conexão"); return d; }); })
         .then(function (r) {
-          try { if (r.pixel && window.fbq) window.fbq("track", "Lead", {}, { eventID: r.pixel.event_id }); } catch (_) {}
+          try { loadPixel(); if (r.pixel && window.fbq) window.fbq("track", "Lead", {}, { eventID: r.pixel.event_id }); } catch (_) {}
           var dest = r.redirect_url || r.redirect_url_desq || CFG.grupo;
           try { sessionStorage.setItem("black_reg", JSON.stringify({ id: r.registro_id, dest: dest, q: r.qualified })); } catch (_) {}
           var u = new URL(CFG.obrigado || "../obrigado/", location.href);

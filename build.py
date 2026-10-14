@@ -12,7 +12,6 @@ SLUG = "black-revolucao-nao-alunos"
 GRUPO = "https://sndflw.com/i/D3dZyygkzj3LQgQ73IHP"
 TITLE = "Black · A Revolução do Estudo — 10 de novembro, 20h, ao vivo"
 DESC = "No dia 10 de novembro, ao vivo, a preparação para concurso que cabe na rotina de quem trabalha, cuida da família e tem pouco tempo. E a maior Black Friday da história do Sou Concurseiro."
-FONTS = "https://fonts.googleapis.com/css2?family=Saira:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&display=swap"
 
 HEAD = """<!doctype html>
 <html lang="pt-BR">
@@ -27,8 +26,10 @@ HEAD = """<!doctype html>
 <meta property="og:image" content="{og}">
 <meta name="theme-color" content="#050607">
 <link rel="icon" href="../assets/logo-e.png" type="image/png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="{fonts}">
+<link rel="preload" href="../assets/fonts/saira-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/hero-bg-m.webp" as="image" type="image/webp" media="(max-width:959px)" fetchpriority="high">
+<link rel="preload" href="../assets/hero-bg.webp" as="image" type="image/webp" media="(min-width:960px)" fetchpriority="high">
 <link rel="stylesheet" href="../assets/black.css?v={v}">
 <script>window.BLACK_CFG={{anon:"{anon}",slug:"{slug}",pixel:"{pixel}",versao:"{versao}",grupo:"{grupo}",obrigado:"../obrigado/"}};</script>
 </head>
@@ -86,7 +87,7 @@ def hero(c):
   <div class="wrap">
     <div class="hero-copy">
       <div class="brand-row rv" style="--d:0s">
-        <div class="brand"><img src="../assets/logo-black-revolucao.png" alt="Black · A Revolução do Estudo"></div>
+        <div class="brand"><img src="../assets/logo-black-revolucao.webp" width="480" height="188" alt="Black · A Revolução do Estudo"></div>
         <div class="date-pill">{cal}<span class="d1">10 de novembro · 20h</span><span class="d2 live">Ao vivo · Brasília</span></div>
       </div>
       <h1 id="h1" class="rv" style="--d:.1s">{c['h1']}</h1>
@@ -94,7 +95,7 @@ def hero(c):
       <div class="hero-form-slot">{form_card("Quero participar")}</div>
     </div>
     <div class="hero-photo rv" aria-hidden="true" style="--d:.05s">
-      <img src="../assets/fabio-camisa-1011.png" alt="" loading="eager" fetchpriority="high">
+      <img src="../assets/fabio-camisa-1011-860.webp" srcset="../assets/fabio-camisa-1011-440.webp 440w, ../assets/fabio-camisa-1011-860.webp 860w" sizes="(max-width:959px) 180px, 600px" width="860" height="1300" alt="" loading="eager" fetchpriority="high">
     </div>
   </div>
 </section>
@@ -119,9 +120,9 @@ def who():
 def dobra2_v2():
     cards = f"""
 <div class="bento">
-  <article class="card img rv"><div class="pic"><img src="../assets/cena-transito.jpg" alt="Mulher no ônibus, a caminho do trabalho, estudando pelo fone"></div><span class="num">01</span><h3>Mais horas de estudo sem tirar nenhuma do seu dia</h3><p>Você estuda e revisa no trânsito, na academia e nas tarefas de casa. O tempo que hoje se perde vira matéria revisada.</p></article>
-  <article class="card img rv" style="transition-delay:.08s"><div class="pic"><img src="../assets/cena-louca.jpg" alt="Homem lavando a louça à noite enquanto ouve uma aula"></div><span class="num">02</span><h3>Direção para o seu concurso</h3><p>Você sabe o que estudar hoje, o que mais pesa na sua prova e o que pode ficar para depois. Acaba o cronograma impossível.</p></article>
-  <article class="card img rv" style="transition-delay:.16s"><div class="pic"><img src="../assets/cena-noite.jpg" alt="Mãe estudando na cozinha às dez da noite, com o filho dormindo no quarto ao lado"></div><span class="num">03</span><h3>Constância nas semanas difíceis</h3><p>Você estuda ao lado de gente no mesmo caminho e tem quem te puxe de volta quando a rotina aperta.</p></article>
+  <article class="card img rv"><div class="pic"><img src="../assets/cena-transito.webp" width="900" height="1117" loading="lazy" decoding="async" alt="Mulher no ônibus, a caminho do trabalho, estudando pelo fone"></div><span class="num">01</span><h3>Mais horas de estudo sem tirar nenhuma do seu dia</h3><p>Você estuda e revisa no trânsito, na academia e nas tarefas de casa. O tempo que hoje se perde vira matéria revisada.</p></article>
+  <article class="card img rv" style="transition-delay:.08s"><div class="pic"><img src="../assets/cena-louca.webp" width="900" height="1117" loading="lazy" decoding="async" alt="Homem lavando a louça à noite enquanto ouve uma aula"></div><span class="num">02</span><h3>Direção para o seu concurso</h3><p>Você sabe o que estudar hoje, o que mais pesa na sua prova e o que pode ficar para depois. Acaba o cronograma impossível.</p></article>
+  <article class="card img rv" style="transition-delay:.16s"><div class="pic"><img src="../assets/cena-noite.webp" width="900" height="1117" loading="lazy" decoding="async" alt="Mãe estudando na cozinha às dez da noite, com o filho dormindo no quarto ao lado"></div><span class="num">03</span><h3>Constância nas semanas difíceis</h3><p>Você estuda ao lado de gente no mesmo caminho e tem quem te puxe de volta quando a rotina aperta.</p></article>
   <article class="card txt rv"><span class="num">04</span>{BARS}<h3>Clareza do que você já domina</h3><p>Você enxerga onde está forte e onde precisa reforçar antes da prova, e para de estudar no escuro.</p></article>
   <article class="card txt rv" style="transition-delay:.08s"><span class="num">05</span>{BARS}<h3>Um começo guiado</h3><p>Nos primeiros 30 dias você recebe o passo a passo para montar a sua rotina, mesmo que nunca tenha estudado para concurso.</p></article>
 </div>
@@ -158,9 +159,9 @@ def dobra2_v1():
     <div class="reveal-grid">
       <ol class="steps">{lis}</ol>
       <div class="mosaic rv" aria-hidden="true">
-        <figure><img src="../assets/cena-noite.jpg" alt=""><figcaption>Dez da noite</figcaption></figure>
-        <figure><img src="../assets/cena-transito.jpg" alt=""><figcaption>No trajeto</figcaption></figure>
-        <figure><img src="../assets/cena-louca.jpg" alt=""><figcaption>Em casa</figcaption></figure>
+        <figure><img src="../assets/cena-noite.webp" width="900" height="1117" loading="lazy" decoding="async" alt=""><figcaption>Dez da noite</figcaption></figure>
+        <figure><img src="../assets/cena-transito.webp" width="900" height="1117" loading="lazy" decoding="async" alt=""><figcaption>No trajeto</figcaption></figure>
+        <figure><img src="../assets/cena-louca.webp" width="900" height="1117" loading="lazy" decoding="async" alt=""><figcaption>Em casa</figcaption></figure>
       </div>
     </div>
     {who()}
@@ -190,7 +191,7 @@ def bio():
     return f"""
 <section>
   <div class="wrap bio">
-    <div class="bio-photo rv"><img src="../assets/fabio-bracos-cruzados.jpg" alt="Fábio Silva, delegado, professor e mentor do Sou Concurseiro"><div class="tag">Quem vai te mostrar o caminho<b>Fábio Silva</b></div></div>
+    <div class="bio-photo rv"><img src="../assets/fabio-bracos-cruzados.webp" width="966" height="1200" loading="lazy" decoding="async" alt="Fábio Silva, delegado, professor e mentor do Sou Concurseiro"><div class="tag">Quem vai te mostrar o caminho<b>Fábio Silva</b></div></div>
     <div>
       <p class="eyebrow rv">Quem vai te mostrar o caminho</p>
       <h2 class="rv">Delegado, professor e mentor do Sou Concurseiro.</h2>
@@ -210,7 +211,7 @@ def encontro():
 <div class="encontro">
 <section class="routine"><div class="wrap"><p class="eyebrow">A vida não espera</p><div class="section-heading"><h2>Você quer começar.<br>Mas por onde?</h2><p>Talvez a vontade de mudar já esteja aí. O que falta é encontrar um jeito de estudar no meio da vida que você tem hoje.</p></div><div class="three-cards"><article><span>01 / TRABALHO</span><h3>O dia termina.<br>A energia também.</h3><p>Depois do expediente e do deslocamento, estudar parece mais uma tarefa impossível de encaixar.</p></article><article><span>02 / FAMÍLIA</span><h3>Há pessoas que<br>contam com você.</h3><p>A casa, os filhos e as responsabilidades continuam. O estudo precisa conviver com tudo isso.</p></article><article><span>03 / DIREÇÃO</span><h3>Muito conteúdo.<br>Pouca clareza.</h3><p>Entre tantas matérias e conselhos, fica difícil saber o que fazer primeiro — e o que pode esperar.</p></article></div></div></section>
 <section class="value"><div class="wrap reveal-grid"><div><p class="eyebrow">O que vamos conversar</p><h2>Um começo com direção.<br><span class="blue">Uma rotina possível.</span></h2><p class="section-copy">O encontro é um convite para organizar seus próximos passos na preparação para concursos, mesmo que você esteja começando agora.</p><a class="text-cta" href="#form" data-goto-form>Quero dar o primeiro passo <span aria-hidden="true">↗</span></a></div><ol class="steps"><li><b>Entender por onde começar</b>Como olhar para o seu momento e definir os primeiros passos da preparação.</li><li><b>Escolher suas prioridades</b>O que considerar para estudar com mais direção, sem tentar abraçar tudo de uma vez.</li><li><b>Encontrar espaço na rotina</b>Como pensar em um plano possível para quem trabalha e cuida da família.</li></ol></div></section>
-<section class="authority"><div class="wrap bio"><div class="bio-photo"><img src="../assets/fabio-bracos-cruzados.jpg" loading="lazy" alt="Fábio Silva, delegado e professor"><div class="tag">Seu professor neste encontro<b>Fábio Silva</b></div></div><div><p class="eyebrow">Quem vai estar com você</p><h2>Fábio Silva</h2><ul class="roles"><li>Delegado</li><li>Professor</li></ul><p>Fábio Silva é delegado e professor do Sou Concurseiro. Neste encontro, vai conversar com você sobre os primeiros passos e as escolhas que fazem parte da preparação para concursos.</p><p>Você não precisa chegar com tudo resolvido. Traga suas dúvidas e a vontade de começar.</p></div></div></section>
+<section class="authority"><div class="wrap bio"><div class="bio-photo"><img src="../assets/fabio-bracos-cruzados.webp" width="966" height="1200" loading="lazy" decoding="async" alt="Fábio Silva, delegado e professor"><div class="tag">Seu professor neste encontro<b>Fábio Silva</b></div></div><div><p class="eyebrow">Quem vai estar com você</p><h2>Fábio Silva</h2><ul class="roles"><li>Delegado</li><li>Professor</li></ul><p>Fábio Silva é delegado e professor do Sou Concurseiro. Neste encontro, vai conversar com você sobre os primeiros passos e as escolhas que fazem parte da preparação para concursos.</p><p>Você não precisa chegar com tudo resolvido. Traga suas dúvidas e a vontade de começar.</p></div></div></section>
 <section class="participate"><div class="wrap"><p class="eyebrow">Do cadastro ao encontro</p><h2>É simples participar.</h2><ol class="journey"><li><b>Faça seu cadastro</b><p>Preencha WhatsApp, e-mail e escolaridade no formulário desta página.</p></li><li><b>Confira a confirmação</b><p>Após o envio, você será direcionado à página de confirmação.</p></li><li><b>Entre no grupo</b><p>Use o convite da página de confirmação para entrar no grupo do WhatsApp e receber o link.</p></li><li><b>Participe ao vivo</b><p>10 de novembro de 2026, às 20h de Brasília (19h de Manaus).</p></li></ol><div class="offer-note"><strong>Um encontro gratuito, com uma oferta ao final.</strong><p>Durante a live, também será apresentada uma oferta de preparação do Sou Concurseiro. Você pode participar do encontro sem compromisso de compra.</p></div></div></section>
 <section class="faq"><div class="wrap faq-grid"><div><p class="eyebrow">Antes de se inscrever</p><h2>Suas dúvidas,<br>respondidas.</h2></div><div>
 <details><summary>O encontro é on-line e gratuito?</summary><p>Sim. Você participa on-line e o cadastro para o encontro é gratuito.</p></details>
@@ -265,12 +266,12 @@ COPY["v3"] = dict(COPY["v2"], fx="synapse")  # v3 = v2 + rede de sinapses (21st.
 COPY["v4"] = dict(COPY["v2"], fx="aether")   # v4 = v2 + éter de partículas (21st.dev · Aether Flow Hero, portado)
 COPY["v5"] = dict(COPY["v3"], encontro=True)  # v5 = hero da v3 (sinapses) + seções da revisão "não alunos" (Codex 07/10)
 
-V = "21"
+V = "22"
 OG = "https://revolucaodoestudo.com.br/assets/og.jpg"
 
 def page(versao):
     c = COPY[versao]
-    out = HEAD.format(title=TITLE, desc=DESC, og=OG, fonts=FONTS, v=V, anon=ANON, slug=SLUG, pixel=PIXEL, versao=versao, grupo=GRUPO)
+    out = HEAD.format(title=TITLE, desc=DESC, og=OG, v=V, anon=ANON, slug=SLUG, pixel=PIXEL, versao=versao, grupo=GRUPO)
     # so_dobra1: página só com a primeira dobra (pedido do Fábio 07/10 para a v2)
     if c.get("encontro"): corpo = hero(c) + encontro()
     else: corpo = hero(c) if c.get("so_dobra1") else hero(c) + c["dobra2"]() + band() + bio() + final()
@@ -279,14 +280,14 @@ def page(versao):
     return out
 
 def obrigado():
-    out = HEAD.format(title="Falta um passo: entre no grupo · Black · A Revolução do Estudo", desc="Entre no grupo do WhatsApp para receber o link da live de 10 de novembro.", og=OG, fonts=FONTS, v=V, anon=ANON, slug=SLUG, pixel=PIXEL, versao="obrigado", grupo=GRUPO)
+    out = HEAD.format(title="Falta um passo: entre no grupo · Black · A Revolução do Estudo", desc="Entre no grupo do WhatsApp para receber o link da live de 10 de novembro.", og=OG, v=V, anon=ANON, slug=SLUG, pixel=PIXEL, versao="obrigado", grupo=GRUPO)
     cal = ("https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + "Black+%C2%B7+A+Revolu%C3%A7%C3%A3o+do+Estudo+%28ao+vivo%29" +
            "&dates=20261110T230000Z/20261111T010000Z&details=Live+da+Black+A+Revolu%C3%A7%C3%A3o+do+Estudo.+O+link+sai+no+grupo+do+WhatsApp.&ctz=America/Sao_Paulo")
     out += f"""
 <main class="thanks">
   <div class="thanks-bg" aria-hidden="true"></div>
   <div class="thanks-card">
-    <div class="brand"><img src="../assets/logo-black-revolucao.png" alt="Black · A Revolução do Estudo"></div>
+    <div class="brand"><img src="../assets/logo-black-revolucao.webp" width="480" height="188" alt="Black · A Revolução do Estudo"></div>
     <h1>Sucesso! Só falta <span class="blue">1 passo</span> para garantir o seu lugar…</h1>
     <div class="bar" role="progressbar" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"><i></i><b>0%</b></div>
     <p>Clique no botão abaixo e entre no grupo oficial do WhatsApp. É por lá que você recebe <b>o link da live do dia 10/11</b>, o lembrete na hora certa e os avisos da Black. Sem ele, você pode perder a condição especial.</p>
