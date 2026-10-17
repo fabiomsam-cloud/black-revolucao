@@ -95,7 +95,7 @@ def hero(c):
       <div class="hero-form-slot">{form_card("Quero participar")}</div>
     </div>
     <div class="hero-photo rv" aria-hidden="true" style="--d:.05s">
-      <img src="../assets/fabio-camisa-1011-860.webp" srcset="../assets/fabio-camisa-1011-440.webp 440w, ../assets/fabio-camisa-1011-860.webp 860w" sizes="(max-width:959px) 180px, 600px" width="860" height="1300" alt="" loading="eager" fetchpriority="high">
+      <img src="../assets/fabio-cerebro-860.webp" srcset="../assets/fabio-cerebro-440.webp 440w, ../assets/fabio-cerebro-860.webp 860w" sizes="(max-width:959px) 210px, 700px" width="860" height="1091" alt="" loading="eager" fetchpriority="high">
     </div>
   </div>
 </section>
