@@ -266,7 +266,7 @@ COPY["v3"] = dict(COPY["v2"], fx="synapse")  # v3 = v2 + rede de sinapses (21st.
 COPY["v4"] = dict(COPY["v2"], fx="aether")   # v4 = v2 + éter de partículas (21st.dev · Aether Flow Hero, portado)
 COPY["v5"] = dict(COPY["v3"], encontro=True)  # v5 = hero da v3 (sinapses) + seções da revisão "não alunos" (Codex 07/10)
 
-V = "23"
+V = "24"
 OG = "https://revolucaodoestudo.com.br/assets/og.jpg"
 
 def page(versao):
