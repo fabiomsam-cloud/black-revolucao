@@ -8,7 +8,7 @@
   var SLUG = CFG.slug || "black-revolucao-nao-alunos";
   var PIXEL = CFG.pixel || "";
   var VERSAO = CFG.versao || "";
-  var LIVE_AT = new Date("2026-11-10T20:00:00-03:00").getTime();
+  var LIVE_AT = new Date(CFG.live || "2026-11-10T20:00:00-03:00").getTime();   /* 18/10: alunos = 27/10 */
   var qs = new URLSearchParams(location.search);
 
   /* ---------- atribuição (mesmo padrão do gerador de páginas: scvp_attr, 30 dias) ---------- */
@@ -113,18 +113,18 @@
       var nome = (email.split("@")[0] || "").replace(/[0-9]+/g, " ").replace(/[._\-+]+/g, " ").trim()
         .split(/\s+/).filter(Boolean).map(function (w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join(" ").slice(0, 60);
       if (nome.length < 2) nome = "Concurseiro(a)";
-      var digits = form.telefone.value.replace(/\D/g, ""), esc = form.escolaridade.value;
+      var digits = form.telefone.value.replace(/\D/g, ""), esc = form.escolaridade ? form.escolaridade.value : "";   /* 18/10: página de alunos não tem escolaridade */
       var ok = true;
       var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); setErr("email", !emailOk); ok = ok && emailOk;
       var telOk = digits.length === 11 && digits[2] === "9"; setErr("telefone", !telOk); ok = ok && telOk;
-      setErr("escolaridade", !esc); ok = ok && !!esc;
+      if (form.escolaridade) { setErr("escolaridade", !esc); ok = ok && !!esc; }
       if (!ok) return;
       var utm = {};
       ["utm_source", "utm_medium", "utm_campaign", "utm_term"].forEach(function (k) { if (attr[k]) utm[k] = attr[k]; });
       utm.utm_content = attr.utm_content || VERSAO;
       var payload = {
         op: "lead", slug: SLUG, nome: nome, email: email, telefone: digits,
-        escolaridade: "", answers: { escolaridade: esc, versao: VERSAO }, utm: utm,   /* 18/10: versão da página sempre gravada (utm_content passa a ser o criativo) */
+        escolaridade: "", answers: esc ? { escolaridade: esc, versao: VERSAO } : { versao: VERSAO }, utm: utm,   /* 18/10: versão da página sempre gravada (utm_content passa a ser o criativo) */
         fbclid: attr.fbclid || qs.get("fbclid") || null, fbclid_ts: attr.ts || Date.now(),
         fbp: cookie("_fbp"), fbc: cookie("_fbc"), page_url: location.href
       };

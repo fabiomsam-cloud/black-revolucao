@@ -31,7 +31,7 @@ HEAD = """<!doctype html>
 <link rel="preload" href="../assets/hero-bg-m.webp" as="image" type="image/webp" media="(max-width:959px)" fetchpriority="high">
 <link rel="preload" href="../assets/hero-bg.webp" as="image" type="image/webp" media="(min-width:960px)" fetchpriority="high">
 <link rel="stylesheet" href="../assets/black.css?v={v}">
-<script>window.BLACK_CFG={{anon:"{anon}",slug:"{slug}",pixel:"{pixel}",versao:"{versao}",grupo:"{grupo}",obrigado:"../obrigado/"}};</script>
+<script>window.BLACK_CFG={{anon:"{anon}",slug:"{slug}",pixel:"{pixel}",versao:"{versao}",grupo:"{grupo}",obrigado:"{obrigado}",live:"{live}"}};</script>
 </head>
 <body>
 """
@@ -56,14 +56,7 @@ def topbar():
 </header>
 """
 
-def form_card(cta):
-    arrow = '<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
-    return f"""
-<form class="form-card rv" id="form" novalidate style="--d:.35s">
-  <p class="form-title">Garanta o seu lugar na live</p>
-  <div class="field"><label for="f-tel">WhatsApp com DDD</label><input id="f-tel" name="telefone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="(00) 00000-0000" required><div class="msg">Confira o WhatsApp: DDD + número com 9 dígitos.</div></div>
-  <div class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="Seu melhor e-mail" required><div class="msg">Digite um e-mail válido.</div></div>
-  <div class="field"><label for="f-esc">Escolaridade</label>
+ESCOLARIDADE = """<div class="field"><label for="f-esc">Escolaridade</label>
     <select id="f-esc" name="escolaridade" class="placeholder" required>
       <option value="" disabled selected>Qual a sua escolaridade?</option>
       <option value="fundamental">Ensino Fundamental</option>
@@ -71,7 +64,16 @@ def form_card(cta):
       <option value="superior_cursando">Superior Cursando</option>
       <option value="superior_completo">Superior Completo</option>
       <option value="pos">Pós-graduação</option>
-    </select><div class="msg">Selecione a sua escolaridade.</div></div>
+    </select><div class="msg">Selecione a sua escolaridade.</div></div>"""
+
+def form_card(cta, sem_escolaridade=False):   # 18/10: página de ALUNOS não pergunta escolaridade
+    arrow = '<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+    return f"""
+<form class="form-card rv" id="form" novalidate style="--d:.35s">
+  <p class="form-title">Garanta o seu lugar na live</p>
+  <div class="field"><label for="f-tel">WhatsApp com DDD</label><input id="f-tel" name="telefone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="(00) 00000-0000" required><div class="msg">Confira o WhatsApp: DDD + número com 9 dígitos.</div></div>
+  <div class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="Seu melhor e-mail" required><div class="msg">Digite um e-mail válido.</div></div>
+  {"" if sem_escolaridade else ESCOLARIDADE}
   <button class="btn block" type="submit"><span>{cta}</span>{arrow}</button>
   <div class="form-error" role="alert"></div>
   <p class="form-note">Cadastro gratuito · Link no grupo do WhatsApp</p>
@@ -88,11 +90,11 @@ def hero(c):
     <div class="hero-copy">
       <div class="brand-row rv" style="--d:0s">
         <div class="brand"><img src="../assets/logo-black-revolucao.webp" width="480" height="188" alt="Black · A Revolução do Estudo"></div>
-        <div class="date-pill">{cal}<span class="d1">10 de novembro · 20h</span><span class="d2 live">Ao vivo · Brasília</span></div>
+        <div class="date-pill">{cal}<span class="d1">{c.get('data', '10 de novembro · 20h')}</span><span class="d2 live">Ao vivo · Brasília</span></div>
       </div>
       <h1 id="h1" class="rv" style="--d:.1s">{c['h1']}</h1>
       <p class="sub rv" style="--d:.18s">{c['sub']}</p>
-      <div class="hero-form-slot">{form_card("Quero participar")}</div>
+      <div class="hero-form-slot">{form_card("Quero participar", c.get("sem_escolaridade"))}</div>
     </div>
     <div class="hero-photo rv" aria-hidden="true" style="--d:.05s">
       <img src="../assets/fabio-cerebro-860.webp" srcset="../assets/fabio-cerebro-440.webp 440w, ../assets/fabio-cerebro-860.webp 860w" sizes="(max-width:959px) 210px, 700px" width="860" height="1091" alt="" loading="eager" fetchpriority="high">
@@ -266,12 +268,24 @@ COPY["v3"] = dict(COPY["v2"], fx="synapse")  # v3 = v2 + rede de sinapses (21st.
 COPY["v4"] = dict(COPY["v2"], fx="aether")   # v4 = v2 + éter de partículas (21st.dev · Aether Flow Hero, portado)
 COPY["v5"] = dict(COPY["v3"], encontro=True)  # v5 = hero da v3 (sinapses) + seções da revisão "não alunos" (Codex 07/10)
 
-V = "26"
+COPY["alunos"] = dict(COPY["v4"],   # 18/10 (Fábio): "replicando a v4" p/ ALUNOS — live terça 27/10 20h, grupo dos alunos, só WhatsApp + e-mail
+    h1='A Revolução do Estudo chega <span class="metal">primeiro</span> para quem já é aluno.',
+    sub="Terça, 27 de outubro, às 20h de Brasília, o Professor Fábio mostra ao vivo, só para alunos, a nova forma de estudar para concursos. O link da live sai no grupo dos alunos.",
+    slug="black-revolucao-alunos", grupo="https://sndflw.com/i/4OSYf8OR5Ac5eJh0UGBk", data="27 de outubro · 20h", live="2026-10-27T20:00:00-03:00",
+    obrigado="../obrigado-alunos/", sem_escolaridade=True,
+    title="Black · A Revolução do Estudo — 27 de outubro, 20h, ao vivo, só para alunos",
+    desc="Terça, 27 de outubro, às 20h, ao vivo e só para quem já é aluno: a nova forma de estudar para concursos. O link sai no grupo dos alunos.")
+OBRIGADO_ALUNOS = dict(slug="black-revolucao-alunos", grupo="https://sndflw.com/i/4OSYf8OR5Ac5eJh0UGBk", live="2026-10-27T20:00:00-03:00", versao="obrigado-alunos",
+    dia="27/10", data_longa="27 de outubro", data_curta="27 de outubro · 20h (Brasília)", dates="20261027T230000Z/20261028T010000Z",
+    quem="o grupo dos alunos no WhatsApp", avisos="os avisos do encontro")
+LIVE = "2026-11-10T20:00:00-03:00"
+V = "27"
 OG = "https://revolucaodoestudo.com.br/assets/og.jpg"
 
 def page(versao):
     c = COPY[versao]
-    out = HEAD.format(title=TITLE, desc=DESC, og=OG, v=V, anon=ANON, slug=SLUG, pixel=PIXEL, versao=versao, grupo=GRUPO)
+    out = HEAD.format(title=c.get("title", TITLE), desc=c.get("desc", DESC), og=OG, v=V, anon=ANON, slug=c.get("slug", SLUG), pixel=PIXEL,
+                      versao=versao, grupo=c.get("grupo", GRUPO), obrigado=c.get("obrigado", "../obrigado/"), live=c.get("live", LIVE))
     # so_dobra1: página só com a primeira dobra (pedido do Fábio 07/10 para a v2)
     if c.get("encontro"): corpo = hero(c) + encontro()
     else: corpo = hero(c) if c.get("so_dobra1") else hero(c) + c["dobra2"]() + band() + bio() + final()
@@ -279,10 +293,14 @@ def page(versao):
     out += topbar() + "<main>" + corpo + "</main>" + FOOT.format(v=V).replace("</body>", extra + "</body>")
     return out
 
-def obrigado():
-    out = HEAD.format(title="Falta um passo: entre no grupo · Black · A Revolução do Estudo", desc="Entre no grupo do WhatsApp para receber o link da live de 10 de novembro.", og=OG, v=V, anon=ANON, slug=SLUG, pixel=PIXEL, versao="obrigado", grupo=GRUPO)
+OBRIGADO_PADRAO = dict(slug=SLUG, grupo=GRUPO, live=None, versao="obrigado", dia="10/11", data_longa="10 de novembro", data_curta="10 de novembro · 20h (Brasília)",
+                       dates="20261110T230000Z/20261111T010000Z", quem="o grupo oficial do WhatsApp", avisos="os avisos da Black")
+def obrigado(o=None):
+    o = dict(OBRIGADO_PADRAO, **(o or {}))
+    out = HEAD.format(title="Falta um passo: entre no grupo · Black · A Revolução do Estudo", desc=f"Entre no grupo do WhatsApp para receber o link da live de {o['data_longa']}.", og=OG, v=V, anon=ANON, slug=o["slug"], pixel=PIXEL, versao=o["versao"], grupo=o["grupo"], obrigado="./", live=o["live"] or LIVE)
+    GRUPO_ = o["grupo"]
     cal = ("https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + "Black+%C2%B7+A+Revolu%C3%A7%C3%A3o+do+Estudo+%28ao+vivo%29" +
-           "&dates=20261110T230000Z/20261111T010000Z&details=Live+da+Black+A+Revolu%C3%A7%C3%A3o+do+Estudo.+O+link+sai+no+grupo+do+WhatsApp.&ctz=America/Sao_Paulo")
+           f"&dates={o['dates']}&details=Live+da+Black+A+Revolu%C3%A7%C3%A3o+do+Estudo.+O+link+sai+no+grupo+do+WhatsApp.&ctz=America/Sao_Paulo")
     out += f"""
 <main class="thanks">
   <div class="thanks-bg" aria-hidden="true"></div>
@@ -290,10 +308,10 @@ def obrigado():
     <div class="brand"><img src="../assets/logo-black-revolucao.webp" width="480" height="188" alt="Black · A Revolução do Estudo"></div>
     <h1>Sucesso! Só falta <span class="blue">1 passo</span> para garantir o seu lugar…</h1>
     <div class="bar" role="progressbar" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"><i></i><b>0%</b></div>
-    <p>Clique no botão abaixo e entre no grupo oficial do WhatsApp. É por lá que você recebe <b>o link da live do dia 10/11</b>, o lembrete na hora certa e os avisos da Black. Sem ele, você pode perder a condição especial.</p>
-    <a class="btn" data-grupo href="{GRUPO}" rel="noopener">Entrar no grupo agora</a>
+    <p>Clique no botão abaixo e entre n{o['quem']}. É por lá que você recebe <b>o link da live do dia {o['dia']}</b>, o lembrete na hora certa e {o['avisos']}. Sem ele, você pode perder a condição especial.</p>
+    <a class="btn" data-grupo href="{GRUPO_}" rel="noopener">Entrar no grupo agora</a>
     <p class="small">O grupo é silencioso: você só recebe as mensagens enviadas pela minha equipe.</p>
-    <div class="date"><span>Salve a data</span><b>10 de novembro · 20h (Brasília)</b><a href="{cal}" target="_blank" rel="noopener">Adicionar à agenda</a></div>
+    <div class="date"><span>Salve a data</span><b>{o['data_curta']}</b><a href="{cal}" target="_blank" rel="noopener">Adicionar à agenda</a></div>
   </div>
 </main>
 <script src="../assets/black.js?v={V}"></script>
@@ -307,9 +325,10 @@ ROOT_INDEX = """<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><t
 <body style="background:#050607;color:#ccc;font-family:sans-serif;padding:40px;text-align:center"><a href="v2/" style="color:#00b7df">Entrar na página</a></body></html>
 """
 
-for v in ("v1", "v2", "v3", "v4", "v5"):
+for v in ("v1", "v2", "v3", "v4", "v5", "alunos"):
     d = ROOT / v; d.mkdir(exist_ok=True); (d / "index.html").write_text(page(v), encoding="utf-8")
 (ROOT / "obrigado").mkdir(exist_ok=True); (ROOT / "obrigado" / "index.html").write_text(obrigado(), encoding="utf-8")
+(ROOT / "obrigado-alunos").mkdir(exist_ok=True); (ROOT / "obrigado-alunos" / "index.html").write_text(obrigado(OBRIGADO_ALUNOS), encoding="utf-8")
 (ROOT / "index.html").write_text(ROOT_INDEX, encoding="utf-8")
 (ROOT / ".nojekyll").write_text("")
-print("ok: v1/, v2/, obrigado/, index.html")
+print("ok: v1–v5/, alunos/, obrigado/, obrigado-alunos/, index.html")
