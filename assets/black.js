@@ -124,7 +124,7 @@
       utm.utm_content = attr.utm_content || VERSAO;
       var payload = {
         op: "lead", slug: SLUG, nome: nome, email: email, telefone: digits,
-        escolaridade: "", answers: { escolaridade: esc }, utm: utm,
+        escolaridade: "", answers: { escolaridade: esc, versao: VERSAO }, utm: utm,   /* 18/10: versão da página sempre gravada (utm_content passa a ser o criativo) */
         fbclid: attr.fbclid || qs.get("fbclid") || null, fbclid_ts: attr.ts || Date.now(),
         fbp: cookie("_fbp"), fbc: cookie("_fbc"), page_url: location.href
       };
