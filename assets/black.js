@@ -134,7 +134,7 @@
       fetch(API, { method: "POST", headers: HEADERS, body: JSON.stringify(payload) })
         .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { if (!r.ok) throw new Error(d.error || "erro de conexão"); return d; }); })
         .then(function (r) {
-          try { loadPixel(); if (r.pixel && window.fbq) window.fbq("track", "Lead", {}, { eventID: r.pixel.event_id }); } catch (_) {}
+          try { loadPixel(); if (r.pixel && window.fbq) window.fbq("track", "Lead", { escolaridade: esc, qualificado: r.qualified ? "sim" : "nao" }, { eventID: r.pixel.event_id }); } catch (_) {}   /* 18/10: Lead p/ todo cadastro (edge lead_todos); escolaridade vai como parâmetro p/ conversão personalizada */
           var dest = r.redirect_url || r.redirect_url_desq || CFG.grupo;
           try { sessionStorage.setItem("black_reg", JSON.stringify({ id: r.registro_id, dest: dest, q: r.qualified })); } catch (_) {}
           var u = new URL(CFG.obrigado || "../obrigado/", location.href);
