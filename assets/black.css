@@ -285,6 +285,23 @@ footer p{margin:0}
   .encontro .final .btn{font-size:14px;padding:20px}
 }
 @media (max-width:400px){.encontro .journey{grid-template-columns:1fr}}
+/* 18/10 — imagens das seções da v5 (só WebP, lazy; nada acima da dobra) */
+.encontro .three-cards .pic{margin:-30px -30px 22px;border-radius:20px 20px 0 0;overflow:hidden;aspect-ratio:4/3;background:#0c1015}
+.encontro .three-cards .pic img{width:100%;height:100%;object-fit:cover;display:block}
+.encontro .steps-pic li{display:grid;grid-template-columns:1fr 96px;gap:18px;align-items:center}
+.encontro .steps-pic li img{width:96px;height:96px;border-radius:14px;object-fit:cover;border:1px solid var(--line);display:block}
+.encontro .journey-pic{grid-template-columns:repeat(3,1fr)}
+.encontro .journey-pic li img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:14px;border:1px solid var(--line);margin-bottom:18px;display:block;background:#0c1015}
+.encontro .depoimentos{background:#0b0e13}
+.encontro .depo-grid{columns:3;column-gap:16px;margin-top:8px}
+.encontro .depo-grid img{width:100%;height:auto;display:block;break-inside:avoid;margin:0 0 16px;border-radius:14px;border:1px solid var(--line);background:#fff}
+@media (max-width:959px){
+  .encontro .steps-pic li{grid-template-columns:1fr 72px;gap:14px}
+  .encontro .steps-pic li img{width:72px;height:72px}
+  .encontro .journey-pic{grid-template-columns:1fr}
+  .encontro .depo-grid{columns:2;column-gap:12px}
+}
+@media (max-width:560px){.encontro .depo-grid{columns:1}}
 
 /* ---------- OBRIGADO ---------- */
 .thanks{min-height:100svh;display:grid;place-items:center;padding:40px 0 60px;position:relative;overflow:hidden}
