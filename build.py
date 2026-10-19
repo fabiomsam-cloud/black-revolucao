@@ -31,7 +31,7 @@ HEAD = """<!doctype html>
 <link rel="preload" href="../assets/hero-bg-m.webp" as="image" type="image/webp" media="(max-width:959px)" fetchpriority="high">
 <link rel="preload" href="../assets/hero-bg.webp" as="image" type="image/webp" media="(min-width:960px)" fetchpriority="high">
 <link rel="stylesheet" href="../assets/black.css?v={v}">
-<script>window.BLACK_CFG={{anon:"{anon}",slug:"{slug}",pixel:"{pixel}",versao:"{versao}",grupo:"{grupo}",obrigado:"{obrigado}",live:"{live}",utm:{utm}}};</script>
+<script>window.BLACK_CFG={{anon:"{anon}",slug:"{slug}",pixel:"{pixel}",versao:"{versao}",grupo:"{grupo}",obrigado:"{obrigado}",live:"{live}",utm:{utm},gads:{gads}}};</script>
 </head>
 <body>
 """
@@ -285,14 +285,16 @@ OBRIGADO_ALUNOS = dict(slug="black-revolucao-alunos", grupo="https://sndflw.com/
     dia="27/10", data_longa="27 de outubro", data_curta="27 de outubro · 20h (Brasília)", dates="20261027T230000Z/20261028T010000Z",
     quem="o grupo dos alunos no WhatsApp", avisos="os avisos do encontro")
 LIVE = "2026-11-10T20:00:00-03:00"
-V = "32"
+V = "33"
+# 18/10 (Fábio): Google Ads (conta 182-909-5948) — Lead superior R$ 30 / médio R$ 10, só nas páginas de NÃO alunos
+GADS = {"id": "AW-646244794", "sup": "AW-646244794/ulgwCP2W0KEdELrTk7QC", "med": "AW-646244794/lH70CICX0KEdELrTk7QC"}
 OG = "https://revolucaodoestudo.com.br/assets/og.jpg"
 
 def page(versao):
     c = COPY[versao]
     out = HEAD.format(title=c.get("title", TITLE), desc=c.get("desc", DESC), og=OG, v=V, anon=ANON, slug=c.get("slug", SLUG), pixel=PIXEL,
                       versao=versao, grupo=c.get("grupo", GRUPO), obrigado=c.get("obrigado", "../obrigado/"), live=c.get("live", LIVE),
-                      utm=json.dumps(c.get("utm") or {}))
+                      utm=json.dumps(c.get("utm") or {}), gads=json.dumps(GADS) if c.get("slug", SLUG) == SLUG else "null")
     # so_dobra1: página só com a primeira dobra (pedido do Fábio 07/10 para a v2)
     if c.get("encontro"): corpo = hero(c) + encontro()
     else: corpo = hero(c) if c.get("so_dobra1") else hero(c) + c["dobra2"]() + band() + bio() + final()
@@ -304,7 +306,7 @@ OBRIGADO_PADRAO = dict(slug=SLUG, grupo=GRUPO, live=None, versao="obrigado", dia
                        dates="20261110T230000Z/20261111T010000Z", quem="o grupo oficial do WhatsApp", avisos="os avisos da Black")
 def obrigado(o=None):
     o = dict(OBRIGADO_PADRAO, **(o or {}))
-    out = HEAD.format(title="Falta um passo: entre no grupo · Black · A Revolução do Estudo", desc=f"Entre no grupo do WhatsApp para receber o link da live de {o['data_longa']}.", og=OG, v=V, anon=ANON, slug=o["slug"], pixel=PIXEL, versao=o["versao"], grupo=o["grupo"], obrigado="./", live=o["live"] or LIVE, utm="{}")
+    out = HEAD.format(title="Falta um passo: entre no grupo · Black · A Revolução do Estudo", desc=f"Entre no grupo do WhatsApp para receber o link da live de {o['data_longa']}.", og=OG, v=V, anon=ANON, slug=o["slug"], pixel=PIXEL, versao=o["versao"], grupo=o["grupo"], obrigado="./", live=o["live"] or LIVE, utm="{}", gads="null")
     GRUPO_ = o["grupo"]
     cal = ("https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + "Black+%C2%B7+A+Revolu%C3%A7%C3%A3o+do+Estudo+%28ao+vivo%29" +
            f"&dates={o['dates']}&details=Live+da+Black+A+Revolu%C3%A7%C3%A3o+do+Estudo.+O+link+sai+no+grupo+do+WhatsApp.&ctz=America/Sao_Paulo")

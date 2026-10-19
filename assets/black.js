@@ -13,7 +13,7 @@
 
   /* ---------- atribuição (mesmo padrão do gerador de páginas: scvp_attr, 30 dias) ---------- */
   var ATTR_KEY = "scvp_attr", ATTR_TTL = 30 * 24 * 3600 * 1000;
-  var ATTR_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid"];
+  var ATTR_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "fbclid", "gclid", "gbraid", "wbraid"];   /* 18/10: ids de clique do Google p/ conversão offline (EntrouGrupo) */
   function loadAttr() {
     var fromUrl = {}, stored = null;
     ATTR_KEYS.forEach(function (k) { if (qs.get(k)) fromUrl[k] = qs.get(k); });
@@ -47,11 +47,35 @@
   // ficam fora da janela do LCP no PageSpeed. PageView continua; o Lead chama loadPixel() antes de disparar.
   (function () {
     var evs = ["pointerdown", "touchstart", "wheel", "keydown"], done = false;
-    function go() { if (done) return; done = true; evs.forEach(function (e) { window.removeEventListener(e, go, true); }); loadPixel(); }
+    function go() { if (done) return; done = true; evs.forEach(function (e) { window.removeEventListener(e, go, true); }); loadPixel(); loadGtag(); }
     evs.forEach(function (e) { window.addEventListener(e, go, { capture: true, passive: true, once: true }); });
     function arm() { setTimeout(go, 3000); }
     if (document.readyState === "complete") arm(); else window.addEventListener("load", arm);
   })();
+
+  /* ---------- Google Ads (18/10): gtag carrega junto com o pixel (fora da janela do LCP); conversão no Lead ---------- */
+  var GADS = CFG.gads || null;
+  function loadGtag() {
+    if (!GADS || window.gtag) return;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.gtag("config", GADS.id, { allow_enhanced_conversions: true });
+    var t = document.createElement("script"); t.async = true; t.src = "https://www.googletagmanager.com/gtag/js?id=" + GADS.id;
+    document.head.appendChild(t);
+  }
+  // espera a tag do Google confirmar (ou 1,2 s) antes de sair da página — senão o redirect corta o envio
+  function gadsLead(qualificado, regId, email, digits, done) {
+    if (!GADS) return done();
+    var fired = false; function go() { if (!fired) { fired = true; done(); } }
+    try {
+      loadGtag();
+      window.gtag("set", "user_data", { email: email, phone_number: "+55" + digits });
+      window.gtag("event", "conversion", { send_to: qualificado ? GADS.sup : GADS.med, value: qualificado ? 30 : 10, currency: "BRL",
+        transaction_id: regId || undefined, event_callback: go });
+    } catch (_) {}
+    setTimeout(go, 1200);
+  }
 
   /* ---------- contador ---------- */
   function pad(n) { return String(n).padStart(2, "0"); }
@@ -143,7 +167,8 @@
       utm.utm_content = attr.utm_content || VERSAO;
       var payload = {
         op: "lead", slug: SLUG, nome: nome, email: email, telefone: digits,
-        escolaridade: "", answers: esc ? { escolaridade: esc, versao: VERSAO } : { versao: VERSAO }, utm: utm,   /* 18/10: versão da página sempre gravada (utm_content passa a ser o criativo) */
+        escolaridade: "", answers: Object.assign(esc ? { escolaridade: esc, versao: VERSAO } : { versao: VERSAO },
+          attr.gclid ? { gclid: attr.gclid } : {}, attr.gbraid ? { gbraid: attr.gbraid } : {}, attr.wbraid ? { wbraid: attr.wbraid } : {}), utm: utm,   /* 18/10: versão da página sempre gravada (utm_content passa a ser o criativo) */
         fbclid: attr.fbclid || qs.get("fbclid") || null, fbclid_ts: attr.ts || Date.now(),
         fbp: cookie("_fbp"), fbc: cookie("_fbc"), page_url: location.href
       };
@@ -159,7 +184,7 @@
           var u = new URL(CFG.obrigado || "../obrigado/", location.href);
           u.searchParams.set("reg", r.registro_id || "");
           u.searchParams.set("v", VERSAO);
-          location.href = u.toString();
+          gadsLead(!!r.qualified, r.registro_id, email, digits, function () { location.href = u.toString(); });
         })
         .catch(function (e) {
           btn.disabled = false; btn.innerHTML = label;
