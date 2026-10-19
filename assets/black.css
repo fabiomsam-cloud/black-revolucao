@@ -302,6 +302,32 @@ footer p{margin:0}
   .encontro .depo-grid{columns:2;column-gap:12px}
 }
 @media (max-width:560px){.encontro .depo-grid{columns:1}}
+/* 18/10 — seção "A Velha Forma de Estudar" (v5, logo abaixo do cadastro) */
+.encontro .velha{background:#0b0e13}
+.encontro .velha-grid{display:grid;grid-template-columns:.9fr 1.3fr;gap:54px;align-items:start}
+.encontro .velha-pic{position:relative;max-width:440px}
+.encontro .velha-pic img{width:100%;height:auto;display:block;border-radius:22px;border:1px solid var(--line);box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.encontro .velha-pic .tag{position:absolute;left:18px;right:18px;bottom:18px;background:rgba(5,6,7,.78);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:14px;padding:12px 16px;font-size:12px;color:var(--ink-2);letter-spacing:.06em;text-transform:uppercase}
+.encontro .velha-pic .tag b{display:block;color:#fff;font:700 17px/1.2 var(--font-d);letter-spacing:0;text-transform:none;margin-top:4px}
+.encontro .velha h2{margin-bottom:14px}
+.encontro .velha-regras{list-style:none;padding:0;margin:26px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.encontro .velha-regras li{position:relative;border:1px solid var(--line);border-radius:16px;padding:16px 18px 16px 50px;background:linear-gradient(140deg,#101e26,#0c1015)}
+.encontro .velha-regras li::before{content:"✕";position:absolute;left:16px;top:16px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;color:#ff6b6b;background:rgba(255,107,107,.12);border:1px solid rgba(255,107,107,.35)}
+.encontro .velha-regras b{display:block;color:#fff;font:700 15.5px/1.25 var(--font-d);margin-bottom:5px}
+.encontro .velha-regras p{margin:0;color:var(--ink-2);font-size:14.5px;line-height:1.45}
+.encontro .velha-fecho{margin:26px 0 0;color:var(--ink-2);font-size:18px}
+.encontro .velha-fecho b{color:#fff}
+.encontro .velha-fotos{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:48px;max-width:860px}
+.encontro .velha-fotos figure{margin:0}
+.encontro .velha-fotos img{width:100%;height:auto;display:block;border-radius:16px;border:1px solid var(--line)}
+.encontro .velha-fotos figcaption{margin-top:10px;color:var(--ink-2);font-size:14px;font-style:italic}
+@media (max-width:959px){
+  .encontro .velha-grid{grid-template-columns:1fr;gap:26px}
+  .encontro .velha-pic{max-width:300px}
+  .encontro .velha-regras{grid-template-columns:1fr}
+  .encontro .velha-fotos{grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
+  .encontro .velha-fotos figcaption{font-size:12.5px}
+}
 
 /* ---------- OBRIGADO ---------- */
 .thanks{min-height:100svh;display:grid;place-items:center;padding:40px 0 60px;position:relative;overflow:hidden}
