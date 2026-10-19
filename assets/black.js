@@ -87,6 +87,23 @@
     });
   });
 
+  /* ---------- vídeo em loop no topo (/bio): só depois do load + folga, nunca com economia de dados ou "reduzir movimento" ---------- */
+  var hv = document.querySelector(".hero-video video");
+  if (hv) {
+    var saveData = navigator.connection && navigator.connection.saveData;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!saveData && !reduce) {
+      var startVideo = function () {
+        var src = hv.canPlayType("video/webm") ? hv.getAttribute("data-webm") : hv.getAttribute("data-mp4");
+        hv.src = src;
+        hv.addEventListener("playing", function () { hv.parentNode.classList.add("on"); }, { once: true });
+        hv.play().catch(function () {});
+      };
+      var kick = function () { setTimeout(startVideo, 1200); };
+      if (document.readyState === "complete") kick(); else window.addEventListener("load", kick, { once: true });
+    }
+  }
+
   /* ---------- formulário ---------- */
   var form = document.getElementById("form");
   if (form) {

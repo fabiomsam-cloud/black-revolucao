@@ -83,6 +83,11 @@ h1{font-family:var(--font-d);font-weight:800;font-size:clamp(30px,4.2vw,54px);li
   background:radial-gradient(closest-side,rgba(0,170,210,.40),rgba(0,155,190,.10) 50%,transparent 72%);filter:blur(14px)}
 .hero-photo img{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:min(900px,96%);width:auto;max-width:none;filter:drop-shadow(0 0 50px rgba(0,170,210,.28)) drop-shadow(0 30px 40px rgba(0,0,0,.6))}
 .hero-photo::after{content:"";position:absolute;inset:auto 0 0;height:180px;background:linear-gradient(180deg,transparent,var(--bg))}
+/* 18/10 — /bio: vídeo em loop (animação do Higgsfield) sobre a foto; o fundo escuro do vídeo some com screen + máscara nas bordas */
+.hero-video video{position:absolute;bottom:0;left:50%;transform:translateX(-50%);height:min(900px,96%);width:auto;max-width:none;opacity:0;transition:opacity .8s ease;pointer-events:none;mix-blend-mode:screen;
+  -webkit-mask-image:radial-gradient(ellipse 62% 70% at 50% 42%,#000 55%,transparent 100%);mask-image:radial-gradient(ellipse 62% 70% at 50% 42%,#000 55%,transparent 100%)}
+.hero-video.on video{opacity:1}
+.hero-video.on img{opacity:0;transition:opacity .8s ease .2s}
 @media (max-width:959px){
   /* CELULAR = réplica do mockup de 07/10 medido a 390px de largura: sem contador · [logo 52px | data] · [promessa 23px | foto 240px]
      · "GARANTA…" 15px · rótulo 14px + campo 44px · botão 48px sólido · 2 notas. Tudo na primeira tela. */
@@ -108,6 +113,8 @@ h1{font-family:var(--font-d);font-weight:800;font-size:clamp(30px,4.2vw,54px);li
   /* a caixa ocupa só a altura do título na grade; a foto é maior e transborda para baixo, por cima do vazio à direita de "GARANTA…" */
   .hero-photo{grid-column:2;order:2;min-height:0;height:196px;margin:0 -16px 0 0;overflow:visible;align-self:start;z-index:1}
   .hero-photo img{position:absolute;top:-10px;bottom:auto;left:auto;right:-8px;transform:none;height:264px;width:auto;filter:none;-webkit-mask-image:linear-gradient(180deg,#000 82%,transparent 100%);mask-image:linear-gradient(180deg,#000 82%,transparent 100%)}
+  .hero-video video{top:-24px;bottom:auto;left:auto;right:-30px;transform:none;height:300px;width:auto;
+    -webkit-mask-image:radial-gradient(ellipse 58% 64% at 50% 40%,#000 50%,transparent 100%);mask-image:radial-gradient(ellipse 58% 64% at 50% 40%,#000 50%,transparent 100%)}
   .hero-photo::before,.hero-photo::after{display:none}
   .hero-photo{background:none}
   .sub{display:none}

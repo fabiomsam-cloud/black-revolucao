@@ -96,8 +96,8 @@ def hero(c):
       <p class="sub rv" style="--d:.18s">{c['sub']}</p>
       <div class="hero-form-slot">{form_card("Quero participar", c.get("sem_escolaridade"))}</div>
     </div>
-    <div class="hero-photo rv" aria-hidden="true" style="--d:.05s">
-      <img src="../assets/fabio-cerebro-860.webp" srcset="../assets/fabio-cerebro-440.webp 440w, ../assets/fabio-cerebro-860.webp 860w" sizes="(max-width:959px) 210px, 700px" width="860" height="1091" alt="" loading="eager" fetchpriority="high">
+    <div class="hero-photo rv{' hero-video' if c.get('hero_video') else ''}" aria-hidden="true" style="--d:.05s">
+      <img src="../assets/fabio-cerebro-860.webp" srcset="../assets/fabio-cerebro-440.webp 440w, ../assets/fabio-cerebro-860.webp 860w" sizes="(max-width:959px) 210px, 700px" width="860" height="1091" alt="" loading="eager" fetchpriority="high">{('<video muted loop playsinline preload="none" width="540" height="780" data-webm="../assets/' + c['hero_video'] + '.webm" data-mp4="../assets/' + c['hero_video'] + '.mp4"></video>') if c.get('hero_video') else ''}
     </div>
   </div>
 </section>
@@ -272,7 +272,8 @@ COPY["v5"] = dict(COPY["v3"], encontro=True)  # v5 = hero da v3 (sinapses) + se�
 
 # 18/10 (Fábio): /bio = cópia da v5 p/ o link da bio dos perfis do Instagram. Sem UTM na URL, o cadastro ganha
 # utm_source=instagram_bio (o Data Core classifica como instagram_organico) e utm_content=bio (versão).
-COPY["bio"] = dict(COPY["v5"], utm={"utm_source": "instagram_bio", "utm_medium": "organico", "utm_campaign": "black-revolucao-bio"})
+COPY["bio"] = dict(COPY["v5"], utm={"utm_source": "instagram_bio", "utm_medium": "organico", "utm_campaign": "black-revolucao-bio"},
+                   hero_video="fabio-cerebro-loop")   # 18/10: animação do Higgsfield em loop mudo (150 KB), foto como capa; só depois do load
 COPY["alunos"] = dict(COPY["v4"],   # 18/10 (Fábio): "replicando a v4" p/ ALUNOS — live terça 27/10 20h, grupo dos alunos, só WhatsApp + e-mail
     h1='A Revolução do Estudo chega <span class="metal">primeiro</span> para quem já é aluno.',
     sub="Terça, 27 de outubro, às 20h de Brasília, o Professor Fábio mostra ao vivo, só para alunos, a nova forma de estudar para concursos. O link da live sai no grupo dos alunos.",
@@ -284,7 +285,7 @@ OBRIGADO_ALUNOS = dict(slug="black-revolucao-alunos", grupo="https://sndflw.com/
     dia="27/10", data_longa="27 de outubro", data_curta="27 de outubro · 20h (Brasília)", dates="20261027T230000Z/20261028T010000Z",
     quem="o grupo dos alunos no WhatsApp", avisos="os avisos do encontro")
 LIVE = "2026-11-10T20:00:00-03:00"
-V = "31"
+V = "32"
 OG = "https://revolucaodoestudo.com.br/assets/og.jpg"
 
 def page(versao):
