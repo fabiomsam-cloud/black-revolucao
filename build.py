@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Gera v1/index.html, v2/index.html, obrigado/index.html e index.html (raiz) a partir de um template único.
 Rodar: python3 build.py   (a chave anon é lida do gerador-paginas/public/index.html, nunca fica no repositório fonte)"""
-import re, pathlib, html
+import re, pathlib, html, json
 
 ROOT = pathlib.Path(__file__).resolve().parent
 GERADOR = ROOT.parent.parent / "gerador-paginas" / "public" / "index.html"
@@ -31,7 +31,7 @@ HEAD = """<!doctype html>
 <link rel="preload" href="../assets/hero-bg-m.webp" as="image" type="image/webp" media="(max-width:959px)" fetchpriority="high">
 <link rel="preload" href="../assets/hero-bg.webp" as="image" type="image/webp" media="(min-width:960px)" fetchpriority="high">
 <link rel="stylesheet" href="../assets/black.css?v={v}">
-<script>window.BLACK_CFG={{anon:"{anon}",slug:"{slug}",pixel:"{pixel}",versao:"{versao}",grupo:"{grupo}",obrigado:"{obrigado}",live:"{live}"}};</script>
+<script>window.BLACK_CFG={{anon:"{anon}",slug:"{slug}",pixel:"{pixel}",versao:"{versao}",grupo:"{grupo}",obrigado:"{obrigado}",live:"{live}",utm:{utm}}};</script>
 </head>
 <body>
 """
@@ -270,6 +270,9 @@ COPY["v3"] = dict(COPY["v2"], fx="synapse")  # v3 = v2 + rede de sinapses (21st.
 COPY["v4"] = dict(COPY["v2"], fx="aether")   # v4 = v2 + éter de partículas (21st.dev · Aether Flow Hero, portado)
 COPY["v5"] = dict(COPY["v3"], encontro=True)  # v5 = hero da v3 (sinapses) + seções da revisão "não alunos" (Codex 07/10)
 
+# 18/10 (Fábio): /bio = cópia da v5 p/ o link da bio dos perfis do Instagram. Sem UTM na URL, o cadastro ganha
+# utm_source=instagram_bio (o Data Core classifica como instagram_organico) e utm_content=bio (versão).
+COPY["bio"] = dict(COPY["v5"], utm={"utm_source": "instagram_bio", "utm_medium": "organico", "utm_campaign": "black-revolucao-bio"})
 COPY["alunos"] = dict(COPY["v4"],   # 18/10 (Fábio): "replicando a v4" p/ ALUNOS — live terça 27/10 20h, grupo dos alunos, só WhatsApp + e-mail
     h1='A Revolução do Estudo chega <span class="metal">primeiro</span> para quem já é aluno.',
     sub="Terça, 27 de outubro, às 20h de Brasília, o Professor Fábio mostra ao vivo, só para alunos, a nova forma de estudar para concursos. O link da live sai no grupo dos alunos.",
@@ -281,13 +284,14 @@ OBRIGADO_ALUNOS = dict(slug="black-revolucao-alunos", grupo="https://sndflw.com/
     dia="27/10", data_longa="27 de outubro", data_curta="27 de outubro · 20h (Brasília)", dates="20261027T230000Z/20261028T010000Z",
     quem="o grupo dos alunos no WhatsApp", avisos="os avisos do encontro")
 LIVE = "2026-11-10T20:00:00-03:00"
-V = "30"
+V = "31"
 OG = "https://revolucaodoestudo.com.br/assets/og.jpg"
 
 def page(versao):
     c = COPY[versao]
     out = HEAD.format(title=c.get("title", TITLE), desc=c.get("desc", DESC), og=OG, v=V, anon=ANON, slug=c.get("slug", SLUG), pixel=PIXEL,
-                      versao=versao, grupo=c.get("grupo", GRUPO), obrigado=c.get("obrigado", "../obrigado/"), live=c.get("live", LIVE))
+                      versao=versao, grupo=c.get("grupo", GRUPO), obrigado=c.get("obrigado", "../obrigado/"), live=c.get("live", LIVE),
+                      utm=json.dumps(c.get("utm") or {}))
     # so_dobra1: página só com a primeira dobra (pedido do Fábio 07/10 para a v2)
     if c.get("encontro"): corpo = hero(c) + encontro()
     else: corpo = hero(c) if c.get("so_dobra1") else hero(c) + c["dobra2"]() + band() + bio() + final()
@@ -299,7 +303,7 @@ OBRIGADO_PADRAO = dict(slug=SLUG, grupo=GRUPO, live=None, versao="obrigado", dia
                        dates="20261110T230000Z/20261111T010000Z", quem="o grupo oficial do WhatsApp", avisos="os avisos da Black")
 def obrigado(o=None):
     o = dict(OBRIGADO_PADRAO, **(o or {}))
-    out = HEAD.format(title="Falta um passo: entre no grupo · Black · A Revolução do Estudo", desc=f"Entre no grupo do WhatsApp para receber o link da live de {o['data_longa']}.", og=OG, v=V, anon=ANON, slug=o["slug"], pixel=PIXEL, versao=o["versao"], grupo=o["grupo"], obrigado="./", live=o["live"] or LIVE)
+    out = HEAD.format(title="Falta um passo: entre no grupo · Black · A Revolução do Estudo", desc=f"Entre no grupo do WhatsApp para receber o link da live de {o['data_longa']}.", og=OG, v=V, anon=ANON, slug=o["slug"], pixel=PIXEL, versao=o["versao"], grupo=o["grupo"], obrigado="./", live=o["live"] or LIVE, utm="{}")
     GRUPO_ = o["grupo"]
     cal = ("https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + "Black+%C2%B7+A+Revolu%C3%A7%C3%A3o+do+Estudo+%28ao+vivo%29" +
            f"&dates={o['dates']}&details=Live+da+Black+A+Revolu%C3%A7%C3%A3o+do+Estudo.+O+link+sai+no+grupo+do+WhatsApp.&ctz=America/Sao_Paulo")
@@ -327,10 +331,10 @@ ROOT_INDEX = """<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><t
 <body style="background:#050607;color:#ccc;font-family:sans-serif;padding:40px;text-align:center"><a href="v2/" style="color:#00b7df">Entrar na página</a></body></html>
 """
 
-for v in ("v1", "v2", "v3", "v4", "v5", "alunos"):
+for v in ("v1", "v2", "v3", "v4", "v5", "bio", "alunos"):
     d = ROOT / v; d.mkdir(exist_ok=True); (d / "index.html").write_text(page(v), encoding="utf-8")
 (ROOT / "obrigado").mkdir(exist_ok=True); (ROOT / "obrigado" / "index.html").write_text(obrigado(), encoding="utf-8")
 (ROOT / "obrigado-alunos").mkdir(exist_ok=True); (ROOT / "obrigado-alunos" / "index.html").write_text(obrigado(OBRIGADO_ALUNOS), encoding="utf-8")
 (ROOT / "index.html").write_text(ROOT_INDEX, encoding="utf-8")
 (ROOT / ".nojekyll").write_text("")
-print("ok: v1–v5/, alunos/, obrigado/, obrigado-alunos/, index.html")
+print("ok: v1–v5/, bio/, alunos/, obrigado/, obrigado-alunos/, index.html")

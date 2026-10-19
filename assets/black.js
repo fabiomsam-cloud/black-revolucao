@@ -32,6 +32,8 @@
     return m ? decodeURIComponent(m[1]) : null;
   }
   var attr = loadAttr();
+  /* 18/10: página com UTM padrão (ex.: /bio) — vale só quando a URL não trouxe nenhuma UTM */
+  if (CFG.utm && !attr.utm_source && !attr.utm_campaign) attr = Object.assign({}, CFG.utm, attr);
 
   /* ---------- pixel ---------- */
   function loadPixel() {
