@@ -84,7 +84,7 @@ def form_card(cta, sem_escolaridade=False):   # 18/10: página de ALUNOS não pe
 def hero(c):
     cal = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>'
     return f"""
-<section class="hero{(' hero--' + c['fx']) if c.get('fx') else ''}" aria-labelledby="h1">
+<section class="hero{(' hero--' + c['fx']) if c.get('fx') else ''}{' hero--ref' if c.get('topo_ref') else ''}" aria-labelledby="h1">
   <div class="hero-bg" aria-hidden="true"></div>{('<canvas class="' + c['fx'] + '" aria-hidden="true"></canvas>') if c.get('fx') else ''}
   <div class="wrap">
     <div class="hero-copy">
@@ -97,7 +97,7 @@ def hero(c):
       <div class="hero-form-slot">{form_card("Quero participar", c.get("sem_escolaridade"))}</div>
     </div>
     <div class="hero-photo rv{' hero-video' if c.get('hero_video') else ''}" aria-hidden="true" style="--d:.05s">
-      <img src="../assets/fabio-cerebro-860.webp" srcset="../assets/fabio-cerebro-440.webp 440w, ../assets/fabio-cerebro-860.webp 860w" sizes="(max-width:959px) 210px, 700px" width="860" height="1091" alt="" loading="eager" fetchpriority="high">{('<video muted loop playsinline preload="none" width="540" height="780" data-webm="../assets/' + c['hero_video'] + '.webm" data-mp4="../assets/' + c['hero_video'] + '.mp4"></video>') if c.get('hero_video') else ''}
+      <img src="../assets/fabio-cerebro-860.webp" srcset="../assets/fabio-cerebro-440.webp 440w, ../assets/fabio-cerebro-860.webp 860w" sizes="{c.get('foto_sizes', '(max-width:959px) 210px, 700px')}" width="860" height="1091" alt="" loading="eager" fetchpriority="high">{('<video muted loop playsinline preload="none" width="540" height="780" data-webm="../assets/' + c['hero_video'] + '.webm" data-mp4="../assets/' + c['hero_video'] + '.mp4"></video>') if c.get('hero_video') else ''}
     </div>
   </div>
 </section>
@@ -281,6 +281,12 @@ COPY["alunos"] = dict(COPY["v4"],   # 18/10 (Fábio): "replicando a v4" p/ ALUNO
     obrigado="../obrigado-alunos/", sem_escolaridade=True,
     title="Black · A Revolução do Estudo — 27 de outubro, 20h, ao vivo, só para alunos",
     desc="Terça, 27 de outubro, às 20h, ao vivo e só para quem já é aluno: a nova forma de estudar para concursos. O link sai no grupo dos alunos.")
+# 21/10 (Fábio): v2 com o topo do celular no padrão da página da Escola da Bel (lp.escoladabel.com/bffv1126-cap-mads-v1):
+# contador em pílula por cima da foto, foto grande centralizada, logo + pílula de data sobre a foto, título e subtítulo centralizados
+# com destaque. Formulário igual, sem caixinha de LGPD. CSS só da v2, embutido na própria página (assets/v2-topo.css).
+# Definido aqui, depois das derivadas, para v3/v4/v5/bio/alunos NÃO herdarem.
+COPY["v2"] = dict(COPY["v2"], topo_ref=True, foto_sizes="(max-width:959px) 270px, 700px",
+    sub='No dia 10 de novembro, irei revelar ao vivo a preparação que faz o estudo caber na rotina de quem trabalha, cuida da família e tem pouco tempo. <strong class="hl">Você passa a estudar nos momentos que hoje perde, sabe todo dia o que precisa estudar para a sua prova e não se prepara mais sozinho.</strong>')
 OBRIGADO_ALUNOS = dict(slug="black-revolucao-alunos", grupo="https://sndflw.com/i/4OSYf8OR5Ac5eJh0UGBk", live="2026-10-27T20:00:00-03:00", versao="obrigado-alunos",
     dia="27/10", data_longa="27 de outubro", data_curta="27 de outubro · 20h (Brasília)", dates="20261027T230000Z/20261028T010000Z",
     quem="o grupo dos alunos no WhatsApp", avisos="os avisos do encontro")
@@ -299,6 +305,8 @@ def page(versao):
     if c.get("encontro"): corpo = hero(c) + encontro()
     else: corpo = hero(c) if c.get("so_dobra1") else hero(c) + c["dobra2"]() + band() + bio() + final()
     extra = f'<script src="../assets/{c["fx"]}.js?v={V}" defer></script>\n' if c.get("fx") else ""
+    if c.get("topo_ref"):
+        out = out.replace("</head>", "<style>" + (ROOT / "assets" / "v2-topo.css").read_text(encoding="utf-8") + "</style>\n</head>", 1)
     out += topbar() + "<main>" + corpo + "</main>" + FOOT.format(v=V).replace("</body>", extra + "</body>")
     return out
 
