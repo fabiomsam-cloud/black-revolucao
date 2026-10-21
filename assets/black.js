@@ -10,6 +10,10 @@
   var VERSAO = CFG.versao || "";
   var LIVE_AT = new Date(CFG.live || "2026-11-10T20:00:00-03:00").getTime();   /* 18/10: alunos = 27/10 */
   var qs = new URLSearchParams(location.search);
+  // 21/10 (Fábio): v4 em rodízio — o script inline da v4 já mandou o visitante p/ outra página: nada roda aqui (nem PageView)
+  if (window.BLACK_REDIRECT) return;
+  // teste de página: ?ab=v4 (veio do rodízio da v4) ou window.BLACK_AB (ficou na própria v4) → vai no cadastro (answers.teste) e na visita
+  var AB = String(qs.get("ab") || window.BLACK_AB || ""); if (!/^[\w-]{1,20}$/.test(AB)) AB = "";
 
   /* ---------- atribuição (mesmo padrão do gerador de páginas: scvp_attr, 30 dias) ---------- */
   var ATTR_KEY = "scvp_attr", ATTR_TTL = 30 * 24 * 3600 * 1000;
@@ -43,11 +47,12 @@
     window.fbq("init", String(PIXEL));
     window.fbq("track", "PageView");
   }
-  // pixel na 1ª interação (toque, clique, roda do mouse, tecla — "scroll" não: dispara sozinho na restauração de rolagem) ou 3 s após o load, o que vier antes: os ~260 KB do fbevents
-  // ficam fora da janela do LCP no PageSpeed. PageView continua; o Lead chama loadPixel() antes de disparar.
+  // 21/10 (Fábio): PageView IMEDIATO — o pixel carrega assim que o black.js roda (fim do body), p/ o connect rate da Meta (clique → visualização da página).
+  // Antes ficava p/ a 1ª interação ou 3 s após o load (otimização do PageSpeed); o gtag do Google continua adiado assim.
+  loadPixel();
   (function () {
     var evs = ["pointerdown", "touchstart", "wheel", "keydown"], done = false;
-    function go() { if (done) return; done = true; evs.forEach(function (e) { window.removeEventListener(e, go, true); }); loadPixel(); loadGtag(); }
+    function go() { if (done) return; done = true; evs.forEach(function (e) { window.removeEventListener(e, go, true); }); loadGtag(); }
     evs.forEach(function (e) { window.addEventListener(e, go, { capture: true, passive: true, once: true }); });
     function arm() { setTimeout(go, 3000); }
     if (document.readyState === "complete") arm(); else window.addEventListener("load", arm);
@@ -76,6 +81,31 @@
     } catch (_) {}
     setTimeout(go, 1200);
   }
+
+  /* ---------- visita (21/10, teste da v4): 1 registro por página por sessão, com id anônimo do visitante (sem dado pessoal) ----------
+     Dispara 1 s após o load (fora da janela do LCP) ou ao sair da página, o que vier antes. Painel: Visitantes × Cadastros por versão. */
+  (function () {
+    if (!VERSAO || document.querySelector(".thanks")) return;
+    var vk = "black_vis_" + VERSAO;
+    try { if (sessionStorage.getItem(vk)) return; } catch (_) {}
+    var vid = null;
+    try {
+      vid = localStorage.getItem("black_vid");
+      if (!vid) { vid = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + "-" + Math.random().toString(16).slice(2); localStorage.setItem("black_vid", vid); }
+    } catch (_) {}
+    var utmV = {};
+    ATTR_KEYS.slice(0, 5).forEach(function (k) { if (attr[k]) utmV[k] = attr[k]; });
+    var sent = false;
+    function send() {
+      if (sent) return; sent = true;
+      try { sessionStorage.setItem(vk, "1"); } catch (_) {}
+      var body = JSON.stringify({ op: "visita", slug: SLUG, versao: VERSAO, teste: AB || null, vid: vid, utm: utmV, ref: (document.referrer || "").slice(0, 200), largura: window.innerWidth });
+      try { fetch(API, { method: "POST", headers: HEADERS, body: body, keepalive: true }).catch(function () {}); } catch (_) {}
+    }
+    function arm() { setTimeout(send, 1000); }
+    if (document.readyState === "complete") arm(); else window.addEventListener("load", arm, { once: true });
+    window.addEventListener("pagehide", send, { once: true });
+  })();
 
   /* ---------- contador ---------- */
   function pad(n) { return String(n).padStart(2, "0"); }
@@ -167,7 +197,7 @@
       utm.utm_content = attr.utm_content || VERSAO;
       var payload = {
         op: "lead", slug: SLUG, nome: nome, email: email, telefone: digits,
-        escolaridade: "", answers: Object.assign(esc ? { escolaridade: esc, versao: VERSAO } : { versao: VERSAO },
+        escolaridade: "", answers: Object.assign(esc ? { escolaridade: esc, versao: VERSAO } : { versao: VERSAO }, AB ? { teste: AB } : {},
           attr.gclid ? { gclid: attr.gclid } : {}, attr.gbraid ? { gbraid: attr.gbraid } : {}, attr.wbraid ? { wbraid: attr.wbraid } : {}), utm: utm,   /* 18/10: versão da página sempre gravada (utm_content passa a ser o criativo) */
         fbclid: attr.fbclid || qs.get("fbclid") || null, fbclid_ts: attr.ts || Date.now(),
         fbp: cookie("_fbp"), fbc: cookie("_fbc"), page_url: location.href

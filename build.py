@@ -301,11 +301,23 @@ COPY["v2d"] = dict(COPY["v2"],
     h1='E se você pudesse estudar para concurso até nos momentos em que hoje <span class="metal">acredita não ter tempo</span>?',
     sub="Uma nova forma de estudar está chegando. No dia 10 de novembro, descubra como transformar momentos esquecidos da sua rotina em oportunidades de aprendizagem, com música, inteligência artificial e uma comunidade ao seu lado.",
     css_extra="@media (max-width:959px){h1{font-size:22px}}@media (max-width:374px){h1{font-size:21px}}")
+# 21/10 (Fábio): TESTE DA V4 — o link /v4 das campanhas fica igual; quem abre cai por sorteio (20% cada) em v4, v2, v2b, v2c ou v5.
+# Script inline no topo do <head> da v4 (antes de qualquer CSS): sorteio fixo por visitante (30 dias), leva UTMs/fbclid/gclid e marca ?ab=v4
+# p/ o cadastro gravar answers.teste = "v4" e a visita entrar no bloco "Teste da v4" do painel. Só a v4 recebe o script.
+COPY["v4"] = dict(COPY["v4"], rodizio=("v4", "v2", "v2b", "v2c", "v5"))
+RODIZIO = """<script>(function(){try{var A=%s,K="black_ab_v4",v=null,s=null;
+try{s=JSON.parse(localStorage.getItem(K)||"null")}catch(e){}
+if(s&&A.indexOf(s.v)>-1&&Date.now()-s.ts<2592e6)v=s.v;
+if(!v){v=A[Math.floor(Math.random()*A.length)];try{localStorage.setItem(K,JSON.stringify({v:v,ts:Date.now()}))}catch(e){}}
+window.BLACK_AB="v4";
+if(v!==A[0]){window.BLACK_REDIRECT=true;var q=new URLSearchParams(location.search);q.set("ab","v4");location.replace("../"+v+"/?"+q.toString()+location.hash)}
+}catch(e){}})();</script>
+"""
 OBRIGADO_ALUNOS = dict(slug="black-revolucao-alunos", grupo="https://sndflw.com/i/4OSYf8OR5Ac5eJh0UGBk", live="2026-10-27T20:00:00-03:00", versao="obrigado-alunos",
     dia="27/10", data_longa="27 de outubro", data_curta="27 de outubro · 20h (Brasília)", dates="20261027T230000Z/20261028T010000Z",
     quem="o grupo dos alunos no WhatsApp", avisos="os avisos do encontro")
 LIVE = "2026-11-10T20:00:00-03:00"
-V = "33"
+V = "34"
 # 18/10 (Fábio): Google Ads (conta 182-909-5948) — Lead superior R$ 30 / médio R$ 10, só nas páginas de NÃO alunos
 GADS = {"id": "AW-646244794", "sup": "AW-646244794/ulgwCP2W0KEdELrTk7QC", "med": "AW-646244794/lH70CICX0KEdELrTk7QC"}
 OG = "https://revolucaodoestudo.com.br/assets/og.jpg"
@@ -319,6 +331,8 @@ def page(versao):
     if c.get("encontro"): corpo = hero(c) + encontro()
     else: corpo = hero(c) if c.get("so_dobra1") else hero(c) + c["dobra2"]() + band() + bio() + final()
     extra = f'<script src="../assets/{c["fx"]}.js?v={V}" defer></script>\n' if c.get("fx") else ""
+    if c.get("rodizio"):
+        out = out.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n' + RODIZIO % json.dumps(list(c["rodizio"])), 1)
     if c.get("topo_ref"):
         out = out.replace("</head>", "<style>" + (ROOT / "assets" / "v2-topo.css").read_text(encoding="utf-8") + c.get("css_extra", "") + "</style>\n</head>", 1)
     # 21/10: v2 sem contador (pedido do Fábio)
