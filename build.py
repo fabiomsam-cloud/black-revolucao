@@ -286,6 +286,7 @@ COPY["alunos"] = dict(COPY["v4"],   # 18/10 (Fábio): "replicando a v4" p/ ALUNO
 # com destaque. Formulário igual, sem caixinha de LGPD. CSS só da v2, embutido na própria página (assets/v2-topo.css).
 # Definido aqui, depois das derivadas, para v3/v4/v5/bio/alunos NÃO herdarem.
 COPY["v2"] = dict(COPY["v2"], topo_ref=True, sem_contador=True, foto_sizes="(max-width:959px) 270px, 700px",
+    data='10 de novembro<span class="sep"> · </span><span class="hr">20h</span>',   # 21/10: no celular quebra em linhas (logo e data ao lado da cabeça); no desktop lê igual
     sub='No dia 10 de novembro, irei revelar ao vivo a preparação que faz o estudo caber na rotina de quem trabalha, cuida da família e tem pouco tempo. <strong class="hl">Você passa a estudar nos momentos que hoje perde, sabe todo dia o que precisa estudar para a sua prova e não se prepara mais sozinho.</strong>')
 OBRIGADO_ALUNOS = dict(slug="black-revolucao-alunos", grupo="https://sndflw.com/i/4OSYf8OR5Ac5eJh0UGBk", live="2026-10-27T20:00:00-03:00", versao="obrigado-alunos",
     dia="27/10", data_longa="27 de outubro", data_curta="27 de outubro · 20h (Brasília)", dates="20261027T230000Z/20261028T010000Z",
