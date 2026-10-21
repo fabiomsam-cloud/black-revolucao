@@ -288,6 +288,19 @@ COPY["alunos"] = dict(COPY["v4"],   # 18/10 (Fábio): "replicando a v4" p/ ALUNO
 COPY["v2"] = dict(COPY["v2"], topo_ref=True, sem_contador=True, foto_sizes="(max-width:959px) 270px, 700px",
     data='10 de novembro<span class="sep"> · </span><span class="hr">20h</span>',   # 21/10: no celular quebra em linhas (logo e data ao lado da cabeça); no desktop lê igual
     sub='No dia 10 de novembro, irei revelar ao vivo a preparação que faz o estudo caber na rotina de quem trabalha, cuida da família e tem pouco tempo. <strong class="hl">Você passa a estudar nos momentos que hoje perde, sabe todo dia o que precisa estudar para a sua prova e não se prepara mais sozinho.</strong>')
+# 21/10 (Fábio): v2b, v2c e v2d = cópias da v2 (mesmo topo, sem contador, mesmo formulário, mesmo slug/grupo/pixel/régua)
+# trocando só título e subtítulo — teste de copy. A versão vai no cadastro (answers.versao = v2b/v2c/v2d) p/ comparar no painel.
+COPY["v2b"] = dict(COPY["v2"],
+    h1='Você não precisa ter uma vida diferente para passar em um concurso. Precisa de uma <span class="metal">forma diferente de estudar</span>.',
+    sub="Descubra no dia 10 de novembro como construir uma preparação que funciona mesmo para quem trabalha o dia inteiro, cuida da família e tem pouco tempo disponível.")
+COPY["v2c"] = dict(COPY["v2"],
+    h1='O problema não é que você tem pouco tempo para estudar. É que ensinaram você a estudar <span class="metal">como se tivesse o dia inteiro livre</span>.',
+    sub="Dia 10 de novembro, descubra uma nova forma de preparação que combina planejamento, música, tecnologia e acompanhamento para fazer seus estudos caberem na sua rotina.",
+    css_extra="@media (max-width:959px){h1{font-size:21.5px}}@media (max-width:374px){h1{font-size:20.5px}}")   # título mais longo: 4 linhas no celular
+COPY["v2d"] = dict(COPY["v2"],
+    h1='E se você pudesse estudar para concurso até nos momentos em que hoje <span class="metal">acredita não ter tempo</span>?',
+    sub="Uma nova forma de estudar está chegando. No dia 10 de novembro, descubra como transformar momentos esquecidos da sua rotina em oportunidades de aprendizagem, com música, inteligência artificial e uma comunidade ao seu lado.",
+    css_extra="@media (max-width:959px){h1{font-size:22px}}@media (max-width:374px){h1{font-size:21px}}")
 OBRIGADO_ALUNOS = dict(slug="black-revolucao-alunos", grupo="https://sndflw.com/i/4OSYf8OR5Ac5eJh0UGBk", live="2026-10-27T20:00:00-03:00", versao="obrigado-alunos",
     dia="27/10", data_longa="27 de outubro", data_curta="27 de outubro · 20h (Brasília)", dates="20261027T230000Z/20261028T010000Z",
     quem="o grupo dos alunos no WhatsApp", avisos="os avisos do encontro")
@@ -307,7 +320,7 @@ def page(versao):
     else: corpo = hero(c) if c.get("so_dobra1") else hero(c) + c["dobra2"]() + band() + bio() + final()
     extra = f'<script src="../assets/{c["fx"]}.js?v={V}" defer></script>\n' if c.get("fx") else ""
     if c.get("topo_ref"):
-        out = out.replace("</head>", "<style>" + (ROOT / "assets" / "v2-topo.css").read_text(encoding="utf-8") + "</style>\n</head>", 1)
+        out = out.replace("</head>", "<style>" + (ROOT / "assets" / "v2-topo.css").read_text(encoding="utf-8") + c.get("css_extra", "") + "</style>\n</head>", 1)
     # 21/10: v2 sem contador (pedido do Fábio)
     out += ("" if c.get("sem_contador") else topbar()) + "<main>" + corpo + "</main>" + FOOT.format(v=V).replace("</body>", extra + "</body>")
     return out
@@ -344,10 +357,10 @@ ROOT_INDEX = """<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><t
 <body style="background:#050607;color:#ccc;font-family:sans-serif;padding:40px;text-align:center"><a href="v2/" style="color:#00b7df">Entrar na página</a></body></html>
 """
 
-for v in ("v1", "v2", "v3", "v4", "v5", "bio", "alunos"):
+for v in ("v1", "v2", "v2b", "v2c", "v2d", "v3", "v4", "v5", "bio", "alunos"):
     d = ROOT / v; d.mkdir(exist_ok=True); (d / "index.html").write_text(page(v), encoding="utf-8")
 (ROOT / "obrigado").mkdir(exist_ok=True); (ROOT / "obrigado" / "index.html").write_text(obrigado(), encoding="utf-8")
 (ROOT / "obrigado-alunos").mkdir(exist_ok=True); (ROOT / "obrigado-alunos" / "index.html").write_text(obrigado(OBRIGADO_ALUNOS), encoding="utf-8")
 (ROOT / "index.html").write_text(ROOT_INDEX, encoding="utf-8")
 (ROOT / ".nojekyll").write_text("")
-print("ok: v1–v5/, bio/, alunos/, obrigado/, obrigado-alunos/, index.html")
+print("ok: v1–v5/, v2b–v2d/, bio/, alunos/, obrigado/, obrigado-alunos/, index.html")
