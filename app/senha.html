@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Revolução do Estudo · Senha</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07080b">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="img/icon-192.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="stylesheet" href="app.css?v=1">
+</head>
+<body>
+<main class="wrap">
+  <header class="top"><a href="./"><img class="logo" src="img/logo.webp" alt="Black · A Revolução do Estudo" width="480" height="188"></a></header>
+
+  <section id="vCriar" hidden>
+    <h1 id="tCriar">Crie sua senha</h1>
+    <p class="sub">Ela vale para o Play Passei, o Clube do Estudo Inteligente e o Dominei. Conta: <b id="emailCriar"></b></p>
+    <form class="painel" id="fCriar">
+      <label for="s1">Nova senha (mínimo 8 caracteres)</label>
+      <input id="s1" type="password" autocomplete="new-password" minlength="8" required>
+      <label for="s2">Repita a senha</label>
+      <input id="s2" type="password" autocomplete="new-password" minlength="8" required>
+      <button class="btn" id="btnCriar" type="submit">Salvar e entrar</button>
+    </form>
+  </section>
+
+  <section id="vTrocar" hidden>
+    <h1>Trocar minha senha</h1>
+    <p class="sub">A nova senha passa a valer nas 3 plataformas.</p>
+    <form class="painel" id="fTrocar">
+      <label for="t1">Nova senha (mínimo 8 caracteres)</label>
+      <input id="t1" type="password" autocomplete="new-password" minlength="8" required>
+      <label for="t2">Repita a senha</label>
+      <input id="t2" type="password" autocomplete="new-password" minlength="8" required>
+      <button class="btn" id="btnTrocar" type="submit">Salvar</button>
+      <div class="links"><a href="./">Voltar</a></div>
+    </form>
+  </section>
+
+  <section id="vRecuperar" hidden>
+    <h1 id="tRec">Esqueci minha senha</h1>
+    <p class="sub" id="sRec">Digite o e-mail da compra. Enviamos o link para criar uma nova senha no seu WhatsApp.</p>
+    <form class="painel" id="fRec">
+      <label for="emailRec">E-mail da compra</label>
+      <input id="emailRec" type="email" inputmode="email" autocomplete="username" required>
+      <button class="btn" id="btnRec" type="submit">Enviar link</button>
+      <div class="links"><a href="./">Voltar para o login</a></div>
+    </form>
+  </section>
+
+  <section id="vInvalido" hidden>
+    <h1>Este link não vale mais</h1>
+    <p class="sub" id="sInv"></p>
+    <div class="links"><a href="senha.html">Pedir um novo link</a> · <a href="./">Ir para o login</a></div>
+  </section>
+
+  <p class="msg" id="msg" role="status"></p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js"></script>
+<script>
+const SB_URL = 'https://dqpxugdhlgafvddavzzp.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRxcHh1Z2RobGdhZnZkZGF2enpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxODQ1NTMsImV4cCI6MjA5Nzc2MDU1M30.nUhYPO3oLUZEXgQCDlRtL-Jawi0nr0l1Z7_z5ecEXvc';
+const HUB = SB_URL + '/functions/v1/hub';
+const sb = supabase.createClient(SB_URL, SB_KEY, { auth: { storageKey: 'hub-auth', persistSession: true, autoRefreshToken: true, detectSessionInUrl: false } });
+const $ = (id) => document.getElementById(id);
+const q = new URLSearchParams(location.search);
+const token = q.get('t'), modo = q.get('modo');
+function msg(t, ok) { const m = $('msg'); m.textContent = t || ''; m.classList.toggle('ok', !!ok); }
+function show(id) { for (const v of ['vCriar', 'vTrocar', 'vRecuperar', 'vInvalido']) $(v).hidden = v !== id; }
+async function api(path, body, method) {
+  const h = { 'Content-Type': 'application/json' };
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) h.Authorization = 'Bearer ' + session.access_token;
+  const r = await fetch(HUB + path, { method: method || (body ? 'POST' : 'GET'), headers: h, body: body ? JSON.stringify(body) : undefined });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.erro || 'Algo deu errado. Tente de novo.');
+  return j;
+}
+function confere(a, b) {
+  if (a.length < 8) return 'A senha precisa ter pelo menos 8 caracteres.';
+  if (a !== b) return 'As duas senhas não são iguais.';
+  return '';
+}
+async function boot() {
+  if (token) {
+    try {
+      const r = await api('/senha?t=' + encodeURIComponent(token));
+      if (r.estado !== 'ok') {
+        $('sInv').textContent = r.estado === 'usado' ? 'Este link já foi usado. Se você já criou a senha, é só entrar.' : r.estado === 'expirado' ? 'O prazo deste link acabou. Peça um novo.' : 'Não reconhecemos este link.';
+        show('vInvalido'); return;
+      }
+      $('emailCriar').textContent = r.email;
+      if (r.tipo === 'recuperar') $('tCriar').textContent = 'Crie uma nova senha';
+      show('vCriar');
+    } catch (e) { show('vInvalido'); $('sInv').textContent = e.message; }
+    return;
+  }
+  if (modo === 'trocar') {
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) { location.href = './'; return; }
+    show('vTrocar'); return;
+  }
+  if (modo === 'primeiro') {
+    $('tRec').textContent = 'Primeiro acesso';
+    $('sRec').textContent = 'Você recebeu no WhatsApp um link para criar sua senha. Se não achou, digite o e-mail da compra e enviamos de novo.';
+  }
+  show('vRecuperar');
+}
+$('fCriar').onsubmit = async (ev) => {
+  ev.preventDefault(); msg('');
+  const s1 = $('s1').value, s2 = $('s2').value, erro = confere(s1, s2);
+  if (erro) { msg(erro); return; }
+  $('btnCriar').disabled = true;
+  try {
+    const r = await api('/senha', { token, senha: s1 });
+    msg('Senha criada. Entrando…', true);
+    const { error } = await sb.auth.signInWithPassword({ email: r.email, password: s1 });
+    location.href = error ? './' : './';
+  } catch (e) { msg(e.message); $('btnCriar').disabled = false; }
+};
+$('fTrocar').onsubmit = async (ev) => {
+  ev.preventDefault(); msg('');
+  const s1 = $('t1').value, s2 = $('t2').value, erro = confere(s1, s2);
+  if (erro) { msg(erro); return; }
+  $('btnTrocar').disabled = true;
+  try { await api('/senha/trocar', { senha: s1 }); msg('Senha trocada nas suas plataformas.', true); setTimeout(() => location.href = './', 1200); }
+  catch (e) { msg(e.message); $('btnTrocar').disabled = false; }
+};
+$('fRec').onsubmit = async (ev) => {
+  ev.preventDefault(); msg('');
+  $('btnRec').disabled = true;
+  try { const r = await api('/recuperar', { email: $('emailRec').value.trim().toLowerCase() }); msg(r.mensagem, true); }
+  catch (e) { msg(e.message); $('btnRec').disabled = false; }
+};
+boot();
+</script>
+</body>
+</html>

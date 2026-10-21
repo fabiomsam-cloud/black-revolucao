@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Revolução do Estudo · Minhas plataformas</title>
+<meta name="description" content="Entre uma vez e acesse o Play Passei, o Clube do Estudo Inteligente e o Dominei.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07080b">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="img/icon-192.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Revolução">
+<link rel="preload" href="/assets/fonts/saira-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="app.css?v=1">
+</head>
+<body>
+<main class="wrap">
+  <header class="top"><img class="logo" src="img/logo.webp" alt="Black · A Revolução do Estudo" width="480" height="188"></header>
+
+  <section id="vLogin" hidden>
+    <h1>Entre nas suas plataformas</h1>
+    <p class="sub">Um login só para o Play Passei, o Clube do Estudo Inteligente e o Dominei.</p>
+    <form class="painel" id="fLogin" autocomplete="on">
+      <label for="email">E-mail da compra</label>
+      <input id="email" name="email" type="email" inputmode="email" autocomplete="username" placeholder="seu@email.com" required>
+      <label for="senha">Senha</label>
+      <input id="senha" name="senha" type="password" autocomplete="current-password" placeholder="Sua senha" required>
+      <button class="btn" id="btnEntrar" type="submit">Entrar</button>
+      <div class="links"><a href="senha.html">Esqueci minha senha</a> · <a href="senha.html?modo=primeiro">Primeiro acesso</a></div>
+    </form>
+  </section>
+
+  <section id="vHome" hidden>
+    <p class="ola">Olá, <b id="nome"></b>. Toque para entrar:</p>
+    <div class="grade" id="grade"></div>
+    <div class="instalar" id="instalar">Dica: adicione esta página à tela inicial do celular para abrir suas plataformas com um toque.</div>
+    <nav class="acoes"><a href="senha.html?modo=trocar">Trocar minha senha</a> · <button id="btnSair" type="button">Sair</button></nav>
+  </section>
+
+  <p class="msg" id="msg" role="status"></p>
+  <p class="rodape">Sou Concurseiro e Vou Passar · Professor Fábio Silva</p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js"></script>
+<script>
+const SB_URL = 'https://dqpxugdhlgafvddavzzp.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRxcHh1Z2RobGdhZnZkZGF2enpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxODQ1NTMsImV4cCI6MjA5Nzc2MDU1M30.nUhYPO3oLUZEXgQCDlRtL-Jawi0nr0l1Z7_z5ecEXvc';
+const HUB = SB_URL + '/functions/v1/hub';
+const sb = supabase.createClient(SB_URL, SB_KEY, { auth: { storageKey: 'hub-auth', persistSession: true, autoRefreshToken: true, detectSessionInUrl: false } });
+const $ = (id) => document.getElementById(id);
+const PLAT = {
+  play_passei: { nome: 'Play Passei', img: 'img/playpassei.png', desc: 'Música para memorizar' },
+  cei:         { nome: 'Clube do Estudo Inteligente', img: 'img/cei.png', desc: 'Método, análise e comunidade' },
+  dominei:     { nome: 'Dominei', img: 'img/dominei.png', desc: 'Seu edital no cérebro' },
+};
+function msg(t, ok) { const m = $('msg'); m.textContent = t || ''; m.classList.toggle('ok', !!ok); }
+function show(id) { for (const v of ['vLogin', 'vHome']) $(v).hidden = v !== id; }
+function humanizar(e) {
+  const m = (e && e.message) || '';
+  if (/invalid login|invalid credentials/i.test(m)) return 'E-mail ou senha não conferem.';
+  if (/rate limit|too many/i.test(m)) return 'Muitas tentativas. Espere um minuto e tente de novo.';
+  if (/email not confirmed/i.test(m)) return 'Este e-mail ainda não foi confirmado.';
+  if (/network|fetch/i.test(m)) return 'Sem conexão. Confira a internet e tente de novo.';
+  return m || 'Algo deu errado. Tente de novo.';
+}
+async function api(path, body) {
+  const h = { 'Content-Type': 'application/json' };
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) h.Authorization = 'Bearer ' + session.access_token;
+  const r = await fetch(HUB + path, { method: body ? 'POST' : 'GET', headers: h, body: body ? JSON.stringify(body) : undefined });
+  const j = await r.json().catch(() => ({}));
+  if (r.status === 401) { await sb.auth.signOut(); show('vLogin'); }
+  if (!r.ok) throw new Error(j.erro || 'Algo deu errado. Tente de novo.');
+  return j;
+}
+function render(me) {
+  $('nome').textContent = ((me.nome || me.email || '').trim().split(/\s+/)[0]) || 'aluno(a)';
+  const g = $('grade'); g.innerHTML = '';
+  let algum = false;
+  for (const p of ['play_passei', 'cei', 'dominei']) {
+    const a = (me.acessos || []).find((x) => x.plataforma === p) || {};
+    const info = PLAT[p];
+    const ativo = me.equipe || a.status === 'ativo';
+    algum = algum || ativo;
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'card' + (ativo ? '' : ' off');
+    card.innerHTML = '<span class="pic"><img src="' + info.img + '" alt="' + info.nome + '"></span><span class="t">' + info.nome + '</span><span class="d">' + (ativo ? info.desc : (a.status === 'encerrado' ? 'Acesso encerrado' : 'Não incluído no seu plano')) + '</span>';
+    if (ativo) card.onclick = () => entrar(p, card);
+    g.appendChild(card);
+  }
+  if (!algum) msg('Ainda não encontramos uma plataforma ativa para ' + me.email + '. Se você acabou de comprar, aguarde alguns minutos e recarregue.');
+  const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+  $('instalar').classList.toggle('on', !standalone);
+}
+async function entrar(p, card) {
+  msg(''); card.classList.add('busy');
+  try {
+    const r = await api('/entrar', { plataforma: p });
+    if (r.aviso) msg(r.aviso, true);
+    location.href = r.url;
+  } catch (e) { msg(humanizar(e)); }
+  finally { card.classList.remove('busy'); }
+}
+async function boot() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { show('vLogin'); return; }
+  show('vHome');
+  try { render(await api('/me')); } catch (e) { msg(humanizar(e)); }
+}
+$('fLogin').onsubmit = async (ev) => {
+  ev.preventDefault(); msg('');
+  const email = $('email').value.trim().toLowerCase(), password = $('senha').value;
+  $('btnEntrar').disabled = true;
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+  $('btnEntrar').disabled = false;
+  if (error) { msg(humanizar(error)); return; }
+  boot();
+};
+$('btnSair').onclick = async () => { await sb.auth.signOut(); msg(''); show('vLogin'); };
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+boot();
+</script>
+</body>
+</html>

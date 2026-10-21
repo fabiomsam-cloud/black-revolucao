@@ -1,0 +1,18 @@
+{
+  "name": "Revolução do Estudo",
+  "short_name": "Revolução",
+  "description": "Um login só para o Play Passei, o Clube do Estudo Inteligente e o Dominei.",
+  "id": "/app/",
+  "start_url": "/app/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#07080b",
+  "theme_color": "#07080b",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "/app/img/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/app/img/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/app/img/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
