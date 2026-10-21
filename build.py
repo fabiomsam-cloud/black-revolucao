@@ -281,11 +281,11 @@ COPY["alunos"] = dict(COPY["v4"],   # 18/10 (Fábio): "replicando a v4" p/ ALUNO
     obrigado="../obrigado-alunos/", sem_escolaridade=True,
     title="Black · A Revolução do Estudo — 27 de outubro, 20h, ao vivo, só para alunos",
     desc="Terça, 27 de outubro, às 20h, ao vivo e só para quem já é aluno: a nova forma de estudar para concursos. O link sai no grupo dos alunos.")
-# 21/10 (Fábio): v2 com o topo do celular no padrão da página da Escola da Bel (lp.escoladabel.com/bffv1126-cap-mads-v1):
+# 21/10 (Fábio): v2 SEM contador e com o topo do celular no padrão da página da Escola da Bel (lp.escoladabel.com/bffv1126-cap-mads-v1):
 # contador em pílula por cima da foto, foto grande centralizada, logo + pílula de data sobre a foto, título e subtítulo centralizados
 # com destaque. Formulário igual, sem caixinha de LGPD. CSS só da v2, embutido na própria página (assets/v2-topo.css).
 # Definido aqui, depois das derivadas, para v3/v4/v5/bio/alunos NÃO herdarem.
-COPY["v2"] = dict(COPY["v2"], topo_ref=True, foto_sizes="(max-width:959px) 270px, 700px",
+COPY["v2"] = dict(COPY["v2"], topo_ref=True, sem_contador=True, foto_sizes="(max-width:959px) 270px, 700px",
     sub='No dia 10 de novembro, irei revelar ao vivo a preparação que faz o estudo caber na rotina de quem trabalha, cuida da família e tem pouco tempo. <strong class="hl">Você passa a estudar nos momentos que hoje perde, sabe todo dia o que precisa estudar para a sua prova e não se prepara mais sozinho.</strong>')
 OBRIGADO_ALUNOS = dict(slug="black-revolucao-alunos", grupo="https://sndflw.com/i/4OSYf8OR5Ac5eJh0UGBk", live="2026-10-27T20:00:00-03:00", versao="obrigado-alunos",
     dia="27/10", data_longa="27 de outubro", data_curta="27 de outubro · 20h (Brasília)", dates="20261027T230000Z/20261028T010000Z",
@@ -307,7 +307,8 @@ def page(versao):
     extra = f'<script src="../assets/{c["fx"]}.js?v={V}" defer></script>\n' if c.get("fx") else ""
     if c.get("topo_ref"):
         out = out.replace("</head>", "<style>" + (ROOT / "assets" / "v2-topo.css").read_text(encoding="utf-8") + "</style>\n</head>", 1)
-    out += topbar() + "<main>" + corpo + "</main>" + FOOT.format(v=V).replace("</body>", extra + "</body>")
+    # 21/10: v2 sem contador (pedido do Fábio)
+    out += ("" if c.get("sem_contador") else topbar()) + "<main>" + corpo + "</main>" + FOOT.format(v=V).replace("</body>", extra + "</body>")
     return out
 
 OBRIGADO_PADRAO = dict(slug=SLUG, grupo=GRUPO, live=None, versao="obrigado", dia="10/11", data_longa="10 de novembro", data_curta="10 de novembro · 20h (Brasília)",
