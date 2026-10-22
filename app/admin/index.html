@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tríade · Administração</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#07080b">
+<link rel="icon" type="image/png" href="/app/img/icon-192.png">
+<link rel="stylesheet" href="/app/app.css?v=2">
+<style>
+.wrap{max-width:980px}
+.abas{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:0 0 18px}
+.abas button{background:var(--card);border:1px solid var(--line);color:var(--ink-2);border-radius:999px;padding:9px 16px;font:inherit;font-weight:700;cursor:pointer}
+.abas button.on{background:var(--blue);color:#001820;border-color:var(--blue)}
+.busca{display:flex;gap:8px}.busca input{flex:1}.busca .btn{width:auto;margin:0;padding:12px 18px}
+.ficha{display:grid;gap:12px;margin-top:16px}
+@media(min-width:760px){.ficha{grid-template-columns:1fr 1fr}}
+.bloco{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px}
+.bloco h3{margin:0 0 8px;font-family:Saira,sans-serif;font-size:.95rem;letter-spacing:.3px;color:var(--ink);text-transform:uppercase}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.9rem;color:var(--ink-2)}.kv b{color:var(--ink-3);font-weight:600}
+.tag{display:inline-block;border-radius:999px;padding:2px 9px;font-size:.78rem;font-weight:700}
+.tag.ok{background:rgba(57,217,138,.15);color:var(--ok)}.tag.off{background:rgba(255,122,122,.15);color:var(--erro)}.tag.neu{background:var(--card-2);color:var(--ink-3)}
+.acoes2{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.acoes2 button,.acoes2 a{background:var(--card-2);border:1px solid var(--line);color:var(--ink);border-radius:12px;padding:9px 12px;font:inherit;font-size:.86rem;font-weight:600;cursor:pointer;text-decoration:none}
+.acoes2 button.perigo{border-color:rgba(255,122,122,.5);color:var(--erro)}
+.acoes2 button[disabled]{opacity:.5;cursor:default}
+table{width:100%;border-collapse:collapse;font-size:.85rem}th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--ink-3);font-weight:600}
+.topo-adm{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;color:var(--ink-3);font-size:.88rem}.topo-adm button{background:none;border:0;color:var(--ink-2);text-decoration:underline;font:inherit;cursor:pointer}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82rem;word-break:break-all}
+.form-linha{display:grid;gap:8px;margin-top:10px}@media(min-width:620px){.form-linha{grid-template-columns:1fr 1fr auto}}
+.form-linha .btn{margin:0;width:auto;padding:12px 16px}
+dialog{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:18px;padding:18px;max-width:420px;width:92vw}dialog::backdrop{background:rgba(0,0,0,.6)}
+dialog h3{margin:0 0 8px;font-family:Saira,sans-serif}dialog .btn{margin-top:12px}dialog .links{margin-top:10px}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="top"><a href="/app/"><img class="logo" src="/app/img/logo.webp" alt="Revolução do Estudo" width="480" height="188" style="width:min(220px,55vw)"></a></header>
+
+  <section id="vLogin" hidden>
+    <h1>Administração da Tríade</h1>
+    <p class="sub">Entre com o seu e-mail da equipe.</p>
+    <form class="painel" id="fLogin">
+      <label for="email">E-mail</label><input id="email" type="email" autocomplete="username" required>
+      <label for="senha">Senha</label><input id="senha" type="password" autocomplete="current-password" required>
+      <button class="btn" id="btnEntrar" type="submit">Entrar</button>
+    </form>
+  </section>
+
+  <section id="vAdm" hidden>
+    <div class="topo-adm"><span id="quem"></span><button id="btnSair" type="button">Sair</button></div>
+    <nav class="abas"><button data-aba="aluno" class="on">Aluno</button><button data-aba="fila">Fila</button><button data-aba="auditoria">Histórico</button><button data-aba="equipe" id="abaEquipe" hidden>Equipe</button></nav>
+
+    <div id="aAluno">
+      <form class="busca" id="fBusca"><input id="q" type="search" placeholder="E-mail ou telefone do aluno" autocomplete="off"><button class="btn" type="submit">Buscar</button></form>
+      <div id="ficha"></div>
+    </div>
+    <div id="aFila" hidden><div class="bloco"><h3>Fila de provisionamento · últimos 60</h3><div id="fila"></div></div></div>
+    <div id="aAuditoria" hidden><div class="bloco"><h3>Histórico de ações da equipe</h3><form class="busca" id="fAud" style="margin-bottom:10px"><input id="qAud" type="search" placeholder="Filtrar por e-mail, pessoa ou ação"><button class="btn" type="submit">Filtrar</button></form><div id="auditoria"></div></div></div>
+    <div id="aEquipe" hidden><div class="bloco"><h3>Equipe com acesso à administração</h3><div id="equipe"></div>
+      <form class="form-linha" id="fEquipe"><input id="eqEmail" type="email" placeholder="e-mail" required><input id="eqNome" type="text" placeholder="nome"><select id="eqPapel" style="background:var(--field);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:12px 16px;font:inherit"><option value="suporte">suporte</option><option value="admin">admin</option></select><button class="btn" type="submit">Adicionar</button></form>
+      <p class="sub" style="text-align:left;margin:10px 0 0;font-size:.85rem">suporte = busca, senha, telefone, reenvio, fila · admin = tudo isso + trocar e-mail, liberar/cortar acesso e gerir a equipe.</p></div></div>
+  </section>
+  <p class="msg" id="msg" role="status"></p>
+</main>
+
+<dialog id="dlg"><h3 id="dlgT"></h3><p class="sub" id="dlgS" style="text-align:left;margin:0 0 6px"></p><form id="dlgF" method="dialog"><div id="dlgCampos"></div><button class="btn" id="dlgOk" value="ok">Confirmar</button><div class="links"><button type="button" id="dlgCancela">Cancelar</button></div></form></dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js"></script>
+<script>
+const SB_URL = 'https://dqpxugdhlgafvddavzzp.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRxcHh1Z2RobGdhZnZkZGF2enpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxODQ1NTMsImV4cCI6MjA5Nzc2MDU1M30.nUhYPO3oLUZEXgQCDlRtL-Jawi0nr0l1Z7_z5ecEXvc';
+const HUB = SB_URL + '/functions/v1/hub';
+const sb = supabase.createClient(SB_URL, SB_KEY, { auth: { storageKey: 'hub-admin-auth', persistSession: true, autoRefreshToken: true, detectSessionInUrl: false } });
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const dt = (s) => s ? new Date(s).toLocaleString('pt-BR', { timeZone: 'America/Manaus', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '—';
+const dd = (s) => s ? new Date(s).toLocaleDateString('pt-BR', { timeZone: 'America/Manaus' }) : '—';
+let eu = null, atual = null;
+function msg(t, ok) { const m = $('msg'); m.textContent = t || ''; m.classList.toggle('ok', !!ok); }
+function show(id) { for (const v of ['vLogin', 'vAdm']) $(v).hidden = v !== id; }
+function aba(n) { for (const a of ['aluno', 'fila', 'auditoria', 'equipe']) $('a' + a[0].toUpperCase() + a.slice(1)).hidden = a !== n; document.querySelectorAll('.abas button').forEach((b) => b.classList.toggle('on', b.dataset.aba === n)); if (n === 'fila') carregarFila(); if (n === 'auditoria') carregarAud(); if (n === 'equipe') carregarEquipe(); }
+async function api(path, body, method) {
+  const h = { 'Content-Type': 'application/json' };
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) h.Authorization = 'Bearer ' + session.access_token;
+  const r = await fetch(HUB + path, { method: method || (body ? 'POST' : 'GET'), headers: h, body: body ? JSON.stringify(body) : undefined });
+  const j = await r.json().catch(() => ({}));
+  if (r.status === 401) { await sb.auth.signOut(); show('vLogin'); }
+  if (!r.ok) throw new Error(j.erro || 'Algo deu errado.');
+  return j;
+}
+// caixa de diálogo com campos
+function perguntar(titulo, sub, campos) {
+  return new Promise((res) => {
+    $('dlgT').textContent = titulo; $('dlgS').textContent = sub || '';
+    $('dlgCampos').innerHTML = campos.map((c) => c.tipo === 'select'
+      ? '<label>' + esc(c.rotulo) + '</label><select name="' + c.nome + '" style="background:var(--field);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:12px 16px;font:inherit;width:100%">' + c.opcoes.map((o) => '<option value="' + esc(o[0]) + '">' + esc(o[1]) + '</option>').join('') + '</select>'
+      : c.tipo === 'check'
+      ? '<label style="display:flex;gap:8px;align-items:center"><input type="checkbox" name="' + c.nome + '" value="1" ' + (c.marcado ? 'checked' : '') + ' style="width:auto"> ' + esc(c.rotulo) + '</label>'
+      : '<label>' + esc(c.rotulo) + '</label><input name="' + c.nome + '" type="' + (c.tipo || 'text') + '" value="' + esc(c.valor || '') + '" ' + (c.obrig ? 'required' : '') + ' autocomplete="off">').join('');
+    const d = $('dlg'); d.showModal();
+    const fim = (ok) => { d.close(); d.removeEventListener('close', onClose); res(ok ? Object.fromEntries(new FormData($('dlgF')).entries()) : null); };
+    const onClose = () => res(null);
+    $('dlgCancela').onclick = () => fim(false);
+    $('dlgF').onsubmit = (ev) => { ev.preventDefault(); fim(true); };
+  });
+}
+function tag(ok, t) { return '<span class="tag ' + (ok === null ? 'neu' : ok ? 'ok' : 'off') + '">' + esc(t) + '</span>'; }
+function renderFicha(d) {
+  atual = d;
+  if (!d.encontrado) { $('ficha').innerHTML = '<p class="sub">' + esc(d.mensagem || 'Nenhuma conta com esse e-mail.') + (eu.papel === 'admin' ? ' <button class="btn" id="btnLiberarNovo" style="margin-top:12px">Liberar acesso para ' + esc(d.email) + '</button>' : '') + '</p>'; if ($('btnLiberarNovo')) $('btnLiberarNovo').onclick = () => acessoManual(d.email, 'enroll'); return; }
+  if (d.varios) { $('ficha').innerHTML = '<div class="bloco"><h3>Mais de uma conta com esse telefone</h3>' + d.varios.map((e) => '<p><a href="#" onclick="buscar(\'' + esc(e) + '\');return false" style="color:var(--blue-2)">' + esc(e) + '</a></p>').join('') + '</div>'; return; }
+  const h = d.hub, P = d.plataformas;
+  const acesso = (p) => { const a = (d.acessos || []).find((x) => x.plataforma === p); return a ? tag(a.status === 'ativo', a.status === 'ativo' ? 'acesso até ' + dd(a.fim) : 'cortado' + (a.motivo ? ' · ' + a.motivo : '')) : tag(null, 'sem acesso registrado'); };
+  const plat = (nome, p, info) => '<div class="bloco"><h3>' + nome + '</h3><div class="kv">' +
+    '<b>Conta</b><span>' + (info.conta ? tag(true, 'existe') + ' · último login ' + dt(info.ultimo_login) : tag(false, 'não existe')) + '</span>' +
+    '<b>Acesso</b><span>' + acesso(p) + '</span>' +
+    (p === 'play_passei' && info.conta ? '<b>Play Passei</b><span>' + esc(info.subscription_type || '') + ' · ' + esc(info.status || '') + ' · até ' + dd(info.trial_ends_at) + '</span>' : '') +
+    (p === 'cei' && info.conta ? '<b>Clube</b><span>' + esc(info.status_acesso || '') + (info.motivo_bloqueio ? ' · ' + esc(info.motivo_bloqueio) : '') + ' · até ' + dd(info.vencimento_em) + '</span>' : '') +
+    (p === 'dominei' && info.conta ? '<b>Dominei</b><span>' + (info.liberado ? 'liberado' : 'não liberado') + (info.assinaturas && info.assinaturas[0] ? ' · ' + esc(info.assinaturas[0].plano) + ' ' + esc(info.assinaturas[0].status) + ' até ' + dd(info.assinaturas[0].fim) : '') + '</span>' : '') +
+    '</div></div>';
+  const adm = eu.papel === 'admin';
+  $('ficha').innerHTML =
+    '<div class="bloco" style="grid-column:1/-1"><h3>Hub · ' + esc(d.email) + '</h3><div class="kv">' +
+    '<b>Nome</b><span>' + esc(h?.nome || '—') + '</span>' +
+    '<b>Telefone</b><span>' + esc(h?.telefone || '—') + '</span>' +
+    '<b>Conta no hub</b><span>' + (h ? (h.so_auth ? tag(null, 'só conta da equipe') : tag(true, 'aluno')) + ' · ' + (h.confirmado ? 'e-mail confirmado' : tag(false, 'e-mail não confirmado')) + ' · último login ' + dt(h.ultimo_login) : tag(false, 'não existe')) + '</span>' +
+    '<b>Senha</b><span>' + (h && !h.so_auth ? (h.senha_definida ? tag(true, 'criada pelo aluno') : tag(false, 'ainda não criou')) : '—') + '</span>' +
+    '<b>Boas-vindas</b><span>' + (h?.boas_vindas_em ? 'enviada ' + dt(h.boas_vindas_em) : (h?.boas_vindas_erro ? tag(false, h.boas_vindas_erro) : '—')) + '</span>' +
+    '</div><div class="acoes2">' +
+    '<button id="acLink">Enviar link de nova senha</button>' +
+    '<button id="acBoas">Reenviar 1º acesso</button>' +
+    '<button id="acSenha">Senha temporária</button>' +
+    '<button id="acTel">Trocar telefone</button>' +
+    (adm ? '<button id="acEmail">Trocar e-mail</button><button id="acLib">Liberar acesso</button><button id="acCorte" class="perigo">Cortar acesso</button>' : '') +
+    '</div></div>' +
+    plat('Play Passei', 'play_passei', P.play_passei) + plat('Clube do Estudo Inteligente', 'cei', P.cei) + plat('Dominei', 'dominei', P.dominei) +
+    '<div class="bloco"><h3>Compras na Hubla</h3>' + (d.hubla.length ? '<table><tr><th>Produto</th><th>Status</th><th>Pago em</th><th>Valor</th></tr>' + d.hubla.map((i) => '<tr><td>' + esc(i.product_name) + '</td><td>' + esc(i.status) + '</td><td>' + dt(i.paid_at) + '</td><td>' + (i.total_value ? 'R$ ' + Number(i.total_value).toFixed(2).replace('.', ',') : '') + '</td></tr>').join('') + '</table>' : '<p class="sub" style="text-align:left;margin:0">Nenhuma fatura com este e-mail.</p>') + '</div>' +
+    '<div class="bloco" style="grid-column:1/-1"><h3>Fila de provisionamento</h3>' + (d.fila.length ? '<table><tr><th>Quando</th><th>Plataforma</th><th>Ação</th><th>Status</th><th>Resultado</th></tr>' + d.fila.map((f) => '<tr><td>' + dt(f.created_at) + '</td><td>' + esc(f.plataforma) + '</td><td>' + esc(f.acao) + '</td><td>' + tag(f.status === 'ok' ? true : f.status === 'erro' ? false : null, f.status + ' (' + f.tentativas + ')') + (f.status === 'erro' ? ' <button class="tag neu" data-retry="' + f.id + '" style="cursor:pointer;border:0">tentar de novo</button>' : '') + '</td><td class="mono">' + esc((f.resultado || '').slice(0, 140)) + '</td></tr>').join('') + '</table>' : '<p class="sub" style="text-align:left;margin:0">Nada na fila.</p>') + '</div>' +
+    '<div class="bloco"><h3>Links de senha</h3>' + (d.tokens.length ? '<table><tr><th>Tipo</th><th>Criado</th><th>Enviado</th><th>Usado</th></tr>' + d.tokens.map((t) => '<tr><td>' + esc(t.tipo) + '</td><td>' + dt(t.created_at) + '</td><td>' + (t.enviado_em ? dt(t.enviado_em) : (t.envio_erro ? tag(false, t.envio_erro) : '—')) + '</td><td>' + dt(t.usado_em) + '</td></tr>').join('') + '</table>' : '<p class="sub" style="text-align:left;margin:0">Nenhum.</p>') + '</div>' +
+    '<div class="bloco"><h3>Ações da equipe neste aluno</h3>' + (d.auditoria.length ? '<table>' + d.auditoria.map((a) => '<tr><td>' + dt(a.created_at) + '</td><td>' + esc(a.quem) + '</td><td>' + esc(a.acao) + '</td></tr>').join('') + '</table>' : '<p class="sub" style="text-align:left;margin:0">Nenhuma.</p>') + '</div>';
+  document.querySelectorAll('[data-retry]').forEach((b) => b.onclick = () => agir(() => api('/admin/fila/retry', { id: Number(b.dataset.retry) }), 'Item de volta à fila.'));
+  const e = d.email;
+  $('acLink').onclick = async () => { const r = await agir(() => api('/admin/senha/link', { email: e, tipo: 'recuperar' })); if (r) mostrarLink(r); };
+  $('acBoas').onclick = async () => { if (!confirm('Reenviar o 1º acesso? O aluno vai criar a senha de novo (a atual deixa de valer quando ele criar).')) return; const r = await agir(() => api('/admin/senha/link', { email: e, tipo: 'boas_vindas' })); if (r) mostrarLink(r); };
+  $('acSenha').onclick = async () => { const f = await perguntar('Senha temporária', 'Vale no hub e nas três plataformas. Leia para o aluno e peça para trocar depois.', [{ nome: 'senha', rotulo: 'Nova senha (mínimo 8)', tipo: 'text', obrig: true }]); if (f) agir(() => api('/admin/senha/definir', { email: e, senha: f.senha }), 'Senha aplicada nas contas.'); };
+  $('acTel').onclick = async () => { const f = await perguntar('Trocar telefone', 'DDD + número. Vai para o hub e para as três plataformas.', [{ nome: 'telefone', rotulo: 'Telefone', tipo: 'tel', valor: h?.telefone || '', obrig: true }]); if (f) agir(() => api('/admin/telefone', { email: e, telefone: f.telefone }), 'Telefone atualizado.'); };
+  if (adm) {
+    $('acEmail').onclick = async () => { const f = await perguntar('Trocar e-mail de login', 'Troca nas quatro contas e nos registros. O e-mail novo não pode ter conta em nenhuma plataforma.', [{ nome: 'novo', rotulo: 'E-mail novo', tipo: 'email', obrig: true }]); if (f && confirm('Trocar ' + e + ' por ' + f.novo + '?')) { const r = await agir(() => api('/admin/email', { email: e, novo: f.novo }), 'E-mail trocado.'); if (r) buscar(f.novo); } };
+    $('acLib').onclick = () => acessoManual(e, 'enroll');
+    $('acCorte').onclick = () => acessoManual(e, 'revoke');
+  }
+}
+async function acessoManual(email, acao) {
+  const f = await perguntar(acao === 'enroll' ? 'Liberar acesso' : 'Cortar acesso', acao === 'enroll' ? 'Cria a conta onde não existir e libera pelo prazo. O aluno recebe a boas-vindas se ainda não tiver senha.' : 'Corta o acesso nas plataformas marcadas.', [
+    { nome: 'play_passei', rotulo: 'Play Passei', tipo: 'check', marcado: true }, { nome: 'cei', rotulo: 'Clube do Estudo Inteligente', tipo: 'check', marcado: true }, { nome: 'dominei', rotulo: 'Dominei', tipo: 'check', marcado: true },
+    ...(acao === 'enroll' ? [{ nome: 'meses', rotulo: 'Meses de acesso', tipo: 'number', valor: '12', obrig: true }, { nome: 'nome', rotulo: 'Nome (se a conta for nova)', valor: atual?.hub?.nome || '' }, { nome: 'telefone', rotulo: 'Telefone (se a conta for nova)', tipo: 'tel', valor: atual?.hub?.telefone || '' }] : []),
+    { nome: 'motivo', rotulo: 'Motivo (fica no histórico)', obrig: true }]);
+  if (!f) return;
+  const plataformas = ['play_passei', 'cei', 'dominei'].filter((p) => f[p]);
+  if (!plataformas.length) return msg('Marque ao menos uma plataforma.');
+  if (!confirm((acao === 'enroll' ? 'Liberar ' : 'Cortar ') + plataformas.join(', ') + ' para ' + email + '?')) return;
+  agir(() => api('/admin/acesso', { email, acao, plataformas, meses: f.meses, nome: f.nome, telefone: f.telefone, motivo: f.motivo }), 'Feito. A ficha atualiza em alguns segundos.', () => setTimeout(() => buscar(email), 6000));
+}
+function mostrarLink(r) { perguntar('Link gerado', r.aviso || '', [{ nome: 'link', rotulo: 'Link (copie se precisar)', valor: r.link }]); }
+async function agir(fn, okMsg, depois) { msg(''); try { const r = await fn(); if (okMsg) msg(okMsg, true); if (depois) depois(); else if (atual?.email) setTimeout(() => buscar(atual.email), 800); return r; } catch (e) { msg(e.message); return null; } }
+async function buscar(q) { msg(''); $('q').value = q; $('ficha').innerHTML = '<p class="sub">Buscando…</p>'; try { renderFicha(await api('/admin/aluno?q=' + encodeURIComponent(q))); } catch (e) { $('ficha').innerHTML = ''; msg(e.message); } }
+async function carregarFila() { try { const r = await api('/admin/fila'); $('fila').innerHTML = r.itens.length ? '<table><tr><th>Quando</th><th>Aluno</th><th>Plat.</th><th>Ação</th><th>Status</th><th>Resultado</th></tr>' + r.itens.map((f) => '<tr><td>' + dt(f.created_at) + '</td><td><a href="#" onclick="aba(\'aluno\');buscar(\'' + esc(f.email) + '\');return false" style="color:var(--blue-2)">' + esc(f.email) + '</a></td><td>' + esc(f.plataforma) + '</td><td>' + esc(f.acao) + '</td><td>' + tag(f.status === 'ok' ? true : f.status === 'erro' ? false : null, f.status + ' (' + f.tentativas + ')') + (f.status === 'erro' ? ' <button class="tag neu" data-retry="' + f.id + '" style="cursor:pointer;border:0">tentar de novo</button>' : '') + '</td><td class="mono">' + esc((f.resultado || '').slice(0, 120)) + '</td></tr>').join('') + '</table>' : '<p class="sub">Fila vazia.</p>'; document.querySelectorAll('#fila [data-retry]').forEach((b) => b.onclick = () => agir(() => api('/admin/fila/retry', { id: Number(b.dataset.retry) }), 'Item de volta à fila.', carregarFila)); } catch (e) { msg(e.message); } }
+async function carregarAud() { try { const r = await api('/admin/auditoria?q=' + encodeURIComponent($('qAud').value.trim())); $('auditoria').innerHTML = r.itens.length ? '<table><tr><th>Quando</th><th>Quem</th><th>Ação</th><th>Aluno</th><th>Detalhe</th></tr>' + r.itens.map((a) => '<tr><td>' + dt(a.created_at) + '</td><td>' + esc(a.quem) + '</td><td>' + esc(a.acao) + '</td><td>' + esc(a.alvo || '') + '</td><td class="mono">' + esc(JSON.stringify(a.detalhe || {}).slice(0, 120)) + '</td></tr>').join('') + '</table>' : '<p class="sub">Nada ainda.</p>'; } catch (e) { msg(e.message); } }
+async function carregarEquipe() { try { const r = await api('/admin/equipe'); $('equipe').innerHTML = '<table><tr><th>E-mail</th><th>Nome</th><th>Papel</th><th>Conta</th><th>Último login</th><th></th></tr>' + r.equipe.filter((e) => e.ativo).map((e) => '<tr><td>' + esc(e.email) + '</td><td>' + esc(e.nome || '') + '</td><td>' + esc(e.papel) + '</td><td>' + (e.conta ? tag(e.confirmado, e.confirmado ? 'ok' : 'não confirmada') : tag(false, 'sem conta')) + '</td><td>' + dt(e.ultimo_login) + '</td><td><button class="tag neu" style="cursor:pointer;border:0" data-eqsenha="' + esc(e.email) + '">senha</button> <button class="tag off" style="cursor:pointer;border:0" data-eqrem="' + esc(e.email) + '">remover</button></td></tr>').join('') + '</table>';
+  document.querySelectorAll('[data-eqsenha]').forEach((b) => b.onclick = async () => { const f = await perguntar('Senha de ' + b.dataset.eqsenha, 'Senha de entrada na administração (mínimo 8).', [{ nome: 'senha', rotulo: 'Nova senha', tipo: 'text', obrig: true }]); if (f) agir(() => api('/admin/equipe/senha', { email: b.dataset.eqsenha, senha: f.senha }), 'Senha definida.', carregarEquipe); });
+  document.querySelectorAll('[data-eqrem]').forEach((b) => b.onclick = () => { if (confirm('Remover ' + b.dataset.eqrem + ' da equipe?')) agir(() => api('/admin/equipe/remover', { email: b.dataset.eqrem }), 'Removido.', carregarEquipe); });
+  } catch (e) { msg(e.message); } }
+$('fEquipe').onsubmit = (ev) => { ev.preventDefault(); agir(() => api('/admin/equipe', { email: $('eqEmail').value.trim(), nome: $('eqNome').value.trim(), papel: $('eqPapel').value }), null, () => { $('eqEmail').value = ''; $('eqNome').value = ''; carregarEquipe(); }).then((r) => { if (r) msg(r.aviso, true); }); };
+$('fBusca').onsubmit = (ev) => { ev.preventDefault(); const q = $('q').value.trim(); if (q) buscar(q); };
+$('fAud').onsubmit = (ev) => { ev.preventDefault(); carregarAud(); };
+document.querySelectorAll('.abas button').forEach((b) => b.onclick = () => aba(b.dataset.aba));
+$('fLogin').onsubmit = async (ev) => { ev.preventDefault(); msg(''); $('btnEntrar').disabled = true; const { error } = await sb.auth.signInWithPassword({ email: $('email').value.trim().toLowerCase(), password: $('senha').value }); $('btnEntrar').disabled = false; if (error) { msg(/invalid login/i.test(error.message) ? 'E-mail ou senha não conferem.' : /not confirmed/i.test(error.message) ? 'E-mail ainda não confirmado: peça ao administrador.' : error.message); return; } boot(); };
+$('btnSair').onclick = async () => { await sb.auth.signOut(); show('vLogin'); };
+async function boot() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { show('vLogin'); return; }
+  try { eu = await api('/admin/eu'); } catch (e) { msg(e.message); await sb.auth.signOut(); show('vLogin'); return; }
+  $('quem').textContent = (eu.nome || eu.email) + ' · ' + eu.papel;
+  $('abaEquipe').hidden = eu.papel !== 'admin';
+  show('vAdm'); aba('aluno');
+  const q = new URLSearchParams(location.search).get('q'); if (q) buscar(q);
+}
+boot();
+</script>
+</body>
+</html>
