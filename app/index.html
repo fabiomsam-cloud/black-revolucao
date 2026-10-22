@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-title" content="Revolução">
 <link rel="preload" href="/assets/fonts/saira-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="app.css?v=1">
+<link rel="stylesheet" href="app.css?v=2">
 </head>
 <body>
 <main class="wrap">
@@ -107,11 +107,21 @@ async function entrar(p, card) {
   } catch (e) { msg(humanizar(e)); }
   finally { card.classList.remove('busy'); }
 }
+// ?ir=<plataforma>: botão cruzado das plataformas (ex.: Dominei → Play Passei). Logado e com acesso, entra direto.
+const IR = (new URLSearchParams(location.search).get('ir') || '').trim();
 async function boot() {
   const { data: { session } } = await sb.auth.getSession();
   if (!session) { show('vLogin'); return; }
   show('vHome');
-  try { render(await api('/me')); } catch (e) { msg(humanizar(e)); }
+  try {
+    const me = await api('/me');
+    render(me);
+    if (IR && PLAT[IR]) {
+      history.replaceState(null, '', location.pathname);
+      const a = (me.acessos || []).find((x) => x.plataforma === IR) || {};
+      if (me.equipe || a.status === 'ativo') { const card = $('grade').children[['play_passei', 'cei', 'dominei'].indexOf(IR)]; if (card) entrar(IR, card); }
+    }
+  } catch (e) { msg(humanizar(e)); }
 }
 $('fLogin').onsubmit = async (ev) => {
   ev.preventDefault(); msg('');
