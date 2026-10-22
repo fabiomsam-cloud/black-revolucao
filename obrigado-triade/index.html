@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Compra confirmada · Tríade do Estudo Inteligente</title>
+<meta name="description" content="Sua matrícula na Tríade do Estudo Inteligente está confirmada. Crie sua senha e entre nas três plataformas.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07080b">
+<link rel="icon" type="image/png" href="/app/img/icon-192.png">
+<link rel="apple-touch-icon" href="/app/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/saira-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/app/app.css?v=2">
+<style>
+.selo{display:inline-flex;align-items:center;gap:8px;background:rgba(0,196,234,.12);border:1px solid rgba(0,196,234,.35);color:var(--blue-2);border-radius:999px;padding:7px 14px;font-weight:700;font-size:.9rem;margin:0 auto 14px}
+.selo i{width:18px;height:18px;border-radius:50%;background:var(--blue-2);color:#001820;display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:.75rem}
+.passos{counter-reset:p;display:grid;gap:10px;margin:18px 0 6px;padding:0;list-style:none}
+.passos li{counter-increment:p;display:flex;gap:12px;align-items:flex-start;background:var(--card-2);border:1px solid var(--line);border-radius:16px;padding:12px 14px;color:var(--ink-2);font-size:.95rem;line-height:1.4}
+.passos li::before{content:counter(p);flex:0 0 28px;height:28px;border-radius:50%;background:var(--blue);color:#001820;font-weight:800;display:flex;align-items:center;justify-content:center;font-family:Saira,sans-serif}
+.passos b{color:var(--ink)}
+.grade.mini{grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0 4px}
+.grade.mini .card{padding:10px 8px 10px;cursor:default;gap:6px}.grade.mini .card .pic{height:58px;padding:8px}.grade.mini .card .t{font-size:.78rem}
+.grade.mini .card:hover{border-color:var(--line)}
+.ou{text-align:center;color:var(--ink-3);font-size:.85rem;margin:18px 0 6px}
+.btn.sec{background:var(--card-2);color:var(--ink);box-shadow:none;border:1px solid var(--line)}
+.espera{display:none;text-align:center;color:var(--ink-2);font-size:.92rem;margin-top:12px}.espera.on{display:block}
+.espera .pulso{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--blue-2);margin-right:8px;animation:pulso 1s infinite alternate}
+@keyframes pulso{from{opacity:.3}to{opacity:1}}
+.wa{display:block;text-align:center;margin-top:16px;color:var(--ink-3);font-size:.9rem}.wa a{color:var(--blue-2);text-decoration:none;font-weight:700}
+</style>
+<!-- Pixel da Meta (SOU CONCURSEIRO, o mesmo das páginas da Black) -->
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','429553154418122');fbq('track','PageView');</script>
+<!-- Google Ads (mesma tag das páginas da Black) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-646244794"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-646244794');</script>
+</head>
+<body>
+<main class="wrap">
+  <header class="top"><img class="logo" src="/app/img/logo.webp" alt="Black · A Revolução do Estudo" width="480" height="188"></header>
+
+  <div style="text-align:center"><span class="selo"><i>✓</i> Compra confirmada</span></div>
+  <h1>Bem-vindo(a) à Tríade do Estudo Inteligente</h1>
+  <p class="sub">Play Passei, Clube do Estudo Inteligente e Dominei, com um login só. Falta um passo: criar a sua senha.</p>
+
+  <div class="grade mini" aria-label="Suas plataformas">
+    <div class="card"><span class="pic"><img src="/app/img/playpassei.png" alt="Play Passei"></span><span class="t">Play Passei</span></div>
+    <div class="card"><span class="pic"><img src="/app/img/cei.png" alt="Clube do Estudo Inteligente"></span><span class="t">Clube</span></div>
+    <div class="card"><span class="pic"><img src="/app/img/dominei.png" alt="Dominei"></span><span class="t">Dominei</span></div>
+  </div>
+
+  <form class="painel" id="fAgora" style="margin-top:16px">
+    <h1 style="font-size:1.15rem;margin:0 0 4px">Criar minha senha agora</h1>
+    <p class="sub" style="margin:0 0 6px;font-size:.92rem">Digite o e-mail que você usou na compra. Em segundos abrimos a página para você criar a senha.</p>
+    <label for="email">E-mail da compra</label>
+    <input id="email" type="email" inputmode="email" autocomplete="email" placeholder="seu@email.com" required>
+    <button class="btn" id="btnAgora" type="submit">Criar minha senha</button>
+    <div class="espera" id="espera"><span class="pulso"></span><span id="esperaTxt">Preparando o seu acesso…</span></div>
+  </form>
+  <p class="msg" id="msg" role="status"></p>
+
+  <p class="ou">ou, se preferir, siga pelo WhatsApp</p>
+  <ol class="passos">
+    <li><b>Abra a mensagem</b> que acabou de chegar no seu WhatsApp e toque em <b>Liberar meu acesso</b>.</li>
+    <li><b>Crie a sua senha.</b> Ela vale para as três plataformas.</li>
+    <li><b>Entre em revolucaodoestudo.com.br/app</b> e adicione à tela inicial do celular. De lá você abre qualquer plataforma com um toque.</li>
+  </ol>
+
+  <a class="btn sec" href="/app/" style="margin-top:14px">Já criei minha senha · Entrar</a>
+  <p class="wa">Não recebeu a mensagem em alguns minutos? <a href="https://wa.me/559284585786?text=Ol%C3%A1!%20Acabei%20de%20comprar%20a%20Tr%C3%ADade%20do%20Estudo%20Inteligente%20e%20n%C3%A3o%20recebi%20a%20mensagem%20de%20acesso." rel="noopener">Fale com a Anne no WhatsApp</a></p>
+  <p class="rodape">Sou Concurseiro e Vou Passar · Professor Fábio Silva</p>
+</main>
+
+<script>
+const HUB = 'https://dqpxugdhlgafvddavzzp.supabase.co/functions/v1/hub';
+const $ = (id) => document.getElementById(id);
+function msg(t, ok) { const m = $('msg'); m.textContent = t || ''; m.classList.toggle('ok', !!ok); }
+function espera(on, txt) { $('espera').classList.toggle('on', !!on); if (txt) $('esperaTxt').textContent = txt; }
+let tentativas = 0;
+async function pedir(email) {
+  const r = await fetch(HUB + '/primeiro-acesso', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email }) });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.erro || 'Algo deu errado. Tente de novo.');
+  return j;
+}
+async function tentar(email) {
+  const j = await pedir(email);
+  if (j.estado === 'ok') { espera(true, 'Pronto! Abrindo a página da senha…'); location.href = '/app/senha.html?t=' + encodeURIComponent(j.token); return; }
+  if (j.estado === 'aguardando') {
+    tentativas++;
+    if (tentativas <= 18) { espera(true, 'Pagamento confirmado. Criando o seu acesso nas três plataformas… (' + tentativas + ')'); setTimeout(() => tentar(email).catch(falha), 5000); return; }
+    espera(false); msg('Está demorando mais que o normal. Fique tranquilo(a): a mensagem com o botão chega no seu WhatsApp. Se preferir, fale com a Anne pelo link abaixo.'); $('btnAgora').disabled = false; return;
+  }
+  espera(false); $('btnAgora').disabled = false;
+  if (j.estado === 'ja_tem_senha') { msg('Você já criou sua senha. É só entrar.', true); location.href = '/app/'; return; }
+  if (j.estado === 'fora_da_janela') { msg('Por segurança, este atalho vale só na primeira hora após a compra. Use "Primeiro acesso" no hub ou toque no botão da mensagem do WhatsApp.'); return; }
+  msg('Não encontramos uma compra da Tríade com este e-mail. Confira se digitou o mesmo e-mail do pagamento. Se acabou de pagar, aguarde um minuto e tente de novo.');
+}
+function falha(e) { espera(false); $('btnAgora').disabled = false; msg((e && e.message) || 'Algo deu errado. Tente de novo.'); }
+$('fAgora').onsubmit = (ev) => {
+  ev.preventDefault(); msg(''); tentativas = 0;
+  const email = $('email').value.trim().toLowerCase();
+  $('btnAgora').disabled = true; espera(true, 'Procurando a sua compra…');
+  tentar(email).catch(falha);
+};
+// e-mail vindo na URL (ex.: ?email=) já preenche o campo
+const qe = new URLSearchParams(location.search).get('email'); if (qe) $('email').value = qe;
+</script>
+</body>
+</html>
