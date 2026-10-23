@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Black · A Revolução do Estudo — assista antes da live dos alunos</title>
-<meta name="description" content="Veja agora as 3 plataformas da Revolução do Estudo. Live só para alunos na terça, 27 de outubro, às 20h de Brasília.">
-<meta property="og:title" content="Black · A Revolução do Estudo — assista antes da live dos alunos">
-<meta property="og:description" content="Veja agora as 3 plataformas da Revolução do Estudo. Live só para alunos na terça, 27 de outubro, às 20h de Brasília.">
+<title>O que está por trás da Revolução do Estudo · só para alunos</title>
+<meta name="description" content="São 3 ferramentas que ninguém viu ainda. Todo mundo só vai conhecer no dia 10 de novembro. Você vê agora em poucos minutos.">
+<meta property="og:title" content="O que está por trás da Revolução do Estudo · só para alunos">
+<meta property="og:description" content="São 3 ferramentas que ninguém viu ainda. Todo mundo só vai conhecer no dia 10 de novembro. Você vê agora em poucos minutos.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://revolucaodoestudo.com.br/assets/og.jpg">
 <meta name="robots" content="noindex">
@@ -35,6 +35,9 @@
     .v-pill{font-size:11px;padding:8px 12px;white-space:nowrap}
   }
   .v-hero{padding:28px 0 8px;text-align:center}
+  .v-hero .v-kicker{display:inline-block;margin:0 0 14px;padding:7px 14px;border-radius:999px;border:1px solid rgba(0,196,234,.45);background:rgba(0,196,234,.08);
+    font-family:var(--font-d);font-weight:800;font-size:13px;letter-spacing:.12em;color:var(--blue-2)}
+  @media (max-width:640px){.v-hero .v-kicker{font-size:11px;letter-spacing:.05em;padding:6px 12px;white-space:nowrap}}
   .v-hero h1{font-family:var(--font-d);font-weight:800;font-size:clamp(28px,5vw,46px);line-height:1.08;margin:0 0 14px}
   .v-hero h1 .metal{color:var(--blue-2)}
   .v-hero p{color:var(--ink-2);font-size:clamp(16px,2.2vw,19px);line-height:1.5;margin:0 auto;max-width:640px}
@@ -96,17 +99,18 @@
 
 <main>
   <section class="v-wrap v-hero">
-    <h1>As 3 plataformas da <span class="metal">Revolução do Estudo</span></h1>
-    <p>Play Passei, Clube do Estudo Inteligente e Dominei: veja agora como elas cabem na sua rotina, antes da live de terça, 27 de outubro.</p>
+    <p class="v-kicker">SÓ PARA ALUNOS · ANTES DE TODO MUNDO</p>
+    <h1>O que está por trás da <span class="metal">Revolução do Estudo</span></h1>
+    <p>São 3 ferramentas que ninguém viu ainda. Todo mundo só vai conhecer no dia 10 de novembro. Você vê agora em poucos minutos.</p>
   </section>
 
   <!-- Etapa 1 -->
   <form class="v-wrap v-gate" id="gate" novalidate>
-    <label for="tel">Seu WhatsApp com DDD</label>
+    <label for="tel">Digite seu WhatsApp para desbloquear o vídeo</label>
     <input id="tel" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="(00) 00000-0000" required>
-    <button class="btn block" type="submit"><span>Assistir agora</span></button>
+    <button class="btn block" type="submit"><span>Desbloquear o vídeo</span></button>
     <p class="v-erro" id="gate-erro" role="alert"></p>
-    <p class="v-nota">Usamos seu WhatsApp só para enviar avisos da live.</p>
+    <p class="v-nota">Liberação imediata · Usamos seu WhatsApp só para avisos da live.</p>
   </form>
 
   <!-- Etapa 2 -->
