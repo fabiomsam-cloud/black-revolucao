@@ -82,6 +82,13 @@
   main > section, .v-coments{padding:0}   /* black.css dá 84px de padding a toda <section> */
   .v-hero{padding:28px 0 8px}
 </style>
+<!-- 23/10: pixel da Black (o mesmo de /alunos) — PageView + eventos próprios do VSL. NÃO dispara Lead:
+     Lead neste pixel é a otimização da campanha de cadastro /alunos. -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
+fbq("init","429553154418122");fbq("track","PageView");
+</script>
 </head>
 <body>
 
@@ -195,6 +202,7 @@
         $("gate").hidden = true;
         $("assistir").hidden = false;
         if (!r.no_grupo) { $("faixa-btn").href = r.grupo_url; $("faixa").hidden = false; }
+        px("trackCustom", "EntrouVSL", { no_grupo: r.no_grupo ? "sim" : "nao" });
         montarVideo();
         carregarComentarios();
       })
@@ -248,10 +256,15 @@
       if (!armado || t == null || !tel) return;
       var pct = (t / DURACAO_VIDEO) * 100;
       marcos.forEach(function (m) {
-        if (pct >= (m === 100 ? 97 : m) && !enviados[m]) { enviados[m] = 1; post("progresso", { telefone: tel, pct: m }).catch(function () {}); }
+        if (pct >= (m === 100 ? 97 : m) && !enviados[m]) {
+          enviados[m] = 1; post("progresso", { telefone: tel, pct: m }).catch(function () {});
+          px("trackCustom", "AssistiuVSL", { pct: m });
+          if (m === 50) px("track", "ViewContent", { content_name: "VSL Black alunos" });
+        }
       });
     }, 3000);
   }
+  function px(tipo, ev, dados) { try { if (window.fbq) window.fbq(tipo, ev, dados); } catch (_) {} }
 
   // ---------- Comentários ----------
   function quando(iso) {
