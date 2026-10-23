@@ -315,7 +315,7 @@ if(v!==A[0]){window.BLACK_REDIRECT=true;var q=new URLSearchParams(location.searc
 """
 OBRIGADO_ALUNOS = dict(slug="black-revolucao-alunos", grupo="https://sndflw.com/i/4OSYf8OR5Ac5eJh0UGBk", live="2026-10-27T20:00:00-03:00", versao="obrigado-alunos",
     dia="27/10", data_longa="27 de outubro", data_curta="27 de outubro · 20h (Brasília)", dates="20261027T230000Z/20261028T010000Z",
-    quem="o grupo dos alunos no WhatsApp", avisos="os avisos do encontro", auto=None)   # 23/10: sem redirecionamento automático (só /obrigado/ dos não alunos)
+    quem="o grupo dos alunos no WhatsApp", avisos="os avisos do encontro", auto=4)   # 23/10 (Fábio): também vai sozinha p/ o grupo dos alunos em 4 s
 LIVE = "2026-11-10T20:00:00-03:00"
 V = "35"
 # 18/10 (Fábio): Google Ads (conta 182-909-5948) — Lead superior R$ 30 / médio R$ 10, só nas páginas de NÃO alunos
@@ -341,7 +341,7 @@ def page(versao):
 
 # 23/10 (Fábio, pedido da equipe): /obrigado/ (NÃO alunos) leva ao grupo sozinha depois de `auto` segundos — o botão continua, e o clique
 # antecipa. O Lead do pixel/CAPI e a conversão do Google já dispararam na página de cadastro, antes de chegar aqui; nada muda neles.
-# /obrigado-alunos/ segue sem o automático (auto=None) até o Fábio pedir.
+# /obrigado-alunos/ idem (auto=4) desde 23/10, a pedido do Fábio.
 OBRIGADO_PADRAO = dict(slug=SLUG, grupo=GRUPO, live=None, versao="obrigado", dia="10/11", data_longa="10 de novembro", data_curta="10 de novembro · 20h (Brasília)",
                        dates="20261110T230000Z/20261111T010000Z", quem="o grupo oficial do WhatsApp", avisos="os avisos da Black", auto=4)
 def obrigado(o=None):
