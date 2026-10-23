@@ -232,13 +232,26 @@
     var bar = thanks.querySelector(".bar i"), pct = thanks.querySelector(".bar b");
     setTimeout(function () { if (bar) bar.style.width = "84%"; }, 250);
     if (pct) { var n = 0, iv = setInterval(function () { n += 3; if (n >= 84) { n = 84; clearInterval(iv); } pct.textContent = n + "%"; }, 60); }
+    function marcaClique(modo) {
+      var id = reg || (saved && saved.id);
+      if (!id) return;
+      try { fetch(API, { method: "POST", headers: HEADERS, body: JSON.stringify({ op: "grupo_click", registro_id: id, modo: modo }), keepalive: true }).catch(function () {}); } catch (_) {}
+    }
+    var autoTimer = null;
     thanks.querySelectorAll("[data-grupo]").forEach(function (a) {
       a.href = dest;
-      a.addEventListener("click", function () {
-        var id = reg || (saved && saved.id);
-        if (!id) return;
-        try { fetch(API, { method: "POST", headers: HEADERS, body: JSON.stringify({ op: "grupo_click", registro_id: id, modo: "obrigado" }), keepalive: true }).catch(function () {}); } catch (_) {}
-      });
+      a.addEventListener("click", function () { if (autoTimer) clearInterval(autoTimer); marcaClique("obrigado"); });
     });
+    // 23/10 (Fábio, pedido da equipe): data-auto="N" → vai sozinho para o grupo depois de N segundos (contagem visível); o clique no botão antecipa.
+    // O painel grava o modo "auto" em clicou_grupo_modo p/ separar quem clicou de quem foi levado.
+    var auto = parseInt(thanks.getAttribute("data-auto") || "0", 10);
+    if (auto > 0 && dest) {
+      var autoMsg = thanks.querySelector("[data-auto-msg] b"), restante = auto;
+      autoTimer = setInterval(function () {
+        restante -= 1;
+        if (autoMsg) autoMsg.textContent = String(Math.max(restante, 0));
+        if (restante <= 0) { clearInterval(autoTimer); autoTimer = null; marcaClique("auto"); location.href = dest; }
+      }, 1000);
+    }
   }
 })();

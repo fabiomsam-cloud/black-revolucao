@@ -315,9 +315,9 @@ if(v!==A[0]){window.BLACK_REDIRECT=true;var q=new URLSearchParams(location.searc
 """
 OBRIGADO_ALUNOS = dict(slug="black-revolucao-alunos", grupo="https://sndflw.com/i/4OSYf8OR5Ac5eJh0UGBk", live="2026-10-27T20:00:00-03:00", versao="obrigado-alunos",
     dia="27/10", data_longa="27 de outubro", data_curta="27 de outubro · 20h (Brasília)", dates="20261027T230000Z/20261028T010000Z",
-    quem="o grupo dos alunos no WhatsApp", avisos="os avisos do encontro")
+    quem="o grupo dos alunos no WhatsApp", avisos="os avisos do encontro", auto=None)   # 23/10: sem redirecionamento automático (só /obrigado/ dos não alunos)
 LIVE = "2026-11-10T20:00:00-03:00"
-V = "34"
+V = "35"
 # 18/10 (Fábio): Google Ads (conta 182-909-5948) — Lead superior R$ 30 / médio R$ 10, só nas páginas de NÃO alunos
 GADS = {"id": "AW-646244794", "sup": "AW-646244794/ulgwCP2W0KEdELrTk7QC", "med": "AW-646244794/lH70CICX0KEdELrTk7QC"}
 OG = "https://revolucaodoestudo.com.br/assets/og.jpg"
@@ -339,23 +339,27 @@ def page(versao):
     out += ("" if c.get("sem_contador") else topbar()) + "<main>" + corpo + "</main>" + FOOT.format(v=V).replace("</body>", extra + "</body>")
     return out
 
+# 23/10 (Fábio, pedido da equipe): /obrigado/ (NÃO alunos) leva ao grupo sozinha depois de `auto` segundos — o botão continua, e o clique
+# antecipa. O Lead do pixel/CAPI e a conversão do Google já dispararam na página de cadastro, antes de chegar aqui; nada muda neles.
+# /obrigado-alunos/ segue sem o automático (auto=None) até o Fábio pedir.
 OBRIGADO_PADRAO = dict(slug=SLUG, grupo=GRUPO, live=None, versao="obrigado", dia="10/11", data_longa="10 de novembro", data_curta="10 de novembro · 20h (Brasília)",
-                       dates="20261110T230000Z/20261111T010000Z", quem="o grupo oficial do WhatsApp", avisos="os avisos da Black")
+                       dates="20261110T230000Z/20261111T010000Z", quem="o grupo oficial do WhatsApp", avisos="os avisos da Black", auto=4)
 def obrigado(o=None):
     o = dict(OBRIGADO_PADRAO, **(o or {}))
     out = HEAD.format(title="Falta um passo: entre no grupo · Black · A Revolução do Estudo", desc=f"Entre no grupo do WhatsApp para receber o link da live de {o['data_longa']}.", og=OG, v=V, anon=ANON, slug=o["slug"], pixel=PIXEL, versao=o["versao"], grupo=o["grupo"], obrigado="./", live=o["live"] or LIVE, utm="{}", gads="null")
     GRUPO_ = o["grupo"]
+    auto_msg = ('\n    <p class="small" data-auto-msg>Em <b>%d</b> segundos você vai direto para o grupo. Se preferir, toque no botão.</p>' % o["auto"]) if o.get("auto") else ""
     cal = ("https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + "Black+%C2%B7+A+Revolu%C3%A7%C3%A3o+do+Estudo+%28ao+vivo%29" +
            f"&dates={o['dates']}&details=Live+da+Black+A+Revolu%C3%A7%C3%A3o+do+Estudo.+O+link+sai+no+grupo+do+WhatsApp.&ctz=America/Sao_Paulo")
     out += f"""
-<main class="thanks">
+<main class="thanks"{(' data-auto="%d"' % o['auto']) if o.get('auto') else ''}>
   <div class="thanks-bg" aria-hidden="true"></div>
   <div class="thanks-card">
     <div class="brand"><img src="../assets/logo-black-revolucao.webp" width="480" height="188" alt="Black · A Revolução do Estudo"></div>
     <h1>Sucesso! Só falta <span class="blue">1 passo</span> para garantir o seu lugar…</h1>
     <div class="bar" role="progressbar" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"><i></i><b>0%</b></div>
     <p>Clique no botão abaixo e entre n{o['quem']}. É por lá que você recebe <b>o link da live do dia {o['dia']}</b>, o lembrete na hora certa e {o['avisos']}. Sem ele, você pode perder a condição especial.</p>
-    <a class="btn" data-grupo href="{GRUPO_}" rel="noopener">Entrar no grupo agora</a>
+    <a class="btn" data-grupo href="{GRUPO_}" rel="noopener">Entrar no grupo agora</a>{auto_msg}
     <p class="small">O grupo é silencioso: você só recebe as mensagens enviadas pela minha equipe.</p>
     <div class="date"><span>Salve a data</span><b>{o['data_curta']}</b><a href="{cal}" target="_blank" rel="noopener">Adicionar à agenda</a></div>
   </div>
