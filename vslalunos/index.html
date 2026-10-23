@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Black · A Revolução do Estudo — assista antes da live dos alunos</title>
+<meta name="description" content="Veja agora as 3 plataformas da Revolução do Estudo. Live só para alunos na terça, 27 de outubro, às 20h de Brasília.">
+<meta property="og:title" content="Black · A Revolução do Estudo — assista antes da live dos alunos">
+<meta property="og:description" content="Veja agora as 3 plataformas da Revolução do Estudo. Live só para alunos na terça, 27 de outubro, às 20h de Brasília.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://revolucaodoestudo.com.br/assets/og.jpg">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#050607">
+<link rel="icon" href="../assets/logo-e.png" type="image/png">
+<link rel="preload" href="../assets/fonts/saira-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/black.css?v=34">
+<!-- Vturb: quando o código do player chegar, os <link rel="preload"/"dns-prefetch"> que o Vturb manda podem entrar aqui. -->
+<style>
+  body{background:var(--bg);color:var(--ink);font-family:var(--font-b)}
+  .v-wrap{width:min(960px,100% - 32px);margin:0 auto}
+  .v-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0 8px}
+  .v-top img{width:190px;height:auto}
+  .v-pill{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;border:1px solid var(--line-2);
+    background:rgba(255,255,255,.04);font-family:var(--font-d);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+  .v-pill b{color:var(--blue-2);font-weight:800}
+  @media (max-width:640px){
+    .v-top{flex-direction:column;gap:12px;padding-top:18px}
+    .v-top img{width:150px}
+    .v-pill{font-size:11px;padding:8px 12px;white-space:nowrap}
+  }
+  .v-hero{padding:28px 0 8px;text-align:center}
+  .v-hero h1{font-family:var(--font-d);font-weight:800;font-size:clamp(28px,5vw,46px);line-height:1.08;margin:0 0 14px}
+  .v-hero h1 .metal{color:var(--blue-2)}
+  .v-hero p{color:var(--ink-2);font-size:clamp(16px,2.2vw,19px);line-height:1.5;margin:0 auto;max-width:640px}
+
+  /* Etapa 1: só o WhatsApp */
+  .v-gate{margin:28px auto 56px;max-width:460px;padding:28px;border-radius:var(--r);background:var(--card);border:1px solid var(--line)}
+  .v-gate label{display:block;font-weight:700;font-size:15px;margin:0 0 8px}
+  .v-gate input{width:100%;box-sizing:border-box;padding:17px 16px;border-radius:var(--r-sm);border:1px solid var(--line-2);background:var(--field);
+    color:var(--ink);font:600 18px var(--font-b)}
+  .v-gate input:focus{outline:2px solid var(--blue-2);outline-offset:1px}
+  .v-gate .btn{margin-top:14px}
+  .v-erro{min-height:20px;margin:10px 0 0;color:#ff7a7a;font-size:14px;font-weight:600}
+  .v-nota{margin:10px 0 0;color:var(--ink-3);font-size:13px;line-height:1.45;text-align:center}
+
+  /* Etapa 2: vídeo + comentários */
+  .v-faixa{position:sticky;top:0;z-index:20;background:linear-gradient(90deg,#004f63,#00708b);border-bottom:1px solid rgba(255,255,255,.18);
+    box-shadow:0 10px 30px rgba(0,0,0,.4)}
+  .v-faixa .v-wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0}
+  .v-faixa p{margin:0;font-size:15px;line-height:1.35;font-weight:600}
+  .v-faixa .btn{flex:none;padding:12px 18px;font-size:14px;white-space:nowrap}
+  @media (max-width:640px){.v-faixa .v-wrap{flex-direction:column;align-items:stretch;text-align:center}}
+  .v-video{margin:22px auto 0;border-radius:var(--r);overflow:hidden;background:#000;box-shadow:0 30px 80px rgba(0,0,0,.55);border:1px solid var(--line)}
+  .v-video-vazio{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-weight:600;text-align:center;padding:20px}
+  .v-coments{margin:44px auto 70px}
+  .v-coments h2{font-family:var(--font-d);font-weight:800;font-size:26px;margin:0 0 6px}
+  .v-coments .sub{color:var(--ink-2);margin:0 0 18px}
+  .v-cform{padding:20px;border-radius:var(--r);background:var(--card);border:1px solid var(--line)}
+  .v-cform input,.v-cform textarea{width:100%;box-sizing:border-box;padding:14px 15px;border-radius:var(--r-sm);border:1px solid var(--line-2);
+    background:var(--field);color:var(--ink);font:500 16px var(--font-b)}
+  .v-cform textarea{min-height:96px;resize:vertical;margin-top:10px;line-height:1.45}
+  .v-cform .linha{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px}
+  .v-cform .btn{padding:14px 22px;font-size:15px}
+  .v-cform .v-erro{margin:0}
+  .v-lista{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:12px}
+  .v-lista li{padding:16px 18px;border-radius:var(--r-sm);background:var(--card-2);border:1px solid var(--line)}
+  .v-lista .quem{display:flex;gap:10px;align-items:baseline;margin-bottom:6px}
+  .v-lista .quem b{font-weight:700}
+  .v-lista .quem span{color:var(--ink-3);font-size:13px}
+  .v-lista p{margin:0;color:var(--ink-2);line-height:1.5;white-space:pre-line;overflow-wrap:anywhere}
+  .v-vazio{color:var(--ink-3);margin-top:16px}
+  [hidden]{display:none!important}
+  main > section, .v-coments{padding:0}   /* black.css dá 84px de padding a toda <section> */
+  .v-hero{padding:28px 0 8px}
+</style>
+</head>
+<body>
+
+<div class="v-faixa" id="faixa" hidden>
+  <div class="v-wrap">
+    <p>Você ainda não está no grupo da live de terça, 27 de outubro, às 20h. Entre para receber o link.</p>
+    <a class="btn" id="faixa-btn" href="https://sndflw.com/i/4OSYf8OR5Ac5eJh0UGBk" target="_blank" rel="noopener">Entrar no grupo da live</a>
+  </div>
+</div>
+
+<header class="v-wrap v-top">
+  <img src="../assets/logo-black-revolucao.webp" width="480" height="188" alt="Black · A Revolução do Estudo">
+  <span class="v-pill">Live · <b>terça, 27 de outubro</b> · 20h Brasília</span>
+</header>
+
+<main>
+  <section class="v-wrap v-hero">
+    <h1>As 3 plataformas da <span class="metal">Revolução do Estudo</span></h1>
+    <p>Play Passei, Clube do Estudo Inteligente e Dominei: veja agora como elas cabem na sua rotina, antes da live de terça, 27 de outubro.</p>
+  </section>
+
+  <!-- Etapa 1 -->
+  <form class="v-wrap v-gate" id="gate" novalidate>
+    <label for="tel">Seu WhatsApp com DDD</label>
+    <input id="tel" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="(00) 00000-0000" required>
+    <button class="btn block" type="submit"><span>Assistir agora</span></button>
+    <p class="v-erro" id="gate-erro" role="alert"></p>
+    <p class="v-nota">Usamos seu WhatsApp só para enviar avisos da live.</p>
+  </form>
+
+  <!-- Etapa 2 -->
+  <section class="v-wrap" id="assistir" hidden>
+    <div class="v-video" id="video-slot">
+      <div class="v-video-vazio" id="video-vazio">O vídeo aparece aqui.</div>
+    </div>
+
+    <section class="v-coments" aria-labelledby="c-h">
+      <h2 id="c-h">Comentários</h2>
+      <p class="sub">Conta pra gente: o que você achou da Revolução do Estudo?</p>
+      <form class="v-cform" id="cform" novalidate>
+        <input id="c-nome" maxlength="40" autocomplete="given-name" placeholder="Seu nome">
+        <textarea id="c-texto" maxlength="600" placeholder="Escreva seu comentário"></textarea>
+        <div class="linha">
+          <p class="v-erro" id="c-erro" role="alert"></p>
+          <button class="btn" type="submit">Publicar</button>
+        </div>
+      </form>
+      <ul class="v-lista" id="lista"></ul>
+      <p class="v-vazio" id="lista-vazia" hidden>Seja o primeiro a comentar.</p>
+    </section>
+  </section>
+</main>
+
+<!--
+  CÓDIGO DO VTURB: colar dentro deste <template>, exatamente como o Vturb entrega
+  (o <vturb-smartplayer ...> e o <script> que carrega o player). O player só é montado
+  depois que a pessoa informa o WhatsApp.
+-->
+<template id="vturb-embed"></template>
+
+<footer>
+  <div class="v-wrap">
+    <p>Seus dados são usados apenas para enviar informações sobre a Black A Revolução do Estudo.</p>
+    <p>© 2026 Sou Concurseiro e Vou Passar · Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var API = "https://dqpxugdhlgafvddavzzp.supabase.co/functions/v1/vsl-alunos";
+  var CHAVE = "vslalunos_tel";
+  var $ = function (id) { return document.getElementById(id); };
+  var tel = null;
+
+  function post(op, dados) {
+    var body = Object.assign({ op: op }, dados || {});
+    return fetch(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), keepalive: op === "progresso" })
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || "Erro"); return j; }); });
+  }
+  function ler(k) { try { return localStorage.getItem(k); } catch (_) { return null; } }
+  function gravar(k, v) { try { localStorage.setItem(k, v); } catch (_) {} }
+  function digitos(s) { return String(s || "").replace(/\D/g, ""); }
+  function valido(d) { if (d.length === 13 && d.indexOf("55") === 0) d = d.slice(2); return d.length === 11 && d[2] === "9"; }
+  function utm() {
+    var q = new URLSearchParams(location.search), u = {};
+    ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"].forEach(function (k) { if (q.get(k)) u[k] = q.get(k); });
+    return u;
+  }
+  function vid() {
+    var v = ler("vslalunos_vid");
+    if (!v) { v = Math.random().toString(36).slice(2) + Date.now().toString(36); gravar("vslalunos_vid", v); }
+    return v;
+  }
+
+  // Máscara (00) 00000-0000
+  $("tel").addEventListener("input", function (e) {
+    var d = digitos(e.target.value).slice(0, 11), s = d;
+    if (d.length > 2) s = "(" + d.slice(0, 2) + ") " + d.slice(2);
+    if (d.length > 7) s = "(" + d.slice(0, 2) + ") " + d.slice(2, 7) + "-" + d.slice(7);
+    e.target.value = s;
+  });
+
+  function entrar(numero, silencioso) {
+    var btn = $("gate").querySelector("button");
+    btn.disabled = true;
+    return post("entrar", { telefone: numero, utm: utm(), ref: document.referrer.slice(0, 200), vid: vid() })
+      .then(function (r) {
+        tel = numero;
+        gravar(CHAVE, numero);
+        $("gate").hidden = true;
+        $("assistir").hidden = false;
+        if (!r.no_grupo) { $("faixa-btn").href = r.grupo_url; $("faixa").hidden = false; }
+        montarVideo();
+        carregarComentarios();
+      })
+      .catch(function (e) {
+        btn.disabled = false;
+        if (!silencioso) $("gate-erro").textContent = e.message || "Não foi possível entrar. Tente de novo.";
+      });
+  }
+
+  $("gate").addEventListener("submit", function (e) {
+    e.preventDefault();
+    $("gate-erro").textContent = "";
+    var d = digitos($("tel").value);
+    if (!valido(d)) { $("gate-erro").textContent = "Confira o WhatsApp: DDD + número com 9 dígitos."; return; }
+    entrar(d);
+  });
+
+  // ---------- Vídeo (Vturb) ----------
+  function montarVideo() {
+    var tpl = $("vturb-embed");
+    if (!tpl || !tpl.content || !tpl.content.childNodes.length || $("video-slot").dataset.montado) return;
+    $("video-slot").dataset.montado = "1";
+    $("video-vazio").remove();
+    // <script> clonado de <template> não roda: recria cada um para o navegador executar.
+    Array.prototype.forEach.call(tpl.content.childNodes, function (n) {
+      if (n.nodeName === "SCRIPT") {
+        var s = document.createElement("script");
+        Array.prototype.forEach.call(n.attributes, function (a) { s.setAttribute(a.name, a.value); });
+        s.text = n.textContent;
+        $("video-slot").appendChild(s);
+      } else {
+        $("video-slot").appendChild(n.cloneNode(true));
+      }
+    });
+    acompanharProgresso();
+  }
+
+  // Marcos de 25/50/75/100% do vídeo. Procura o <video> do player (inclusive dentro do shadow DOM do Vturb).
+  function acharVideo() {
+    var slot = $("video-slot"), v = slot.querySelector("video");
+    if (v) return v;
+    var els = slot.querySelectorAll("*");
+    for (var i = 0; i < els.length; i++) {
+      if (els[i].shadowRoot) { v = els[i].shadowRoot.querySelector("video"); if (v) return v; }
+    }
+    return null;
+  }
+  function acompanharProgresso() {
+    var enviados = {}, marcos = [25, 50, 75, 100];
+    setInterval(function () {
+      var v = acharVideo();
+      if (!v || !v.duration || !isFinite(v.duration) || !tel) return;
+      var pct = (v.currentTime / v.duration) * 100;
+      marcos.forEach(function (m) {
+        if (pct >= (m === 100 ? 97 : m) && !enviados[m]) { enviados[m] = 1; post("progresso", { telefone: tel, pct: m }).catch(function () {}); }
+      });
+    }, 3000);
+  }
+
+  // ---------- Comentários ----------
+  function quando(iso) {
+    var d = new Date(iso), s = Math.round((Date.now() - d.getTime()) / 1000);
+    if (s < 60) return "agora";
+    if (s < 3600) return "há " + Math.floor(s / 60) + " min";
+    if (s < 86400) return "há " + Math.floor(s / 3600) + " h";
+    return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
+  }
+  function item(c) {
+    var li = document.createElement("li"), q = document.createElement("div"), b = document.createElement("b"),
+        t = document.createElement("span"), p = document.createElement("p");
+    q.className = "quem"; b.textContent = c.nome; t.textContent = quando(c.created_at); p.textContent = c.texto;
+    q.appendChild(b); q.appendChild(t); li.appendChild(q); li.appendChild(p);
+    return li;
+  }
+  function carregarComentarios() {
+    post("comentarios").then(function (r) {
+      var ul = $("lista"); ul.innerHTML = "";
+      (r.comentarios || []).forEach(function (c) { ul.appendChild(item(c)); });
+      $("lista-vazia").hidden = !!(r.comentarios && r.comentarios.length);
+    }).catch(function () {});
+  }
+  setInterval(function () { if (tel && !document.hidden) carregarComentarios(); }, 60000);
+
+  $("c-nome").value = ler("vslalunos_nome") || "";
+  $("cform").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var nome = $("c-nome").value.trim(), texto = $("c-texto").value.trim(), btn = $("cform").querySelector("button");
+    $("c-erro").textContent = "";
+    if (nome.length < 2) { $("c-erro").textContent = "Escreva seu nome."; return; }
+    if (texto.length < 2) { $("c-erro").textContent = "Escreva seu comentário."; return; }
+    btn.disabled = true;
+    post("comentar", { telefone: tel, nome: nome, texto: texto }).then(function (r) {
+      gravar("vslalunos_nome", nome);
+      $("c-texto").value = "";
+      $("lista").insertBefore(item(r.comentario), $("lista").firstChild);
+      $("lista-vazia").hidden = true;
+    }).catch(function (e2) { $("c-erro").textContent = e2.message || "Não foi possível publicar."; })
+      .then(function () { btn.disabled = false; });
+  });
+
+  // Quem já entrou neste aparelho vai direto para o vídeo.
+  var salvo = ler(CHAVE);
+  if (salvo && valido(salvo)) entrar(salvo, true);
+})();
+</script>
+</body>
+</html>
