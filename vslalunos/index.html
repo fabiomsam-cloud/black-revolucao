@@ -15,7 +15,12 @@
 <link rel="preload" href="../assets/fonts/saira-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/black.css?v=34">
-<!-- Vturb: quando o código do player chegar, os <link rel="preload"/"dns-prefetch"> que o Vturb manda podem entrar aqui. -->
+<link rel="preload" href="https://scripts.converteai.net/98f98845-02a5-4e75-a39a-bbafedfa3212/players/6adb46dba43f96837cbfd504/v4/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://api.vturb.com.br">
 <style>
   body{background:var(--bg);color:var(--ink);font-family:var(--font-b)}
   .v-wrap{width:min(960px,100% - 32px);margin:0 auto}
@@ -132,7 +137,7 @@
   (o <vturb-smartplayer ...> e o <script> que carrega o player). O player só é montado
   depois que a pessoa informa o WhatsApp.
 -->
-<template id="vturb-embed"></template>
+<template id="vturb-embed"><vturb-smartplayer id="vid-6adb46dba43f96837cbfd504" style="display: block; margin: 0 auto; width: 100%; "><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 56.25% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/98f98845-02a5-4e75-a39a-bbafedfa3212/players/6adb46dba43f96837cbfd504/v4/player.js", s.async=!0,document.head.appendChild(s); </script></template>
 
 <footer>
   <div class="v-wrap">
@@ -224,22 +229,21 @@
     acompanharProgresso();
   }
 
-  // Marcos de 25/50/75/100% do vídeo. Procura o <video> do player (inclusive dentro do shadow DOM do Vturb).
-  function acharVideo() {
-    var slot = $("video-slot"), v = slot.querySelector("video");
-    if (v) return v;
-    var els = slot.querySelectorAll("*");
-    for (var i = 0; i < els.length; i++) {
-      if (els[i].shadowRoot) { v = els[i].shadowRoot.querySelector("video"); if (v) return v; }
-    }
-    return null;
+  // Marcos de 25/50/75/100% do vídeo. O player do Vturb (smartplayer v4) só expõe o tempo atual
+  // em smartplayer.instances[0].video.currentTime; a duração é a do vídeo editado (7:05).
+  // Só conta depois que a pessoa toca no player: antes disso é o autoplay mudo de prévia.
+  var DURACAO_VIDEO = 425;
+  function tempoAtual() {
+    var sp = window.smartplayer, i = sp && sp.instances && sp.instances[0];
+    return i && i.video && typeof i.video.currentTime === "number" ? i.video.currentTime : null;
   }
   function acompanharProgresso() {
-    var enviados = {}, marcos = [25, 50, 75, 100];
+    var enviados = {}, marcos = [25, 50, 75, 100], armado = false;
+    $("video-slot").addEventListener("pointerdown", function () { armado = true; }, true);
     setInterval(function () {
-      var v = acharVideo();
-      if (!v || !v.duration || !isFinite(v.duration) || !tel) return;
-      var pct = (v.currentTime / v.duration) * 100;
+      var t = tempoAtual();
+      if (!armado || t == null || !tel) return;
+      var pct = (t / DURACAO_VIDEO) * 100;
       marcos.forEach(function (m) {
         if (pct >= (m === 100 ? 97 : m) && !enviados[m]) { enviados[m] = 1; post("progresso", { telefone: tel, pct: m }).catch(function () {}); }
       });
