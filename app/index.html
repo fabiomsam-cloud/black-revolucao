@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-title" content="Revolução">
 <link rel="preload" href="/assets/fonts/saira-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="app.css?v=2">
+<link rel="stylesheet" href="app.css?v=3">
 </head>
 <body>
 <main class="wrap">
@@ -38,11 +38,26 @@
   <section id="vHome" hidden>
     <p class="ola">Olá, <b id="nome"></b>. Toque para entrar:</p>
     <div class="grade" id="grade"></div>
-    <div class="instalar" id="instalar">Dica: adicione esta página à tela inicial do celular para abrir suas plataformas com um toque.</div>
     <nav class="acoes"><a href="senha.html?modo=trocar">Trocar minha senha</a> · <button id="btnSair" type="button">Sair</button></nav>
   </section>
 
   <p class="msg" id="msg" role="status"></p>
+  <!-- instalar como app (PWA): aparece em todo acesso pelo celular até a pessoa instalar -->
+  <div class="pwa" id="pwa" hidden>
+    <div class="pwa-box" role="dialog" aria-labelledby="pwaT">
+      <img src="img/icon-192.png" alt="" width="64" height="64">
+      <div class="pwa-t" id="pwaT">Instale o app no seu celular</div>
+      <p class="pwa-s" id="pwaS">Abre com um toque, sem digitar endereço, com suas plataformas juntas.</p>
+      <button class="btn pwa-btn" id="pwaBtn" type="button" hidden>Instalar o app</button>
+      <ol class="pwa-ios" id="pwaIos" hidden>
+        <li>Toque em <b>Compartilhar</b> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7"/></svg> na barra de baixo do Safari</li>
+        <li>Role a lista e toque em <b>Adicionar à Tela de Início</b></li>
+        <li>Toque em <b>Adicionar</b>. O ícone fica junto dos seus apps.</li>
+      </ol>
+      <p class="pwa-nav" id="pwaNav" hidden>Este navegador não instala apps. Toque nos três pontos (ou em <b>⋯</b>) e escolha <b>Abrir no navegador</b>. Lá, instale pelo botão.</p>
+      <button class="pwa-skip" id="pwaSkip" type="button">Continuar no navegador por agora</button>
+    </div>
+  </div>
   <p class="rodape">Sou Concurseiro e Vou Passar · Professor Fábio Silva</p>
 </main>
 
@@ -95,8 +110,6 @@ function render(me) {
     g.appendChild(card);
   }
   if (!algum) msg('Ainda não encontramos uma plataforma ativa para ' + me.email + '. Se você acabou de comprar, aguarde alguns minutos e recarregue.');
-  const standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
-  $('instalar').classList.toggle('on', !standalone);
 }
 async function entrar(p, card) {
   msg(''); card.classList.add('busy');
@@ -134,6 +147,34 @@ $('fLogin').onsubmit = async (ev) => {
 };
 $('btnSair').onclick = async () => { await sb.auth.signOut(); msg(''); show('vLogin'); };
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+// ---- instalar como app (PWA). O navegador não deixa instalar sozinho: exige um toque da pessoa. Então a folha
+// insiste em todo acesso pelo celular (login ou home) até o app estar instalado; "continuar no navegador" vale só nesta aba.
+let pwaEvt = null;
+const UA = navigator.userAgent;
+const pwaStandalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+const pwaIos = /iPhone|iPad|iPod/.test(UA) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const pwaInApp = /Instagram|FBAN|FBAV|FB_IAB|Line\//i.test(UA);
+const pwaMobile = pwaIos || /Android/i.test(UA);
+const pwaDebug = (new URLSearchParams(location.search).get('instalar') || ''); // ?instalar=android|ios|navegador: só para conferir a tela
+function pwaMostrar(modo) {
+  $('pwaBtn').hidden = modo !== 'android'; $('pwaIos').hidden = modo !== 'ios'; $('pwaNav').hidden = modo !== 'navegador';
+  $('pwaS').textContent = modo === 'navegador' ? 'Para instalar, abra esta página no navegador do celular.' : 'Abre com um toque, sem digitar endereço, com suas plataformas juntas.';
+  $('pwa').hidden = false; document.body.classList.add('pwa-on');
+}
+function pwaEsconder() { $('pwa').hidden = true; document.body.classList.remove('pwa-on'); }
+function pwaDecidir() {
+  if (pwaDebug) return pwaMostrar(pwaDebug);
+  if (pwaStandalone() || !pwaMobile) return;
+  try { if (sessionStorage.getItem('pwa-depois')) return; } catch (e) {}
+  if (pwaInApp) return pwaMostrar('navegador');
+  if (pwaIos) return pwaMostrar('ios');
+  if (pwaEvt) return pwaMostrar('android'); // Android: só quando o Chrome avisa que dá para instalar (já instalado = não avisa)
+}
+window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); pwaEvt = e; pwaDecidir(); });
+window.addEventListener('appinstalled', () => { pwaEvt = null; pwaEsconder(); msg('App instalado. Abra pelo ícone na tela inicial.', true); });
+$('pwaBtn').onclick = async () => { if (!pwaEvt) return; pwaEvt.prompt(); const r = await pwaEvt.userChoice.catch(() => null); pwaEvt = null; if (!r || r.outcome !== 'accepted') pwaEsconder(); };
+$('pwaSkip').onclick = () => { try { sessionStorage.setItem('pwa-depois', '1'); } catch (e) {} pwaEsconder(); };
+pwaDecidir();
 boot();
 </script>
 </body>
