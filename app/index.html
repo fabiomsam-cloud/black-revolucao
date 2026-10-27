@@ -16,7 +16,8 @@
 <meta name="apple-mobile-web-app-title" content="Revolução">
 <link rel="preload" href="/assets/fonts/saira-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="app.css?v=4">
+<link rel="stylesheet" href="app.css?v=5">
+<script src="instalar.js?v=1" defer></script>
 </head>
 <body>
 <main class="wrap">
@@ -42,22 +43,6 @@
   </section>
 
   <p class="msg" id="msg" role="status"></p>
-  <!-- instalar como app (PWA): aparece em todo acesso pelo celular até a pessoa instalar -->
-  <div class="pwa" id="pwa" hidden>
-    <div class="pwa-box" role="dialog" aria-labelledby="pwaT">
-      <img src="img/icon-192.png" alt="" width="64" height="64">
-      <div class="pwa-t" id="pwaT">Instale o app no seu celular</div>
-      <p class="pwa-s" id="pwaS">Abre com um toque, sem digitar endereço, com suas plataformas juntas.</p>
-      <button class="btn pwa-btn" id="pwaBtn" type="button" hidden>Instalar o app</button>
-      <ol class="pwa-ios" id="pwaIos" hidden>
-        <li id="pwaIos1">Toque em <b>Compartilhar</b> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 12v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7"/></svg> <span id="pwaOnde">na barra de baixo do Safari</span></li>
-        <li>Role a lista e toque em <b>Adicionar à Tela de Início</b></li>
-        <li>Toque em <b>Adicionar</b>. O ícone fica junto dos seus apps.</li>
-      </ol>
-      <p class="pwa-alt" id="pwaAlt" hidden>Não achou? Abra este endereço no <b>Safari</b> e instale por lá: <button type="button" id="pwaCopiar">copiar o link</button></p>
-      <p class="pwa-nav" id="pwaNav" hidden>Este navegador não instala apps. Toque nos três pontos (ou em <b>⋯</b>) e escolha <b>Abrir no navegador</b>. Lá, instale pelo botão.</p>
-      <button class="pwa-skip" id="pwaSkip" type="button">Continuar no navegador por agora</button>
-    </div>
   </div>
   <p class="rodape">Sou Concurseiro e Vou Passar · Professor Fábio Silva</p>
 </main>
@@ -147,40 +132,6 @@ $('fLogin').onsubmit = async (ev) => {
   boot();
 };
 $('btnSair').onclick = async () => { await sb.auth.signOut(); msg(''); show('vLogin'); };
-if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
-// ---- instalar como app (PWA). O navegador não deixa instalar sozinho: exige um toque da pessoa. Então a folha
-// insiste em todo acesso pelo celular (login ou home) até o app estar instalado; "continuar no navegador" vale só nesta aba.
-let pwaEvt = null;
-const UA = navigator.userAgent;
-const pwaStandalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-const pwaIos = /iPhone|iPad|iPod/.test(UA) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-const pwaInApp = /Instagram|FBAN|FBAV|FB_IAB|Line\//i.test(UA);
-const pwaMobile = pwaIos || /Android/i.test(UA);
-const pwaQ = new URLSearchParams(location.search), pwaDebug = pwaQ.get('instalar') || ''; // ?instalar=android|ios|navegador (&nav=chrome|firefox|edge): só para conferir a tela
-// no iPhone cada navegador guarda o Compartilhar num lugar; todos instalam pelo mesmo caminho (iOS 16.4+)
-const pwaNavIos = pwaQ.get('nav') || (/CriOS/.test(UA) ? 'chrome' : /FxiOS/.test(UA) ? 'firefox' : /EdgiOS/.test(UA) ? 'edge' : /OPiOS|OPT\//.test(UA) ? 'opera' : 'safari');
-const PWA_ONDE = { safari: 'na barra de baixo do Safari', chrome: 'no canto da barra de endereço do Chrome', firefox: 'no menu ≡ do Firefox', edge: 'no menu ⋯ do Edge', opera: 'no menu do Opera' };
-function pwaMostrar(modo) {
-  $('pwaBtn').hidden = modo !== 'android'; $('pwaIos').hidden = modo !== 'ios'; $('pwaNav').hidden = modo !== 'navegador';
-  $('pwaOnde').textContent = PWA_ONDE[pwaNavIos] || PWA_ONDE.safari; $('pwaAlt').hidden = !(modo === 'ios' && pwaNavIos !== 'safari');
-  $('pwaS').textContent = modo === 'navegador' ? 'Para instalar, abra esta página no navegador do celular.' : 'Abre com um toque, sem digitar endereço, com suas plataformas juntas.';
-  $('pwa').hidden = false; document.body.classList.add('pwa-on');
-}
-function pwaEsconder() { $('pwa').hidden = true; document.body.classList.remove('pwa-on'); }
-function pwaDecidir() {
-  if (pwaDebug) return pwaMostrar(pwaDebug);
-  if (pwaStandalone() || !pwaMobile) return;
-  try { if (sessionStorage.getItem('pwa-depois')) return; } catch (e) {}
-  if (pwaInApp) return pwaMostrar('navegador');
-  if (pwaIos) return pwaMostrar('ios');
-  if (pwaEvt) return pwaMostrar('android'); // Android: só quando o Chrome avisa que dá para instalar (já instalado = não avisa)
-}
-window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); pwaEvt = e; pwaDecidir(); });
-window.addEventListener('appinstalled', () => { pwaEvt = null; pwaEsconder(); msg('App instalado. Abra pelo ícone na tela inicial.', true); });
-$('pwaBtn').onclick = async () => { if (!pwaEvt) return; pwaEvt.prompt(); const r = await pwaEvt.userChoice.catch(() => null); pwaEvt = null; if (!r || r.outcome !== 'accepted') pwaEsconder(); };
-$('pwaCopiar').onclick = async () => { const url = location.origin + '/app/'; try { await navigator.clipboard.writeText(url); $('pwaCopiar').textContent = 'link copiado ✓'; } catch (e) { prompt('Copie o endereço:', url); } };
-$('pwaSkip').onclick = () => { try { sessionStorage.setItem('pwa-depois', '1'); } catch (e) {} pwaEsconder(); };
-pwaDecidir();
 boot();
 </script>
 </body>
