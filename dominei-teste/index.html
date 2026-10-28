@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Teste o Dominei por 48 horas</title>
+<meta name="description" content="Exclusivo para alunos do Sou Concurseiro e Vou Passar: teste o Dominei por 48 horas e descubra o que você já domina e onde precisa focar no seu concurso.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#06110c">
+<meta property="og:title" content="Seu estudo ganhou um cérebro. Teste o Dominei por 48 horas">
+<meta property="og:description" content="Exclusivo para alunos: descubra o que você já domina e onde precisa focar no seu concurso.">
+<meta property="og:image" content="https://revolucaodoestudo.com.br/assets/dominei-teste-48h.jpg">
+<meta property="og:url" content="https://revolucaodoestudo.com.br/dominei-teste/">
+<link rel="icon" type="image/png" href="/app/img/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira:wght@600;700;800&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* mesma identidade do pop-up da área do aluno (popup-dominei-teste.js): fundo escuro, verde do Dominei, Saira + Figtree */
+:root{--bg:#06110c;--card:#0b1116;--card2:#131b21;--ink:#f2f6f4;--ink2:#c3cdc8;--ink3:#82908a;--green:#2ef0a0;--green2:#5cf5b8;--line:rgba(255,255,255,.16);--red:#e5484d}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Figtree,system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}
+.dmt{position:relative;width:100%;max-width:420px;background:var(--card);border:1px solid rgba(46,240,160,.22);border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 60px rgba(46,240,160,.14);overflow:hidden;text-align:center;animation:up .32s ease}
+@keyframes up{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+.dmt-img{display:block;width:100%;height:auto;aspect-ratio:900/697;object-fit:cover}
+.dmt-in{padding:18px 22px 20px}
+h1{font-family:Saira,system-ui,sans-serif;font-weight:800;font-size:22px;line-height:1.15;margin:0 0 8px;color:#fff}
+h1 em{font-style:normal;color:var(--green)}
+p{margin:0 0 14px;font-size:14.5px;line-height:1.5;color:var(--ink2)}
+label{display:block;text-align:left;font-size:13px;font-weight:600;color:var(--ink2);margin:0 0 6px}
+input{width:100%;height:46px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--card2);color:#fff;font-family:inherit;font-size:15px;margin:0 0 12px;-webkit-appearance:none;appearance:none;outline:0}
+input::placeholder{color:var(--ink3)}input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(46,240,160,.18)}
+input.err{border-color:var(--red)!important}
+.btn{width:100%;min-height:50px;border:0;border-radius:999px;background:var(--green);color:#06110c;font-family:Saira,system-ui,sans-serif;font-weight:800;font-size:15px;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;box-shadow:0 8px 28px rgba(46,240,160,.35);display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;padding:0 18px}
+.btn:hover{background:var(--green2)}.btn:disabled{opacity:.6;cursor:wait}
+.msg{display:none;color:#ff8f93;font-size:13px;margin:0 0 10px}.msg.show{display:block}
+.note{font-size:12px;color:var(--ink3);margin:12px 0 0;line-height:1.5}
+.aviso{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:14px;color:var(--ink2);font-size:14px;line-height:1.5}
+.rodape{margin-top:14px;font-size:11.5px;color:var(--ink3);text-align:center}
+@media (max-width:420px){h1{font-size:20px}.dmt-in{padding:16px 16px 18px}}
+</style>
+</head>
+<body>
+<main class="dmt">
+  <img class="dmt-img" src="/assets/dominei-popup.jpg" alt="Dominei: seu estudo ganhou um cérebro" width="900" height="697">
+  <div class="dmt-in" id="step1">
+    <h1>Teste o Dominei <em>por 48 horas.</em></h1>
+    <p>Exclusivo para alunos: descubra o que você já domina e onde precisa focar no seu concurso.</p>
+    <form id="form" novalidate>
+      <label for="nome">Seu nome</label><input id="nome" name="nome" type="text" autocomplete="name" placeholder="Nome e sobrenome" maxlength="120">
+      <label for="email">Seu e-mail</label><input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="seu@email.com" maxlength="160">
+      <label for="tel">Seu WhatsApp</label><input id="tel" name="telefone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="(92) 99999-9999" maxlength="15">
+      <div class="msg" id="msg"></div>
+      <button type="submit" class="btn" id="btn">Quero testar o Dominei &rarr;</button>
+    </form>
+    <p class="note">Use o e-mail da sua conta de aluno. O link do teste chega no seu WhatsApp em até 10 minutos.</p>
+  </div>
+  <div class="dmt-in" id="step2" style="display:none">
+    <h1>Pronto! Seu teste de 48 horas <em>está liberado.</em> 🎉</h1>
+    <a class="btn" id="link" href="https://dominei.app" target="_blank" rel="noopener">Criar minha conta no Dominei &rarr;</a>
+    <p class="note">Também te mandei o link no WhatsApp.</p>
+  </div>
+  <div class="dmt-in" id="step3" style="display:none">
+    <h1>Esse teste <em>já é seu.</em></h1>
+    <div class="aviso" id="avisoTxt"></div>
+  </div>
+</main>
+<script>
+(function () {
+  var API = "https://dqpxugdhlgafvddavzzp.supabase.co/functions/v1/dominei-popup";
+  var q = new URLSearchParams(location.search);
+  /* origem: grupo = chegou pelo link postado no WhatsApp (utm_source com "grupo" ou "whatsapp", ou sem UTM); pagina = outro caminho */
+  var src = (q.get("utm_source") || "").toLowerCase();
+  var ORIGEM = (!src || /grupo|whatsapp/.test(src)) ? "grupo" : "pagina";
+  var tel = document.getElementById("tel"), nome = document.getElementById("nome"), email = document.getElementById("email");
+  var btn = document.getElementById("btn"), msg = document.getElementById("msg");
+  tel.addEventListener("input", function () {
+    var d = tel.value.replace(/\D/g, "").slice(0, 11), o = "";
+    if (d.length > 0) o = "(" + d.slice(0, 2); if (d.length >= 3) o += ") " + d.slice(2, 7); if (d.length >= 8) o += "-" + d.slice(7);
+    tel.value = o;
+  });
+  function mostrar(id) { ["step1", "step2", "step3"].forEach(function (s) { document.getElementById(s).style.display = s === id ? "block" : "none"; }); }
+  var AVISO = {
+    piloto: "Você já recebeu o seu link pessoal do teste no WhatsApp. Procure a mensagem da Anne com o botão <b>Testar o Dominei</b>.",
+    comprou: "Você já faz parte da Tríade do Estudo Inteligente: o Dominei completo já está liberado para você. Entre em <b>revolucaodoestudo.com.br/app</b>.",
+    tem_conta: "Você já tem uma conta no Dominei. Entre em <b>dominei.app</b> com o seu e-mail e a sua senha."
+  };
+  document.getElementById("form").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var digits = tel.value.replace(/\D/g, ""), em = email.value.trim().toLowerCase(), nm = nome.value.trim();
+    var telOk = digits.length === 11 && digits[2] === "9", emOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em), nmOk = nm.length >= 2;
+    tel.classList.toggle("err", !telOk); email.classList.toggle("err", !emOk); nome.classList.toggle("err", !nmOk);
+    msg.classList.remove("show");
+    if (!(telOk && emOk && nmOk)) {
+      msg.textContent = !nmOk ? "Escreva o seu nome." : !emOk ? "Confira o e-mail." : "Confira o WhatsApp: DDD + número com 9 dígitos.";
+      msg.classList.add("show"); return;
+    }
+    btn.disabled = true; btn.textContent = "LIBERANDO…";
+    fetch(API, { method: "POST", headers: { "Content-Type": "application/json" },
+                 body: JSON.stringify({ email: em, nome: nm, whatsapp: digits, origem: ORIGEM }) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { d._status = r.status; return d; }); })
+      .then(function (d) {
+        if (d.ok) { document.getElementById("link").href = d.link; mostrar("step2"); return; }
+        if (d.motivo && AVISO[d.motivo]) { document.getElementById("avisoTxt").innerHTML = AVISO[d.motivo]; mostrar("step3"); return; }
+        throw new Error(d.erro || "erro");
+      })
+      .catch(function (e) {
+        btn.disabled = false; btn.innerHTML = "Quero testar o Dominei &rarr;";
+        msg.textContent = /whatsapp/i.test(e.message) ? "Confira o WhatsApp: DDD + número com 9 dígitos." : /pegou/i.test(e.message) ? e.message : "Não conseguimos liberar agora. Tente de novo em instantes.";
+        msg.classList.add("show");
+      });
+  });
+})();
+</script>
+</body>
+</html>
