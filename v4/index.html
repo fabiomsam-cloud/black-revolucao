@@ -2,12 +2,12 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<script>(function(){try{var A=["v4", "v2", "v2b", "v2c", "v5"],K="black_ab_v4",v=null,s=null;
+<script>(function(){try{var A=["v2b", "v2c"],S="v4",K="black_ab_v4",v=null,s=null;
 try{s=JSON.parse(localStorage.getItem(K)||"null")}catch(e){}
 if(s&&A.indexOf(s.v)>-1&&Date.now()-s.ts<2592e6)v=s.v;
 if(!v){v=A[Math.floor(Math.random()*A.length)];try{localStorage.setItem(K,JSON.stringify({v:v,ts:Date.now()}))}catch(e){}}
 window.BLACK_AB="v4";
-if(v!==A[0]){window.BLACK_REDIRECT=true;var q=new URLSearchParams(location.search);q.set("ab","v4");location.replace("../"+v+"/?"+q.toString()+location.hash)}
+if(v!==S){window.BLACK_REDIRECT=true;var q=new URLSearchParams(location.search);q.set("ab","v4");location.replace("../"+v+"/?"+q.toString()+location.hash)}
 }catch(e){}})();</script>
 
 <meta name="viewport" content="width=device-width,initial-scale=1">
