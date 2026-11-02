@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aulas do seu edital · O Cérebro</title>
+<meta name="description" content="Aulas de conteúdo do seu edital para você assistir e transformar em material dentro do Cérebro.">
+<meta property="og:title" content="Aulas do seu edital · O Cérebro">
+<meta property="og:description" content="Aulas de conteúdo do seu edital para você assistir e transformar em material dentro do Cérebro.">
+<meta property="og:image" content="https://revolucaodoestudo.com.br/assets/cerebro-convite.jpg">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#050607">
+<link rel="icon" href="../assets/logo-e.png" type="image/png">
+<link rel="preload" href="../assets/fonts/saira-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/black.css?v=36">
+<style>
+  body{background:var(--bg);color:var(--ink);font-family:var(--font-b);margin:0}
+  .a-wrap{width:min(900px,100% - 32px);margin:0 auto}
+  .a-top{display:flex;align-items:center;justify-content:center;padding:18px 0 8px}
+  .a-top img{width:150px;height:auto}
+  h1{font-family:var(--font-d);font-weight:800;font-size:clamp(24px,4.5vw,36px);line-height:1.1;margin:10px 0 8px;text-align:center}
+  .a-sub{text-align:center;color:var(--ink-2);font-size:15px;line-height:1.5;margin:0 0 18px}
+  .a-sel{max-width:520px;margin:0 auto 26px;padding:20px;border-radius:var(--r);background:var(--card);border:1px solid var(--line)}
+  .a-sel label{display:block;font-weight:700;font-size:13px;margin:0 0 6px;color:var(--ink-2)}
+  .a-sel select{width:100%;box-sizing:border-box;padding:14px;border-radius:var(--r-sm);border:1px solid var(--line-2);background:var(--field);color:var(--ink);font:600 16px var(--font-b)}
+  .a-player{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:var(--r);overflow:hidden;border:1px solid var(--line)}
+  .a-player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .a-lista{display:grid;gap:10px;margin:16px 0 26px}
+  .a-item{display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:var(--r-sm);background:var(--card);border:1px solid var(--line);cursor:pointer;text-align:left;color:var(--ink);font:inherit}
+  .a-item.on{border-color:var(--blue-2);background:var(--card-2)}
+  .a-item .n{flex:none;width:34px;height:34px;border-radius:999px;display:grid;place-items:center;background:var(--field);font:800 14px var(--font-d);color:var(--blue-2)}
+  .a-item .t{font-weight:700;font-size:15px;line-height:1.3}
+  .a-item .d{color:var(--ink-3);font-size:13px;margin-top:2px}
+  .a-vazio{padding:28px;border-radius:var(--r);background:var(--card);border:1px dashed var(--line-2);text-align:center;color:var(--ink-2);line-height:1.5}
+  .a-cta{margin:10px auto 48px;max-width:520px;padding:22px;border-radius:var(--r);background:linear-gradient(135deg,#0b1a36,#071022);border:1px solid var(--line);text-align:center}
+  .a-cta h2{font-family:var(--font-d);font-weight:800;font-size:20px;margin:0 0 6px}
+  .a-cta p{color:var(--ink-2);font-size:14px;line-height:1.5;margin:0 0 14px}
+  .a-cta .btn{width:100%}
+  footer{padding:24px 0 36px;text-align:center;color:var(--ink-3);font-size:12px}
+</style>
+</head>
+<body>
+<main class="a-wrap">
+  <div class="a-top"><img src="../assets/logo-black-revolucao.webp" alt="A Revolução do Estudo" width="150" height="40"></div>
+  <h1 id="h1">Aulas do seu edital</h1>
+  <p class="a-sub" id="sub">Assista e, depois, transforme em material dentro do Cérebro: é assim que ele passa a estudar com o que é seu.</p>
+  <div class="a-sel" id="sel-box"><label for="sel">Qual é o seu concurso?</label><select id="sel"><option value="">Carregando…</option></select></div>
+  <div id="player-box" class="a-player" hidden><iframe id="yt" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Aula"></iframe></div>
+  <div class="a-lista" id="lista"></div>
+  <div class="a-vazio" id="vazio" hidden>As aulas deste edital entram em breve. Enquanto isso, faça a sessão do dia no Cérebro.</div>
+  <section class="a-cta">
+    <h2>Assistiu? Agora suba o seu material.</h2>
+    <p>Anote o que aprendeu, tire foto das suas anotações ou suba um PDF em <b>Meu Material</b>. O Cérebro organiza tudo e liga ao seu edital.</p>
+    <a class="btn" id="btn-app" href="../dominei/">ABRIR O CÉREBRO</a>
+  </section>
+</main>
+<footer><div class="a-wrap">© 2026 Sou Concurseiro e Vou Passar</div></footer>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var DC = "https://dqpxugdhlgafvddavzzp.supabase.co", DC_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRxcHh1Z2RobGdhZnZkZGF2enpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxODQ1NTMsImV4cCI6MjA5Nzc2MDU1M30.nUhYPO3oLUZEXgQCDlRtL-Jawi0nr0l1Z7_z5ecEXvc";
+  var qs = new URLSearchParams(location.search), TOKEN = (qs.get("t") || "").trim().toLowerCase();
+  var dados = null, atual = null;
+  function rpc(fn, body) { return fetch(DC + "/rest/v1/rpc/" + fn, { method: "POST", keepalive: true, headers: { "Content-Type": "application/json", apikey: DC_ANON, Authorization: "Bearer " + DC_ANON }, body: JSON.stringify(body || {}) }).then(function (r) { return r.json(); }); }
+  function evento(tipo, dado) { if (!TOKEN) return; rpc("fn_cerebro_evento", { p_token: TOKEN, p_tipo: tipo, p_dado: dado || {} }).catch(function () {}); }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  if (TOKEN) $("btn-app").href = "../cerebro/?t=" + encodeURIComponent(TOKEN);
+  rpc("fn_cerebro_aulas", { p_token: TOKEN || null }).then(function (d) {
+    dados = d || {};
+    var sel = $("sel"), eds = d.editais || [];
+    sel.innerHTML = '<option value="">Escolha o seu concurso</option>' + eds.map(function (e) { return '<option value="' + e.edital_id + '">' + esc(e.concurso + (e.cargo ? " · " + e.cargo : "")) + (e.aulas ? "" : " (em breve)") + "</option>"; }).join("");
+    var l = d.lead || {};
+    if (l.nome) $("h1").textContent = "Aulas do seu edital, " + esc(String(l.nome).split(/\s+/)[0]);
+    if (l.edital_id) { sel.value = l.edital_id; mostrar(d.aulas || [], l.edital_nome); }
+    sel.onchange = function () {
+      var id = sel.value; if (!id) return;
+      var e = eds.filter(function (x) { return x.edital_id === id; })[0];
+      evento("edital", { edital_id: id });
+      // aulas do edital escolhido na hora: a função devolve as aulas do lead; para troca, pede de novo sem token e filtra
+      rpc("fn_cerebro_aulas_de", { p_edital: id }).then(function (r) { mostrar((r && r.aulas) || [], e ? e.concurso + " · " + (e.cargo || "") : ""); }).catch(function () { mostrar([], ""); });
+    };
+  }).catch(function () { $("sel").innerHTML = '<option value="">Não carregou. Atualize a página.</option>'; });
+  function mostrar(aulas, nome) {
+    $("sub").textContent = (nome ? nome + ". " : "") + "Assista e, depois, transforme em material dentro do Cérebro.";
+    $("lista").innerHTML = ""; $("vazio").hidden = aulas.length > 0; $("player-box").hidden = aulas.length === 0;
+    aulas.forEach(function (a, i) {
+      var b = document.createElement("button"); b.type = "button"; b.className = "a-item";
+      b.innerHTML = '<span class="n">' + (i + 1) + '</span><span><div class="t">' + esc(a.titulo) + '</div>' + (a.descricao ? '<div class="d">' + esc(a.descricao) + "</div>" : "") + "</span>";
+      b.onclick = function () { tocar(a, b); };
+      $("lista").appendChild(b);
+    });
+    if (aulas.length) tocar(aulas[0], $("lista").firstChild, true);
+  }
+  function tocar(a, el, auto) {
+    Array.prototype.forEach.call($("lista").children, function (c) { c.classList.remove("on"); }); if (el) el.classList.add("on");
+    $("yt").src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(a.youtube_id) + "?rel=0&modestbranding=1" + (auto ? "" : "&autoplay=1");
+    if (!auto) { $("player-box").scrollIntoView({ behavior: "smooth", block: "start" }); }
+    evento("aula", { youtube_id: a.youtube_id, titulo: a.titulo, auto: !!auto });
+  }
+})();
+</script>
+</body>
+</html>

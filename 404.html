@@ -1,0 +1,8 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Revolução do Estudo</title><meta name="robots" content="noindex">
+<script>
+// 02/11: botão de URL dinâmica da Meta não aceita "?" → /cerebro/<token> e /aulas/<token> viram /cerebro/?t=<token> (como o AGORA15).
+(function(){var m=location.pathname.match(/^\/(cerebro|aulas)\/([^\/?#]+)\/?$/);
+if(m){var tok=m[2];try{tok=decodeURIComponent(tok)}catch(e){}tok=tok.replace(/^\?+/,'').replace(/^t=/,'');
+var extra=location.search.replace(/^\?/,'');location.replace('/'+m[1]+'/?t='+encodeURIComponent(tok)+(extra?'&'+extra:''));}
+else location.replace('/');})();
+</script></head><body></body></html>

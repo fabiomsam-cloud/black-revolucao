@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>O Cérebro · A Revolução do Estudo</title>
+<meta name="description" content="A plataforma que organiza o seu estudo pelo edital do seu concurso. Liberada para você até 10/11.">
+<meta property="og:title" content="O Cérebro · A Revolução do Estudo">
+<meta property="og:description" content="A plataforma que organiza o seu estudo pelo edital do seu concurso. Liberada para você até 10/11.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://revolucaodoestudo.com.br/assets/cerebro-convite.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="628">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#050607">
+<link rel="icon" href="../assets/logo-e.png" type="image/png">
+<link rel="preload" href="../assets/fonts/saira-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/black.css?v=36">
+<link rel="preload" href="https://scripts.converteai.net/98f98845-02a5-4e75-a39a-bbafedfa3212/players/6ae8f6ceb850e26f93ec6966/v4/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="dns-prefetch" href="https://cdn.converteai.net"><link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net"><link rel="dns-prefetch" href="https://api.vturb.com.br">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2"></script>
+<style>
+  body{background:var(--bg);color:var(--ink);font-family:var(--font-b);margin:0}
+  .c-wrap{width:min(560px,100% - 32px);margin:0 auto}
+  .c-top{display:flex;align-items:center;justify-content:center;padding:18px 0 10px}
+  .c-top img{width:150px;height:auto}
+  .c-oi{text-align:center;margin:0 0 14px;color:var(--ink-2);font-size:15px;line-height:1.45}
+  .c-oi b{color:var(--ink)}
+  .c-video{width:min(400px,100%);margin:0 auto}
+  .c-nota{text-align:center;color:var(--ink-3);font-size:13px;margin:12px 0 0;line-height:1.45}
+  .hide{display:none}
+  .c-form{margin:22px auto 48px;padding:24px;border-radius:var(--r);background:var(--card);border:1px solid var(--line)}
+  .c-form h2{font-family:var(--font-d);font-weight:800;font-size:22px;line-height:1.15;margin:0 0 6px}
+  .c-form p.sub{margin:0 0 16px;color:var(--ink-2);font-size:14px;line-height:1.45}
+  .c-form label{display:block;font-weight:700;font-size:13px;margin:12px 0 6px;color:var(--ink-2)}
+  .c-form input,.c-form select{width:100%;box-sizing:border-box;padding:15px 14px;border-radius:var(--r-sm);border:1px solid var(--line-2);background:var(--field);color:var(--ink);font:600 17px var(--font-b)}
+  .c-form input:focus,.c-form select:focus{outline:2px solid var(--blue-2);outline-offset:1px}
+  .c-form input.err{border-color:#ff7a7a}
+  .c-form .btn{margin-top:16px;width:100%}
+  .c-erro{min-height:20px;margin:10px 0 0;color:#ff7a7a;font-size:14px;font-weight:600;line-height:1.4}
+  .c-links{margin:14px 0 0;text-align:center;font-size:14px;color:var(--ink-3);line-height:1.6}
+  .c-links a{color:var(--blue-2);font-weight:700;text-decoration:none}
+  .senha-box{position:relative}.senha-box input{padding-right:84px}
+  .senha-box .olho{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:0;color:var(--ink-3);font:600 13px var(--font-b);cursor:pointer;padding:8px}
+  .c-fechado{margin:22px auto 48px;padding:24px;border-radius:var(--r);background:linear-gradient(135deg,#0b1a36,#071022);border:1px solid var(--line)}
+  .c-fechado h2{font-family:var(--font-d);font-weight:800;font-size:22px;margin:0 0 8px}
+  .c-fechado p{color:var(--ink-2);font-size:15px;line-height:1.5;margin:0 0 14px}
+  .c-fechado .btn{width:100%;margin-top:8px}
+  footer{padding:24px 0 36px;text-align:center;color:var(--ink-3);font-size:12px;line-height:1.5}
+</style>
+</head>
+<body>
+<main class="c-wrap">
+  <div class="c-top"><img src="../assets/logo-black-revolucao.webp" alt="A Revolução do Estudo" width="150" height="40" onerror="this.style.display='none'"></div>
+  <p class="c-oi" id="oi">Assista ao vídeo até o fim. <b>O passo seguinte aparece aqui embaixo.</b></p>
+
+  <div class="c-video" id="video-slot">
+    <vturb-smartplayer id="vid-6ae8f6ceb850e26f93ec6966" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 177.77777777777777% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer>
+  </div>
+  <p class="c-nota" id="nota">Toque no vídeo para ouvir.</p>
+
+  <!-- liberado pelo player aos 50 s (persist) ou pelo fallback de tempo -->
+  <section class="c-form hide" id="form-area" aria-live="polite">
+    <form id="f" novalidate>
+      <h2 id="f-titulo">Crie sua conta no Cérebro</h2>
+      <p class="sub" id="f-sub">Confira seus dados e crie uma senha. Em seguida você já entra na plataforma.</p>
+      <div id="f-campos">
+        <label for="nome">Seu nome</label><input id="nome" name="nome" type="text" autocomplete="name" maxlength="120" placeholder="Nome e sobrenome">
+        <label for="email">Seu e-mail (vai ser o seu login)</label><input id="email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="160" placeholder="seu@email.com">
+        <label for="telefone">Seu WhatsApp</label><input id="telefone" name="telefone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="15" placeholder="(92) 99999-9999">
+        <div id="f-escolaridade" class="hide"><label for="escolaridade">Escolaridade</label>
+          <select id="escolaridade" name="escolaridade"><option value="">Selecione</option><option>fundamental</option><option>médio</option><option>superior cursando</option><option>superior completo</option><option>pós-graduação</option></select></div>
+      </div>
+      <label for="senha" id="l-senha">Crie uma senha</label>
+      <div class="senha-box"><input id="senha" name="senha" type="password" autocomplete="new-password" minlength="6" maxlength="72" placeholder="mínimo de 6 caracteres"><button type="button" class="olho" id="olho">mostrar</button></div>
+      <button type="submit" class="btn" id="btn">CRIAR MINHA CONTA E ENTRAR</button>
+      <div class="c-erro" id="erro"></div>
+      <div class="c-links" id="links"></div>
+    </form>
+  </section>
+
+  <section class="c-fechado hide" id="fechado">
+    <h2>O Cérebro fechou hoje às 8h.</h2>
+    <p>Nada se perdeu: seus tópicos, seu diagnóstico e seu material continuam guardados. Hoje às <b>19h (horário de Manaus, 20h em Brasília)</b> o Professor Fábio abre o Cérebro de novo, ao vivo, na Revolução do Estudo. O link sai no grupo.</p>
+    <a class="btn" href="https://sndflw.com/i/D3dZyygkzj3LQgQ73IHP" rel="noopener">ENTRAR NO GRUPO DA REVOLUÇÃO</a>
+    <a class="btn" href="../dominei/" id="btn-ver" style="background:transparent;border:1px solid var(--line-2);color:var(--ink)">VER MEU PROGRESSO</a>
+  </section>
+</main>
+<footer><div class="c-wrap">© 2026 Sou Concurseiro e Vou Passar · Seus dados são usados apenas para o seu acesso ao Cérebro e às informações da Revolução do Estudo.</div></footer>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var DC = "https://dqpxugdhlgafvddavzzp.supabase.co", DC_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRxcHh1Z2RobGdhZnZkZGF2enpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxODQ1NTMsImV4cCI6MjA5Nzc2MDU1M30.nUhYPO3oLUZEXgQCDlRtL-Jawi0nr0l1Z7_z5ecEXvc";
+  var SB_URL = "https://syzegzobxnhpjnbebvst.supabase.co", SB_KEY = "sb_publishable_IBfOjZVIlht14DH7D6cUqQ_8woHSJ8b";
+  var CONVITE = "revolucao", APP = "../dominei/", SEGUNDO_FORM = 50, SLUG = "black-revolucao-nao-alunos", PIXEL = "429553154418122";
+  var qs = new URLSearchParams(location.search);
+  var TOKEN = (qs.get("t") || "").trim().toLowerCase();
+  var lead = null, modo = "cadastro", liberado = false, sb = null;
+
+  // ---------- pixel ----------
+  try { !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', PIXEL); fbq('track', 'PageView'); } catch (_) {}
+  function px(tipo, ev, dados) { try { if (window.fbq) window.fbq(tipo, ev, dados || {}); } catch (_) {} }
+
+  // ---------- Data Core (RPC anon) ----------
+  function rpc(fn, body) {
+    return fetch(DC + "/rest/v1/rpc/" + fn, { method: "POST", keepalive: true,
+      headers: { "Content-Type": "application/json", apikey: DC_ANON, Authorization: "Bearer " + DC_ANON },
+      body: JSON.stringify(body || {}) }).then(function (r) { return r.json(); });
+  }
+  function evento(tipo, dado) { if (!TOKEN) return Promise.resolve(); return rpc("fn_cerebro_evento", { p_token: TOKEN, p_tipo: tipo, p_dado: dado || {} }).catch(function () {}); }
+
+  // ---------- estado inicial ----------
+  function aplicarLead(d) {
+    lead = d && d.ok ? d : null;
+    if (d && d.fechado) { fechado(); return; }
+    if (lead) {
+      $("oi").innerHTML = "Oi" + (lead.nome ? ", <b>" + esc(primeiro(lead.nome)) + "</b>" : "") + "! Assista ao vídeo até o fim. <b>O passo seguinte aparece aqui embaixo.</b>";
+      $("nome").value = lead.nome || ""; $("email").value = lead.conta_email || lead.email || ""; $("telefone").value = fmtTel(lead.telefone || "");
+      if (lead.conta_em) modoLogin("Sua conta no Cérebro já está criada. Entre com a senha que você criou.");
+      else $("links").innerHTML = 'Não é você? <a href="#" id="limpar">Limpar os dados</a> · Já tem conta? <a href="#" id="ir-login">Entrar</a>';
+    } else {
+      $("f-escolaridade").classList.remove("hide"); modo = "cadastro_completo";
+      $("links").innerHTML = 'Já tem conta no Cérebro? <a href="#" id="ir-login">Entrar</a>';
+    }
+    ligarLinks();
+  }
+  function fechado() { $("form-area").classList.add("hide"); $("fechado").classList.remove("hide"); liberado = true; }
+  function modoLogin(msg) {
+    modo = "login";
+    $("f-titulo").textContent = "Entrar no Cérebro"; $("f-sub").textContent = msg || "Entre com o seu e-mail e a senha que você criou.";
+    $("nome").parentNode && ($("nome").previousElementSibling.classList.add("hide"), $("nome").classList.add("hide"));
+    $("telefone").previousElementSibling.classList.add("hide"); $("telefone").classList.add("hide"); $("f-escolaridade").classList.add("hide");
+    $("l-senha").textContent = "Sua senha"; $("senha").placeholder = "••••••••"; $("senha").setAttribute("autocomplete", "current-password");
+    $("btn").textContent = "ENTRAR NO CÉREBRO";
+    $("links").innerHTML = '<a href="../app/senha.html" rel="noopener">Esqueci minha senha</a>' + (lead && !lead.conta_em ? ' · <a href="#" id="ir-cadastro">Criar minha conta</a>' : (!lead ? ' · <a href="#" id="ir-cadastro">Criar minha conta</a>' : ""));
+    ligarLinks();
+  }
+  function modoCadastro() {
+    modo = lead ? "cadastro" : "cadastro_completo";
+    $("f-titulo").textContent = "Crie sua conta no Cérebro"; $("f-sub").textContent = "Confira seus dados e crie uma senha. Em seguida você já entra na plataforma.";
+    $("nome").previousElementSibling.classList.remove("hide"); $("nome").classList.remove("hide");
+    $("telefone").previousElementSibling.classList.remove("hide"); $("telefone").classList.remove("hide");
+    if (!lead) $("f-escolaridade").classList.remove("hide");
+    $("l-senha").textContent = "Crie uma senha"; $("senha").placeholder = "mínimo de 6 caracteres"; $("senha").setAttribute("autocomplete", "new-password");
+    $("btn").textContent = "CRIAR MINHA CONTA E ENTRAR";
+    $("links").innerHTML = (lead ? 'Não é você? <a href="#" id="limpar">Limpar os dados</a> · ' : "") + 'Já tem conta? <a href="#" id="ir-login">Entrar</a>';
+    ligarLinks();
+  }
+  function ligarLinks() {
+    var a = $("limpar"), b = $("ir-login"), c = $("ir-cadastro");
+    if (a) a.onclick = function (e) { e.preventDefault(); lead = null; $("nome").value = ""; $("email").value = ""; $("telefone").value = ""; modoCadastro(); $("nome").focus(); };
+    if (b) b.onclick = function (e) { e.preventDefault(); modoLogin(); $("email").focus(); };
+    if (c) c.onclick = function (e) { e.preventDefault(); modoCadastro(); };
+  }
+
+  if (TOKEN) rpc("fn_cerebro_lead", { p_token: TOKEN }).then(aplicarLead).catch(function () { aplicarLead(null); });
+  else rpc("fn_cerebro_lead", { p_token: "x" }).then(function (d) { aplicarLead(d && d.fechado ? d : null); }).catch(function () { aplicarLead(null); });
+
+  // ---------- vídeo: libera o formulário aos 50 s (Vturb, com memória) + fallback por tempo + marcos ----------
+  function liberar(origem) {
+    if (liberado) return; liberado = true;
+    $("form-area").classList.remove("hide"); $("nota").textContent = "";
+    evento("formulario", { origem: origem });
+    px("trackCustom", "CerebroFormulario", { origem: origem });
+    setTimeout(function () { $("form-area").scrollIntoView({ behavior: "smooth", block: "start" }); }, 400);
+  }
+  document.addEventListener("player:ready", function (e) {
+    try { e.detail.displayHiddenElements(SEGUNDO_FORM, [".c-form.hide"], { persist: true }); } catch (_) {}
+  });
+  var enviados = {}, DUR = null;
+  setInterval(function () {
+    var sp = window.smartplayer, i = sp && sp.instances && sp.instances[0];
+    if (!i || !i.video) return;
+    var t = i.video.currentTime, d = i.video.duration || DUR; if (d) DUR = d;
+    if (typeof t !== "number") return;
+    if (t >= SEGUNDO_FORM) liberar("tempo");
+    if (!$("form-area").classList.contains("hide")) liberar("vturb");
+    if (d) { var pct = t / d * 100; [25, 50, 75, 100].forEach(function (m) {
+      if (pct >= (m === 100 ? 97 : m) && !enviados[m]) { enviados[m] = 1; evento("video", { pct: m }); px("trackCustom", "CerebroVideo", { pct: m }); } }); }
+  }, 2000);
+  // quem já passou do ponto em outra visita: o Vturb mostra o bloco sozinho; a observação acima captura e registra.
+
+  // ---------- formulário ----------
+  $("olho").onclick = function () { var i = $("senha"), v = i.type === "password"; i.type = v ? "text" : "password"; $("olho").textContent = v ? "ocultar" : "mostrar"; i.focus(); };
+  $("telefone").addEventListener("input", function () { $("telefone").value = fmtTel($("telefone").value); });
+  function setErr(msg) { $("erro").textContent = msg || ""; }
+  function marcar(id, on) { $(id).classList.toggle("err", !!on); }
+  $("f").addEventListener("submit", function (ev) {
+    ev.preventDefault(); setErr("");
+    var email = $("email").value.trim().toLowerCase(), senha = $("senha").value, nome = $("nome").value.trim(), tel = $("telefone").value.replace(/\D/g, "");
+    var ok = true;
+    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); marcar("email", !emailOk); ok = ok && emailOk;
+    var senhaOk = senha.length >= 6; marcar("senha", !senhaOk); ok = ok && senhaOk;
+    if (modo !== "login") { var nomeOk = nome.length >= 2; marcar("nome", !nomeOk); ok = ok && nomeOk;
+      var telOk = tel.length === 11 && tel[2] === "9"; marcar("telefone", !telOk); ok = ok && telOk;
+      if (modo === "cadastro_completo") { var escOk = !!$("escolaridade").value; marcar("escolaridade", !escOk); ok = ok && escOk; } }
+    if (!ok) { setErr(modo === "login" ? "Confira o e-mail e a senha." : "Confira os campos marcados."); return; }
+    var btn = $("btn"), rot = btn.textContent; btn.disabled = true; btn.textContent = modo === "login" ? "ENTRANDO…" : "CRIANDO SUA CONTA…";
+    var fim = function () { btn.disabled = false; btn.textContent = rot; };
+    sb = sb || window.supabase.createClient(SB_URL, SB_KEY);
+    var p = Promise.resolve();
+    if (modo === "cadastro_completo") p = cadastrarNaRevolucao(nome, email, tel, $("escolaridade").value);
+    p.then(function () { return modo === "login" ? entrar(email, senha) : criar(nome, email, tel, senha); })
+     .then(function (r) { if (r && r.redirect) { location.href = APP; } })
+     .catch(function (e) { fim(); setErr(humanizar(e)); evento("erro", { modo: modo, msg: String(e && e.message || e).slice(0, 200) }); });
+  });
+  function cadastrarNaRevolucao(nome, email, tel, esc) {
+    // sem token: entra na base da Revolução (mesmo motor da página de captação) e ganha o seu token
+    var payload = { op: "lead", slug: SLUG, nome: nome, email: email, telefone: tel, escolaridade: "",
+      answers: { escolaridade: esc, versao: "cerebro" }, utm: { utm_source: qs.get("utm_source") || "direto", utm_medium: qs.get("utm_medium") || "cerebro", utm_campaign: qs.get("utm_campaign") || "black-cerebro", utm_content: "cerebro" },
+      fbclid: qs.get("fbclid") || null, fbp: cookie("_fbp"), fbc: cookie("_fbc"), page_url: location.href };
+    return fetch(DC + "/functions/v1/gerador-paginas", { method: "POST", headers: { "Content-Type": "application/json", apikey: DC_ANON, Authorization: "Bearer " + DC_ANON }, body: JSON.stringify(payload) })
+      .then(function (r) { return r.json(); })
+      .then(function (r) {
+        if (!r || !r.registro_id) throw new Error(r && r.error || "cadastro");
+        try { if (r.pixel) px("track", "Lead", { escolaridade: esc, qualificado: r.qualified ? "sim" : "nao" }); } catch (_) {}
+        return rpc("fn_cerebro_token_por_registro", { p_registro: r.registro_id });
+      })
+      .then(function (r) { if (r && r.token) { TOKEN = r.token; try { history.replaceState(null, "", "?t=" + TOKEN); } catch (_) {} } });
+  }
+  function criar(nome, email, tel, senha) {
+    return sb.auth.signUp({ email: email, password: senha, options: { data: { nome: nome, telefone: tel, convite: CONVITE } } })
+      .then(function (r) {
+        if (r.error) {
+          if (/already|registered|exists/i.test(r.error.message)) { modoLogin("Esse e-mail já tem conta no Cérebro. Entre com a sua senha."); $("senha").value = ""; throw new Error("ja_existe"); }
+          throw r.error;
+        }
+        if (!r.data || !r.data.session) throw new Error("sem_sessao");
+        var u = r.data.user;
+        px("trackCustom", "CerebroConta", { modo: "nova" });
+        return rpc("fn_cerebro_conta", { p_token: TOKEN || "", p_email: email, p_user_id: u.id, p_nome: nome, p_telefone: tel, p_existia: false }).catch(function () {})
+          .then(function () { return { redirect: true }; });
+      });
+  }
+  function entrar(email, senha) {
+    return sb.auth.signInWithPassword({ email: email, password: senha }).then(function (r) {
+      if (r.error) throw new Error("login_invalido");
+      var u = r.data.user;
+      px("trackCustom", "CerebroConta", { modo: "existente" });
+      return sb.rpc("fn_cerebro_reativar").catch(function () {})
+        .then(function () { return rpc("fn_cerebro_conta", { p_token: TOKEN || "", p_email: email, p_user_id: u.id, p_existia: true }).catch(function () {}); })
+        .then(function () { evento("login", {}); return { redirect: true }; });
+    });
+  }
+  function humanizar(e) {
+    var m = String(e && e.message || e || "");
+    if (m === "ja_existe") return "Esse e-mail já tem conta no Cérebro. Entre com a sua senha abaixo.";
+    if (m === "login_invalido") return "E-mail ou senha incorretos. Se esqueceu a senha, toque em \"Esqueci minha senha\".";
+    if (/cadastro_fechado|convite_invalido/.test(m)) return "O acesso gratuito ao Cérebro foi encerrado. Entre no grupo da Revolução para acompanhar a live.";
+    if (/password/i.test(m)) return "A senha precisa ter pelo menos 6 caracteres.";
+    if (/failed to fetch|network|load failed/i.test(m)) return "Sem conexão. Confira sua internet e tente de novo.";
+    if (/whatsapp/i.test(m)) return "Confira o WhatsApp: DDD + número com 9 dígitos.";
+    return "Não conseguimos agora. Tente de novo em instantes.";
+  }
+  function fmtTel(v) { var d = String(v || "").replace(/\D/g, ""); if (d.length === 13 && d.slice(0, 2) === "55") d = d.slice(2); d = d.slice(0, 11); var out = "";
+    if (d.length > 0) out = "(" + d.slice(0, 2); if (d.length >= 3) out += ") " + d.slice(2, 7); if (d.length >= 8) out += "-" + d.slice(7); return out; }
+  function primeiro(n) { return String(n || "").trim().split(/\s+/)[0] || ""; }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function cookie(n) { var m = document.cookie.match("(?:^|; )" + n + "=([^;]*)"); return m ? decodeURIComponent(m[1]) : null; }
+})();
+</script>
+<script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/98f98845-02a5-4e75-a39a-bbafedfa3212/players/6ae8f6ceb850e26f93ec6966/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
+</body>
+</html>
