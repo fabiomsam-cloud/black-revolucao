@@ -171,15 +171,17 @@
   document.addEventListener("player:ready", function (e) {
     try { e.detail.displayHiddenElements(SEGUNDO_FORM, [".c-form.hide"], { persist: true }); } catch (_) {}
   });
-  var enviados = {}, DUR = null;
+  // 03/11: o smartplayer não expõe a duração (vinha vazia) → duração fixa da VSL editada (6:23). Prévia muda do autoplay não conta como assistido.
+  var enviados = {}, DUR_VSL = 383;
   setInterval(function () {
     var sp = window.smartplayer, i = sp && sp.instances && sp.instances[0];
     if (!i || !i.video) return;
-    var t = i.video.currentTime, d = i.video.duration || DUR; if (d) DUR = d;
+    var t = i.video.currentTime, dv = i.video.duration, d = (typeof dv === "number" && isFinite(dv) && dv > 60) ? dv : DUR_VSL;
     if (typeof t !== "number") return;
     if (t >= SEGUNDO_FORM) liberar("tempo");
     if (!$("form-area").classList.contains("hide")) liberar("vturb");
-    if (d) { var pct = t / d * 100; [25, 50, 75, 100].forEach(function (m) {
+    var previa = i.smartAutoPlay && i.analytics && !i.analytics.hasStarted;
+    if (d && !previa) { var pct = t / d * 100; [25, 50, 75, 100].forEach(function (m) {
       if (pct >= (m === 100 ? 97 : m) && !enviados[m]) { enviados[m] = 1; evento("video", { pct: m }); px("trackCustom", "CerebroVideo", { pct: m }); } }); }
   }, 2000);
   // quem já passou do ponto em outra visita: o Vturb mostra o bloco sozinho; a observação acima captura e registra.
