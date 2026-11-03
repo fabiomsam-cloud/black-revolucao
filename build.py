@@ -507,6 +507,9 @@ COPY["v6"] = dict(COPY["v2b"], cerebro=True, topo_cta=CZ_TOPO,
     css_extra=CZ_CSS,
     title="A Revolução do Estudo · o Cérebro — de graça até a live de 10 de novembro",
     desc="Conheça o Cérebro: a plataforma que mostra o que você já domina do seu edital, o que estudar hoje e o que revisar. Use de graça até a live de 10 de novembro, 20h.")
+# 03/11 (Fábio): a v6 vira a página principal — raiz do domínio, /bio (mesmas UTMs de bio, versão "bio") e YouTube.
+# /v5 (link das descrições dos vídeos do YouTube) passa a só redirecionar p/ a /v6 levando as UTMs; o conteúdo antigo da v5 sai do ar.
+COPY["bio"] = dict(COPY["v6"], utm=COPY["bio"]["utm"])
 RODIZIO = """<script>(function(){try{var A=%s,S=%s,K="black_ab_v4",v=null,s=null;
 try{s=JSON.parse(localStorage.getItem(K)||"null")}catch(e){}
 if(s&&A.indexOf(s.v)>-1&&Date.now()-s.ts<2592e6)v=s.v;
@@ -574,14 +577,15 @@ def obrigado(o=None):
     return out
 
 ROOT_INDEX = """<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Black · A Revolução do Estudo</title>
-<meta http-equiv="refresh" content="0; url=v2/"><link rel="canonical" href="v2/"><script>location.replace("v2/" + location.search + location.hash);</script></head>
-<body style="background:#050607;color:#ccc;font-family:sans-serif;padding:40px;text-align:center"><a href="v2/" style="color:#00b7df">Entrar na página</a></body></html>
+<meta http-equiv="refresh" content="0; url={d}"><link rel="canonical" href="{d}"><script>location.replace("{d}" + location.search + location.hash);</script></head>
+<body style="background:#050607;color:#ccc;font-family:sans-serif;padding:40px;text-align:center"><a href="{d}" style="color:#00b7df">Entrar na página</a></body></html>
 """
 
-for v in ("v1", "v2", "v2b", "v2c", "v2d", "v3", "v4", "v5", "v6", "bio", "alunos"):
+for v in ("v1", "v2", "v2b", "v2c", "v2d", "v3", "v4", "v6", "bio", "alunos"):
     d = ROOT / v; d.mkdir(exist_ok=True); (d / "index.html").write_text(page(v), encoding="utf-8")
+(ROOT / "v5" / "index.html").write_text(ROOT_INDEX.replace("{d}", "../v6/"), encoding="utf-8")
 (ROOT / "obrigado").mkdir(exist_ok=True); (ROOT / "obrigado" / "index.html").write_text(obrigado(), encoding="utf-8")
 (ROOT / "obrigado-alunos").mkdir(exist_ok=True); (ROOT / "obrigado-alunos" / "index.html").write_text(obrigado(OBRIGADO_ALUNOS), encoding="utf-8")
-(ROOT / "index.html").write_text(ROOT_INDEX, encoding="utf-8")
+(ROOT / "index.html").write_text(ROOT_INDEX.replace("{d}", "v6/"), encoding="utf-8")
 (ROOT / ".nojekyll").write_text("")
 print("ok: v1–v6/, v2b–v2d/, bio/, alunos/, obrigado/, obrigado-alunos/, index.html")
