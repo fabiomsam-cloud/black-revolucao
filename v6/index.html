@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A Revolução do Estudo · o Cérebro — de graça até a live de 10 de novembro</title>
+<meta name="description" content="Conheça o Cérebro: a plataforma que mostra o que você já domina do seu edital, o que estudar hoje e o que revisar. Use de graça até a live de 10 de novembro, 20h.">
+<meta property="og:title" content="A Revolução do Estudo · o Cérebro — de graça até a live de 10 de novembro">
+<meta property="og:description" content="Conheça o Cérebro: a plataforma que mostra o que você já domina do seu edital, o que estudar hoje e o que revisar. Use de graça até a live de 10 de novembro, 20h.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://revolucaodoestudo.com.br/assets/og.jpg">
+<meta name="theme-color" content="#050607">
+<link rel="icon" href="../assets/logo-e.png" type="image/png">
+<link rel="preload" href="../assets/fonts/saira-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/hero-bg-m.webp" as="image" type="image/webp" media="(max-width:959px)" fetchpriority="high">
+<link rel="preload" href="../assets/hero-bg.webp" as="image" type="image/webp" media="(min-width:960px)" fetchpriority="high">
+<link rel="stylesheet" href="../assets/black.css?v=35">
+<script>window.BLACK_CFG={anon:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRxcHh1Z2RobGdhZnZkZGF2enpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxODQ1NTMsImV4cCI6MjA5Nzc2MDU1M30.nUhYPO3oLUZEXgQCDlRtL-Jawi0nr0l1Z7_z5ecEXvc",slug:"black-revolucao-nao-alunos",pixel:"429553154418122",versao:"v6",grupo:"https://sndflw.com/i/D3dZyygkzj3LQgQ73IHP",obrigado:"../obrigado/",live:"2026-11-10T20:00:00-03:00",utm:{},gads:{"id": "AW-646244794", "sup": "AW-646244794/ulgwCP2W0KEdELrTk7QC", "med": "AW-646244794/lH70CICX0KEdELrTk7QC"}};</script>
+<style>/* v2 · topo no padrão da referência da Escola da Bel (21/10). Embutido SÓ na v2 pelo build.py. */
+.sub .hl{color:#1cc6e6;font-weight:700}
+@media (max-width:959px){
+  /* 21/10: sem contador nesta página (o build não gera a barra do topo) */
+
+  /* uma coluna só, tudo centralizado: foto → logo + data → título → subtítulo → formulário */
+  .hero{padding-top:0;margin-top:0}
+  .hero .wrap{display:flex;flex-direction:column;align-items:stretch;gap:0;text-align:center}
+  .hero-copy{display:contents}
+
+  /* foto grande, centralizada, da cabeça até a mão com o cérebro, sumindo embaixo */
+  .hero-photo{order:1;position:relative;align-self:stretch;min-height:0;height:222px;margin:0 -16px;overflow:hidden;z-index:1}
+  .hero-photo::before{display:block;content:"";position:absolute;left:50%;top:14px;width:290px;height:215px;transform:translateX(-50%);border-radius:50%;
+    background:radial-gradient(closest-side,rgba(0,170,210,.42),rgba(0,155,190,.12) 55%,transparent 75%);filter:blur(10px)}
+  .hero-photo::after{display:none}
+  .hero-photo img{position:absolute;top:2px;bottom:auto;left:50%;right:auto;transform:translateX(-50%);height:278px;width:auto;filter:none;
+    -webkit-mask-image:linear-gradient(180deg,#000 76%,transparent 82%);mask-image:linear-gradient(180deg,#000 76%,transparent 82%)}
+
+  /* 21/10 (equipe): logo e data SOBEM para o topo, um de cada lado da cabeça — o botão entra na primeira tela */
+  .brand-row{order:0;position:absolute;top:14px;left:0;right:0;z-index:3;margin:0;flex-direction:row;flex-wrap:nowrap;align-items:flex-start;justify-content:space-between;gap:8px;pointer-events:none}
+  .brand img{height:42px}
+  .date-pill{display:flex;flex-direction:column;align-items:center;gap:1px;padding:7px 11px 8px;position:relative;
+    border:1px solid rgba(255,255,255,.18);border-radius:14px;background:rgba(10,13,18,.78);box-shadow:0 8px 24px rgba(0,0,0,.45);
+    -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);text-align:center;line-height:1.1}
+  .date-pill svg{display:none}
+  .date-pill .d1{display:flex;flex-direction:column;align-items:center;font-size:11.5px;font-weight:700;letter-spacing:.02em;color:#fff;text-transform:uppercase}
+  .date-pill .d1 .sep{display:none}
+  .date-pill .d1 .hr{font-size:19px;font-weight:800;line-height:1.05;margin-top:1px}
+  .date-pill .d2{font-size:9.5px;font-weight:700;letter-spacing:.04em;color:#1cc6e6;text-transform:uppercase;white-space:nowrap}
+
+  /* título e subtítulo centralizados (o subtítulo volta a aparecer no celular) */
+  h1{order:3;font-size:23px;line-height:1.15;margin:4px 0 6px;text-wrap:balance}
+  .sub{display:block;order:4;font-size:14.5px;line-height:1.32;color:#c9cdd4;margin:0 0 10px;max-width:none;text-wrap:pretty}
+
+  /* formulário: igual ao de antes */
+  .hero-form-slot{order:5;margin:0 0 36px;text-align:left}
+}
+@media (max-width:374px){
+  .brand img{height:38px}
+  .date-pill{padding:6px 9px 7px}
+  .date-pill .d1{font-size:10.5px}
+  .date-pill .d1 .hr{font-size:17px}
+  .date-pill .d2{font-size:8.5px}
+  h1{font-size:21.5px}
+  .sub{font-size:14px}
+}
+@media (max-width:339px){
+  .hero-photo{height:212px}
+  .hero-photo img{height:262px}
+  .brand img{height:32px}
+  h1{font-size:20px}
+  .sub{font-size:13.5px}
+}
+
+.sub [data-cz-depois][hidden],.sub [data-cz-ate][hidden]{display:none}
+.cz-topo{max-width:560px}.cz-topo .btn.block{font-size:16px}
+.cz-ja{display:block;text-align:center;margin:14px 0 0;color:#1cc6e6;font-weight:600;font-size:15px;text-decoration:underline;text-underline-offset:3px}
+.cz section{padding:84px 0;border-top:1px solid var(--line)}
+.cz h3{font-family:var(--font-d);font-weight:800;font-size:clamp(20px,2vw,26px);line-height:1.15;margin:0 0 10px}
+.cz [hidden]{display:none!important}
+.cz-dores{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px;text-align:left}
+.cz-dores .card{grid-column:auto;min-height:0;justify-content:flex-start}.cz-dores .card .bars{margin-bottom:18px}
+.cz-passos{list-style:none;margin:40px 0 0;padding:0;display:grid;gap:56px}
+.cz-passo{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:48px;align-items:center;max-width:900px;margin:0 auto;width:100%}
+.cz-passo:nth-child(even) .cz-txt{order:2}
+.cz-txt p{color:var(--ink-2);font-size:clamp(16.5px,1.35vw,19px);margin:0}
+.cz-n{display:inline-block;font-family:var(--font-d);font-weight:800;font-size:14px;letter-spacing:.14em;color:#1cc6e6;margin:0 0 10px}
+.cz-v{color:#2fe08d}.cz-a{color:#ffc93c}.cz-r{color:#ff5d6c}
+.cz-tela{border-radius:28px;overflow:hidden;border:1px solid var(--line-2);background:#05070a;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 50px rgba(0,155,190,.16);max-width:300px;margin:0 auto}
+.cz-tela img{display:block;width:100%;height:auto}
+.cz-player{max-width:360px;margin:30px auto 0;border-radius:18px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 60px rgba(0,155,190,.18)}
+.cz-jornada{list-style:none;padding:0;margin:34px auto 0;max-width:980px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;text-align:left}
+.cz-jornada li{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line);border-radius:var(--r);padding:22px 20px}
+.cz-jornada li[hidden]{display:none}
+.cz-jornada b{display:block;font-family:var(--font-d);font-size:19px;margin:0 0 8px}
+.cz-jornada p{margin:0;color:var(--ink-2);font-size:15.5px}
+.cz-filtro{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px;margin:30px auto 0}
+.cz-filtro>div{border-radius:var(--r);padding:24px 22px;border:1px solid var(--line);background:var(--card)}
+.cz-sim{border-color:rgba(47,224,141,.35)!important;background:linear-gradient(180deg,rgba(47,224,141,.07),var(--card))!important}
+.cz-filtro ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.cz-filtro li{position:relative;padding-left:30px;color:var(--ink-2);font-size:16px;line-height:1.4}
+.cz-filtro li::before{position:absolute;left:0;top:0;font-weight:800}
+.cz-sim li::before{content:"✓";color:#2fe08d}.cz-nao li::before{content:"✕";color:#ff5d6c}
+.cz-final .form-card{margin:26px auto 0}
+.cz-final-sub{color:var(--ink-2);font-size:17px;max-width:46ch;margin:0 auto}
+.cz-det{max-width:760px;margin:26px auto 0}
+.cz-det details{border:1px solid var(--line);border-radius:14px;background:var(--card);margin:0 0 10px;padding:0 20px}
+.cz-det summary{cursor:pointer;list-style:none;padding:18px 26px 18px 0;font-weight:700;font-size:16.5px;position:relative}
+.cz-det summary::-webkit-details-marker{display:none}
+.cz-det summary::after{content:"+";position:absolute;right:0;top:14px;font-size:22px;color:#1cc6e6}
+.cz-det details[open] summary::after{content:"–"}
+.cz-det p{margin:0 0 18px;color:var(--ink-2)}
+@media (max-width:959px){
+  .cz-topo{margin:0 0 36px}
+  .cz section{padding:56px 0}
+  .cz-dores{grid-template-columns:1fr}
+  .cz-passos{gap:44px}
+  .cz-passo{grid-template-columns:1fr;gap:20px;text-align:center}
+  .cz-passo:nth-child(even) .cz-txt{order:0}
+  .cz-tela{max-width:260px;border-radius:24px}
+  .cz-jornada{grid-template-columns:1fr}
+  .cz-filtro{grid-template-columns:1fr}
+  .cz-final .form-card{text-align:left}
+}
+</style>
+</head>
+<body>
+<main>
+<section class="hero hero--ref" aria-labelledby="h1">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <div class="brand-row rv" style="--d:0s">
+        <div class="brand"><img src="../assets/logo-black-revolucao.webp" width="480" height="188" alt="Black · A Revolução do Estudo"></div>
+        <div class="date-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg><span class="d1">10 de novembro<span class="sep"> · </span><span class="hr">20h</span></span><span class="d2 live">Ao vivo · Brasília</span></div>
+      </div>
+      <h1 id="h1" class="rv" style="--d:.1s">A Revolução do Estudo é estudar com um <span class="metal">Cérebro</span> do seu lado.</h1>
+      <p class="sub rv" style="--d:.18s">Uma plataforma que mostra o que você já domina do seu edital, o que estudar hoje e o que revisar. <strong class="hl" data-cz-ate>Faça o cadastro e use o Cérebro de graça até a live de 10 de novembro.</strong><strong class="hl" data-cz-depois hidden>No dia 10 de novembro, ao vivo, o Professor Fábio abre o Cérebro e mostra como estudar com ele.</strong></p>
+      <div class="hero-form-slot"><div class="cz-topo rv" style="--d:.3s"><a class="btn block" href="#como">Ver como o Cérebro funciona</a><a class="cz-ja" href="#form" data-goto-form>Já quero o meu acesso <span aria-hidden="true">↓</span></a><p class="form-note">Cadastro gratuito no fim da página · Com Fábio Silva · Sou Concurseiro</p></div></div>
+    </div>
+    <div class="hero-photo rv" aria-hidden="true" style="--d:.05s">
+      <img src="../assets/fabio-cerebro-860.webp" srcset="../assets/fabio-cerebro-440.webp 440w, ../assets/fabio-cerebro-860.webp 860w" sizes="(max-width:959px) 270px, 700px" width="860" height="1091" alt="" loading="eager" fetchpriority="high">
+    </div>
+  </div>
+</section>
+
+<div class="cz">
+<section class="glow-top" id="como-era">
+  <div class="wrap center">
+    <p class="eyebrow rv">A velha forma de estudar</p>
+    <h2 class="rv">Você estuda. Mas sabe o que vai <span class="blue">lembrar no dia da prova</span>?</h2>
+    <div class="cz-dores"><article class="card txt rv" style="transition-delay:0.00s"><span class="num">01</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><h3>O que você já domina</h3><p>Você termina um assunto e não sabe se ele ficou ou se vai sumir até a prova.</p></article><article class="card txt rv" style="transition-delay:0.08s"><span class="num">02</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><h3>O que mais cai</h3><p>O edital tem centenas de temas e todos parecem urgentes. Sem saber o peso de cada um, o tempo vai para o lugar errado.</p></article><article class="card txt rv" style="transition-delay:0.16s"><span class="num">03</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><h3>O que revisar, e quando</h3><p>Revisar tudo é impossível. Não revisar é esquecer. Falta alguém dizendo o que voltar a ver hoje.</p></article></div>
+    <p class="lead rv" style="margin:36px auto 0">Antes era quase impossível enxergar isso sozinho. Agora, com inteligência artificial, dá. <b>Essa é a Revolução do Estudo.</b></p>
+  </div>
+</section>
+<section id="como">
+  <div class="wrap">
+    <div class="center">
+      <p class="eyebrow rv">O Cérebro por dentro</p>
+      <h2 class="rv">Quatro passos. Todo dia você sabe <span class="blue">onde está e o que falta</span>.</h2>
+      <p class="lead rv">O nome oficial da plataforma é <b>Dominei</b>. A gente chama de Cérebro porque é isso que ela monta: o mapa da sua cabeça para o seu edital.</p>
+    </div>
+    <ol class="cz-passos"><li class="cz-passo rv"><div class="cz-txt"><span class="cz-n">01</span><h3>Escolha o seu edital</h3><p>O Cérebro é montado para a prova que você vai fazer: PRF, TJ-AM, Polícia Federal, Polícia Civil e Polícia Militar do Amazonas, INSS, ManausPrev, SES-AM, SEDUC-AM, SEDUC-PA e SEMED Manaus.</p></div><div class="cz-tela"><img src="../assets/cz-edital-560.webp" srcset="../assets/cz-edital-360.webp 360w, ../assets/cz-edital-560.webp 560w" sizes="(max-width:959px) 260px, 300px" loading="lazy" decoding="async" alt="Tela do Cérebro: escolha do concurso, com a PRF selecionada"></div></li><li class="cz-passo rv"><div class="cz-txt"><span class="cz-n">02</span><h3>Faça o diagnóstico e veja o seu cérebro acender</h3><p>Um teste de até 20 questões do seu edital. Cada assunto vira um ponto: <b class="cz-v">verde</b> é o que você domina, <b class="cz-a">amarelo</b> está em desenvolvimento, <b class="cz-r">vermelho</b> precisa de atenção.</p></div><div class="cz-tela"><img src="../assets/cz-cerebro-560.webp" srcset="../assets/cz-cerebro-360.webp 360w, ../assets/cz-cerebro-560.webp 560w" sizes="(max-width:959px) 260px, 300px" loading="lazy" decoding="async" alt="Tela do Cérebro: mapa do edital da PRF aceso em verde, amarelo e vermelho"></div></li><li class="cz-passo rv"><div class="cz-txt"><span class="cz-n">03</span><h3>Receba a sua sessão do dia</h3><p>Todo dia ele mostra a sua prioridade: o assunto que mais pesa na prova cruzado com o que falta em você, mais as revisões na hora certa. Um botão e você começa.</p></div><div class="cz-tela"><img src="../assets/cz-hoje-560.webp" srcset="../assets/cz-hoje-360.webp 360w, ../assets/cz-hoje-560.webp 560w" sizes="(max-width:959px) 260px, 300px" loading="lazy" decoding="async" alt="Tela do Cérebro: prioridade de hoje com os assuntos e o botão para começar"></div></li><li class="cz-passo rv"><div class="cz-txt"><span class="cz-n">04</span><h3>Guarde o seu material</h3><p>Resumo, foto das anotações, mapa mental, PDF: tudo fica no <b>Meu Material</b>, organizado por disciplina e assunto do edital, e aceso no seu cérebro.</p></div><div class="cz-tela"><img src="../assets/cz-material-560.webp" srcset="../assets/cz-material-360.webp 360w, ../assets/cz-material-560.webp 560w" sizes="(max-width:959px) 260px, 300px" loading="lazy" decoding="async" alt="Tela do Cérebro: Meu Material com resumos, fotos e PDFs organizados"></div></li></ol>
+  </div>
+</section>
+<section class="cz-vsl">
+  <div class="wrap center">
+    <p class="eyebrow rv">Veja funcionando</p>
+    <h2 class="rv">O Professor Fábio abre o Cérebro e mostra <span class="blue">cada tela</span>.</h2>
+    <div class="cz-player rv"><vturb-smartplayer id="vid-6ae8f6ceb850e26f93ec6966" style="display:block;margin:0 auto;width:100%;max-width:360px"><div class="vturb-player-placeholder" style="position:relative;width:100%;padding:177.77777777777777% 0 0;z-index:0;background-color:#000"></div></vturb-smartplayer></div>
+    <p class="cta-row"><a class="btn" href="#form" data-goto-form><span data-cz-ate>Quero usar o Cérebro de graça</span><span data-cz-depois hidden>Quero participar da live</span></a></p>
+  </div>
+</section>
+<section>
+  <div class="wrap center">
+    <p class="eyebrow rv">Como você entra</p>
+    <h2 class="rv">Do cadastro ao seu <span class="blue">cérebro aceso</span>.</h2>
+    <ol class="cz-jornada">
+      <li class="rv"><span class="cz-n">01</span><b>Faça o cadastro</b><p>WhatsApp, e-mail e escolaridade, no fim desta página.</p></li>
+      <li class="rv"><span class="cz-n">02</span><b>Entre no grupo</b><p>A página seguinte leva você ao grupo do WhatsApp da Revolução. É por lá que saem os avisos e o link da live.</p></li>
+      <li class="rv" data-cz-ate><span class="cz-n">03</span><b>Receba o seu acesso</b><p>No seu WhatsApp chega o link pessoal para criar a sua conta no Cérebro. Use de graça até terça, 10/11, às 8h de Manaus.</p></li>
+      <li class="rv"><span class="cz-n" data-cz-ate>04</span><span class="cz-n" data-cz-depois hidden>03</span><b>Venha para a live</b><p>Terça, 10 de novembro, às 20h de Brasília (19h de Manaus), no YouTube. O Professor Fábio abre o Cérebro ao vivo e revela a condição de Black Friday.</p></li>
+    </ol>
+  </div>
+</section>
+<section class="glow-top">
+  <div class="wrap">
+    <div class="center"><p class="eyebrow rv">Antes de se cadastrar</p><h2 class="rv">Essa semana é para você?</h2></div>
+    <div class="cz-filtro">
+      <div class="cz-sim rv"><h3>É para você se</h3><ul><li>Você vai fazer concurso e quer saber exatamente o que estudar.</li><li>Você tem pouco tempo e quer usar cada minuto no que mais pesa na prova.</li><li>Você topa estudar um pouco todo dia, pelo celular ou pelo computador.</li><li>Você quer testar de verdade nesta semana, com o seu edital.</li></ul></div>
+      <div class="cz-nao rv"><h3>Não é para você se</h3><ul><li>Você procura um atalho para passar sem estudar.</li><li>Você quer só assistir aula, sem responder questão.</li><li>Você não pretende abrir a plataforma antes da live.</li></ul></div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="wrap bio">
+    <div class="bio-photo rv"><img src="../assets/fabio-bracos-cruzados.webp" width="966" height="1200" loading="lazy" decoding="async" alt="Fábio Silva, delegado, professor e mentor do Sou Concurseiro"><div class="tag">Quem construiu o Cérebro<b>Fábio Silva</b></div></div>
+    <div>
+      <p class="eyebrow rv">Quem está com você</p>
+      <h2 class="rv">Delegado, professor e mentor do Sou Concurseiro.</h2>
+      <ul class="roles rv"><li>Polícias</li><li>Tribunais</li><li>Saúde</li><li>Educação</li></ul>
+      <p class="rv">Fábio Silva prepara alunos para concursos de polícia, tribunais, saúde e educação. Viu muita gente boa estudar no escuro e desistir sem saber se estava perto ou longe da aprovação.</p>
+      <p class="rv">O Cérebro é a resposta que ele construiu para isso: uma forma de estudar em que você enxerga, todo dia, o que já domina e o que falta para a sua prova.</p>
+    </div>
+  </div>
+</section>
+<section class="final cz-final" id="cadastro">
+  <div class="wrap center">
+    <p class="eyebrow rv">Seu cadastro</p>
+    <h2 class="rv"><span data-cz-ate>Cadastre-se e <span class="blue">acenda o seu cérebro</span>.</span><span data-cz-depois hidden>Garanta o seu lugar na <span class="blue">live de 10/11</span>.</span></h2>
+    <p class="cz-final-sub rv"><span data-cz-ate>Gratuito. O acesso ao Cérebro chega no seu WhatsApp e vale até terça, 10/11, às 8h de Manaus.</span><span data-cz-depois hidden>Gratuito. O link da live sai no grupo do WhatsApp.</span></p>
+    
+<form class="form-card rv" id="form" novalidate style="--d:.35s">
+  <p class="form-title">Seu lugar na Revolução do Estudo</p>
+  <div class="field"><label for="f-tel">WhatsApp com DDD</label><input id="f-tel" name="telefone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="(00) 00000-0000" required><div class="msg">Confira o WhatsApp: DDD + número com 9 dígitos.</div></div>
+  <div class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="Seu melhor e-mail" required><div class="msg">Digite um e-mail válido.</div></div>
+  <div class="field"><label for="f-esc">Escolaridade</label>
+    <select id="f-esc" name="escolaridade" class="placeholder" required>
+      <option value="" disabled selected>Qual a sua escolaridade?</option>
+      <option value="fundamental">Ensino Fundamental</option>
+      <option value="medio">Ensino Médio</option>
+      <option value="superior_cursando">Superior Cursando</option>
+      <option value="superior_completo">Superior Completo</option>
+      <option value="pos">Pós-graduação</option>
+    </select><div class="msg">Selecione a sua escolaridade.</div></div>
+  <button class="btn block" type="submit"><span>Quero participar</span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  <div class="form-error" role="alert"></div>
+  <p class="form-note">Cadastro gratuito · Acesso e link da live pelo WhatsApp</p>
+  <p class="form-note">Com Fábio Silva · Sou Concurseiro</p>
+</form>
+
+  </div>
+</section>
+<section class="cz-faq">
+  <div class="wrap">
+    <div class="center"><p class="eyebrow rv">Dúvidas</p><h2 class="rv">Antes de entrar.</h2></div>
+    <div class="cz-det"><details><summary>É de graça mesmo?</summary><p><span data-cz-ate>Sim. O cadastro é gratuito e o Cérebro fica liberado para você até terça, 10 de novembro, às 8h de Manaus. Não pedimos cartão.</span><span data-cz-depois hidden>O cadastro é gratuito. O acesso grátis ao Cérebro desta semana já foi encerrado; na live o Professor Fábio mostra como continuar.</span></p></details><details><summary>Preciso instalar alguma coisa?</summary><p>Não. O Cérebro abre no navegador do celular ou do computador. Você cria a sua conta pelo link pessoal que chega no seu WhatsApp.</p></details><details><summary>O meu concurso está lá?</summary><p>Hoje são 20 editais: PRF, Polícia Federal (agente e administrativo), Polícia Civil e Polícia Militar do Amazonas, TJ-AM, INSS, ManausPrev, SES-AM, SEDUC-AM, SEDUC-PA e SEMED Manaus. Se o seu não estiver na lista, você pode pedir o seu dentro do Cérebro.</p></details><details><summary>Preciso ser aluno do Sou Concurseiro?</summary><p>Não. Esta semana é para você que ainda não é aluno conhecer a nova forma de estudar.</p></details><details><summary>O que acontece no dia 10?</summary><p>Às 8h de Manaus o acesso grátis termina e o seu progresso fica guardado. Às 20h de Brasília (19h de Manaus), ao vivo no YouTube, o Professor Fábio mostra como continuar estudando com o Cérebro e revela a condição de Black Friday.</p></details><details><summary>Vai ter oferta na live?</summary><p>Sim. Na live será apresentada uma oferta do Sou Concurseiro. A participação é gratuita e a compra é opcional.</p></details></div>
+    <p class="cta-row"><a class="btn" href="#form" data-goto-form>Quero participar</a></p>
+  </div>
+</section>
+</div>
+<script>(function(){var fim=Date.parse("2026-11-09T23:00:00Z");if(Date.now()<fim)return;
+document.querySelectorAll("[data-cz-ate]").forEach(function(e){e.hidden=true});document.querySelectorAll("[data-cz-depois]").forEach(function(e){e.hidden=false})})();
+(function(){var p=document.querySelector(".cz-player");if(!p)return;var ok=false,go=function(){if(ok)return;ok=true;var s=document.createElement("script");
+s.src="https://scripts.converteai.net/98f98845-02a5-4e75-a39a-bbafedfa3212/players/6ae8f6ceb850e26f93ec6966/v4/player.js";s.async=true;document.head.appendChild(s)};
+if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){go();io.disconnect()}},{rootMargin:"900px 0px"});io.observe(p)}else go();
+window.addEventListener("load",function(){setTimeout(go,6000)})})();</script>
+</main>
+<footer>
+  <div class="wrap">
+    <p>Seus dados são usados apenas para enviar informações sobre a Black A Revolução do Estudo.</p>
+    <p>© 2026 Sou Concurseiro e Vou Passar · Todos os direitos reservados.</p>
+  </div>
+</footer>
+<script src="../assets/black.js?v=35"></script>
+</body>
+</html>

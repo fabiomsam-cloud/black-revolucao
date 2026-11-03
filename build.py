@@ -66,17 +66,19 @@ ESCOLARIDADE = """<div class="field"><label for="f-esc">Escolaridade</label>
       <option value="pos">Pós-graduação</option>
     </select><div class="msg">Selecione a sua escolaridade.</div></div>"""
 
-def form_card(cta, sem_escolaridade=False):   # 18/10: página de ALUNOS não pergunta escolaridade
-    arrow = '<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+ARROW = '<svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+
+def form_card(cta, sem_escolaridade=False, titulo="Garanta o seu lugar na live", nota="Cadastro gratuito · Link no grupo do WhatsApp"):   # 18/10: página de ALUNOS não pergunta escolaridade
+    arrow = ARROW
     return f"""
 <form class="form-card rv" id="form" novalidate style="--d:.35s">
-  <p class="form-title">Garanta o seu lugar na live</p>
+  <p class="form-title">{titulo}</p>
   <div class="field"><label for="f-tel">WhatsApp com DDD</label><input id="f-tel" name="telefone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="(00) 00000-0000" required><div class="msg">Confira o WhatsApp: DDD + número com 9 dígitos.</div></div>
   <div class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="Seu melhor e-mail" required><div class="msg">Digite um e-mail válido.</div></div>
   {"" if sem_escolaridade else ESCOLARIDADE}
   <button class="btn block" type="submit"><span>{cta}</span>{arrow}</button>
   <div class="form-error" role="alert"></div>
-  <p class="form-note">Cadastro gratuito · Link no grupo do WhatsApp</p>
+  <p class="form-note">{nota}</p>
   <p class="form-note">Com Fábio Silva · Sou Concurseiro</p>
 </form>
 """
@@ -94,7 +96,7 @@ def hero(c):
       </div>
       <h1 id="h1" class="rv" style="--d:.1s">{c['h1']}</h1>
       <p class="sub rv" style="--d:.18s">{c['sub']}</p>
-      <div class="hero-form-slot">{form_card("Quero participar", c.get("sem_escolaridade"))}</div>
+      <div class="hero-form-slot">{c["topo_cta"] if c.get("topo_cta") else form_card("Quero participar", c.get("sem_escolaridade"))}</div>
     </div>
     <div class="hero-photo rv{' hero-video' if c.get('hero_video') else ''}" aria-hidden="true" style="--d:.05s">
       <img src="../assets/fabio-cerebro-860.webp" srcset="../assets/fabio-cerebro-440.webp 440w, ../assets/fabio-cerebro-860.webp 860w" sizes="{c.get('foto_sizes', '(max-width:959px) 210px, 700px')}" width="860" height="1091" alt="" loading="eager" fetchpriority="high">{('<video muted loop playsinline preload="none" width="540" height="780" data-webm="../assets/' + c['hero_video'] + '.webm" data-mp4="../assets/' + c['hero_video'] + '.mp4"></video>') if c.get('hero_video') else ''}
@@ -241,6 +243,187 @@ def final():
 </section>
 """
 
+# 03/11 (Fábio): v6 = página EXPLICATIVA do Cérebro (Dominei) — o lead entra sabendo o que é a revolução. Topo da v2b com botão no lugar do
+# formulário; formulário só no fim, depois de: velha forma · 4 passos com telas reais (geradas do app com dados de demonstração, sem conta de aluno) ·
+# VSL do Cérebro (Vturb, carrega só perto da tela) · como entra · para quem é · professor · dúvidas. Mesmo slug/grupo/pixel/régua.
+# Até CZ_TETO (fim do T1 da régua do Cérebro) a página promete o acesso grátis pelo WhatsApp; depois, só a live ([data-cz-ate] / [data-cz-depois]).
+CZ_TETO = "2026-11-09T23:00:00Z"
+CZ_PLAYER = "6ae8f6ceb850e26f93ec6966"
+CZ_CONTA = "98f98845-02a5-4e75-a39a-bbafedfa3212"
+
+def cz_tela(nome, alt):
+    return (f'<div class="cz-tela"><img src="../assets/cz-{nome}-560.webp" srcset="../assets/cz-{nome}-360.webp 360w, ../assets/cz-{nome}-560.webp 560w" '
+            f'sizes="(max-width:959px) 260px, 300px" loading="lazy" decoding="async" alt="{alt}"></div>')
+
+def cerebro_secoes():
+    passos = [
+        ("edital", "Escolha o seu edital", "O Cérebro é montado para a prova que você vai fazer: PRF, TJ-AM, Polícia Federal, Polícia Civil e Polícia Militar do Amazonas, INSS, ManausPrev, SES-AM, SEDUC-AM, SEDUC-PA e SEMED Manaus.",
+         "Tela do Cérebro: escolha do concurso, com a PRF selecionada"),
+        ("cerebro", "Faça o diagnóstico e veja o seu cérebro acender", "Um teste de até 20 questões do seu edital. Cada assunto vira um ponto: <b class=\"cz-v\">verde</b> é o que você domina, <b class=\"cz-a\">amarelo</b> está em desenvolvimento, <b class=\"cz-r\">vermelho</b> precisa de atenção.",
+         "Tela do Cérebro: mapa do edital da PRF aceso em verde, amarelo e vermelho"),
+        ("hoje", "Receba a sua sessão do dia", "Todo dia ele mostra a sua prioridade: o assunto que mais pesa na prova cruzado com o que falta em você, mais as revisões na hora certa. Um botão e você começa.",
+         "Tela do Cérebro: prioridade de hoje com os assuntos e o botão para começar"),
+        ("material", "Guarde o seu material", "Resumo, foto das anotações, mapa mental, PDF: tudo fica no <b>Meu Material</b>, organizado por disciplina e assunto do edital, e aceso no seu cérebro.",
+         "Tela do Cérebro: Meu Material com resumos, fotos e PDFs organizados"),
+    ]
+    lis = "".join(f'<li class="cz-passo rv"><div class="cz-txt"><span class="cz-n">0{i + 1}</span><h3>{t}</h3><p>{p}</p></div>{cz_tela(n, alt)}</li>'
+                  for i, (n, t, p, alt) in enumerate(passos))
+    dores = [("O que você já domina", "Você termina um assunto e não sabe se ele ficou ou se vai sumir até a prova."),
+             ("O que mais cai", "O edital tem centenas de temas e todos parecem urgentes. Sem saber o peso de cada um, o tempo vai para o lugar errado."),
+             ("O que revisar, e quando", "Revisar tudo é impossível. Não revisar é esquecer. Falta alguém dizendo o que voltar a ver hoje.")]
+    cards = "".join(f'<article class="card txt rv" style="transition-delay:{i * .08:.2f}s"><span class="num">0{i + 1}</span>{BARS}<h3>{a}</h3><p>{b}</p></article>' for i, (a, b) in enumerate(dores))
+    sim = ["Você vai fazer concurso e quer saber exatamente o que estudar.", "Você tem pouco tempo e quer usar cada minuto no que mais pesa na prova.",
+           "Você topa estudar um pouco todo dia, pelo celular ou pelo computador.", "Você quer testar de verdade nesta semana, com o seu edital."]
+    nao = ["Você procura um atalho para passar sem estudar.", "Você quer só assistir aula, sem responder questão.", "Você não pretende abrir a plataforma antes da live."]
+    faq = [("É de graça mesmo?", '<span data-cz-ate>Sim. O cadastro é gratuito e o Cérebro fica liberado para você até terça, 10 de novembro, às 8h de Manaus. Não pedimos cartão.</span><span data-cz-depois hidden>O cadastro é gratuito. O acesso grátis ao Cérebro desta semana já foi encerrado; na live o Professor Fábio mostra como continuar.</span>'),
+           ("Preciso instalar alguma coisa?", "Não. O Cérebro abre no navegador do celular ou do computador. Você cria a sua conta pelo link pessoal que chega no seu WhatsApp."),
+           ("O meu concurso está lá?", "Hoje são 20 editais: PRF, Polícia Federal (agente e administrativo), Polícia Civil e Polícia Militar do Amazonas, TJ-AM, INSS, ManausPrev, SES-AM, SEDUC-AM, SEDUC-PA e SEMED Manaus. Se o seu não estiver na lista, você pode pedir o seu dentro do Cérebro."),
+           ("Preciso ser aluno do Sou Concurseiro?", "Não. Esta semana é para você que ainda não é aluno conhecer a nova forma de estudar."),
+           ("O que acontece no dia 10?", "Às 8h de Manaus o acesso grátis termina e o seu progresso fica guardado. Às 20h de Brasília (19h de Manaus), ao vivo no YouTube, o Professor Fábio mostra como continuar estudando com o Cérebro e revela a condição de Black Friday."),
+           ("Vai ter oferta na live?", "Sim. Na live será apresentada uma oferta do Sou Concurseiro. A participação é gratuita e a compra é opcional.")]
+    det = "".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a in faq)
+    return f"""
+<div class="cz">
+<section class="glow-top" id="como-era">
+  <div class="wrap center">
+    <p class="eyebrow rv">A velha forma de estudar</p>
+    <h2 class="rv">Você estuda. Mas sabe o que vai <span class="blue">lembrar no dia da prova</span>?</h2>
+    <div class="cz-dores">{cards}</div>
+    <p class="lead rv" style="margin:36px auto 0">Antes era quase impossível enxergar isso sozinho. Agora, com inteligência artificial, dá. <b>Essa é a Revolução do Estudo.</b></p>
+  </div>
+</section>
+<section id="como">
+  <div class="wrap">
+    <div class="center">
+      <p class="eyebrow rv">O Cérebro por dentro</p>
+      <h2 class="rv">Quatro passos. Todo dia você sabe <span class="blue">onde está e o que falta</span>.</h2>
+      <p class="lead rv">O nome oficial da plataforma é <b>Dominei</b>. A gente chama de Cérebro porque é isso que ela monta: o mapa da sua cabeça para o seu edital.</p>
+    </div>
+    <ol class="cz-passos">{lis}</ol>
+  </div>
+</section>
+<section class="cz-vsl">
+  <div class="wrap center">
+    <p class="eyebrow rv">Veja funcionando</p>
+    <h2 class="rv">O Professor Fábio abre o Cérebro e mostra <span class="blue">cada tela</span>.</h2>
+    <div class="cz-player rv"><vturb-smartplayer id="vid-{CZ_PLAYER}" style="display:block;margin:0 auto;width:100%;max-width:360px"><div class="vturb-player-placeholder" style="position:relative;width:100%;padding:177.77777777777777% 0 0;z-index:0;background-color:#000"></div></vturb-smartplayer></div>
+    <p class="cta-row"><a class="btn" href="#form" data-goto-form><span data-cz-ate>Quero usar o Cérebro de graça</span><span data-cz-depois hidden>Quero participar da live</span></a></p>
+  </div>
+</section>
+<section>
+  <div class="wrap center">
+    <p class="eyebrow rv">Como você entra</p>
+    <h2 class="rv">Do cadastro ao seu <span class="blue">cérebro aceso</span>.</h2>
+    <ol class="cz-jornada">
+      <li class="rv"><span class="cz-n">01</span><b>Faça o cadastro</b><p>WhatsApp, e-mail e escolaridade, no fim desta página.</p></li>
+      <li class="rv"><span class="cz-n">02</span><b>Entre no grupo</b><p>A página seguinte leva você ao grupo do WhatsApp da Revolução. É por lá que saem os avisos e o link da live.</p></li>
+      <li class="rv" data-cz-ate><span class="cz-n">03</span><b>Receba o seu acesso</b><p>No seu WhatsApp chega o link pessoal para criar a sua conta no Cérebro. Use de graça até terça, 10/11, às 8h de Manaus.</p></li>
+      <li class="rv"><span class="cz-n" data-cz-ate>04</span><span class="cz-n" data-cz-depois hidden>03</span><b>Venha para a live</b><p>Terça, 10 de novembro, às 20h de Brasília (19h de Manaus), no YouTube. O Professor Fábio abre o Cérebro ao vivo e revela a condição de Black Friday.</p></li>
+    </ol>
+  </div>
+</section>
+<section class="glow-top">
+  <div class="wrap">
+    <div class="center"><p class="eyebrow rv">Antes de se cadastrar</p><h2 class="rv">Essa semana é para você?</h2></div>
+    <div class="cz-filtro">
+      <div class="cz-sim rv"><h3>É para você se</h3><ul>{"".join(f"<li>{t}</li>" for t in sim)}</ul></div>
+      <div class="cz-nao rv"><h3>Não é para você se</h3><ul>{"".join(f"<li>{t}</li>" for t in nao)}</ul></div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="wrap bio">
+    <div class="bio-photo rv"><img src="../assets/fabio-bracos-cruzados.webp" width="966" height="1200" loading="lazy" decoding="async" alt="Fábio Silva, delegado, professor e mentor do Sou Concurseiro"><div class="tag">Quem construiu o Cérebro<b>Fábio Silva</b></div></div>
+    <div>
+      <p class="eyebrow rv">Quem está com você</p>
+      <h2 class="rv">Delegado, professor e mentor do Sou Concurseiro.</h2>
+      <ul class="roles rv"><li>Polícias</li><li>Tribunais</li><li>Saúde</li><li>Educação</li></ul>
+      <p class="rv">Fábio Silva prepara alunos para concursos de polícia, tribunais, saúde e educação. Viu muita gente boa estudar no escuro e desistir sem saber se estava perto ou longe da aprovação.</p>
+      <p class="rv">O Cérebro é a resposta que ele construiu para isso: uma forma de estudar em que você enxerga, todo dia, o que já domina e o que falta para a sua prova.</p>
+    </div>
+  </div>
+</section>
+<section class="final cz-final" id="cadastro">
+  <div class="wrap center">
+    <p class="eyebrow rv">Seu cadastro</p>
+    <h2 class="rv"><span data-cz-ate>Cadastre-se e <span class="blue">acenda o seu cérebro</span>.</span><span data-cz-depois hidden>Garanta o seu lugar na <span class="blue">live de 10/11</span>.</span></h2>
+    <p class="cz-final-sub rv"><span data-cz-ate>Gratuito. O acesso ao Cérebro chega no seu WhatsApp e vale até terça, 10/11, às 8h de Manaus.</span><span data-cz-depois hidden>Gratuito. O link da live sai no grupo do WhatsApp.</span></p>
+    {form_card("Quero participar", titulo="Seu lugar na Revolução do Estudo", nota="Cadastro gratuito · Acesso e link da live pelo WhatsApp")}
+  </div>
+</section>
+<section class="cz-faq">
+  <div class="wrap">
+    <div class="center"><p class="eyebrow rv">Dúvidas</p><h2 class="rv">Antes de entrar.</h2></div>
+    <div class="cz-det">{det}</div>
+    <p class="cta-row"><a class="btn" href="#form" data-goto-form>Quero participar</a></p>
+  </div>
+</section>
+</div>
+<script>(function(){{var fim=Date.parse("{CZ_TETO}");if(Date.now()<fim)return;
+document.querySelectorAll("[data-cz-ate]").forEach(function(e){{e.hidden=true}});document.querySelectorAll("[data-cz-depois]").forEach(function(e){{e.hidden=false}})}})();
+(function(){{var p=document.querySelector(".cz-player");if(!p)return;var ok=false,go=function(){{if(ok)return;ok=true;var s=document.createElement("script");
+s.src="https://scripts.converteai.net/{CZ_CONTA}/players/{CZ_PLAYER}/v4/player.js";s.async=true;document.head.appendChild(s)}};
+if("IntersectionObserver" in window){{var io=new IntersectionObserver(function(es){{if(es[0].isIntersecting){{go();io.disconnect()}}}},{{rootMargin:"900px 0px"}});io.observe(p)}}else go();
+window.addEventListener("load",function(){{setTimeout(go,6000)}})}})();</script>
+"""
+
+CZ_TOPO = ('<div class="cz-topo rv" style="--d:.3s"><a class="btn block" href="#como">Ver como o Cérebro funciona</a>'
+           '<a class="cz-ja" href="#form" data-goto-form>Já quero o meu acesso <span aria-hidden="true">↓</span></a>'
+           '<p class="form-note">Cadastro gratuito no fim da página · Com Fábio Silva · Sou Concurseiro</p></div>')
+
+CZ_CSS = """
+.sub [data-cz-depois][hidden],.sub [data-cz-ate][hidden]{display:none}
+.cz-topo{max-width:560px}.cz-topo .btn.block{font-size:16px}
+.cz-ja{display:block;text-align:center;margin:14px 0 0;color:#1cc6e6;font-weight:600;font-size:15px;text-decoration:underline;text-underline-offset:3px}
+.cz section{padding:84px 0;border-top:1px solid var(--line)}
+.cz h3{font-family:var(--font-d);font-weight:800;font-size:clamp(20px,2vw,26px);line-height:1.15;margin:0 0 10px}
+.cz [hidden]{display:none!important}
+.cz-dores{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px;text-align:left}
+.cz-dores .card{grid-column:auto;min-height:0;justify-content:flex-start}.cz-dores .card .bars{margin-bottom:18px}
+.cz-passos{list-style:none;margin:40px 0 0;padding:0;display:grid;gap:56px}
+.cz-passo{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:48px;align-items:center;max-width:900px;margin:0 auto;width:100%}
+.cz-passo:nth-child(even) .cz-txt{order:2}
+.cz-txt p{color:var(--ink-2);font-size:clamp(16.5px,1.35vw,19px);margin:0}
+.cz-n{display:inline-block;font-family:var(--font-d);font-weight:800;font-size:14px;letter-spacing:.14em;color:#1cc6e6;margin:0 0 10px}
+.cz-v{color:#2fe08d}.cz-a{color:#ffc93c}.cz-r{color:#ff5d6c}
+.cz-tela{border-radius:28px;overflow:hidden;border:1px solid var(--line-2);background:#05070a;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 50px rgba(0,155,190,.16);max-width:300px;margin:0 auto}
+.cz-tela img{display:block;width:100%;height:auto}
+.cz-player{max-width:360px;margin:30px auto 0;border-radius:18px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 60px rgba(0,155,190,.18)}
+.cz-jornada{list-style:none;padding:0;margin:34px auto 0;max-width:980px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;text-align:left}
+.cz-jornada li{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line);border-radius:var(--r);padding:22px 20px}
+.cz-jornada li[hidden]{display:none}
+.cz-jornada b{display:block;font-family:var(--font-d);font-size:19px;margin:0 0 8px}
+.cz-jornada p{margin:0;color:var(--ink-2);font-size:15.5px}
+.cz-filtro{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px;margin:30px auto 0}
+.cz-filtro>div{border-radius:var(--r);padding:24px 22px;border:1px solid var(--line);background:var(--card)}
+.cz-sim{border-color:rgba(47,224,141,.35)!important;background:linear-gradient(180deg,rgba(47,224,141,.07),var(--card))!important}
+.cz-filtro ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.cz-filtro li{position:relative;padding-left:30px;color:var(--ink-2);font-size:16px;line-height:1.4}
+.cz-filtro li::before{position:absolute;left:0;top:0;font-weight:800}
+.cz-sim li::before{content:"✓";color:#2fe08d}.cz-nao li::before{content:"✕";color:#ff5d6c}
+.cz-final .form-card{margin:26px auto 0}
+.cz-final-sub{color:var(--ink-2);font-size:17px;max-width:46ch;margin:0 auto}
+.cz-det{max-width:760px;margin:26px auto 0}
+.cz-det details{border:1px solid var(--line);border-radius:14px;background:var(--card);margin:0 0 10px;padding:0 20px}
+.cz-det summary{cursor:pointer;list-style:none;padding:18px 26px 18px 0;font-weight:700;font-size:16.5px;position:relative}
+.cz-det summary::-webkit-details-marker{display:none}
+.cz-det summary::after{content:"+";position:absolute;right:0;top:14px;font-size:22px;color:#1cc6e6}
+.cz-det details[open] summary::after{content:"–"}
+.cz-det p{margin:0 0 18px;color:var(--ink-2)}
+@media (max-width:959px){
+  .cz-topo{margin:0 0 36px}
+  .cz section{padding:56px 0}
+  .cz-dores{grid-template-columns:1fr}
+  .cz-passos{gap:44px}
+  .cz-passo{grid-template-columns:1fr;gap:20px;text-align:center}
+  .cz-passo:nth-child(even) .cz-txt{order:0}
+  .cz-tela{max-width:260px;border-radius:24px}
+  .cz-jornada{grid-template-columns:1fr}
+  .cz-filtro{grid-template-columns:1fr}
+  .cz-final .form-card{text-align:left}
+}
+"""
+
 FOOT = """
 <footer>
   <div class="wrap">
@@ -307,6 +490,16 @@ COPY["v2d"] = dict(COPY["v2"],
 # 28/10 (Fábio): fase 2 do teste — só v2b e v2c, 50% cada (fase 1, 21–28/10: v4, v2, v2b, v2c, v5 a 20%). Quem tinha sorteio antigo
 # (v4/v2/v5) é sorteado de novo entre as duas; a própria página (S) só "fica" se estiver na lista.
 COPY["v4"] = dict(COPY["v4"], rodizio=("v2b", "v2c"))
+# 03/11 (Fábio): fase 3 do teste — v2b × v6 (explicativa do Cérebro), 50% cada. Quem tinha v2c é sorteado de novo entre as duas.
+COPY["v4"] = dict(COPY["v4"], rodizio=("v2b", "v6"))
+COPY["v6"] = dict(COPY["v2b"], cerebro=True, topo_cta=CZ_TOPO,
+    h1='A Revolução do Estudo é estudar com um <span class="metal">Cérebro</span> do seu lado.',
+    sub='Uma plataforma que mostra o que você já domina do seu edital, o que estudar hoje e o que revisar. '
+        '<strong class="hl" data-cz-ate>Faça o cadastro e use o Cérebro de graça até a live de 10 de novembro.</strong>'
+        '<strong class="hl" data-cz-depois hidden>No dia 10 de novembro, ao vivo, o Professor Fábio abre o Cérebro e mostra como estudar com ele.</strong>',
+    css_extra=CZ_CSS,
+    title="A Revolução do Estudo · o Cérebro — de graça até a live de 10 de novembro",
+    desc="Conheça o Cérebro: a plataforma que mostra o que você já domina do seu edital, o que estudar hoje e o que revisar. Use de graça até a live de 10 de novembro, 20h.")
 RODIZIO = """<script>(function(){try{var A=%s,S=%s,K="black_ab_v4",v=null,s=null;
 try{s=JSON.parse(localStorage.getItem(K)||"null")}catch(e){}
 if(s&&A.indexOf(s.v)>-1&&Date.now()-s.ts<2592e6)v=s.v;
@@ -330,7 +523,8 @@ def page(versao):
                       versao=versao, grupo=c.get("grupo", GRUPO), obrigado=c.get("obrigado", "../obrigado/"), live=c.get("live", LIVE),
                       utm=json.dumps(c.get("utm") or {}), gads=json.dumps(GADS) if c.get("slug", SLUG) == SLUG else "null")
     # so_dobra1: página só com a primeira dobra (pedido do Fábio 07/10 para a v2)
-    if c.get("encontro"): corpo = hero(c) + encontro()
+    if c.get("cerebro"): corpo = hero(c) + cerebro_secoes()
+    elif c.get("encontro"): corpo = hero(c) + encontro()
     else: corpo = hero(c) if c.get("so_dobra1") else hero(c) + c["dobra2"]() + band() + bio() + final()
     extra = f'<script src="../assets/{c["fx"]}.js?v={V}" defer></script>\n' if c.get("fx") else ""
     if c.get("rodizio"):
@@ -377,10 +571,10 @@ ROOT_INDEX = """<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><t
 <body style="background:#050607;color:#ccc;font-family:sans-serif;padding:40px;text-align:center"><a href="v2/" style="color:#00b7df">Entrar na página</a></body></html>
 """
 
-for v in ("v1", "v2", "v2b", "v2c", "v2d", "v3", "v4", "v5", "bio", "alunos"):
+for v in ("v1", "v2", "v2b", "v2c", "v2d", "v3", "v4", "v5", "v6", "bio", "alunos"):
     d = ROOT / v; d.mkdir(exist_ok=True); (d / "index.html").write_text(page(v), encoding="utf-8")
 (ROOT / "obrigado").mkdir(exist_ok=True); (ROOT / "obrigado" / "index.html").write_text(obrigado(), encoding="utf-8")
 (ROOT / "obrigado-alunos").mkdir(exist_ok=True); (ROOT / "obrigado-alunos" / "index.html").write_text(obrigado(OBRIGADO_ALUNOS), encoding="utf-8")
 (ROOT / "index.html").write_text(ROOT_INDEX, encoding="utf-8")
 (ROOT / ".nojekyll").write_text("")
-print("ok: v1–v5/, v2b–v2d/, bio/, alunos/, obrigado/, obrigado-alunos/, index.html")
+print("ok: v1–v6/, v2b–v2d/, bio/, alunos/, obrigado/, obrigado-alunos/, index.html")
