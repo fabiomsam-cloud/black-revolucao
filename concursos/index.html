@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Aulas do seu concurso · Black A Revolução do Estudo</title>
+<meta name="description" content="Escolha o seu concurso e assista às aulas com o Professor Fábio Silva antes da live de 10 de novembro, às 20h (horário de Brasília).">
+<meta property="og:title" content="Aulas do seu concurso · assista antes da live">
+<meta property="og:description" content="Escolha o seu concurso e assista às aulas com o Professor Fábio Silva antes da live de 10 de novembro, às 20h (horário de Brasília).">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://revolucaodoestudo.com.br/assets/og.jpg">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07080b">
+<link rel="icon" href="../assets/logo-e.png" type="image/png">
+<link rel="preload" href="../assets/fonts/saira-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://i.ytimg.com">
+<style>
+/* BLACK · A Revolução do Estudo — página de AULAS POR CONCURSO (aquecimento dos grupos antes da live de 10/11)
+   Mesma identidade de assets/black.css. Para trocar ou incluir aula: editar a lista CONCURSOS no fim do arquivo. */
+@font-face{font-family:"Saira";font-style:normal;font-weight:500 800;font-stretch:100%;font-display:swap;src:url(../assets/fonts/saira-latin.woff2) format("woff2")}
+@font-face{font-family:"Figtree";font-style:normal;font-weight:400 700;font-display:swap;src:url(../assets/fonts/figtree-latin.woff2) format("woff2")}
+:root{
+  --bg:#07080b; --card:#0f1217; --card-2:#141820; --field:#171b22;
+  --ink:#f4f5f7; --ink-2:#c8ccd3; --ink-3:#8b919b;
+  --blue:#009BBE; --blue-2:#00c4ea; --blue-deep:#006f8a; --glow:rgba(0,170,210,.55);
+  --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.16);
+  --r:20px; --r-sm:14px;
+  --font-d:"Saira",system-ui,sans-serif; --font-b:"Figtree",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:16.5px;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+[hidden]{display:none!important}
+a{color:inherit}
+b,strong{font-weight:700;color:#fff}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit}
+.fundo{position:absolute;top:0;left:0;right:0;height:520px;z-index:0;pointer-events:none;background:url(../assets/hero-bg-m.webp) center top/cover no-repeat;opacity:.5}
+.fundo::after{content:"";position:absolute;inset:0;background:radial-gradient(70% 45% at 50% 22%,rgba(0,155,190,.24),transparent 70%),linear-gradient(180deg,rgba(7,8,11,.1),rgba(7,8,11,.6) 60%,var(--bg) 97%)}
+@media (min-width:960px){.fundo{background-image:url(../assets/hero-bg.webp);height:600px}}
+.wrap{position:relative;z-index:1;width:min(880px,calc(100% - 32px));margin:0 auto}
+
+/* topo */
+.topo{display:flex;flex-direction:column;align-items:center;gap:14px;padding:22px 0 0;text-align:center}
+.topo img{width:168px;height:auto}
+.pill{display:inline-flex;align-items:center;gap:9px;padding:9px 16px;border-radius:999px;border:1px solid var(--line-2);
+  background:radial-gradient(120% 200% at 50% 0%,rgba(0,155,190,.18),rgba(15,18,23,.9) 60%);
+  font-family:var(--font-d);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--blue-2);box-shadow:0 0 10px var(--blue-2);flex:none}
+h1{font-family:var(--font-d);font-weight:800;font-size:clamp(28px,6.6vw,46px);line-height:1.06;letter-spacing:-.01em;margin:20px 0 12px;text-align:center;text-wrap:balance}
+h1 span{color:#1cc6e6}
+.sub{max-width:560px;margin:0 auto;text-align:center;color:var(--ink-2);font-size:16.5px;text-wrap:pretty}
+
+/* seletor de concurso */
+.rotulo{font-family:var(--font-d);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-2);text-align:center;margin:30px 0 12px}
+.grade{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (min-width:640px){.grade{grid-template-columns:repeat(3,1fr);gap:12px}}
+.conc{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-height:92px;padding:14px 14px 12px;text-align:left;cursor:pointer;
+  border-radius:var(--r-sm);border:1px solid var(--line-2);background:var(--card);transition:border-color .15s,background .15s,transform .15s}
+.conc:hover{border-color:rgba(0,196,234,.55);transform:translateY(-1px)}
+.conc:focus-visible{outline:2px solid var(--blue-2);outline-offset:2px}
+.conc .sig{font-family:var(--font-d);font-weight:800;font-size:21px;line-height:1.1;color:#fff}
+.conc .nom{font-size:12.5px;line-height:1.3;color:var(--ink-3)}
+.conc .qtd{margin-top:auto;padding-top:6px;font-family:var(--font-d);font-weight:700;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-2)}
+.conc.on{border-color:var(--blue-2);background:linear-gradient(160deg,rgba(0,155,190,.22),var(--card-2) 70%);box-shadow:0 0 0 1px rgba(0,196,234,.35),0 0 26px rgba(0,170,210,.25)}
+.conc.on .nom{color:var(--ink-2)}
+
+/* aulas */
+.aulas{margin-top:34px;scroll-margin-top:14px}
+.aulas h2{font-family:var(--font-d);font-weight:800;font-size:clamp(21px,4.6vw,28px);line-height:1.15;margin:0 0 14px;text-align:center}
+.aulas h2 span{color:#1cc6e6}
+.player{position:relative;width:100%;aspect-ratio:16/9;background:#000 center/cover no-repeat;border-radius:var(--r);overflow:hidden;border:1px solid var(--line-2);
+  box-shadow:0 0 0 1px rgba(0,196,234,.18),0 24px 60px rgba(0,0,0,.55)}
+.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.agora{margin:14px 2px 0}
+.agora .n{font-family:var(--font-d);font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-2)}
+.agora .t{font-family:var(--font-d);font-weight:700;font-size:18px;line-height:1.25;color:#fff;margin-top:3px;text-wrap:pretty}
+.lista{display:grid;gap:10px;margin-top:18px}
+.aula{display:flex;gap:12px;align-items:center;width:100%;padding:10px;text-align:left;cursor:pointer;border-radius:var(--r-sm);border:1px solid var(--line);background:var(--card);transition:border-color .15s,background .15s}
+.aula:hover{border-color:rgba(0,196,234,.5)}
+.aula:focus-visible{outline:2px solid var(--blue-2);outline-offset:2px}
+.aula.on{border-color:var(--blue-2);background:var(--card-2)}
+.aula .th{position:relative;flex:none;width:112px;aspect-ratio:16/9;border-radius:9px;overflow:hidden;background:#000}
+.aula .th img{width:100%;height:100%;object-fit:cover}
+.aula .tx{min-width:0;flex:1}
+.aula .n{font-family:var(--font-d);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.aula.on .n{color:var(--blue-2)}
+.aula .t{font-weight:700;font-size:14.5px;line-height:1.3;color:#fff;margin-top:2px}
+.aula .ok{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line-2);color:transparent}
+.aula.vista .ok{background:rgba(0,196,234,.16);border-color:var(--blue-2);color:var(--blue-2)}
+.aula .ok svg{width:14px;height:14px}
+.breve{padding:26px 20px;border-radius:var(--r);border:1px dashed var(--line-2);background:var(--card);text-align:center;color:var(--ink-2)}
+.trocar{display:block;margin:18px auto 0;padding:8px 12px;background:none;border:0;cursor:pointer;color:var(--ink-3);font-size:14px;text-decoration:underline;text-underline-offset:3px}
+.trocar:hover{color:var(--ink)}
+
+/* live */
+.live{margin:40px 0 0;padding:28px 20px 26px;border-radius:var(--r);border:1px solid var(--line-2);text-align:center;
+  background:radial-gradient(120% 120% at 50% 0%,rgba(0,155,190,.20),rgba(15,18,23,.96) 62%)}
+.live .eb{font-family:var(--font-d);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-2)}
+.live h2{font-family:var(--font-d);font-weight:800;font-size:clamp(23px,5.2vw,32px);line-height:1.1;margin:8px 0 10px;text-wrap:balance}
+.live p{max-width:520px;margin:0 auto;color:var(--ink-2);text-wrap:pretty}
+.cd{display:flex;justify-content:center;gap:10px;margin:20px 0 4px}
+.cd div{min-width:66px;padding:10px 6px 8px;border-radius:var(--r-sm);background:rgba(7,8,11,.6);border:1px solid var(--line)}
+.cd b{display:block;font-family:var(--font-d);font-weight:800;font-size:28px;line-height:1;font-variant-numeric:tabular-nums}
+.cd span{display:block;margin-top:5px;font-family:var(--font-d);font-weight:600;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.live .nota{margin-top:16px;font-size:14.5px;color:var(--ink-2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;margin-top:14px;padding:16px 26px;border-radius:999px;cursor:pointer;text-decoration:none;
+  font-family:var(--font-d);font-weight:800;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:#fff;
+  border:1px solid rgba(0,196,234,.6);background:rgba(0,155,190,.12);transition:background .15s,transform .15s}
+.btn:hover{background:rgba(0,155,190,.26);transform:translateY(-1px)}
+footer{padding:30px 0 40px;text-align:center;color:var(--ink-3);font-size:12px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.conc,.btn{transition:none}}
+</style>
+</head>
+<body>
+<div class="fundo" aria-hidden="true"></div>
+<main class="wrap">
+  <header class="topo">
+    <img src="../assets/logo-black-revolucao.webp" alt="Black · A Revolução do Estudo" width="168" height="45">
+    <div class="pill"><i></i>Ao vivo · terça, 10/11 · 20h (Brasília)</div>
+  </header>
+
+  <h1>Tudo sobre o <span>seu concurso</span>, antes da live.</h1>
+  <p class="sub">Escolha o seu concurso e assista às aulas. Assim você chega na live de terça já sabendo como está o seu edital.</p>
+
+  <div class="rotulo" id="rotulo">Qual é o seu concurso?</div>
+  <div class="grade" id="grade" role="group" aria-labelledby="rotulo"></div>
+
+  <section class="aulas" id="aulas" hidden aria-live="polite">
+    <h2 id="aulas-h"></h2>
+    <div id="com-aula">
+      <div class="player" id="player"></div>
+      <div class="agora"><div class="n" id="agora-n"></div><div class="t" id="agora-t"></div></div>
+      <div class="lista" id="lista"></div>
+    </div>
+    <div class="breve" id="breve" hidden>A aula deste concurso entra no ar em breve. Volte daqui a pouco.</div>
+    <button type="button" class="trocar" id="trocar">Ver as aulas de outro concurso</button>
+  </section>
+
+  <section class="live" id="live">
+    <div class="eb">Terça, 10 de novembro</div>
+    <h2 id="live-h">Agora é só estar na live.</h2>
+    <p id="live-p">Às <b>20h, no horário de Brasília</b>, eu apresento ao vivo a <b>Revolução do Estudo</b>: a preparação para concurso que cabe na rotina de quem trabalha, cuida da família e tem pouco tempo.</p>
+    <div class="cd" id="cd" aria-hidden="true">
+      <div><b data-cd="d">00</b><span>dias</span></div>
+      <div><b data-cd="h">00</b><span>horas</span></div>
+      <div><b data-cd="m">00</b><span>min</span></div>
+      <div><b data-cd="s">00</b><span>seg</span></div>
+    </div>
+    <div class="nota">O link da live sai no grupo da Black.</div>
+    <a class="btn" id="btn-grupo" href="https://sndflw.com/i/D3dZyygkzj3LQgQ73IHP" target="_blank" rel="noopener">Ainda não estou no grupo</a>
+  </section>
+</main>
+<footer><div class="wrap">© 2026 Sou Concurseiro e Vou Passar · Professor Fábio Silva</div></footer>
+
+<script>
+(function () {
+  "use strict";
+  /* ============ AULAS: para trocar, incluir ou tirar vídeo, mexa só aqui ============
+     id = código do vídeo no YouTube (o que vem depois de v= ou de youtu.be/). t = título mostrado na página.
+     pendente:true = vídeo ainda não está público; o concurso aparece com o aviso "entra no ar em breve". */
+  var CONCURSOS = [
+    { k: "prf", sig: "PRF", nom: "Polícia Rodoviária Federal", de: "da PRF", aulas: [
+      { id: "dVx4VzgswzE", t: "Concurso PRF: diretor fala em DOBRAR o efetivo (13 mil → 26 mil)" },
+      { id: "sjcTkj_Mt1A", t: "Concurso PRF: salário de R$ 12 mil, requisitos e o que cai na prova" } ] },
+    { k: "tjam", sig: "TJ-AM", nom: "Tribunal de Justiça do Amazonas", de: "do TJ-AM", aulas: [
+      { id: "_PWMSxtCATQ", t: "Concurso TJ-AM: o que estudar ANTES do edital (400 vagas)" },
+      { id: "Bt2jkYnwytY", t: "Concurso TJ-AM: o concurso entrou no ORÇAMENTO de 2027 (veja o documento)" } ] },
+    { k: "pcam", sig: "PC-AM", nom: "Polícia Civil do Amazonas", de: "da PC-AM", pendente: true, sondar: true, aulas: [   /* sondar: a página confere sozinha se o vídeo já saiu do privado e liga a aula */
+      { id: "rMznHJ6J7Vw", t: "" } ] },
+    { k: "pmam", sig: "PM-AM", nom: "Polícia Militar do Amazonas", de: "da PM-AM", aulas: [
+      { id: "3pXJJDGesO8", t: "Concurso PM-AM: Soldado agora precisa de FACULDADE. O que diz a lei" } ] },
+    { k: "seducam", sig: "SEDUC-AM", nom: "Secretaria de Educação do Amazonas", de: "da SEDUC-AM", aulas: [
+      { id: "Nv3sz5NHudc", t: "Concurso SEDUC-AM: 7.862 vagas, salários e o que estudar antes do edital" },
+      { id: "y2U2FDCEiUw", t: "Concurso SEDUC-AM: Cesgranrio contratada. O edital ainda sai em dezembro?" } ] },
+    { k: "semsa", sig: "SEMSA", nom: "Secretaria Municipal de Saúde de Manaus", de: "da SEMSA Manaus", aulas: [
+      { id: "_2VvZh5ZQFg", t: "Concurso SEMSA Manaus: comissão criada, cargos, salários e o que estudar" } ] }
+  ];
+  var LIVE_AT = new Date("2026-11-10T20:00:00-03:00").getTime();
+  var PIXEL = "429553154418122";
+  var API = "https://dqpxugdhlgafvddavzzp.supabase.co/functions/v1/gerador-paginas";
+  var ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRxcHh1Z2RobGdhZnZkZGF2enpwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxODQ1NTMsImV4cCI6MjA5Nzc2MDU1M30.nUhYPO3oLUZEXgQCDlRtL-Jawi0nr0l1Z7_z5ecEXvc";
+  var SLUG = "black-concursos-aulas";   /* slug próprio: não se mistura com as visitas das páginas de cadastro no painel */
+  var LOCAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+
+  var $ = function (id) { return document.getElementById(id); };
+  var qs = new URLSearchParams(location.search);
+  var atual = null, aulaAtual = null;
+
+  /* ---------- memória do aparelho (aulas já iniciadas); a página funciona igual sem ela ---------- */
+  function ler(k) { try { return localStorage.getItem(k); } catch (_) { return null; } }
+  function gravar(k, v) { try { localStorage.setItem(k, v); } catch (_) {} }
+  function vistas() { try { return JSON.parse(ler("black_aulas_vistas") || "{}") || {}; } catch (_) { return {}; } }
+  function marcarVista(id) { var v = vistas(); if (v[id]) return; v[id] = 1; gravar("black_aulas_vistas", JSON.stringify(v)); }
+
+  /* ---------- medição: pixel da Meta + registro anônimo (sem dado pessoal) ---------- */
+  function fbq() { if (window.fbq) window.fbq.apply(null, arguments); }
+  if (!LOCAL) {
+    !function (f, b, e, v, n, t, s) { if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = "2.0"; n.queue = []; t = b.createElement(e); t.async = !0; t.src = v; s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
+    }(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+    fbq("init", PIXEL); fbq("track", "PageView");
+  }
+  var vid = ler("black_vid");
+  if (!vid) { vid = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + "-" + Math.random().toString(16).slice(2); gravar("black_vid", vid); }
+  var utm = {};
+  ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"].forEach(function (k) { if (qs.get(k)) utm[k] = qs.get(k); });
+  function registrar(versao) {   /* 1 vez por sessão para cada marco: pagina · concurso-<k> · play-<k>-<vídeo> */
+    if (LOCAL) return;
+    var sk = "black_conc_" + versao;
+    try { if (sessionStorage.getItem(sk)) return; sessionStorage.setItem(sk, "1"); } catch (_) {}
+    try {
+      fetch(API, { method: "POST", keepalive: true, headers: { "Content-Type": "application/json", Authorization: "Bearer " + ANON, apikey: ANON },
+        body: JSON.stringify({ op: "visita", slug: SLUG, versao: versao, vid: vid, utm: utm, ref: (document.referrer || "").slice(0, 200), largura: window.innerWidth }) }).catch(function () {});
+    } catch (_) {}
+  }
+  if (document.readyState === "complete") setTimeout(function () { registrar("pagina"); }, 1000);
+  else window.addEventListener("load", function () { setTimeout(function () { registrar("pagina"); }, 1000); }, { once: true });
+
+  /* ---------- seletor ---------- */
+  var grade = $("grade");
+  CONCURSOS.forEach(function (c) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "conc"; b.setAttribute("data-k", c.k); b.setAttribute("aria-pressed", "false");
+    var s = document.createElement("span"); s.className = "sig"; s.textContent = c.sig;
+    var n = document.createElement("span"); n.className = "nom"; n.textContent = c.nom;
+    var q = document.createElement("span"); q.className = "qtd"; q.textContent = c.pendente ? "Em breve" : (c.aulas.length === 1 ? "1 aula" : c.aulas.length + " aulas");
+    b.appendChild(s); b.appendChild(n); b.appendChild(q);
+    b.addEventListener("click", function () { escolher(c, true); });
+    grade.appendChild(b);
+    /* vídeo privado devolve uma capa-padrão de 120 px; vídeo público ou não listado devolve a capa real (320 px) */
+    if (c.sondar && c.pendente) {
+      var im = new Image();
+      im.onload = function () {
+        if (im.naturalWidth <= 120) return;
+        c.pendente = false; q.textContent = c.aulas.length === 1 ? "1 aula" : c.aulas.length + " aulas";
+        if (atual === c) escolher(c, false);
+      };
+      im.src = "https://i.ytimg.com/vi/" + c.aulas[0].id + "/mqdefault.jpg";
+    }
+  });
+
+  function escolher(c, rolar) {
+    atual = c;
+    Array.prototype.forEach.call(grade.children, function (b) { var on = b.getAttribute("data-k") === c.k; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false"); });
+    $("aulas").hidden = false;
+    $("aulas-h").innerHTML = "";
+    $("aulas-h").appendChild(document.createTextNode(c.aulas.length === 1 || c.pendente ? "Aula do concurso " : "Aulas do concurso "));
+    var sp = document.createElement("span"); sp.textContent = c.de; $("aulas-h").appendChild(sp);
+    $("breve").hidden = !c.pendente; $("com-aula").hidden = !!c.pendente;
+    if (!c.pendente) { montarLista(c); tocar(c, c.aulas[0]); }
+    try { var u = new URL(location.href); u.searchParams.set("c", c.k); history.replaceState(null, "", u.toString()); } catch (_) {}
+    registrar("concurso-" + c.k);
+    fbq("trackCustom", "ConcursoEscolhido", { concurso: c.sig });
+    if (rolar) $("aulas").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function montarLista(c) {
+    var lista = $("lista"); lista.innerHTML = ""; lista.hidden = c.aulas.length < 2;
+    if (c.aulas.length < 2) return;
+    var v = vistas();
+    c.aulas.forEach(function (a, i) {
+      var b = document.createElement("button"); b.type = "button"; b.className = "aula" + (v[a.id] ? " vista" : ""); b.setAttribute("data-id", a.id);
+      var th = document.createElement("span"); th.className = "th";
+      var im = document.createElement("img"); im.loading = "lazy"; im.alt = ""; im.width = 320; im.height = 180; im.src = "https://i.ytimg.com/vi/" + a.id + "/mqdefault.jpg"; th.appendChild(im);
+      var tx = document.createElement("span"); tx.className = "tx";
+      var n = document.createElement("span"); n.className = "n"; n.textContent = "Aula " + (i + 1); n.style.display = "block";
+      var t = document.createElement("span"); t.className = "t"; t.textContent = a.t; t.style.display = "block";
+      tx.appendChild(n); tx.appendChild(t);
+      var ok = document.createElement("span"); ok.className = "ok"; ok.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+      b.appendChild(th); b.appendChild(tx); b.appendChild(ok);
+      b.addEventListener("click", function () { tocar(c, a); $("player").scrollIntoView({ behavior: "smooth", block: "center" }); });
+      lista.appendChild(b);
+    });
+  }
+
+  /* O player do YouTube entra direto (sem tocar sozinho): o toque no play é da pessoa, então a visualização conta para o canal.
+     enablejsapi + mensagem "listening" fazem o player avisar quando o vídeo começou (playerState 1). */
+  function tocar(c, a) {
+    aulaAtual = a;
+    var i = c.aulas.indexOf(a);
+    $("agora-n").textContent = c.aulas.length > 1 ? "Aula " + (i + 1) + " de " + c.aulas.length : "Aula";
+    $("agora-t").textContent = a.t; $("agora-t").hidden = !a.t;
+    Array.prototype.forEach.call($("lista").children, function (b) { b.classList.toggle("on", b.getAttribute("data-id") === a.id); });
+    var p = $("player"); p.innerHTML = "";
+    p.style.backgroundImage = "url(https://i.ytimg.com/vi_webp/" + a.id + "/sddefault.webp)";
+    var f = document.createElement("iframe");
+    f.title = a.t || ("Aula do concurso " + c.de); f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"; f.allowFullscreen = true;
+    f.referrerPolicy = "strict-origin-when-cross-origin";
+    f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(a.id) + "?rel=0&playsinline=1&enablejsapi=1&origin=" + encodeURIComponent(location.origin);
+    f.addEventListener("load", function () {
+      var ouvir = function () { try { f.contentWindow.postMessage(JSON.stringify({ event: "listening", id: 1, channel: "widget" }), "*"); } catch (_) {} };
+      ouvir(); setTimeout(ouvir, 1200);
+    });
+    p.appendChild(f);
+  }
+  window.addEventListener("message", function (ev) {
+    if (!/^https:\/\/www\.youtube(-nocookie)?\.com$/.test(ev.origin) || !atual || !aulaAtual) return;
+    var d; try { d = typeof ev.data === "string" ? JSON.parse(ev.data) : ev.data; } catch (_) { return; }
+    if (!d || d.event !== "infoDelivery" || !d.info || d.info.playerState !== 1) return;
+    var a = aulaAtual, c = atual;
+    marcarVista(a.id);
+    Array.prototype.forEach.call($("lista").children, function (b) { if (b.getAttribute("data-id") === a.id) b.classList.add("vista"); });
+    var chave = "play-" + c.k + "-" + a.id;
+    var novo = true; try { novo = !sessionStorage.getItem("black_conc_" + chave); } catch (_) {}
+    registrar(chave);
+    if (novo) fbq("trackCustom", "AulaConcurso", { concurso: c.sig, video: a.id, titulo: a.t });
+  });
+
+  $("trocar").addEventListener("click", function () { $("rotulo").scrollIntoView({ behavior: "smooth", block: "start" }); });
+  $("btn-grupo").addEventListener("click", function () { registrar("grupo-clique"); });
+
+  /* link direto por concurso: /concursos/?c=prf (tjam · pcam · pmam · seducam · semsa) */
+  var pre = (qs.get("c") || "").toLowerCase().replace(/[^a-z]/g, "");
+  CONCURSOS.forEach(function (c) { if (c.k === pre) escolher(c, false); });
+
+  /* ---------- contador até a live ---------- */
+  var els = document.querySelectorAll("[data-cd]");
+  function pad(n) { return String(n).padStart(2, "0"); }
+  function tick() {
+    var falta = LIVE_AT - Date.now();
+    if (falta <= 0) {
+      $("cd").hidden = true;
+      $("live-h").textContent = "A live é agora.";
+      $("live-p").textContent = "O link está no grupo da Black. Entre lá e acompanhe ao vivo.";
+      return false;
+    }
+    var s = Math.floor(falta / 1000), v = { d: pad(Math.floor(s / 86400)), h: pad(Math.floor(s % 86400 / 3600)), m: pad(Math.floor(s % 3600 / 60)), s: pad(s % 60) };
+    Array.prototype.forEach.call(els, function (el) { var k = el.getAttribute("data-cd"); if (el.textContent !== v[k]) el.textContent = v[k]; });
+    return true;
+  }
+  if (tick()) { var iv = setInterval(function () { if (!tick()) clearInterval(iv); }, 1000); }
+})();
+</script>
+</body>
+</html>
