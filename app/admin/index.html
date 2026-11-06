@@ -92,9 +92,9 @@ async function api(path, body, method) {
   return j;
 }
 // caixa de diálogo com campos
-function perguntar(titulo, sub, campos) {
+function perguntar(titulo, sub, campos, okTxt) {
   return new Promise((res) => {
-    $('dlgT').textContent = titulo; $('dlgS').textContent = sub || '';
+    $('dlgT').textContent = titulo; $('dlgS').textContent = sub || ''; $('dlgOk').textContent = okTxt || 'Confirmar';
     $('dlgCampos').innerHTML = campos.map((c) => c.tipo === 'select'
       ? '<label>' + esc(c.rotulo) + '</label><select name="' + c.nome + '" style="background:var(--field);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:12px 16px;font:inherit;width:100%">' + c.opcoes.map((o) => '<option value="' + esc(o[0]) + '">' + esc(o[1]) + '</option>').join('') + '</select>'
       : c.tipo === 'check'
@@ -114,14 +114,14 @@ function renderFicha(d) {
   if (d.varios) { $('ficha').innerHTML = '<div class="bloco"><h3>Mais de uma conta com esse telefone</h3>' + d.varios.map((e) => '<p><a href="#" onclick="buscar(\'' + esc(e) + '\');return false" style="color:var(--blue-2)">' + esc(e) + '</a></p>').join('') + '</div>'; return; }
   const h = d.hub, P = d.plataformas;
   const acesso = (p) => { const a = (d.acessos || []).find((x) => x.plataforma === p); return a ? tag(a.status === 'ativo', a.status === 'ativo' ? 'acesso até ' + dd(a.fim) : 'cortado' + (a.motivo ? ' · ' + a.motivo : '')) : tag(null, 'sem acesso registrado'); };
+  const adm = eu.papel === 'admin';
   const plat = (nome, p, info) => '<div class="bloco"><h3>' + nome + '</h3><div class="kv">' +
     '<b>Conta</b><span>' + (info.conta ? tag(true, 'existe') + ' · último login ' + dt(info.ultimo_login) : tag(false, 'não existe')) + '</span>' +
     '<b>Acesso</b><span>' + acesso(p) + '</span>' +
     (p === 'play_passei' && info.conta ? '<b>Play Passei</b><span>' + esc(info.subscription_type || '') + ' · ' + esc(info.status || '') + ' · até ' + dd(info.trial_ends_at) + '</span>' : '') +
     (p === 'cei' && info.conta ? '<b>Clube</b><span>' + esc(info.status_acesso || '') + (info.motivo_bloqueio ? ' · ' + esc(info.motivo_bloqueio) : '') + ' · até ' + dd(info.vencimento_em) + '</span>' : '') +
     (p === 'dominei' && info.conta ? '<b>Dominei</b><span>' + (info.liberado ? 'liberado' : 'não liberado') + (info.assinaturas && info.assinaturas[0] ? ' · ' + esc(info.assinaturas[0].plano) + ' ' + esc(info.assinaturas[0].status) + ' até ' + dd(info.assinaturas[0].fim) : '') + '</span>' : '') +
-    '</div></div>';
-  const adm = eu.papel === 'admin';
+    '</div>' + (adm && info.conta ? '<div class="acoes2"><button data-entrar="' + p + '" data-nome="' + esc(nome) + '">Entrar como aluno</button></div>' : '') + '</div>';
   $('ficha').innerHTML =
     '<div class="bloco" style="grid-column:1/-1"><h3>Hub · ' + esc(d.email) + '</h3><div class="kv">' +
     '<b>Nome</b><span>' + esc(h?.nome || '—') + '</span>' +
@@ -143,6 +143,7 @@ function renderFicha(d) {
     '<div class="bloco"><h3>Ações da equipe neste aluno</h3>' + (d.auditoria.length ? '<table>' + d.auditoria.map((a) => '<tr><td>' + dt(a.created_at) + '</td><td>' + esc(a.quem) + '</td><td>' + esc(a.acao) + '</td></tr>').join('') + '</table>' : '<p class="sub" style="text-align:left;margin:0">Nenhuma.</p>') + '</div>';
   document.querySelectorAll('[data-retry]').forEach((b) => b.onclick = () => agir(() => api('/admin/fila/retry', { id: Number(b.dataset.retry) }), 'Item de volta à fila.'));
   const e = d.email;
+  document.querySelectorAll('[data-entrar]').forEach((b) => b.onclick = () => entrarComo(e, b.dataset.entrar, b.dataset.nome));
   $('acLink').onclick = async () => { const r = await agir(() => api('/admin/senha/link', { email: e, tipo: 'recuperar' })); if (r) mostrarLink(r); };
   $('acBoas').onclick = async () => { if (!confirm('Reenviar o 1º acesso? O aluno vai criar a senha de novo (a atual deixa de valer quando ele criar).')) return; const r = await agir(() => api('/admin/senha/link', { email: e, tipo: 'boas_vindas' })); if (r) mostrarLink(r); };
   $('acSenha').onclick = async () => { const f = await perguntar('Senha temporária', 'Vale no hub e nas três plataformas. Leia para o aluno e peça para trocar depois.', [{ nome: 'senha', rotulo: 'Nova senha (mínimo 8)', tipo: 'text', obrig: true }]); if (f) agir(() => api('/admin/senha/definir', { email: e, senha: f.senha }), 'Senha aplicada nas contas.'); };
@@ -163,6 +164,14 @@ async function acessoManual(email, acao) {
   if (!plataformas.length) return msg('Marque ao menos uma plataforma.');
   if (!confirm((acao === 'enroll' ? 'Liberar ' : 'Cortar ') + plataformas.join(', ') + ' para ' + email + '?')) return;
   agir(() => api('/admin/acesso', { email, acao, plataformas, meses: f.meses, nome: f.nome, telefone: f.telefone, motivo: f.motivo }), 'Feito. A ficha atualiza em alguns segundos.', () => setTimeout(() => buscar(email), 6000));
+}
+// entrar como o aluno (06/11/2026): abre a plataforma na conta dele, com link de uso único; só papel admin; fica no Histórico
+async function entrarComo(email, p, nome) {
+  if (!confirm('Entrar no ' + nome + ' como ' + email + '?\n\nÉ a conta de verdade do aluno: tudo que você fizer lá dentro (responder questão, marcar aula, trocar concurso) fica gravado como se fosse ele. Use só para olhar.\n\nA entrada fica no Histórico com o seu nome.')) return;
+  const r = await agir(() => api('/admin/entrar', { email, plataforma: p }));
+  if (!r) return;
+  const f = await perguntar('Entrada pronta · ' + r.plataforma, 'O link vale uma única vez. Se você usa essa plataforma com login próprio neste navegador, copie o link e abra numa janela anônima — senão o seu login é trocado pelo do aluno. Ao terminar, saia da conta dele.', [{ nome: 'link', rotulo: 'Link de entrada (uso único)', valor: r.url }], 'Abrir em nova aba');
+  if (f) window.open(r.url, '_blank', 'noopener');
 }
 function mostrarLink(r) { perguntar('Link gerado', r.aviso || '', [{ nome: 'link', rotulo: 'Link (copie se precisar)', valor: r.link }]); }
 async function agir(fn, okMsg, depois) { msg(''); try { const r = await fn(); if (okMsg) msg(okMsg, true); if (depois) depois(); else if (atual?.email) setTimeout(() => buscar(atual.email), 800); return r; } catch (e) { msg(e.message); return null; } }
