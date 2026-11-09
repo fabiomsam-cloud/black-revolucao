@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Matrícula · Black A Revolução do Estudo</title>
+<meta name="description" content="Página de matrícula da Black A Revolução do Estudo, com o Professor Fábio Silva.">
+<meta property="og:title" content="Matrícula · Black A Revolução do Estudo">
+<meta property="og:description" content="Página de matrícula da Black A Revolução do Estudo, com o Professor Fábio Silva.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://revolucaodoestudo.com.br/assets/og.jpg">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#07080b">
+<link rel="icon" href="/assets/logo-e.png" type="image/png">
+<link rel="preload" href="/assets/fonts/saira-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* BLACK · A Revolução do Estudo — página de matrícula dos NÃO ALUNOS (mesma identidade de assets/black.css) */
+@font-face{font-family:"Saira";font-style:normal;font-weight:500 800;font-stretch:100%;font-display:swap;src:url(/assets/fonts/saira-latin.woff2) format("woff2")}
+@font-face{font-family:"Figtree";font-style:normal;font-weight:400 700;font-display:swap;src:url(/assets/fonts/figtree-latin.woff2) format("woff2")}
+:root{
+  --bg:#07080b; --card:#0f1217; --card-2:#141820;
+  --ink:#f4f5f7; --ink-2:#c8ccd3; --ink-3:#8b919b;
+  --blue:#009BBE; --blue-2:#00c4ea; --blue-deep:#006f8a; --glow:rgba(0,170,210,.55);
+  --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.16);
+  --vivo:#ff3b3b;
+  --font-d:"Saira",system-ui,sans-serif; --font-b:"Figtree",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:16.5px;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+[hidden]{display:none!important}
+a{color:inherit}
+b,strong{font-weight:700;color:#fff}
+.fundo{position:absolute;top:0;left:0;right:0;height:560px;z-index:0;pointer-events:none;background:url(/assets/hero-bg-m.webp) center top/cover no-repeat;opacity:.5}
+.fundo::after{content:"";position:absolute;inset:0;background:radial-gradient(70% 45% at 50% 22%,rgba(0,155,190,.24),transparent 70%),linear-gradient(180deg,rgba(7,8,11,.1),rgba(7,8,11,.6) 60%,var(--bg) 97%)}
+@media (min-width:960px){.fundo{background-image:url(/assets/hero-bg.webp);height:640px}}
+.wrap{position:relative;z-index:1;width:min(1040px,calc(100% - 32px));margin:0 auto}
+.col{max-width:600px;margin:0 auto;text-align:center}
+
+/* faixa do modo de conferência (só aparece com ?estado=) */
+.conf{position:relative;z-index:3;background:#ffc93c;color:#1a1300;font-size:13px;line-height:1.35;padding:8px 12px;text-align:center}
+.conf b{color:#1a1300}
+.conf a{display:inline-block;margin:2px 3px;padding:2px 9px;border-radius:999px;background:rgba(0,0,0,.12);text-decoration:none;font-weight:700}
+.conf a.on{background:#1a1300;color:#ffc93c}
+.pend{margin:10px auto;max-width:600px;padding:8px 12px;border:1px dashed #ffc93c;border-radius:10px;color:#ffc93c;font-size:13px;text-align:left}
+
+/* topo */
+.topo{display:flex;justify-content:center;padding:14px 0 12px}
+.topo img{height:42px;width:auto;display:block}
+
+/* barra que acompanha a rolagem: tempo + parcela */
+.fixa{position:fixed;top:0;left:0;right:0;z-index:20;padding:calc(8px + env(safe-area-inset-top)) 12px 8px;display:flex;align-items:center;justify-content:center;gap:8px 12px;flex-wrap:wrap;
+  background:linear-gradient(180deg,rgba(7,8,11,.97),rgba(7,8,11,.88));-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+  font-family:var(--font-d);font-weight:700;font-size:14px;letter-spacing:.02em;transform:translateY(-110%);transition:transform .25s ease}
+.fixa.on{transform:none}
+.fixa .fx-t{display:inline-flex;align-items:center;gap:7px;color:#fff;font-variant-numeric:tabular-nums}
+.fixa .fx-t::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--vivo)}
+.fixa .fx-p{color:var(--blue-2)}
+.fixa .fx-s{width:1px;height:14px;background:var(--line-2)}
+
+/* selo + contador */
+.prazo{margin:0 auto 18px;padding:13px 12px 12px;border-radius:22px;border:1px solid var(--line-2);
+  background:radial-gradient(120% 160% at 50% 0%,rgba(0,155,190,.16),rgba(15,18,23,.92) 62%);box-shadow:0 14px 44px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08)}
+.selo{display:inline-flex;align-items:center;gap:9px;margin:0 0 10px;font-family:var(--font-d);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#fff}
+.selo i{width:8px;height:8px;border-radius:50%;background:var(--vivo);box-shadow:0 0 0 0 rgba(255,59,59,.7);animation:pulso 1.6s infinite}
+@keyframes pulso{0%{box-shadow:0 0 0 0 rgba(255,59,59,.7)}70%{box-shadow:0 0 0 9px rgba(255,59,59,0)}100%{box-shadow:0 0 0 0 rgba(255,59,59,0)}}
+.relogio{display:flex;justify-content:center;gap:8px}
+.cel{flex:1 1 0;max-width:120px;padding:8px 4px 7px;border-radius:14px;background:rgba(7,8,11,.62);border:1px solid var(--line)}
+.cel b{display:block;font-family:var(--font-d);font-weight:800;font-size:clamp(32px,10vw,50px);line-height:1;font-variant-numeric:tabular-nums;color:#fff}
+.cel span{display:block;margin-top:5px;font-family:var(--font-d);font-weight:600;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.prazo-nota{margin:9px 0 0;font-size:13.5px;color:var(--ink-2)}
+
+/* título, parcela e o que o combo inclui */
+h1{font-family:var(--font-d);font-weight:800;font-size:clamp(28px,7.6vw,44px);line-height:1.08;letter-spacing:-.01em;margin:0 0 8px;text-wrap:balance}
+h1 .az{color:#1cc6e6}
+h1.h1-venda{margin-bottom:14px}
+h1 small{display:block;margin-top:8px;font-family:var(--font-b);font-weight:600;font-size:15px;letter-spacing:0;color:var(--ink-2)}
+.sub{margin:0 auto 14px;color:var(--ink-2);font-size:16px;line-height:1.4;max-width:34em;text-wrap:pretty}
+.preco{margin:0 auto 14px;padding:12px 16px 12px;border-radius:20px;border:1px solid rgba(0,196,234,.35);background:linear-gradient(180deg,rgba(0,155,190,.14),rgba(15,18,23,.9));box-shadow:0 0 44px rgba(0,155,190,.14)}
+.preco .p-l{display:flex;align-items:baseline;justify-content:center;gap:10px;font-family:var(--font-d);line-height:1}
+.preco .p-x{font-weight:700;font-size:20px;color:var(--ink-2)}
+.preco .p-v{font-weight:800;font-size:clamp(40px,12.5vw,58px);color:#fff;letter-spacing:-.01em;white-space:nowrap}
+.preco .p-n{display:block;margin-top:7px;font-size:13.5px;line-height:1.35;color:var(--ink-2)}
+.combo{list-style:none;margin:0 auto 24px;padding:4px 16px;display:grid;text-align:left;border-radius:18px;background:var(--card);border:1px solid var(--line)}
+.combo li{position:relative;padding:11px 0 11px 32px;color:var(--ink-2);font-size:15px;line-height:1.36}
+.combo li+li{border-top:1px solid var(--line)}
+.combo li::before{content:"";position:absolute;left:0;top:12px;width:20px;height:20px;border-radius:50%;
+  background:var(--blue-2) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23001820' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'><path d='M6 12.5l4 4 8-9'/></svg>") center/14px no-repeat}
+
+/* espaço do vídeo (desligado até 11/11) */
+.video{margin:0 auto 26px;max-width:720px;border-radius:18px;overflow:hidden;border:1px solid var(--line-2);background:#000;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 60px rgba(0,155,190,.16)}
+
+/* grade das mentorias */
+.toque{margin:0 0 12px;text-align:center;font-family:var(--font-d);font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-2)}
+.grade{display:grid;grid-template-columns:1fr;gap:10px}
+.mt{position:relative;display:flex;align-items:center;gap:12px;min-height:76px;padding:14px 14px 14px 18px;border-radius:18px;border:1px solid var(--line-2);
+  background:linear-gradient(180deg,var(--card-2),var(--card));color:var(--ink);text-decoration:none;text-align:left;-webkit-tap-highlight-color:transparent;
+  transition:transform .12s ease,border-color .15s ease,box-shadow .2s ease}
+a.mt:hover{border-color:rgba(0,196,234,.55);box-shadow:0 0 34px rgba(0,155,190,.16)}
+a.mt:active{transform:scale(.985)}
+a.mt:focus-visible{outline:2px solid var(--blue-2);outline-offset:3px}
+.mt-tx{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px}
+.mt-n{font-family:var(--font-d);font-weight:700;font-size:18.5px;line-height:1.15;color:#fff}
+.mt-c{font-size:14px;line-height:1.3;color:var(--ink-3)}
+.mt-selo{display:none;align-self:flex-start;margin:0 0 4px;padding:3px 10px;border-radius:999px;background:var(--blue-2);color:#001820;font-family:var(--font-d);font-weight:800;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase}
+.mt-ir{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;width:46px;height:46px;border-radius:999px;color:#fff;
+  background:linear-gradient(92deg,var(--blue-2) 0%,var(--blue) 55%,var(--blue-deep) 100%);box-shadow:0 0 0 1px rgba(0,196,234,.35),0 0 22px rgba(0,170,210,.4)}
+.mt-ir svg{width:20px;height:20px;flex:none}
+.mt-ir-t{display:none;font-family:var(--font-d);font-weight:800;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+.mt.alvo{border-color:var(--blue-2);box-shadow:0 0 0 1px var(--blue-2),0 0 44px rgba(0,170,210,.32)}
+.mt.alvo .mt-selo{display:inline-block}
+.mt.off{cursor:default;border-style:dashed}
+.mt.off .mt-n{color:var(--ink-2)}
+.mt.off .mt-ir{width:auto;height:auto;padding:8px 12px;background:rgba(255,255,255,.06);box-shadow:none;color:var(--ink-3);font-size:12.5px;font-weight:600;white-space:nowrap}
+.mt.indo{pointer-events:none;opacity:.7}
+.pagto{margin:18px auto 0;max-width:34em;text-align:center;color:var(--ink-3);font-size:14px}
+
+/* avisos: fechada, encerrada, carregando */
+.aviso{padding:38px 0 10px}
+.pilula{display:inline-flex;align-items:center;gap:9px;margin:0 0 18px;padding:9px 16px;border-radius:999px;border:1px solid var(--line-2);background:rgba(15,18,23,.85);
+  font-family:var(--font-d);font-weight:700;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.pilula i{width:8px;height:8px;border-radius:50%;background:var(--vivo);animation:pulso 1.6s infinite}
+.pilula.cinza{color:var(--ink-2)}.pilula.cinza i{background:var(--ink-3);animation:none}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;max-width:420px;margin:24px auto 0;padding:20px 22px;border-radius:999px;border:0;cursor:pointer;text-decoration:none;
+  font-family:var(--font-d);font-weight:800;font-size:17px;letter-spacing:.06em;text-transform:uppercase;line-height:1.1;color:#fff;
+  background:linear-gradient(92deg,var(--blue-2) 0%,var(--blue) 55%,var(--blue-deep) 100%);box-shadow:0 0 0 1px rgba(0,196,234,.35),0 0 32px var(--glow),0 12px 30px rgba(0,0,0,.45);transition:transform .15s ease,filter .15s ease}
+.btn:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.btn:active{transform:none}
+.btn svg{width:20px;height:20px;flex:none}
+.espera{padding:90px 0;text-align:center}
+.espera i{display:inline-block;width:9px;height:9px;margin:0 4px;border-radius:50%;background:var(--blue-2);animation:pisca 1s infinite alternate}
+.espera i:nth-child(2){animation-delay:.2s}.espera i:nth-child(3){animation-delay:.4s}
+@keyframes pisca{from{opacity:.2}to{opacity:1}}
+
+footer{position:relative;z-index:1;margin-top:44px;padding:26px 0 40px;border-top:1px solid var(--line);color:var(--ink-3);font-size:13px;text-align:center}
+footer p{margin:0 0 6px}
+
+@media (min-width:760px){
+  .topo{padding:26px 0 20px}.topo img{height:56px}
+  .prazo{padding:20px 22px 18px}
+  .relogio{gap:12px}
+  .grade{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .mt{flex-direction:column;align-items:stretch;justify-content:space-between;gap:16px;min-height:168px;padding:20px 18px 18px}
+  .mt-ir{width:100%;height:auto;padding:14px 12px}
+  .mt-ir-t{display:inline}
+  .mt.off .mt-ir{padding:13px 12px}
+  .aviso{padding:60px 0 20px}
+}
+@media (max-width:359px){
+  .relogio{gap:6px}
+  .cel span{font-size:9.5px;letter-spacing:.08em}
+  .mt-n{font-size:17px}
+  .cel b{font-size:32px}
+  .preco .p-x{font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+<script>
+/* Rastreamento igual ao das outras páginas da Black (Pixel 429553154418122 + Google Ads AW-646244794).
+   Fica desligado no computador local e no modo de conferência (?estado=), para não sujar os números. */
+(function(){
+  var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+  var conf = /[?&]estado=/.test(location.search);
+  if (local || conf) return;
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','429553154418122');fbq('track','PageView');
+  window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments);};gtag('js',new Date());gtag('config','AW-646244794');
+  var g=document.createElement('script');g.async=true;g.src='https://www.googletagmanager.com/gtag/js?id=AW-646244794';document.head.appendChild(g);
+})();
+</script>
+</head>
+<body data-fase="carregando">
+<div class="fundo" aria-hidden="true"></div>
+
+<div class="conf" id="conf" hidden></div>
+
+<div class="fixa" id="fixa" aria-hidden="true" hidden>
+  <span class="fx-t" id="fxT" hidden></span><span class="fx-s" id="fxS" hidden></span>
+  <span class="fx-p">12x de R$ 149,70</span>
+</div>
+
+<main class="wrap">
+  <header class="topo"><img src="/assets/logo-black-revolucao.webp" width="480" height="188" alt="Black · A Revolução do Estudo"></header>
+
+  <!-- enquanto a página descobre a fase -->
+  <section class="espera" id="vEspera" aria-label="Carregando"><i></i><i></i><i></i></section>
+
+  <!-- FASE fechada: antes do anúncio da live (sem preço, sem mentorias) -->
+  <section class="aviso col" id="vFechada" hidden>
+    <p class="pilula"><i></i>Ao vivo · terça, 10/11 · 20h</p>
+    <h1>As matrículas abrem na live de <span class="az">terça, 10/11, às 20h</span><small>(horário de Brasília)</small></h1>
+    <p class="sub">Em Manaus, a live começa às 19h. Entre no grupo do WhatsApp: é por lá que saem os avisos e o link da live.</p>
+    <a class="btn" href="https://sndflw.com/i/D3dZyygkzj3LQgQ73IHP" rel="noopener">Entrar no grupo
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </section>
+
+  <!-- FASE encerrada: sem botões de compra -->
+  <section class="aviso col" id="vEncerrada" hidden>
+    <p class="pilula cinza"><i></i>Oferta encerrada</p>
+    <h1>Esta oferta foi encerrada</h1>
+    <p class="sub">As matrículas da Black A Revolução do Estudo nesta condição não estão mais disponíveis.</p>
+    <p class="pend" data-pend hidden>[[PENDENTE: definir se a página encerrada deve levar para algum lugar (por exemplo, o WhatsApp da Anne). Hoje ela não tem botão nenhum.]]</p>
+  </section>
+
+  <!-- FASES aberta / prorrogada / sem_prazo: vendendo -->
+  <section id="vVenda" hidden>
+    <div class="col">
+      <div class="prazo" id="prazo" hidden>
+        <p class="selo"><i></i><span id="seloTxt">Só até meia-noite de hoje</span></p>
+        <div class="relogio" id="relogio" role="timer" aria-label="Tempo que falta">
+          <div class="cel" id="celD" hidden><b id="dd">00</b><span>dias</span></div>
+          <div class="cel"><b id="hh">00</b><span>horas</span></div>
+          <div class="cel"><b id="mm">00</b><span>minutos</span></div>
+          <div class="cel"><b id="ss">00</b><span>segundos</span></div>
+        </div>
+        <p class="prazo-nota" id="prazoNota" hidden></p>
+      </div>
+
+      <h1 id="titulo" class="h1-venda">Escolha a sua <span class="az">mentoria</span></h1>
+
+      <div class="preco" id="preco">
+        <span class="p-l"><span class="p-x">12x de</span><span class="p-v">R$ 149,70</span></span>
+        <span class="p-n">No cartão em 12x ou no Pix à vista. Você escolhe na hora de pagar.</span>
+      </div>
+
+      <ul class="combo" aria-label="O que você leva">
+        <li><b>A mentoria do seu concurso.</b> Você tem o conteúdo do seu concurso e estuda por ele.</li>
+        <li><b>O Dominei.</b> Você descobre o que já domina e o que ainda precisa dominar.</li>
+        <li><b>Os dois até a data da sua prova.</b> Não importa quando ela aconteça.</li>
+      </ul>
+    </div>
+
+    <!-- VÍDEO (trecho da live): entra a partir de 11/11. Ligue em VIDEO, no começo do script. -->
+    <div class="video" id="video" hidden></div>
+    <p class="pend" data-pend hidden>[[PENDENTE: vídeo com o trecho da live (a partir de 11/11). O espaço fica aqui, entre o resumo e a lista de mentorias. Falta o código do player.]]</p>
+
+    <p class="toque" id="toque">Toque na sua mentoria</p>
+    <div class="grade" id="grade"></div>
+    <p class="pagto">Você vai para a página de pagamento da sua mentoria, em ambiente seguro da Hubla.</p>
+    <p class="pend" data-pend hidden>[[PENDENTE: confirmar se o rodapé deve citar garantia. O briefing não informou garantia, então a página não cita.]]</p>
+  </section>
+
+  <noscript><p class="sub" style="padding:40px 0;text-align:center">Para ver esta página, ative o JavaScript do navegador ou abra o link em outro navegador.</p></noscript>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Sou Concurseiro e Vou Passar · Professor Fábio Silva</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* =====================================================================================
+     CONFIGURAÇÃO — tudo que muda fica aqui em cima
+     ===================================================================================== */
+
+  // >>> COLE AQUI OS IDS DAS OFERTAS DA HUBLA <<<
+  // Em "oferta" vai SÓ o id do checkout: o trecho que vem depois de https://pay.hub.la/
+  // (exemplo: para https://pay.hub.la/AbCdEf123 cole 'AbCdEf123').
+  // Nunca cole link no formato hub.la/r/... — esse formato descarta as UTMs.
+  // Mentoria com "oferta" vazia aparece desativada ("em instantes") e não leva a lugar nenhum.
+  // A ordem desta lista é a ordem dos cartões na página.
+  var MENTORIAS = [
+    { chave: 'prf',     nome: 'Elite PRF',                        cargos: 'Policial Rodoviário Federal',                                      oferta: 'lAfRZW98zjv67oOiELLs' },
+    { chave: 'pf',      nome: 'Elite Federal Premium',            cargos: 'Polícia Federal · Agente e Escrivão',   oferta: 'Uyc5rqx95iIUn7HoBAR2' },
+    { chave: 'prfadm',  nome: 'Elite PRF Administrativo',         cargos: 'Agente Administrativo · Nível Médio',                                      oferta: 'p160tc6CaXOKrAuBKP1T' },
+    { chave: 'pcam',    nome: 'Elite Polícia Civil do Amazonas',  cargos: 'Investigador e Escrivão',               oferta: 'OPVFiUruIOXoooESIf2l' },
+    { chave: 'pmam',    nome: 'Elite Polícia Militar do Amazonas', cargos: 'Soldado',                              oferta: 'I3PH9ms4QYcFXHK94XEH' },
+    { chave: 'tjam',    nome: 'Elite TJ-AM',                      cargos: 'Analista e Técnico',                    oferta: 'WcXIrMwdL4jYj30o4KuE' },
+    { chave: 'inss',    nome: 'Elite INSS',                       cargos: 'Técnico do Seguro Social · Nível Médio',                                      oferta: 'Ieue5Uv04c0NhdzJq7cE' },
+    { chave: 'seducam', nome: 'Elite SEDUC-AM',                   cargos: 'Professor, Pedagogo e Administrativos',                                      oferta: 'Qqoapsq3i8PdFCIknf0Q' },
+    { chave: 'semsa',   nome: 'Elite SEMSA Manaus',               cargos: 'Profissionais da Saúde',                                      oferta: 'O3w7s7oOH9ZaKmlB6Wau' }
+  ];
+
+  // m=<apelido> destaca mais de uma mentoria
+  var GRUPOS = { policias: ['pcam', 'pmam'] };
+
+  // VÍDEO (trecho da live, a partir de 11/11): cole o id do player do Vturb e troque ligado para true.
+  var VIDEO = { ligado: false, id: '', conta: '98f98845-02a5-4e75-a39a-bbafedfa3212', proporcao: '56.25%' /* 16:9; vertical = 177.78% */ };
+
+  // Supabase da Anne (mesmo projeto e mesma chave pública do AGORA15)
+  var SB = 'https://blwbbdcwdcwitsnskplk.supabase.co';
+  var SBK = 'sb_publishable_kfJ3pGohrm4tr_gn5KffCQ_flMg1aYr';
+  var LIMITE_ESTADO = 3500;   // ms de espera pela fase (banco e estado.json)
+  var LIMITE_ESCOLHA = 1200;  // ms de espera, no máximo, antes de ir ao checkout
+
+  // De quanto em quanto tempo a página aberta pergunta a fase de novo (em segundos; 0 desliga).
+  // Serve para quem deixou a página aberta esperando a live: ela abre sozinha quando a fase muda.
+  var RECONSULTA = { fechada: 120, outras: 600 };
+
+  // UTMs padrão (só entram quando a URL não trouxe a UTM correspondente)
+  var UTM_PADRAO = { source: 'black-nao-alunos', sourceAnne: 'whatsapp-anne-vendedora', medium: 'pagina-matricula', campaign: 'black-nao-alunos-1011' };
+
+  // Modo de conferência (?estado=fechada|aberta|prorrogada|sem_prazo|encerrada).
+  // false = o ?estado= só funciona no computador local: na página publicada ninguém força a fase pela URL
+  // (senão quem soubesse do parâmetro veria o preço antes da live). O teste no celular do Fábio é liberado
+  // pelo banco: a conversa de teste (comando.py teste mover) recebe a fase "aberta" pela fn_black_pagina.
+  var CONFERENCIA_PUBLICA = false;
+
+  /* ===================================================================================== */
+
+  var FASES = ['fechada', 'aberta', 'prorrogada', 'sem_prazo', 'encerrada'];
+  var qs = new URLSearchParams(location.search);
+  var LOCAL = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
+
+  function limpo(v, max) { return (v == null ? '' : String(v)).trim().slice(0, max || 200); }
+  var MK = limpo(qs.get('m'), 40).toLowerCase();
+  var TK = limpo(qs.get('t'), 80);
+  if (!/^[A-Za-z0-9_-]{8,80}$/.test(TK)) TK = '';
+  var UTM = {};
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
+    var v = limpo(qs.get(k)); if (v) UTM[k] = v;
+  });
+
+  var forcada = limpo(qs.get('estado'), 20).toLowerCase();
+  var CONF = FASES.indexOf(forcada) >= 0 && (CONFERENCIA_PUBLICA || LOCAL);
+
+  var $ = function (id) { return document.getElementById(id); };
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+
+  /* ---------- link do checkout: pay.hub.la/<oferta> + UTMs ---------- */
+  function montarCheckout(m) {
+    var u = {
+      utm_source: UTM.utm_source || (TK ? UTM_PADRAO.sourceAnne : UTM_PADRAO.source),
+      utm_medium: UTM.utm_medium || UTM_PADRAO.medium,
+      utm_campaign: UTM.utm_campaign || UTM_PADRAO.campaign,
+      utm_content: UTM.utm_content || m.chave
+    };
+    if (UTM.utm_term) u.utm_term = UTM.utm_term;   // marca do vendedor humano: só passa se veio na URL
+    var p = [];
+    for (var k in u) p.push(k + '=' + encodeURIComponent(u[k]));
+    return 'https://pay.hub.la/' + encodeURIComponent(m.oferta) + '?' + p.join('&');
+  }
+
+  /* ---------- banco da Anne ---------- */
+  function rpc(nome, corpo, limite, manter) {
+    var ctl = ('AbortController' in window) ? new AbortController() : null;
+    var relogio = setTimeout(function () { if (ctl) ctl.abort(); }, limite);
+    return fetch(SB + '/rest/v1/rpc/' + nome, {
+      method: 'POST', keepalive: !!manter, signal: ctl ? ctl.signal : undefined,
+      headers: { 'apikey': SBK, 'Authorization': 'Bearer ' + SBK, 'Content-Type': 'application/json' },
+      body: JSON.stringify(corpo)
+    }).then(function (r) {
+      clearTimeout(relogio);
+      if (!r.ok) throw new Error('rpc ' + r.status);
+      return r.json();
+    }, function (e) { clearTimeout(relogio); throw e; });
+  }
+  function comLimite(promessa, ms) {
+    return new Promise(function (ok, erro) {
+      var t = setTimeout(function () { erro(new Error('tempo')); }, ms);
+      promessa.then(function (v) { clearTimeout(t); ok(v); }, function (e) { clearTimeout(t); erro(e); });
+    });
+  }
+  function normalizar(j, origem) {
+    if (Array.isArray(j)) j = j[0];
+    if (!j || FASES.indexOf(j.fase) < 0) throw new Error('fase inválida');
+    var ms = j.prazo ? Date.parse(j.prazo) : NaN;
+    return { fase: j.fase, prazo: isNaN(ms) ? null : ms, m: limpo(j.m, 40).toLowerCase(), origem: origem };
+  }
+  var PASTA = (function () {
+    var p = location.pathname;
+    if (/\/$/.test(p)) return p;
+    return /\.[a-z0-9]+$/i.test(p) ? p.replace(/[^\/]*$/, '') : p + '/';
+  })();
+  function lerArquivo() {
+    return comLimite(fetch(PASTA + 'estado.json?_=' + Math.floor(Date.now() / 60000), { cache: 'no-store' }).then(function (r) {
+      if (!r.ok) throw new Error('estado.json ' + r.status);
+      return r.json();
+    }), LIMITE_ESTADO).then(function (j) { return normalizar(j, 'estado.json'); });
+  }
+  // Ordem: (a) banco da Anne → (b) estado.json → (c) fechada. O arquivo é pedido junto, para não somar esperas.
+  function buscarEstado() {
+    var arquivo = lerArquivo();
+    arquivo.catch(function () {});
+    return comLimite(rpc('fn_black_pagina', { p_token: TK || null, p_m: MK || null }, LIMITE_ESTADO), LIMITE_ESTADO)
+      .then(function (j) { return normalizar(j, 'banco'); })
+      .catch(function () { return arquivo; })
+      .catch(function () { return { fase: 'fechada', prazo: null, m: '', origem: 'padrão' }; });
+  }
+  function estadoDeConferencia() {
+    var agora = Date.now(), H3 = 3 * 3600 * 1000, prazo = null;
+    function fimDoDia(ms) { var b = new Date(ms - H3); b.setUTCHours(23, 59, 59, 0); return b.getTime() + H3; }
+    if (forcada === 'aberta') prazo = fimDoDia(agora);                                   // exemplo: hoje, 23h59 de Brasília
+    if (forcada === 'prorrogada') {                                                      // exemplo: 15/11, 23h59 de Brasília
+      prazo = Date.parse('2026-11-15T23:59:59-03:00');
+      if (prazo <= agora) prazo = fimDoDia(agora + 3 * 86400000);
+    }
+    var pq = Date.parse(limpo(qs.get('prazo'), 40));                                     // ?prazo=<data ISO> troca o exemplo
+    if (!isNaN(pq)) prazo = pq;
+    return { fase: forcada, prazo: prazo, m: '', origem: 'conferência' };
+  }
+
+  /* ---------- datas no horário de Brasília ---------- */
+  function emBrasilia(ms) {
+    try {
+      var o = {};
+      new Intl.DateTimeFormat('pt-BR', { timeZone: 'America/Sao_Paulo', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false })
+        .formatToParts(new Date(ms)).forEach(function (x) { o[x.type] = x.value; });
+      if (o.hour === '24') o.hour = '00';
+      return { dia: o.day + '/' + o.month, hora: o.hour + 'h' + o.minute, h: +o.hour };
+    } catch (e) { return null; }
+  }
+
+  /* ---------- pintura ---------- */
+  var atual = { fase: 'carregando', prazo: null, alvo: '' };
+  var contando = false, relogioId = null, jaRolou = false;
+
+  function alvos(chave) {
+    if (GRUPOS[chave]) return GRUPOS[chave];
+    for (var i = 0; i < MENTORIAS.length; i++) if (MENTORIAS[i].chave === chave) return [chave];
+    return [];
+  }
+  var SETA = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+  function pintarGrade() {
+    var g = $('grade'), lista = alvos(atual.alvo), html = '';
+    MENTORIAS.forEach(function (m) {
+      var eAlvo = lista.indexOf(m.chave) >= 0;
+      var texto = '<span class="mt-tx"><span class="mt-selo">' + (lista.length > 1 ? 'Para você' : 'Sua mentoria') + '</span>' +
+        '<b class="mt-n">' + esc(m.nome) + '</b>' + (m.cargos ? '<span class="mt-c">' + esc(m.cargos) + '</span>' : '') + '</span>';
+      var cls = 'mt' + (eAlvo ? ' alvo' : '');   // sem animação de entrada: os cartões nunca dependem de animação para aparecer
+      if (m.oferta) {
+        html += '<a class="' + cls + '" data-k="' + esc(m.chave) + '" href="' + esc(montarCheckout(m)) + '"' +
+          ' aria-label="' + esc(m.nome + (m.cargos ? ', ' + m.cargos : '') + ': ir para a matrícula') + '">' + texto +
+          '<span class="mt-ir"><span class="mt-ir-t">Quero esta mentoria</span>' + SETA + '</span></a>';
+      } else {
+        html += '<div class="' + cls + ' off" data-k="' + esc(m.chave) + '" aria-disabled="true">' + texto +
+          '<span class="mt-ir">em instantes</span></div>';
+      }
+    });
+    g.innerHTML = html;
+  }
+
+  function rolarAteAlvo() {
+    if (jaRolou || !document.querySelector('#grade .mt.alvo')) return;
+    jaRolou = true;
+    var calmo = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setTimeout(function () {
+      var el = document.querySelector('#grade .mt.alvo');   // procura na hora de rolar: a grade pode ter sido repintada
+      if (!el) return;
+      try { el.scrollIntoView({ block: 'center', behavior: calmo ? 'auto' : 'smooth' }); } catch (e) { el.scrollIntoView(); }
+    }, 450);
+    // garantia: se a rolagem suave não chegou (navegador economizando animação) e a pessoa não mexeu na tela, vai direto
+    var mexeu = false, marca = function () { mexeu = true; };
+    ['touchstart', 'wheel', 'keydown'].forEach(function (ev) { window.addEventListener(ev, marca, { passive: true, once: true }); });
+    setTimeout(function () {
+      var el = document.querySelector('#grade .mt.alvo');
+      if (!el || mexeu) return;
+      var r = el.getBoundingClientRect();
+      if (r.top < 0 || r.bottom > window.innerHeight) { try { el.scrollIntoView({ block: 'center', behavior: 'auto' }); } catch (e) { el.scrollIntoView(); } }
+    }, 2200);
+  }
+
+  function pintarPrazo() {
+    var agora = Date.now();
+    contando = (atual.fase === 'aberta' || atual.fase === 'prorrogada') && !!atual.prazo && atual.prazo > agora;
+    $('prazo').hidden = !contando;
+    $('fxT').hidden = $('fxS').hidden = !contando;
+    if (relogioId) { clearTimeout(relogioId); relogioId = null; }
+    if (!contando) return;
+    var b = emBrasilia(atual.prazo), hoje = emBrasilia(agora), mesmoDia = b && hoje && b.dia === hoje.dia;
+    var selo, nota = '';
+    if (atual.fase === 'prorrogada') {
+      selo = 'Prorrogado até ' + (b ? b.dia : '15/11');
+      if (b) nota = (mesmoDia ? 'Encerra hoje' : 'Encerra em ' + b.dia) + ', às ' + b.hora + ' (horário de Brasília)';
+    } else {
+      selo = (!b || (mesmoDia && b.h >= 23)) ? 'Só até meia-noite de hoje' : 'Só até ' + (mesmoDia ? 'hoje' : b.dia) + ', às ' + b.hora;
+      if (b) nota = (mesmoDia ? 'Encerra hoje' : 'Encerra em ' + b.dia) + ', às ' + b.hora + ' (horário de Brasília)';
+    }
+    $('seloTxt').textContent = selo;
+    $('prazoNota').textContent = nota; $('prazoNota').hidden = !nota;
+    tique();
+  }
+
+  function tique() {
+    var falta = atual.prazo - Date.now();
+    if (falta <= 0) { pintarPrazo(); return; }   // zerou: some o contador e a página segue vendendo (nunca encerra sozinha)
+    var s = Math.floor(falta / 1000), d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600), mi = Math.floor((s % 3600) / 60), se = s % 60;
+    $('celD').hidden = d < 1;
+    $('dd').textContent = pad(d); $('hh').textContent = pad(h); $('mm').textContent = pad(mi); $('ss').textContent = pad(se);
+    $('fxT').textContent = (d ? d + 'd ' : '') + pad(h) + ':' + pad(mi) + ':' + pad(se);
+    relogioId = setTimeout(tique, 1000 - (Date.now() % 1000) + 15);
+  }
+
+  function pintar(e) {
+    var alvo = e.m || MK;
+    var mudou = e.fase !== atual.fase || e.prazo !== atual.prazo || alvo !== atual.alvo;
+    if (!mudou) return;
+    atual = { fase: e.fase, prazo: e.prazo, alvo: alvo };
+    var venda = e.fase === 'aberta' || e.fase === 'prorrogada' || e.fase === 'sem_prazo';
+    document.body.setAttribute('data-fase', e.fase);
+    $('vEspera').hidden = true;
+    $('vFechada').hidden = e.fase !== 'fechada';
+    $('vEncerrada').hidden = e.fase !== 'encerrada';
+    $('vVenda').hidden = !venda;
+    $('fixa').hidden = !venda;   // fora das fases de venda a parcela não fica nem escondida na página
+    if (!venda) $('fixa').classList.remove('on');
+    if (venda) {
+      pintarGrade();
+      pintarPrazo();
+      montarVideo();
+      rolarAteAlvo();
+    } else if (relogioId) { clearTimeout(relogioId); relogioId = null; }
+  }
+
+  /* ---------- vídeo (Vturb), só quando ligado ---------- */
+  var videoMontado = false;
+  function montarVideo() {
+    if (videoMontado || !VIDEO.ligado || !VIDEO.id) return;
+    videoMontado = true;
+    var caixa = $('video');
+    caixa.innerHTML = '<vturb-smartplayer id="vid-' + esc(VIDEO.id) + '" style="display:block;margin:0 auto;width:100%"><div class="vturb-player-placeholder" style="position:relative;width:100%;padding:' + esc(VIDEO.proporcao) + ' 0 0;z-index:0;background-color:#000"></div></vturb-smartplayer>';
+    caixa.hidden = false;
+    var s = document.createElement('script');
+    s.src = 'https://scripts.converteai.net/' + VIDEO.conta + '/players/' + VIDEO.id + '/v4/player.js'; s.async = true;
+    document.head.appendChild(s);
+  }
+
+  /* ---------- clique na mentoria ---------- */
+  $('grade').addEventListener('click', function (ev) {
+    var a = ev.target.closest ? ev.target.closest('a.mt') : null;
+    if (!a) return;
+    var chave = a.getAttribute('data-k'), m = null;
+    MENTORIAS.forEach(function (x) { if (x.chave === chave) m = x; });
+    if (!m || !m.oferta) { ev.preventDefault(); return; }
+    try { if (window.fbq) fbq('track', 'InitiateCheckout', { content_name: m.nome, content_ids: [m.chave], content_category: 'black-nao-alunos' }); } catch (e) {}
+    if (!TK || CONF) return;                                         // sem conversa da Anne (ou em conferência): segue direto pelo link
+    // com "t": avisa a Anne da escolha em segundo plano, sem travar a ida ao checkout
+    var aviso = rpc('fn_black_escolha', { p_token: TK, p_m: m.chave }, 4000, true).catch(function () {});
+    if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.button) return; // abrindo em outra aba: o navegador cuida
+    ev.preventDefault();
+    a.classList.add('indo');
+    var destino = a.href, foi = false;
+    function ir() { if (foi) return; foi = true; location.href = destino; }
+    setTimeout(ir, LIMITE_ESCOLHA);
+    aviso.then(ir, ir);
+  });
+  window.addEventListener('pageshow', function () {   // voltou do checkout pelo botão "voltar"
+    var presos = document.querySelectorAll('.mt.indo');
+    for (var i = 0; i < presos.length; i++) presos[i].classList.remove('indo');
+  });
+
+  /* ---------- barra que acompanha a rolagem ---------- */
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      var venda = !$('vVenda').hidden;
+      $('fixa').classList.toggle('on', venda && !es[0].isIntersecting && es[0].boundingClientRect.top < 0);
+    }, { threshold: 0 }).observe($('preco'));
+  }
+
+  /* ---------- modo de conferência ---------- */
+  function montarConferencia() {
+    var faixa = $('conf'), html = '<b>Modo de conferência</b> · fase forçada pela URL, sem banco e sem rastreamento<br>';
+    FASES.forEach(function (f) {
+      var q = new URLSearchParams(location.search); q.set('estado', f); q.delete('prazo');
+      html += '<a class="' + (f === forcada ? 'on' : '') + '" href="?' + esc(q.toString()) + '">' + f + '</a>';
+    });
+    faixa.innerHTML = html; faixa.hidden = false;
+    var pend = document.querySelectorAll('[data-pend]');
+    for (var i = 0; i < pend.length; i++) pend[i].hidden = false;
+    // para testar no console (só existe no modo de conferência)
+    window.__matricula = { MENTORIAS: MENTORIAS, montarCheckout: montarCheckout, repintar: function () { pintarGrade(); }, estado: function () { return atual; } };
+  }
+
+  /* ---------- partida ---------- */
+  if (CONF) {
+    montarConferencia();
+    pintar(estadoDeConferencia());
+    return;
+  }
+  var ultima = 0, agendado = null;
+  function consultar() {
+    ultima = Date.now();
+    return buscarEstado().then(function (e) { pintar(e); agendar(); });
+  }
+  function agendar() {
+    if (agendado) clearTimeout(agendado);
+    var seg = atual.fase === 'fechada' ? RECONSULTA.fechada : RECONSULTA.outras;
+    if (!seg) return;
+    agendado = setTimeout(function () {   // só pergunta de novo com a aba visível; a variação espalha as consultas
+      if (document.hidden) { agendar(); return; }
+      consultar();
+    }, seg * 1000 * (0.75 + Math.random() * 0.5));
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden && Date.now() - ultima > 30000) consultar();
+  });
+  consultar();
+})();
+</script>
+</body>
+</html>
