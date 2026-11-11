@@ -318,6 +318,12 @@ footer p{margin:0 0 6px}
   var forcada = limpo(qs.get('estado'), 20).toLowerCase();
   var CONF = FASES.indexOf(forcada) >= 0 && (CONFERENCIA_PUBLICA || LOCAL);
 
+  // 11/11 (pedido do Fábio): quem chega pelo WEBINÁRIO (botão do vídeo ou link da Anne do webinário,
+  // utm_source=sou-webinario) vê o prazo DO DIA — "só até meia-noite de hoje" (23h59 de Brasília) —
+  // e o contador recomeça todo dia. Vale só nas fases de venda; a página nunca encerra sozinha.
+  var DO_WEBINARIO = UTM.utm_source === 'sou-webinario';
+  function fimDoDiaBrasilia(ms) { var H3 = 3 * 3600 * 1000, b = new Date(ms - H3); b.setUTCHours(23, 59, 59, 0); return b.getTime() + H3; }
+
   var $ = function (id) { return document.getElementById(id); };
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
@@ -479,7 +485,10 @@ footer p{margin:0 0 6px}
 
   function tique() {
     var falta = atual.prazo - Date.now();
-    if (falta <= 0) { pintarPrazo(); return; }   // zerou: some o contador e a página segue vendendo (nunca encerra sozinha)
+    if (falta <= 0) {
+      if (DO_WEBINARIO) atual.prazo = fimDoDiaBrasilia(Date.now() + 2000);   // webinário: virou o dia, o contador recomeça
+      pintarPrazo(); return;   // demais: zerou, some o contador e a página segue vendendo (nunca encerra sozinha)
+    }
     var s = Math.floor(falta / 1000), d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600), mi = Math.floor((s % 3600) / 60), se = s % 60;
     $('celD').hidden = d < 1;
     $('dd').textContent = pad(d); $('hh').textContent = pad(h); $('mm').textContent = pad(mi); $('ss').textContent = pad(se);
@@ -488,6 +497,8 @@ footer p{margin:0 0 6px}
   }
 
   function pintar(e) {
+    if (DO_WEBINARIO && (e.fase === 'aberta' || e.fase === 'prorrogada' || e.fase === 'sem_prazo'))
+      e = { fase: 'aberta', prazo: fimDoDiaBrasilia(Date.now()), m: e.m, origem: e.origem };
     var alvo = e.m || MK;
     var mudou = e.fase !== atual.fase || e.prazo !== atual.prazo || alvo !== atual.alvo;
     if (!mudou) return;
