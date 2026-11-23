@@ -82,7 +82,7 @@ h1 small{display:block;margin-top:8px;font-family:var(--font-b);font-weight:600;
 .preco .p-l{display:flex;align-items:baseline;justify-content:center;gap:10px;font-family:var(--font-d);line-height:1}
 .preco .p-x{font-weight:700;font-size:20px;color:var(--ink-2)}
 .preco .p-v{font-weight:800;font-size:clamp(40px,12.5vw,58px);color:#fff;letter-spacing:-.01em;white-space:nowrap}
-.preco .p-n{display:block;margin-top:7px;font-size:13.5px;line-height:1.35;color:var(--ink-2)}
+.preco .p-n{display:block;font-size:13.5px;line-height:1.35;color:var(--ink-2)}
 .combo{list-style:none;margin:0 auto 24px;padding:4px 16px;display:grid;text-align:left;border-radius:18px;background:var(--card);border:1px solid var(--line)}
 .combo li{position:relative;padding:11px 0 11px 32px;color:var(--ink-2);font-size:15px;line-height:1.36}
 .combo li+li{border-top:1px solid var(--line)}
@@ -104,6 +104,8 @@ a.mt:focus-visible{outline:2px solid var(--blue-2);outline-offset:3px}
 .mt-tx{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px}
 .mt-n{font-family:var(--font-d);font-weight:700;font-size:18.5px;line-height:1.15;color:#fff}
 .mt-c{font-size:14px;line-height:1.3;color:var(--ink-3)}
+.mt-p{margin-top:5px;font-family:var(--font-d);font-weight:700;font-size:13.5px;line-height:1.1;color:var(--ink-2)}
+.mt-p b{font-weight:800;font-size:19px;color:#1cc6e6;white-space:nowrap}
 .mt-selo{display:none;align-self:flex-start;margin:0 0 4px;padding:3px 10px;border-radius:999px;background:var(--blue-2);color:#001820;font-family:var(--font-d);font-weight:800;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase}
 .mt-ir{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;width:46px;height:46px;border-radius:999px;color:#fff;
   background:linear-gradient(92deg,var(--blue-2) 0%,var(--blue) 55%,var(--blue-deep) 100%);box-shadow:0 0 0 1px rgba(0,196,234,.35),0 0 22px rgba(0,170,210,.4)}
@@ -180,7 +182,7 @@ footer p{margin:0 0 6px}
 
 <div class="fixa" id="fixa" aria-hidden="true" hidden>
   <span class="fx-t" id="fxT" hidden></span><span class="fx-s" id="fxS" hidden></span>
-  <span class="fx-p">12x de R$ 149,77</span>
+  <span class="fx-p">Escolha a sua mentoria</span>
 </div>
 
 <main class="wrap">
@@ -223,14 +225,11 @@ footer p{margin:0 0 6px}
       <h1 id="titulo" class="h1-venda">Escolha a sua <span class="az">mentoria</span></h1>
 
       <div class="preco" id="preco">
-        <span class="p-l"><span class="p-x">12x de</span><span class="p-v">R$ 149,77</span></span>
         <span class="p-n">No cartão em 12x ou no Pix à vista. Você escolhe na hora de pagar.</span>
       </div>
 
       <ul class="combo" aria-label="O que você leva">
         <li><b>A mentoria do seu concurso.</b> Você tem o conteúdo do seu concurso e estuda por ele.</li>
-        <li><b>O Dominei.</b> Você descobre o que já domina e o que ainda precisa dominar.</li>
-        <li><b>Os dois até a data da sua prova.</b> Não importa quando ela aconteça.</li>
       </ul>
     </div>
 
@@ -264,15 +263,18 @@ footer p{margin:0 0 6px}
   // Nunca cole link no formato hub.la/r/... — esse formato descarta as UTMs.
   // Mentoria com "oferta" vazia aparece desativada ("em instantes") e não leva a lugar nenhum.
   // A ordem desta lista é a ordem dos cartões na página.
+  // "preco" é o valor da parcela em 12x que aparece no cartão: tem de ser igual ao do checkout da Hubla.
   var MENTORIAS = [
-    { chave: 'prf',     nome: 'Elite PRF',                        cargos: 'Policial Rodoviário Federal',                                      oferta: 'lAfRZW98zjv67oOiELLs' },
-    { chave: 'pcam',    nome: 'Elite Polícia Civil do Amazonas',  cargos: 'Investigador e Escrivão',               oferta: 'OPVFiUruIOXoooESIf2l' },
-    { chave: 'pmam',    nome: 'Elite Polícia Militar do Amazonas', cargos: 'Soldado',                              oferta: 'I3PH9ms4QYcFXHK94XEH' },
-    { chave: 'prfadm',  nome: 'Elite PRF Administrativo',         cargos: 'Agente Administrativo · Nível Médio',                                      oferta: 'p160tc6CaXOKrAuBKP1T' },
-    { chave: 'tjam',    nome: 'Elite TJ-AM',                      cargos: 'Analista e Técnico',                    oferta: 'WcXIrMwdL4jYj30o4KuE' },
-    { chave: 'inss',    nome: 'Elite INSS',                       cargos: 'Técnico do Seguro Social · Nível Médio',                                      oferta: 'Ieue5Uv04c0NhdzJq7cE' },
-    { chave: 'seducam', nome: 'Elite SEDUC-AM',                   cargos: 'Professor, Pedagogo e Administrativos',                                      oferta: 'Qqoapsq3i8PdFCIknf0Q' },
-    { chave: 'semsa',   nome: 'Elite SEMSA Manaus',               cargos: 'Profissionais da Saúde',                                      oferta: 'O3w7s7oOH9ZaKmlB6Wau' }
+    { chave: 'prf',     nome: 'Elite PRF',                        cargos: 'Policial Rodoviário Federal',                                      oferta: 'yCGJYjtxS2fCyWpXkEvC', preco: '99,75' },
+    { chave: 'pcam',    nome: 'Elite Polícia Civil do Amazonas',  cargos: 'Investigador e Escrivão',               oferta: 'Hosy81E5z1YT2DXZYOPt', preco: '79,74' },
+    { chave: 'pmam',    nome: 'Elite Polícia Militar do Amazonas', cargos: 'Soldado',                              oferta: 'jBM8NgJGiGFiXhF8w6CT', preco: '79,74' },
+    { chave: 'ppam',    nome: 'Elite Polícia Penal do Amazonas',  cargos: 'Policial Penal',                        oferta: 'IadqCuJAUoa4R2KpnYGA', preco: '79,74' },
+    { chave: 'prfadm',  nome: 'Elite PRF Administrativo',         cargos: 'Agente Administrativo · Nível Médio',                                      oferta: 'faIA8PxlIPN2AnwN54Xd', preco: '79,74' },
+    { chave: 'tjam',    nome: 'Elite TJ-AM',                      cargos: 'Analista e Técnico',                    oferta: 'tqY0VCIEuTjcbeNGTCXu', preco: '99,75' },
+    { chave: 'inss',    nome: 'Elite INSS',                       cargos: 'Técnico do Seguro Social · Nível Médio',                                      oferta: 'YkEipsRtIJYKAvKUE10Q', preco: '79,74' },
+    { chave: 'seducam', nome: 'Elite SEDUC-AM',                   cargos: 'Professor, Pedagogo e Administrativos',                                      oferta: 'AkwjJstO2lOjma0jgJKi', preco: '79,74' },
+    { chave: 'semsa',   nome: 'Elite SEMSA Manaus',               cargos: 'Profissionais da Saúde',                                      oferta: 'h2jNFQiKvX06fos2luKS', preco: '79,74' },
+    { chave: 'sesam',   nome: 'Elite SES-AM',                     cargos: 'Profissionais da Saúde',                oferta: 'rOwhZui1KBXZ8QxoGWyb', preco: '79,74' }
   ];
 
   // m=<apelido> destaca mais de uma mentoria
@@ -428,7 +430,8 @@ footer p{margin:0 0 6px}
     MENTORIAS.forEach(function (m) {
       var eAlvo = lista.indexOf(m.chave) >= 0;
       var texto = '<span class="mt-tx"><span class="mt-selo">' + (lista.length > 1 ? 'Para você' : 'Sua mentoria') + '</span>' +
-        '<b class="mt-n">' + esc(m.nome) + '</b>' + (m.cargos ? '<span class="mt-c">' + esc(m.cargos) + '</span>' : '') + '</span>';
+        '<b class="mt-n">' + esc(m.nome) + '</b>' + (m.cargos ? '<span class="mt-c">' + esc(m.cargos) + '</span>' : '') +
+        (m.preco ? '<span class="mt-p">12x de <b>R$ ' + esc(m.preco) + '</b></span>' : '') + '</span>';
       var cls = 'mt' + (eAlvo ? ' alvo' : '');   // sem animação de entrada: os cartões nunca dependem de animação para aparecer
       if (m.oferta) {
         html += '<a class="' + cls + '" data-k="' + esc(m.chave) + '" href="' + esc(montarCheckout(m)) + '"' +
