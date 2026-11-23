@@ -82,7 +82,11 @@ h1 small{display:block;margin-top:8px;font-family:var(--font-b);font-weight:600;
 .preco .p-l{display:flex;align-items:baseline;justify-content:center;gap:10px;font-family:var(--font-d);line-height:1}
 .preco .p-x{font-weight:700;font-size:20px;color:var(--ink-2)}
 .preco .p-v{font-weight:800;font-size:clamp(40px,12.5vw,58px);color:#fff;letter-spacing:-.01em;white-space:nowrap}
-.preco .p-n{display:block;font-size:13.5px;line-height:1.35;color:var(--ink-2)}
+.preco{padding:18px 16px 16px}
+.preco .p-d{display:block;font-family:var(--font-d);font-weight:800;font-size:clamp(23px,6.6vw,34px);line-height:1.08;letter-spacing:.01em;text-transform:uppercase;color:#fff;text-wrap:balance}
+.preco .p-d .az{color:#1cc6e6}
+.preco .p-pix{display:block;margin-top:6px;font-family:var(--font-d);font-weight:800;font-size:clamp(15px,4.3vw,19px);line-height:1.15;letter-spacing:.1em;text-transform:uppercase;color:#1cc6e6}
+.preco .p-n{display:block;margin-top:9px;font-size:13.5px;line-height:1.35;color:var(--ink-2)}
 .combo{list-style:none;margin:0 auto 24px;padding:4px 16px;display:grid;text-align:left;border-radius:18px;background:var(--card);border:1px solid var(--line)}
 .combo li{position:relative;padding:11px 0 11px 32px;color:var(--ink-2);font-size:15px;line-height:1.36}
 .combo li+li{border-top:1px solid var(--line)}
@@ -225,7 +229,9 @@ footer p{margin:0 0 6px}
       <h1 id="titulo" class="h1-venda">Escolha a sua <span class="az">mentoria</span></h1>
 
       <div class="preco" id="preco">
-        <span class="p-n">No cartão em 12x ou no Pix à vista. Você escolhe na hora de pagar.</span>
+        <span class="p-d">Super desconto de <span class="az">Black Friday</span></span>
+        <span class="p-pix">para pagamentos via Pix</span>
+        <span class="p-n">ou em 12x nos cartões com juros*</span>
       </div>
 
       <ul class="combo" aria-label="O que você leva">
