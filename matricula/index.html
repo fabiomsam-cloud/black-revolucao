@@ -108,6 +108,10 @@ a.mt:focus-visible{outline:2px solid var(--blue-2);outline-offset:3px}
 .mt-tx{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px}
 .mt-n{font-family:var(--font-d);font-weight:700;font-size:18.5px;line-height:1.15;color:#fff}
 .mt-c{font-size:14px;line-height:1.3;color:var(--ink-3)}
+/* preço âncora: valor cheio riscado, acima da parcela da Black */
+.mt-de{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 7px;margin-top:9px;font-family:var(--font-d);font-weight:700;font-size:13.5px;line-height:1.1;color:var(--ink-2)}
+.mt-de s{font-weight:800;font-size:23px;letter-spacing:.01em;color:#fff;white-space:nowrap;text-decoration:line-through;text-decoration-color:#ff4757;text-decoration-thickness:2px}
+.mt-de+.mt-p{margin-top:2px}
 .mt-p{margin-top:5px;font-family:var(--font-d);font-weight:700;font-size:13.5px;line-height:1.25;color:var(--ink-2)}
 .mt-x{margin-top:2px;font-size:14px;line-height:1.3;color:var(--ink-2)}
 .mt-x b{font-weight:700;color:#fff;white-space:nowrap}
@@ -270,17 +274,18 @@ footer p{margin:0 0 6px}
   // A ordem desta lista é a ordem dos cartões na página.
   // "pix" é o desconto (em R$) no Pix à vista; sem "pix" a linha do desconto não aparece no cartão.
   // "preco" é o valor da parcela em 12x que aparece no cartão: tem de ser igual ao do checkout da Hubla.
+  // "de" é o preço âncora (valor cheio, sem a Black), riscado em destaque no cartão; sem "de" a linha não aparece.
   var MENTORIAS = [
-    { chave: 'prf',     nome: 'Elite PRF',                        cargos: 'Policial Rodoviário Federal',                                      oferta: 'yCGJYjtxS2fCyWpXkEvC', preco: '99,75', pix: '300,00' },
-    { chave: 'pcam',    nome: 'Elite Polícia Civil do Amazonas',  cargos: 'Investigador e Escrivão',               oferta: 'Hosy81E5z1YT2DXZYOPt', preco: '79,74', pix: '200,00' },
-    { chave: 'pmam',    nome: 'Elite Polícia Militar do Amazonas', cargos: 'Soldado',                              oferta: 'jBM8NgJGiGFiXhF8w6CT', preco: '79,74', pix: '200,00' },
-    { chave: 'ppam',    nome: 'Elite Polícia Penal do Amazonas',  cargos: 'Policial Penal',                        oferta: 'IadqCuJAUoa4R2KpnYGA', preco: '79,74', pix: '200,00' },
-    { chave: 'prfadm',  nome: 'Elite PRF Administrativo',         cargos: 'Agente Administrativo · Nível Médio',                                      oferta: 'faIA8PxlIPN2AnwN54Xd', preco: '79,74', pix: '400,00' },
-    { chave: 'tjam',    nome: 'Elite TJ-AM',                      cargos: 'Analista e Técnico',                    oferta: 'tqY0VCIEuTjcbeNGTCXu', preco: '99,75', pix: '300,00' },
-    { chave: 'inss',    nome: 'Elite INSS',                       cargos: 'Técnico do Seguro Social · Nível Médio',                                      oferta: 'YkEipsRtIJYKAvKUE10Q', preco: '79,74', pix: '200,00' },
-    { chave: 'seducam', nome: 'Elite SEDUC-AM',                   cargos: 'Professor, Pedagogo e Administrativos',                                      oferta: 'AkwjJstO2lOjma0jgJKi', preco: '79,74', pix: '200,00' },
-    { chave: 'semsa',   nome: 'Elite SEMSA Manaus',               cargos: 'Profissionais da Saúde',                                      oferta: 'h2jNFQiKvX06fos2luKS', preco: '79,74', pix: '200,00' },
-    { chave: 'sesam',   nome: 'Elite SES-AM',                     cargos: 'Profissionais da Saúde',                oferta: 'rOwhZui1KBXZ8QxoGWyb', preco: '79,74', pix: '200,00' }
+    { chave: 'prf',     nome: 'Elite PRF',                        cargos: 'Policial Rodoviário Federal',                                      oferta: 'yCGJYjtxS2fCyWpXkEvC', de: '2.000', preco: '99,75', pix: '300,00' },
+    { chave: 'pcam',    nome: 'Elite Polícia Civil do Amazonas',  cargos: 'Investigador e Escrivão',               oferta: 'Hosy81E5z1YT2DXZYOPt', de: '2.000', preco: '79,74', pix: '200,00' },
+    { chave: 'pmam',    nome: 'Elite Polícia Militar do Amazonas', cargos: 'Soldado',                              oferta: 'jBM8NgJGiGFiXhF8w6CT', de: '1.500', preco: '79,74', pix: '200,00' },
+    { chave: 'ppam',    nome: 'Elite Polícia Penal do Amazonas',  cargos: 'Policial Penal',                        oferta: 'IadqCuJAUoa4R2KpnYGA', de: '1.500', preco: '79,74', pix: '200,00' },
+    { chave: 'prfadm',  nome: 'Elite PRF Administrativo',         cargos: 'Agente Administrativo · Nível Médio',                                      oferta: 'faIA8PxlIPN2AnwN54Xd', de: '1.500', preco: '79,74', pix: '400,00' },
+    { chave: 'tjam',    nome: 'Elite TJ-AM',                      cargos: 'Analista e Técnico',                    oferta: 'tqY0VCIEuTjcbeNGTCXu', de: '2.000', preco: '99,75', pix: '300,00' },
+    { chave: 'inss',    nome: 'Elite INSS',                       cargos: 'Técnico do Seguro Social · Nível Médio',                                      oferta: 'YkEipsRtIJYKAvKUE10Q', de: '1.500', preco: '79,74', pix: '200,00' },
+    { chave: 'seducam', nome: 'Elite SEDUC-AM',                   cargos: 'Professor, Pedagogo e Administrativos',                                      oferta: 'AkwjJstO2lOjma0jgJKi', de: '1.500', preco: '79,74', pix: '200,00' },
+    { chave: 'semsa',   nome: 'Elite SEMSA Manaus',               cargos: 'Profissionais da Saúde',                                      oferta: 'h2jNFQiKvX06fos2luKS', de: '1.500', preco: '79,74', pix: '200,00' },
+    { chave: 'sesam',   nome: 'Elite SES-AM',                     cargos: 'Profissionais da Saúde',                oferta: 'rOwhZui1KBXZ8QxoGWyb', de: '1.500', preco: '79,74', pix: '200,00' }
   ];
 
   // m=<apelido> destaca mais de uma mentoria
@@ -437,6 +442,7 @@ footer p{margin:0 0 6px}
       var eAlvo = lista.indexOf(m.chave) >= 0;
       var texto = '<span class="mt-tx"><span class="mt-selo">' + (lista.length > 1 ? 'Para você' : 'Sua mentoria') + '</span>' +
         '<b class="mt-n">' + esc(m.nome) + '</b>' + (m.cargos ? '<span class="mt-c">' + esc(m.cargos) + '</span>' : '') +
+        (m.de ? '<span class="mt-de"><span>De</span><s>R$ ' + esc(m.de) + '</s><span>por</span></span>' : '') +
         (m.preco ? '<span class="mt-p">12x de <b>R$ ' + esc(m.preco) + '</b> nos cartões com juros</span>' : '') +
         (m.pix ? '<span class="mt-x">ou <b>R$ ' + esc(m.pix) + ' de desconto</b> no Pix à vista</span>' : '') + '</span>';
       var cls = 'mt' + (eAlvo ? ' alvo' : '');   // sem animação de entrada: os cartões nunca dependem de animação para aparecer
