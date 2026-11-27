@@ -285,7 +285,11 @@ footer p{margin:0 0 6px}
     { chave: 'inss',    nome: 'Elite INSS',                       cargos: 'Técnico do Seguro Social · Nível Médio',                                      oferta: 'YkEipsRtIJYKAvKUE10Q', de: '1.500', preco: '79,74', pix: '200,00' },
     { chave: 'seducam', nome: 'Elite SEDUC-AM',                   cargos: 'Professor, Pedagogo e Administrativos',                                      oferta: 'AkwjJstO2lOjma0jgJKi', de: '1.500', preco: '79,74', pix: '200,00' },
     { chave: 'semsa',   nome: 'Elite SEMSA Manaus',               cargos: 'Profissionais da Saúde',                                      oferta: 'h2jNFQiKvX06fos2luKS', de: '1.500', preco: '79,74', pix: '200,00' },
-    { chave: 'sesam',   nome: 'Elite SES-AM',                     cargos: 'Profissionais da Saúde',                oferta: 'rOwhZui1KBXZ8QxoGWyb', de: '1.500', preco: '79,74', pix: '200,00' }
+    { chave: 'sesam',   nome: 'Elite SES-AM',                     cargos: 'Profissionais da Saúde',                oferta: 'rOwhZui1KBXZ8QxoGWyb', de: '1.500', preco: '79,74', pix: '200,00' },
+    // PÓS-GRADUAÇÕES (27/11): mesma condição do disparo para alunos, sem o Dominei. "avista" é o valor no Pix à vista
+    // (aqui não há desconto extra no Pix: R$ 897 é o preço cheio da Black); "botao" troca o texto do botão do cartão.
+    { chave: 'posdp',   nome: 'Pós-Graduação em Direito Policial', cargos: 'Especialização · acesso por 1 ano',     oferta: 'WIanP9XELLugPFpmxTSg', de: '2.000', preco: '89,74', avista: '897,00', botao: 'Quero esta pós' },
+    { chave: 'posgp',   nome: 'Pós-Graduação em Gestão Pública',  cargos: 'Especialização · acesso por 1 ano',     oferta: 'QzUBfErl9tqM1eKVaGSK', de: '2.000', preco: '89,74', avista: '897,00', botao: 'Quero esta pós' }
   ];
 
   // m=<apelido> destaca mais de uma mentoria
@@ -444,12 +448,13 @@ footer p{margin:0 0 6px}
         '<b class="mt-n">' + esc(m.nome) + '</b>' + (m.cargos ? '<span class="mt-c">' + esc(m.cargos) + '</span>' : '') +
         (m.de ? '<span class="mt-de"><span>De</span><s>R$ ' + esc(m.de) + '</s><span>por</span></span>' : '') +
         (m.preco ? '<span class="mt-p">12x de <b>R$ ' + esc(m.preco) + '</b> nos cartões com juros</span>' : '') +
-        (m.pix ? '<span class="mt-x">ou <b>R$ ' + esc(m.pix) + ' de desconto</b> no Pix à vista</span>' : '') + '</span>';
+        (m.pix ? '<span class="mt-x">ou <b>R$ ' + esc(m.pix) + ' de desconto</b> no Pix à vista</span>' : '') +
+        (m.avista ? '<span class="mt-x">ou <b>R$ ' + esc(m.avista) + '</b> à vista no Pix</span>' : '') + '</span>';
       var cls = 'mt' + (eAlvo ? ' alvo' : '');   // sem animação de entrada: os cartões nunca dependem de animação para aparecer
       if (m.oferta) {
         html += '<a class="' + cls + '" data-k="' + esc(m.chave) + '" href="' + esc(montarCheckout(m)) + '"' +
           ' aria-label="' + esc(m.nome + (m.cargos ? ', ' + m.cargos : '') + ': ir para a matrícula') + '">' + texto +
-          '<span class="mt-ir"><span class="mt-ir-t">Quero esta mentoria</span>' + SETA + '</span></a>';
+          '<span class="mt-ir"><span class="mt-ir-t">' + esc(m.botao || 'Quero esta mentoria') + '</span>' + SETA + '</span></a>';
       } else {
         html += '<div class="' + cls + ' off" data-k="' + esc(m.chave) + '" aria-disabled="true">' + texto +
           '<span class="mt-ir">em instantes</span></div>';
