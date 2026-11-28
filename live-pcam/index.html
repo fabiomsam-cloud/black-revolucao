@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#06080b">
+<title>PC-AM · Sala secreta · 30/11</title>
+<meta name="description" content="Segunda-feira, 30/11, às 20h (horário de Manaus): transmissão fechada do Delegado Fábio Silva sobre o concurso da Polícia Civil do Amazonas. Inscreva-se para receber o link.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PC-AM · Sala secreta · 30/11">
+<meta property="og:description" content="Segunda-feira, 30/11, às 20h (horário de Manaus): transmissão fechada do Delegado Fábio Silva sobre o concurso da Polícia Civil do Amazonas. Inscreva-se para receber o link.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --asfalto:#06080b; --placa:#11161d; --borda:#232b36;
+  --amarelo:#ffcc00; --amarelo-escuro:#d9a900; --ciano:#22c7d6; --azul-prf:#0b3a8c;
+  --branco:#f4f6f8; --cinza:#9aa6b4; --erro:#ff6b5e;
+  --display:"Bebas Neue","Barlow Condensed",Impact,sans-serif;
+  --cond:"Barlow Condensed","Barlow",sans-serif;
+  --texto:"Barlow",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; min-height:100dvh; background:var(--asfalto); color:var(--branco);
+  font-family:var(--texto); font-size:17px; line-height:1.45; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    linear-gradient(112deg, transparent 0 18%, rgba(34,199,214,.10) 18% 26%, transparent 26% 100%),
+    linear-gradient(112deg, transparent 0 62%, rgba(34,199,214,.05) 62% 74%, transparent 74% 100%),
+    radial-gradient(120% 70% at 85% 0%, rgba(11,58,140,.35), transparent 60%),
+    radial-gradient(90% 60% at 0% 100%, rgba(255,204,0,.06), transparent 60%);
+}
+.faixa-topo{position:relative; z-index:2; height:6px; background:linear-gradient(90deg,var(--azul-prf) 0 34%,var(--amarelo) 34% 100%)}
+.pagina{position:relative; z-index:1; max-width:1120px; margin:0 auto}
+
+.abertura{position:relative; padding:20px 20px 0; min-height:236px; overflow:hidden}
+.abertura .foto{
+  position:absolute; right:-62px; top:0; height:236px; width:auto; z-index:0;
+  -webkit-mask-image:linear-gradient(90deg,transparent 2%,#000 46%),linear-gradient(0deg,transparent 0,#000 15%);
+  -webkit-mask-composite:source-in; mask-image:linear-gradient(90deg,transparent 2%,#000 46%),linear-gradient(0deg,transparent 0,#000 15%);
+  mask-composite:intersect;
+}
+.selo{
+  position:relative; z-index:1; display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--cond); font-weight:600; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--cinza);
+}
+.selo i{width:8px; height:8px; background:var(--erro); border-radius:50%; display:block; box-shadow:0 0 0 0 rgba(255,107,94,.7); animation:pulsa 1.6s infinite}
+@keyframes pulsa{70%{box-shadow:0 0 0 9px rgba(255,107,94,0)}100%{box-shadow:0 0 0 0 rgba(255,107,94,0)}}
+.marca{position:relative; z-index:1; margin:10px 0 0}
+.marca .prf{display:block; font-family:var(--display); font-size:72px; line-height:.86; color:var(--amarelo); letter-spacing:.01em; text-shadow:0 0 34px rgba(255,204,0,.22)}
+.marca .linha{display:block; width:74px; height:5px; background:var(--ciano); margin:12px 0 10px; box-shadow:0 0 18px rgba(34,199,214,.6)}
+.marca .vagas{display:block; font-family:var(--display); font-size:41px; line-height:.9; color:#fff; letter-spacing:.015em}
+.marca .previstas{display:block; margin-top:8px; font-family:var(--cond); font-weight:600; font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--ciano); max-width:15em; line-height:1.25}
+.chamada{position:relative; z-index:1; padding:14px 20px 2px}
+.chamada h1{margin:0; font-family:var(--display); font-weight:400; font-size:37px; line-height:.98; letter-spacing:.01em}
+.chamada h1 b{font-weight:400; color:var(--amarelo)}
+.chamada p{margin:10px 0 0; color:#c9d2dc; max-width:34em}
+.assina{display:block; margin-top:10px; font-family:var(--cond); font-weight:600; letter-spacing:.1em; text-transform:uppercase; font-size:13px; color:var(--cinza)}
+
+.rota{position:relative; z-index:1; padding:18px 20px 30px}
+.placa{
+  position:relative; background:linear-gradient(180deg,#121820,#0d1218); border:1px solid var(--borda); border-radius:6px;
+  padding:22px 18px 20px; box-shadow:0 24px 60px -30px rgba(0,0,0,.9);
+}
+.placa::before{content:""; position:absolute; left:-1px; top:18px; width:4px; height:44px; background:var(--amarelo)}
+.rotulo{font-family:var(--cond); font-weight:700; font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:var(--ciano)}
+.pergunta{margin:6px 0 16px; font-family:var(--cond); font-weight:700; font-size:27px; line-height:1.08; letter-spacing:.005em}
+
+input[type=text], input[type=tel]{
+  width:100%; background:#080b0f; color:#fff; border:1.5px solid #2a3340; border-radius:4px;
+  font:500 18px/1.4 var(--texto); padding:14px 14px; outline:none; transition:border-color .15s, box-shadow .15s;
+}
+input::placeholder{color:#5f6b79}
+input:focus{border-color:var(--amarelo); box-shadow:0 0 0 3px rgba(255,204,0,.16)}
+.campo{display:block; margin:0 0 14px; border:0; padding:0; min-width:0}
+.campo > span, .campo > legend{display:block; padding:0; margin-bottom:6px; font-family:var(--cond); font-weight:600; letter-spacing:.1em; text-transform:uppercase; font-size:13px; color:var(--cinza)}
+
+.opcoes{display:grid; gap:9px}
+.opcao{
+  display:flex; align-items:center; gap:14px; width:100%; text-align:left; cursor:pointer;
+  background:#0a0e13; color:#fff; border:1.5px solid #27303c; border-radius:4px; padding:13px 14px;
+  font:600 17px/1.25 var(--texto); transition:transform .12s, border-color .12s, background .12s, color .12s;
+  -webkit-tap-highlight-color:transparent;
+}
+.opcao .letra{
+  flex:none; width:28px; height:28px; display:grid; place-items:center; border:1.5px solid #3a4553; border-radius:3px;
+  font-family:var(--cond); font-weight:700; font-size:15px; color:var(--amarelo);
+}
+.opcao:hover{border-color:#566375}
+.opcao:active{transform:scale(.985)}
+.opcao.marcada{background:var(--amarelo); border-color:var(--amarelo); color:#0a0a0a}
+.opcao.marcada .letra{border-color:#0a0a0a; color:#0a0a0a; background:rgba(0,0,0,.08)}
+.opcao:focus-visible, .botao:focus-visible{outline:3px solid var(--ciano); outline-offset:2px}
+
+.botao{
+  display:flex; align-items:center; justify-content:center; gap:10px; width:100%; margin-top:18px; cursor:pointer;
+  background:var(--amarelo); color:#0a0a0a; border:0; border-radius:4px; padding:17px 14px; text-decoration:none; text-align:center;
+  font-family:var(--display); font-size:24px; letter-spacing:.04em; line-height:1;
+  box-shadow:0 10px 30px -10px rgba(255,204,0,.55); transition:transform .12s, filter .12s;
+}
+.botao:hover{filter:brightness(1.06)} .botao:active{transform:translateY(1px)}
+.botao[disabled]{opacity:.6; cursor:progress}
+.botao .seta{font-family:var(--texto); font-weight:700; font-size:20px}
+.erro{display:none; margin-top:10px; color:var(--erro); font-weight:600; font-size:15px}
+.erro.mostra{display:block}
+.nota{margin:12px 0 0; color:var(--cinza); font-size:14px; text-align:center}
+.isca{position:absolute; left:-9999px; width:1px; height:1px; opacity:0}
+
+.chegada .carimbo{
+  display:inline-block; font-family:var(--display); font-size:50px; line-height:.92; color:var(--amarelo);
+  border-bottom:5px solid var(--ciano); padding-bottom:8px; margin-bottom:14px;
+}
+.chegada p{margin:0 0 10px; color:#d5dde6}
+.chegada p b{color:#fff}
+.contagem{display:flex; align-items:center; gap:12px; margin:16px 0 0; padding:12px 14px; background:#080b0f; border:1px solid var(--borda); border-radius:4px; color:#c9d2dc; font-size:15px}
+.contagem .n{flex:none; width:38px; height:38px; display:grid; place-items:center; border-radius:50%; border:2px solid var(--amarelo); color:var(--amarelo); font-family:var(--display); font-size:24px; line-height:1}
+
+.rodape{position:relative; z-index:1; padding:0 20px 34px; color:#6b7786; font-size:13px; line-height:1.5}
+.rodape b{color:#8d99a8; font-weight:600}
+
+@media (min-width:900px){
+  .pagina{display:grid; grid-template-columns:1.05fr 1fr; gap:10px 56px; align-items:start; padding:40px 40px 0}
+  .abertura{grid-column:1; grid-row:1 / span 3; min-height:690px; padding:20px 0 0; position:sticky; top:20px}
+  .abertura .foto{right:auto; left:70px; top:232px; height:440px;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24%,#000 76%,transparent 100%),linear-gradient(180deg,transparent 0,#000 12%,#000 78%,transparent 100%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 24%,#000 76%,transparent 100%),linear-gradient(180deg,transparent 0,#000 12%,#000 78%,transparent 100%)}
+  .marca .prf{font-size:150px} .marca .vagas{font-size:84px} .marca .linha{width:120px; height:7px; margin:18px 0 16px}
+  .marca .previstas{font-size:16px}
+  .chamada{grid-column:2; padding:26px 0 0} .chamada h1{font-size:52px}
+  .rota{grid-column:2; padding:22px 0 30px} .rodape{grid-column:2; padding:0 0 40px}
+  .placa{padding:30px 28px 26px} .pergunta{font-size:32px}
+}
+@media (max-width:359px){ .marca .prf{font-size:64px} .marca .vagas{font-size:37px} .chamada h1{font-size:32px} .pergunta{font-size:24px} .botao{font-size:21px} }
+@media (prefers-reduced-motion:reduce){ .selo i{animation:none} }
+</style>
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '429553154418122');
+fbq('track', 'PageView');
+</script>
+</head>
+<body>
+<div class="faixa-topo"></div>
+<div class="pagina">
+
+  <header class="abertura">
+    <img class="foto" src="fabio-pcam.jpg" alt="Delegado Fábio Silva com o distintivo da Polícia Civil do Amazonas" width="600" height="628">
+    <div class="selo"><i></i>Transmissão fechada · PC-AM</div>
+    <div class="marca" aria-label="PC-AM, sala secreta, segunda-feira 30/11 às 20h de Manaus">
+      <span class="prf">PC-AM</span>
+      <span class="linha"></span>
+      <span class="vagas">SALA SECRETA</span>
+      <span class="previstas">Segunda, 30/11 · 20h de Manaus</span>
+    </div>
+  </header>
+
+  <section class="chamada">
+    <h1>Tenho uma novidade sobre a PC-AM.<br><b>Vou contar só na sala secreta.</b></h1>
+    <p>Segunda-feira, 30/11, às 20h (horário de Manaus), eu abro uma transmissão fechada com informações que ainda não circularam sobre o concurso da Polícia Civil do Amazonas. O link sai só no grupo.</p>
+    <span class="assina">Delegado Fábio Silva</span>
+  </section>
+
+  <main class="rota">
+    <form class="placa" id="form" novalidate autocomplete="on">
+      <input class="isca" type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="rotulo">Acesso à sala secreta</div>
+      <h2 class="pergunta">Preencha para receber o link</h2>
+
+      <label class="campo"><span>Seu nome</span>
+        <input type="text" id="nome" name="nome" maxlength="80" autocomplete="name" placeholder="Como você quer ser chamado"></label>
+      <label class="campo"><span>Seu WhatsApp com DDD</span>
+        <input type="tel" id="whatsapp" name="whatsapp" inputmode="numeric" autocomplete="tel-national" placeholder="(92) 99999-9999"></label>
+      <fieldset class="campo" id="escolaridade"><legend>Sua escolaridade</legend>
+        <div class="opcoes" role="radiogroup" aria-label="Sua escolaridade">
+          <button type="button" class="opcao" role="radio" aria-checked="false" data-valor="superior_completo"><span class="letra">A</span>Ensino superior completo</button>
+          <button type="button" class="opcao" role="radio" aria-checked="false" data-valor="superior_cursando"><span class="letra">B</span>Cursando o ensino superior</button>
+          <button type="button" class="opcao" role="radio" aria-checked="false" data-valor="medio"><span class="letra">C</span>Ensino médio</button>
+        </div>
+      </fieldset>
+
+      <div class="erro" id="erro" role="alert"></div>
+      <button type="submit" class="botao" id="enviar">Quero entrar na sala secreta <span class="seta">→</span></button>
+      <p class="nota">Gratuito. O link da transmissão sai só no grupo.</p>
+    </form>
+  </main>
+
+  <footer class="rodape">
+    <b>Sou Concurseiro e Vou Passar.</b> Seus dados ficam só com a equipe do Delegado Fábio Silva e servem para avisar você da transmissão.
+  </footer>
+</div>
+
+<script>
+(function(){
+  var API = "https://npdxyxunsdfoxwdjjfue.supabase.co/functions/v1/sou-webinario";
+  var KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5wZHh5eHVuc2Rmb3h3ZGpqZnVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgyMjk1MTgsImV4cCI6MjEwMzgwNTUxOH0.a4vyGpqBJi5UCtwCZsW5c-PFeUuUuO8eusCd2-nDq2k";
+  var SLUG = "live-pcam", GUARDA = "live-pcam_inscricao";
+  var $ = function(s){ return document.querySelector(s); };
+  var form = $("#form"), nome = $("#nome"), zap = $("#whatsapp"), erro = $("#erro"), botao = $("#enviar");
+  var opcoes = Array.prototype.slice.call(document.querySelectorAll(".opcao"));
+  var escolaridade = "", enviando = false;
+  var ROTULO = botao.innerHTML;
+
+  function digitos(v){ var n = String(v || "").replace(/\D/g, ""); if (n.indexOf("55") === 0 && n.length > 11) n = n.slice(2); return n.slice(0, 11); }
+  function mascara(v){
+    var n = digitos(v); if (!n) return "";
+    if (n.length <= 2) return "(" + n;
+    if (n.length <= 6) return "(" + n.slice(0,2) + ") " + n.slice(2);
+    if (n.length <= 10) return "(" + n.slice(0,2) + ") " + n.slice(2,6) + "-" + n.slice(6);
+    return "(" + n.slice(0,2) + ") " + n.slice(2,7) + "-" + n.slice(7);
+  }
+  function telefoneValido(n){
+    if (!(n.length === 10 || n.length === 11)) return false;
+    if (/^(\d)\1+$/.test(n)) return false;
+    var ddd = Number(n.slice(0,2)); if (ddd < 11) return false;
+    if (n.length === 11 && n.charAt(2) !== "9") return false;
+    return true;
+  }
+  function cookie(nm){ var m = document.cookie.match(new RegExp("(?:^|; )" + nm + "=([^;]*)")); return m ? decodeURIComponent(m[1]) : null; }
+  function utm(){
+    var p = new URLSearchParams(location.search), o = {};
+    ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"].forEach(function(k){ var v = p.get(k); if (v) o[k] = v.slice(0,150); });
+    return o;
+  }
+  function falha(msg, campo){ erro.textContent = msg; erro.classList.add("mostra"); if (campo) campo.focus(); }
+  function seguir(){ location.href = "obrigado/"; }
+
+  opcoes.forEach(function(o){
+    o.addEventListener("click", function(){
+      opcoes.forEach(function(x){ x.classList.remove("marcada"); x.setAttribute("aria-checked", "false"); });
+      o.classList.add("marcada"); o.setAttribute("aria-checked", "true"); escolaridade = o.dataset.valor;
+      erro.classList.remove("mostra");
+    });
+  });
+  zap.addEventListener("input", function(){ zap.value = mascara(zap.value); erro.classList.remove("mostra"); });
+  nome.addEventListener("input", function(){ erro.classList.remove("mostra"); });
+
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    if (enviando) return;
+    var n = nome.value.trim().replace(/\s+/g, " "), t = digitos(zap.value);
+    if (n.length < 2) return falha("Escreva o seu nome.", nome);
+    if (!telefoneValido(t)) return falha("Confira o WhatsApp com DDD.", zap);
+    if (!escolaridade) return falha("Marque a sua escolaridade.", opcoes[0]);
+    try { sessionStorage.setItem(GUARDA, JSON.stringify({ nome: n.split(" ")[0] })); } catch(e){}
+    if (form.site.value) return seguir();           // campo-isca: robô segue sem gravar
+
+    enviando = true; botao.disabled = true; botao.textContent = "Liberando o seu acesso…"; erro.classList.remove("mostra");
+    fetch(API + "/cadastro", {
+      method: "POST",
+      headers: { "Authorization": "Bearer " + KEY, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        w: SLUG, name: n, phone: t,
+        email: "whats-" + t + "@" + SLUG + ".invalid",   // a plataforma exige e-mail; o formulário não pede: chave única pelo telefone
+        answers: { escolaridade: escolaridade },
+        utm: utm(), fbp: cookie("_fbp"), fbc: cookie("_fbc"), page_url: location.href
+      })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(out){
+      if (!out || !out.ok) throw new Error((out && out.error) || "falha");
+      // Lead SÓ para ensino superior ou cursando: quem decide é o servidor (mesma regra do webinário)
+      if (out.pixel && window.fbq) fbq("track", "Lead", {}, { eventID: out.pixel.event_id });
+      setTimeout(seguir, out.pixel ? 450 : 0);
+    })
+    .catch(function(){
+      enviando = false; botao.disabled = false; botao.innerHTML = ROTULO;
+      falha("Não consegui concluir agora. Confira a internet e toque de novo.");
+    });
+  });
+  // voltou pelo botão do navegador: destrava o botão
+  window.addEventListener("pageshow", function(e){ if (e.persisted){ enviando = false; botao.disabled = false; botao.innerHTML = ROTULO; } });
+})();
+</script>
+</body>
+</html>
