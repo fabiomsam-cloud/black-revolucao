@@ -61,7 +61,8 @@ body::before{
 .chamada{position:relative; z-index:1; padding:14px 20px 2px}
 .chamada h1{margin:0; font-family:var(--display); font-weight:400; font-size:37px; line-height:.98; letter-spacing:.01em}
 .chamada h1 b{font-weight:400; color:var(--amarelo)}
-.chamada p{margin:10px 0 0; color:#c9d2dc; max-width:34em}
+.contexto{position:relative; z-index:1; padding:10px 20px 2px}
+.contexto p{margin:0; color:#c9d2dc; max-width:34em}
 .assina{display:block; margin-top:10px; font-family:var(--cond); font-weight:600; letter-spacing:.1em; text-transform:uppercase; font-size:13px; color:var(--cinza)}
 
 .rota{position:relative; z-index:1; padding:18px 20px 30px}
@@ -127,16 +128,46 @@ input:focus{border-color:var(--amarelo); box-shadow:0 0 0 3px rgba(255,204,0,.16
 
 @media (min-width:900px){
   .pagina{display:grid; grid-template-columns:1.05fr 1fr; gap:10px 56px; align-items:start; padding:40px 40px 0}
-  .abertura{grid-column:1; grid-row:1 / span 3; min-height:690px; padding:20px 0 0; position:sticky; top:20px}
+  .abertura{grid-column:1; grid-row:1 / span 4; min-height:690px; padding:20px 0 0; position:sticky; top:20px}
   .abertura .foto{right:auto; left:70px; top:232px; height:440px;
     -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24%,#000 76%,transparent 100%),linear-gradient(180deg,transparent 0,#000 12%,#000 78%,transparent 100%);
     mask-image:linear-gradient(90deg,transparent 0,#000 24%,#000 76%,transparent 100%),linear-gradient(180deg,transparent 0,#000 12%,#000 78%,transparent 100%)}
   .marca .prf{font-size:150px} .marca .vagas{font-size:84px} .marca .linha{width:120px; height:7px; margin:18px 0 16px}
   .marca .previstas{font-size:16px}
   .chamada{grid-column:2; padding:26px 0 0} .chamada h1{font-size:52px}
+  .contexto{grid-column:2; padding:12px 0 0}
   .rota{grid-column:2; padding:22px 0 30px} .rodape{grid-column:2; padding:0 0 40px}
   .placa{padding:30px 28px 26px} .pergunta{font-size:32px}
 }
+@media (max-width:899px){
+  .inscricao{display:flex; flex-direction:column}
+  .inscricao .abertura{order:1; min-height:0; padding:12px 16px 0}
+  .inscricao .abertura .foto{height:134px; right:-34px}
+  .inscricao .selo{font-size:11px}
+  .inscricao .marca{margin:6px 0 0}
+  .inscricao .marca .prf{font-size:50px}
+  .inscricao .marca .linha{width:56px; height:4px; margin:6px 0}
+  .inscricao .marca .vagas{font-size:25px}
+  .inscricao .marca .previstas{margin-top:4px; font-size:12px; max-width:none}
+  .inscricao .chamada{order:2; padding:10px 16px 0}
+  .inscricao .chamada h1{font-size:25px; line-height:1}
+  .inscricao .rota{order:3; padding:10px 16px 14px}
+  .inscricao .contexto{order:4; padding:0 20px 18px}
+  .inscricao .rodape{order:5}
+  .inscricao .placa{padding:12px 14px}
+  .inscricao .placa::before{top:12px; height:24px}
+  .inscricao .rotulo{display:none}
+  .inscricao .pergunta{font-size:20px; margin:0 0 9px}
+  .inscricao .campo{margin-bottom:9px}
+  .inscricao .campo > span, .inscricao .campo > legend{font-size:12px; margin-bottom:4px}
+  .inscricao input[type=text], .inscricao input[type=tel]{padding:10px 12px; font-size:17px}
+  .inscricao .opcoes{gap:6px}
+  .inscricao .opcao{padding:8px 12px; font-size:16px; gap:11px}
+  .inscricao .opcao .letra{width:24px; height:24px; font-size:13px}
+  .inscricao .botao{margin-top:12px; padding:14px 12px; font-size:22px}
+  .inscricao .nota{margin-top:8px; font-size:13px}
+}
+@media (max-width:359px){ .inscricao .marca .prf{font-size:44px} .inscricao .chamada h1{font-size:23px} .inscricao .botao{font-size:20px} }
 @media (max-width:359px){ .marca .prf{font-size:64px} .marca .vagas{font-size:37px} .chamada h1{font-size:32px} .pergunta{font-size:24px} .botao{font-size:21px} }
 @media (prefers-reduced-motion:reduce){ .selo i{animation:none} }
 </style>
